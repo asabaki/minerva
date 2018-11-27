@@ -11,6 +11,9 @@ import { WSpaceComponent } from './w-space/w-space.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material';
+import { SignUpComponent } from './w-space/sign-up/sign-up.component';
+
+
 
 
 @NgModule({
@@ -18,7 +21,8 @@ import { MatIconModule } from '@angular/material';
     AppComponent,
     HeaderComponent,
     SideNavComponent,
-    WSpaceComponent
+    WSpaceComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
