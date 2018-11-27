@@ -1,0 +1,39 @@
+<header class="header">
+  <img src="assets/img/minerva_1.png" class="logo" alt="minerva logo" />
+
+  <nav class="user-nav">
+    <div class="user-nav__icon-box">
+      <mat-icon class="user-nav__icon">person</mat-icon>
+      <span class="user-nav__notification">7</span>
+    </div>
+    <div class="user-nav__icon-box">
+      <mat-icon class="user-nav__icon">group</mat-icon>
+      <span class="user-nav__notification">13</span>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user">
+      <img
+        src="assets/img/701987-avatar/png/036-woman.png"
+        alt="User photo"
+        class="user-nav__user-photo"
+      />
+      <span class="user-nav__user-name">Kanpizzzaaaaaa</span>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>Account Setting</span>
+          </button>
+          <!--
+            <button mat-menu-item disabled>
+              <mat-icon>voicemail</mat-icon>
+              <span>Check voicemail</span>
+            </button>
+          -->
+          <button mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sing Out</span>
+          </button>
+        </mat-menu>
+    </button>
+
+  </nav>
+</header>

@@ -1,1 +1,93 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$Minerva-primary: mat-palette($mat-indigo);
+$Minerva-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$Minerva-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$Minerva-theme: mat-light-theme($Minerva-primary, $Minerva-accent, $Minerva-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($Minerva-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+:root{
+  --color-primary:#F68B1F;
+  --color-primary-light:#F4B821;
+  --color-primary-dark:#F46C21;
+
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #777;
+  --color-grey-dark-3: #999;
+
+  --shadow-dark:0 2rem 6rem rgba(0,0,0,0.3);
+  --shadow-light:0 2rem 5rem rgba(0,0,0,.06);
+
+  --line:1px solid var(--color-grey-light-2);
+}
+$bp-largest: 75em; //1200px  (1200/16)
+$bp-large: 68.25em; //1100px  (1100/16)
+$bp-medium: 65.25em; //900px  (900/16)
+$bp-small: 37.5em; //600px  (600/16)
+$bp-smallest: 31.25em; //500px  (500/16)
+
+*{
+
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before
+{
+  box-sizing: inherit;
+}
+
+html{
+  box-sizing: border-box;
+  font-size: 62.5%; //1rem=10px , 10px/16px=62.5%
+
+  @media only screen and (max-width: $bp-large){
+      font-size: 50%;
+  }
+}
+
+body{
+ font-family: "Open Sans", sans-serif;
+ font-weight: 400;
+ line-height: 1.6;
+ color: var(--color-grey-dark-2);
+ background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
+ background-size: cover;
+ background-repeat: no-repeat;
+
+ min-height: 100vh;
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
