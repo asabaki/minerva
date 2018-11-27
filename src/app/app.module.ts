@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material';
 import { SignUpComponent } from './w-space/sign-up/sign-up.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './w-space/services/auth-intercepter';
+import {AuthService} from './w-space/services/auth.service';
 
 
 
@@ -31,7 +34,10 @@ import { SignUpComponent } from './w-space/sign-up/sign-up.component';
     MatMenuModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
