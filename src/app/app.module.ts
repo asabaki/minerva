@@ -6,15 +6,18 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material';
+import {MatIconModule, MatInputModule, MatFormFieldModule} from '@angular/material';
 import { SignUpComponent } from './w-space/sign-up/sign-up.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -32,7 +35,12 @@ import {AuthService} from './w-space/services/auth.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    AngularFontAwesomeModule,
+    FormsModule,
+    MatFormFieldModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

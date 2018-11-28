@@ -1,9 +1,12 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private token: string;
   private tokenTimer: any;
@@ -21,8 +24,8 @@ export class AuthService {
     });
   }
 
-  signUp(username: string, password: string) {
-    const user = {username, password};
+  signUp(name: string, email: string, password: string) {
+    const user = {name, email, password};
     this.http.post('http://localhost:3000/api/user/signup', user).subscribe((result) => {
       console.log(result);
     });
