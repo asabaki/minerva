@@ -1,41 +1,57 @@
-.sign-up {
+.log-in {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   height: 100%;
-  &__form {
-    margin: auto;
-    border-radius: 10px 40px 10px 10px;
-
-
+  &__social {
+    margin: 2rem 0 3rem 0;
     display: flex;
-    background-color: #fff;
-    height: 60rem;
-    background-image: linear-gradient(
-        to right bottom,
-        rgba(#5a6d89, 0.8),
-        rgba(68, 82, 102, 0.8)
-      ),
-      url("https://images.unsplash.com/photo-1528701202755-cf9158dc3da6?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c072549944daeba2ee1229f21ecdd45e&auto=format&fit=crop&w=1639&q=80");
-    background-size: cover;
-    box-shadow: 0 1rem 2rem rgba(black, 0.2);
     & > * {
-      display: flex;
-      flex-direction: column;
+      border-radius: 50%;
+      color: white;
+      width: 4rem;
+      height: 4rem;
+      margin: 1rem;
+      padding: auto;
+      text-align: center;
+      padding-top: 0.5rem;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      display: block;
+      transition: all 0.5s;
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+      }
+      &:visited,
+      &:active {
+        transform: scale(1);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.5);
+      }
     }
-    &-left {
-      flex: 0 0 50%;
-      background-color: var(--color-grey-light-3);
-      justify-content: center;
-      align-items: center;
-      padding: 2rem 0;
-      border-radius: 10px 0 0 10px;
+    &-facebook {
+      background-color: #3b5998;
     }
-    &-right {
-      flex: 1;
-      padding: 8rem 0;
+    &-twitter {
+      background-color: #0084b4;
     }
+    &-google {
+      background-color: #d85040;
+    }
+  }
+  &__form {
+    border-radius: 10px;
+    box-shadow: 0 1rem 2rem rgba(black, 0.2);
+    background-color: var(--color-grey-light-3);
+    height: 60rem;
+    margin: auto;
+    display: flex;
+    flex: 0 0 35%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
     &-input {
       border: none;
       border-radius: 10px;
@@ -48,32 +64,21 @@
         transform: scale(1.05);
         border-bottom: 3px inset var(--color-secondary-light);
       }
-      &__error
-      {
+      &__error {
         border-bottom: 3px inset red;
       }
     }
     &-header {
       &-1 {
-        margin: 4rem 13rem 0 13rem;
+        margin: 2rem 13rem 2rem 13rem;
         text-align: center;
         font-size: 3rem;
         color: var(--color-grey-dark-1);
       }
       &-2 {
-        margin: auto;
         text-align: center;
         font-size: 2rem;
         font-weight: 100;
-      }
-      &-3 {
-        margin: auto 14rem;
-        text-align: center;
-        font-size: 3.5rem;
-        padding-bottom: 2.5rem;
-        margin-bottom: 2.5rem;
-        border-bottom: 1px solid var(--color-grey-light-2);
-        color: white;
       }
     }
   }
@@ -88,21 +93,6 @@
     margin: auto;
     color: white;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
-    fa {
-      padding: 0 1rem;
-    }
-    &-facebook {
-      background-color: #3b5998;
-      padding-left: 4rem;
-    }
-    &-twitter {
-      background-color: #0084b4;
-      padding-left: 4rem;
-    }
-    &-google {
-      background-color: #d85040;
-      padding-left: 4rem;
-    }
     &-submit {
       text-align: center;
       background-image: linear-gradient(
@@ -147,6 +137,7 @@
         outline: none;
         animation: pulsate 1s infinite;
       }
+
     }
     &:hover {
       transform: scale(1.1);
@@ -155,3 +146,8 @@
   }
 }
 
+.border {
+  border-bottom: 2px solid rgb(165, 165, 165);
+  width: 30rem;
+  margin-bottom: 4rem;
+}
