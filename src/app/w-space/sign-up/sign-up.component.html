@@ -1,10 +1,22 @@
 <div class="sign-up">
-  <h1>Sign Up</h1>
-  <h2>Please fill in this form to create an account.</h2>
-  <hr />
-  <form action="#">
-    <span>First name</span> <input type="text" name="firstName" />
-    <span>Last name</span> <input type="text" name="lastName" />
-    <span>Email Address</span> <input type="text" name="email" />
-  </form>
+  <div class="sign-up__form">
+    <form action="#" class="sign-up__form-left">
+      <h1 class="sign-up__form-header-1">Sign Up</h1>
+      <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
+      <hr />
+      <input type="text" name="firstName" placeholder="First name" class="sign-up__form-input"/>
+      <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"/>
+      <input type="text" name="email" placeholder="Email" class="sign-up__form-input"/>
+      <input type="password" name="password" placeholder="Password" class="sign-up__form-input"/>
+      <input type="password" name="confirm-password" placeholder="Confirm Password" class="sign-up__form-input" />
+      <button class="sign-up__btn sign-up__btn-submit">Sign me up</button>
+    </form>
+    <div class="or">Or</div>
+    <form action="#" class="sign-up__form-right">
+      <h1 class="sign-up__form-header-3">Sign in with social network</h1>
+      <button class="sign-up__btn sign-up__btn-facebook"><fa name="facebook-f"></fa>Log in with Facebook</button>
+      <button class="sign-up__btn sign-up__btn-twitter"><fa name="twitter"></fa>Log in with Twitter</button>
+      <button class="sign-up__btn sign-up__btn-google"><fa name="google"></fa>Log in with Google+</button>
+    </form>
+  </div>
 </div>

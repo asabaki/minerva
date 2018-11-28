@@ -15,6 +15,7 @@ import { SignUpComponent } from './w-space/sign-up/sign-up.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 
@@ -32,7 +33,8 @@ import {AuthService} from './w-space/services/auth.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    AngularFontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
