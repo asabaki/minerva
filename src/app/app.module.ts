@@ -16,6 +16,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { LogInComponent } from './w-space/log-in/log-in.component';
 
 
 
@@ -26,7 +27,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     HeaderComponent,
     SideNavComponent,
     WSpaceComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogInComponent
   ],
   imports: [
     BrowserModule,
