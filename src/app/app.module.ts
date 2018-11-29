@@ -1,26 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent, LogInComponent, SignUpComponent } from './header/header.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
-import { WSpaceComponent } from './w-space/w-space.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import {MatIconModule, MatInputModule, MatFormFieldModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
+
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { WSpaceComponent } from './w-space/w-space.component';
 import {SignUpComponent, SuccessSnackComponent} from './w-space/sign-up/sign-up.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LogInComponent } from './w-space/log-in/log-in.component';
 import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
+
+
 
 
 
@@ -47,7 +48,7 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
     MatFormFieldModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
     MatDialogModule
 
   ],
@@ -58,8 +59,8 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
   entryComponents: [
     ErrorSnackComponent,
     SuccessSnackComponent,
-    LogInComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogInComponent
   ]
   ,
   bootstrap: [AppComponent]
