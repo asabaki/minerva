@@ -91,9 +91,15 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.my-snack { background-color: var(--color-secondary-dark); }
+
 button:focus {
     outline: 0;
 }
+
 
 input:focus {
     outline: 0;

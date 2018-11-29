@@ -1,9 +1,13 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private token: string;
   private tokenTimer: any;
@@ -21,11 +25,27 @@ export class AuthService {
     });
   }
 
-  signUp(username: string, password: string) {
-    const user = {username, password};
-    this.http.post('http://localhost:3000/api/user/signup', user).subscribe((result) => {
-      console.log(result);
-    });
+  signUp(name: string, email: string, password: string): Observable<any> {
+    const user = {name, email, password};
+    const v = new Subject<any>();
+    this.http.post<any>('http://localhost:3000/api/user/signup', user)
+      .pipe(map((res) => {
+        return {
+          user: res.user,
+          emessage: res.emessage
+        };
+      }) )
+      .subscribe(
+        (result) => {
+          // console.log(result);
+          v.next(result);
+        },
+        (err) => {
+          // console.log(err);
+          v.next(err.error);
+          return 'Error!';
+        });
+    return v.asObservable();
   }
 
   login(username: string, password: string) {

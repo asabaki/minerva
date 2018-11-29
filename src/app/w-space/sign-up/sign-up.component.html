@@ -1,8 +1,8 @@
 <div class="sign-up">
   <div class="sign-up__form">
-    <form action="#" class="sign-up__form-left">
+    <form class="sign-up__form-left" (submit)="onSignup()" [formGroup]="form">
       <h1 class="sign-up__form-header-1">Sign Up</h1>
-      <button mat-button mat-dialog-close class="cross cross-small">
+       <button mat-button mat-dialog-close class="cross cross-small">
         <mat-icon>close</mat-icon>
       </button>
       <div class="sign-up__form-small">
@@ -20,42 +20,28 @@
         Please fill in this form to create an account.
       </h2>
       <hr />
-
-      <input
-        type="text"
-        name="firstName"
-        placeholder="First name"
-        class="sign-up__form-input"
+      <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
+      <hr/>
+      <input type="text" name="firstName" placeholder="First name" formControlName="firstName"
+             [ngClass]="('sign-up__form-input ' + (form.get('firstName').invalid && form.touched ? 'sign-up__form-input__error' : ''))"/>
+      <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"
+             formControlName="lastName"
+             [ngClass]="('sign-up__form-input ' + (form.get('lastName').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
       />
-      <input
-        type="text"
-        name="lastName"
-        placeholder="Last name"
-        class="sign-up__form-input"
+      <input type="text" name="email" placeholder="Email" class="sign-up__form-input" formControlName="email"
+             [ngClass]="('sign-up__form-input ' + (form.get('email').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
       />
-      <input
-        type="text"
-        name="email"
-        placeholder="Email"
-        class="sign-up__form-input "
+      <input type="password" name="password" placeholder="Password" class="sign-up__form-input"
+             formControlName="password"
+             [ngClass]="('sign-up__form-input ' + (form.get('password').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
       />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        class="sign-up__form-input"
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="sign-up__form-input"
+             formControlName="cfPassword"
+             [ngClass]="('sign-up__form-input ' + (form.get('cfPassword').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
       />
-      <input
-        type="password"
-        name="confirm-password"
-        placeholder="Confirm Password"
-        class="sign-up__form-input"
-      />
-      <!--
-        if input error add class 'sign-up__form-input__error' to the input tag
-      -->
-      <button class="sign-up__btn sign-up__btn-submit">
-        <span class="sign-up__btn-submit__visible">sign me up!</span>
+      <mat-error *ngIf="form.invalid">{{getErrorMsg()}}</mat-error>
+      <button class="sign-up__btn sign-up__btn-submit" type="submit">
+        <span class="sign-up__btn-submit__visible">Sign Me Up!</span>
         <span class="sign-up__btn-submit__invisible">Submit</span>
       </button>
     </form>
@@ -65,7 +51,6 @@
         <mat-icon>close</mat-icon>
       </button>
       <h1 class="sign-up__form-header-3">Sign in with social network</h1>
-
       <button class="sign-up__btn sign-up__btn-facebook">
         <fa name="facebook-f"></fa>Log in with Facebook
       </button>
