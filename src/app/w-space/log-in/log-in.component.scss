@@ -155,24 +155,3 @@
   }
 }
 
-.or {
-  height: 7rem;
-  width: 7rem;
-  font-size: 3rem;
-  background-color: var(--color-grey-light-1);
-  border-radius: 50%;
-  color: var(--color-grey-dark-3);
-  margin: auto -4rem;
-  text-align: center;
-  text-transform: lowercase;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.4);
-
-
-  &:hover,
-  &:focus{
-    animation: rotate 3s infinite;
-  }
-
-}

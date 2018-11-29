@@ -11,15 +11,15 @@ import { HttpModule } from '@angular/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatIconModule, MatInputModule, MatFormFieldModule} from '@angular/material';
-import { SignUpComponent } from './w-space/sign-up/sign-up.component';
+import {MatIconModule, MatInputModule, MatFormFieldModule, MatSnackBarModule} from '@angular/material';
+import {SignUpComponent, SuccessSnackComponent} from './w-space/sign-up/sign-up.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-
+import { LogInComponent } from './w-space/log-in/log-in.component';
+import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -28,7 +28,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HeaderComponent,
     SideNavComponent,
     WSpaceComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogInComponent,
+    ErrorSnackComponent,
+    SuccessSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +43,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     MatFormFieldModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     AuthService
   ],
+  entryComponents: [
+    ErrorSnackComponent,
+    SuccessSnackComponent
+  ]
+  ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
