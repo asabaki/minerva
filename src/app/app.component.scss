@@ -82,6 +82,22 @@ body {
         box-shadow: none;
     }
 }
+@keyframes rotate {
+0% {
+  transform: rotate(0deg);
+  box-shadow: none;
+}
+
+50% {
+  transform: rotate(180deg);
+  box-shadow: none;
+}
+
+100% {
+  transform: rotate(360deg);
+  box-shadow: none;
+}
+}
 
 app-side-nav {
     flex: 0 0 18%;
