@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, LogInComponent, SignUpComponent } from './header/header.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,8 @@ import { HttpModule } from '@angular/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatIconModule, MatInputModule, MatFormFieldModule, MatSnackBarModule} from '@angular/material';
+
+import {MatIconModule, MatInputModule, MatFormFieldModule, MatSnackBarModule, MatDialogModule} from '@angular/material';
 import {SignUpComponent, SuccessSnackComponent} from './w-space/sign-up/sign-up.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
@@ -20,6 +21,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LogInComponent } from './w-space/log-in/log-in.component';
 import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
+
+
 
 
 @NgModule({
@@ -45,6 +48,8 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule
+    MatDialogModule
+
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
@@ -52,7 +57,9 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
   ],
   entryComponents: [
     ErrorSnackComponent,
-    SuccessSnackComponent
+    SuccessSnackComponent,
+    LogInComponent,
+    SignUpComponent
   ]
   ,
   bootstrap: [AppComponent]

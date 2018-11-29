@@ -2,6 +2,24 @@
   <div class="sign-up__form">
     <form class="sign-up__form-left" (submit)="onSignup()" [formGroup]="form">
       <h1 class="sign-up__form-header-1">Sign Up</h1>
+       <button mat-button mat-dialog-close class="cross cross-small">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="sign-up__form-small">
+        <h2 class="sign-up__form-header-2">Sign in with social network</h2>
+        <div class="sign-up__social">
+          <div class="sign-up__social-facebook">
+            <fa name="facebook-f"></fa>
+          </div>
+          <div class="sign-up__social-twitter"><fa name="twitter"></fa></div>
+          <div class="sign-up__social-google"><fa name="google"></fa></div>
+        </div>
+        <h2 class="sign-up__form-header-2">0r</h2>
+      </div>
+      <h2 class="sign-up__form-header-2">
+        Please fill in this form to create an account.
+      </h2>
+      <hr />
       <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
       <hr/>
       <input type="text" name="firstName" placeholder="First name" formControlName="firstName"
@@ -29,18 +47,18 @@
     </form>
     <div class="or">Or</div>
     <form action="#" class="sign-up__form-right">
+      <button mat-button mat-dialog-close class="cross">
+        <mat-icon>close</mat-icon>
+      </button>
       <h1 class="sign-up__form-header-3">Sign in with social network</h1>
       <button class="sign-up__btn sign-up__btn-facebook">
-        <fa name="facebook-f"></fa>
-        Log in with Facebook
+        <fa name="facebook-f"></fa>Log in with Facebook
       </button>
       <button class="sign-up__btn sign-up__btn-twitter">
-        <fa name="twitter"></fa>
-        Log in with Twitter
+        <fa name="twitter"></fa>Log in with Twitter
       </button>
       <button class="sign-up__btn sign-up__btn-google">
-        <fa name="google"></fa>
-        Log in with Google+
+        <fa name="google"></fa>Log in with Google+
       </button>
     </form>
   </div>
