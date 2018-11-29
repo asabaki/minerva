@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import {SignUpComponent} from '../w-space/sign-up/sign-up.component';
+import {LogInComponent} from '../w-space/log-in/log-in.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,17 +26,3 @@ export class HeaderComponent  {
     });
   }
 }
-@Component({
-  selector: 'app-log-in',
-  templateUrl: '../w-space/log-in/log-in.component.html',
-  styleUrls: ['../w-space/log-in//log-in.component.scss']
-})
-export class LogInComponent {}
-
-@Component({
-  selector: 'app-sign-up',
-  templateUrl: '../w-space/sign-up/sign-up.component.html',
-  styleUrls: ['../w-space/sign-up/sign-up.component.scss']
-})
-export class SignUpComponent {}
-

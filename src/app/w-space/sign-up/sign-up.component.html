@@ -2,7 +2,7 @@
   <div class="sign-up__form">
     <form class="sign-up__form-left" (submit)="onSignup()" [formGroup]="form">
       <h1 class="sign-up__form-header-1">Sign Up</h1>
-       <button mat-button mat-dialog-close class="cross cross-small">
+      <button mat-button mat-dialog-close class="cross cross-small">
         <mat-icon>close</mat-icon>
       </button>
       <div class="sign-up__form-small">
@@ -11,18 +11,19 @@
           <div class="sign-up__social-facebook">
             <fa name="facebook-f"></fa>
           </div>
-          <div class="sign-up__social-twitter"><fa name="twitter"></fa></div>
-          <div class="sign-up__social-google"><fa name="google"></fa></div>
+          <div class="sign-up__social-twitter">
+            <fa name="twitter"></fa>
+          </div>
+          <div class="sign-up__social-google">
+            <fa name="google"></fa>
+          </div>
         </div>
         <h2 class="sign-up__form-header-2">0r</h2>
       </div>
-      <h2 class="sign-up__form-header-2">
-        Please fill in this form to create an account.
-      </h2>
-      <hr />
+      <hr/>
       <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
       <hr/>
-      <input type="text" name="firstName" placeholder="First name" formControlName="firstName"
+      <input type="text" name="firstName" placeholder="First name" class="sign-up__form-input" formControlName="firstName"
              [ngClass]="('sign-up__form-input ' + (form.get('firstName').invalid && form.touched ? 'sign-up__form-input__error' : ''))"/>
       <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"
              formControlName="lastName"
@@ -52,13 +53,16 @@
       </button>
       <h1 class="sign-up__form-header-3">Sign in with social network</h1>
       <button class="sign-up__btn sign-up__btn-facebook">
-        <fa name="facebook-f"></fa>Log in with Facebook
+        <fa name="facebook-f"></fa>
+        Log in with Facebook
       </button>
       <button class="sign-up__btn sign-up__btn-twitter">
-        <fa name="twitter"></fa>Log in with Twitter
+        <fa name="twitter"></fa>
+        Log in with Twitter
       </button>
       <button class="sign-up__btn sign-up__btn-google">
-        <fa name="google"></fa>Log in with Google+
+        <fa name="google"></fa>
+        Log in with Google+
       </button>
     </form>
   </div>
