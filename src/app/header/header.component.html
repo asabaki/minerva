@@ -10,6 +10,10 @@
       <mat-icon class="user-nav__icon">group</mat-icon>
       <span class="user-nav__notification">13</span>
     </div>
+
+    <button mat-button (click)="signUp_dialog()">Sign up</button>
+    <button mat-button (click)="logIn_dialog()">Log in</button>
+
     <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user">
       <img
         src="assets/img/701987-avatar/png/036-woman.png"
@@ -18,22 +22,21 @@
       />
       <span class="user-nav__user-name">Kanpizzzaaaaaa</span>
       <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            <span>Account Setting</span>
+        <button mat-menu-item>
+          <mat-icon>account_circle</mat-icon>
+          <span>Account Setting</span>
+        </button>
+        <!--
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voicemail</span>
           </button>
-          <!--
-            <button mat-menu-item disabled>
-              <mat-icon>voicemail</mat-icon>
-              <span>Check voicemail</span>
-            </button>
-          -->
-          <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Sing Out</span>
-          </button>
-        </mat-menu>
+        -->
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Sing Out</span>
+        </button>
+      </mat-menu>
     </button>
-
   </nav>
 </header>

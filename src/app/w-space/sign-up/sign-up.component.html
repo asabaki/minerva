@@ -2,26 +2,79 @@
   <div class="sign-up__form">
     <form action="#" class="sign-up__form-left">
       <h1 class="sign-up__form-header-1">Sign Up</h1>
-      <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
+      <button mat-button mat-dialog-close class="cross cross-small">
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="sign-up__form-small">
+        <h2 class="sign-up__form-header-2">Sign in with social network</h2>
+        <div class="sign-up__social">
+          <div class="sign-up__social-facebook">
+            <fa name="facebook-f"></fa>
+          </div>
+          <div class="sign-up__social-twitter"><fa name="twitter"></fa></div>
+          <div class="sign-up__social-google"><fa name="google"></fa></div>
+        </div>
+        <h2 class="sign-up__form-header-2">0r</h2>
+      </div>
+      <h2 class="sign-up__form-header-2">
+        Please fill in this form to create an account.
+      </h2>
       <hr />
-      <input type="text" name="firstName" placeholder="First name" class="sign-up__form-input"/>
-      <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"/>
-      <input type="text" name="email" placeholder="Email" class="sign-up__form-input "/>
-      <input type="password" name="password" placeholder="Password" class="sign-up__form-input"/>
-      <input type="password" name="confirm-password" placeholder="Confirm Password" class="sign-up__form-input" />
-      <!--if input error add class 'sign-up__form-input__error' to the input tag-->
+
+      <input
+        type="text"
+        name="firstName"
+        placeholder="First name"
+        class="sign-up__form-input"
+      />
+      <input
+        type="text"
+        name="lastName"
+        placeholder="Last name"
+        class="sign-up__form-input"
+      />
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        class="sign-up__form-input "
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        class="sign-up__form-input"
+      />
+      <input
+        type="password"
+        name="confirm-password"
+        placeholder="Confirm Password"
+        class="sign-up__form-input"
+      />
+      <!--
+        if input error add class 'sign-up__form-input__error' to the input tag
+      -->
       <button class="sign-up__btn sign-up__btn-submit">
         <span class="sign-up__btn-submit__visible">sign me up!</span>
         <span class="sign-up__btn-submit__invisible">Submit</span>
       </button>
-
     </form>
     <div class="or">Or</div>
     <form action="#" class="sign-up__form-right">
+      <button mat-button mat-dialog-close class="cross">
+        <mat-icon>close</mat-icon>
+      </button>
       <h1 class="sign-up__form-header-3">Sign in with social network</h1>
-      <button class="sign-up__btn sign-up__btn-facebook"><fa name="facebook-f" ></fa>Log in with Facebook</button>
-      <button class="sign-up__btn sign-up__btn-twitter"><fa name="twitter" ></fa>Log in with Twitter</button>
-      <button class="sign-up__btn sign-up__btn-google"><fa name="google" ></fa>Log in with Google+</button>
+
+      <button class="sign-up__btn sign-up__btn-facebook">
+        <fa name="facebook-f"></fa>Log in with Facebook
+      </button>
+      <button class="sign-up__btn sign-up__btn-twitter">
+        <fa name="twitter"></fa>Log in with Twitter
+      </button>
+      <button class="sign-up__btn sign-up__btn-google">
+        <fa name="google"></fa>Log in with Google+
+      </button>
     </form>
   </div>
 </div>
