@@ -66,13 +66,12 @@ html {
     }
 }
 
-
 body {
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
     line-height: 1.6;
     color: var(--color-grey-dark-2);
-    background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark)), url(https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=954560871844da528c60343dc344ccbf&auto=format&fit=crop&w=1650&q=80);
+    background-image: linear-gradient( to right bottom, var(--color-primary-light), var(--color-primary-dark)), url(https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=954560871844da528c60343dc344ccbf&auto=format&fit=crop&w=1650&q=80);
     /*background-size: cover;
     background-repeat: no-repeat;
     background-image: linear-gradient( to right bottom, rgba(#fbf9c6, 0.9), rgba(rgb(251, 222, 198), 0.9), rgba(#6ac3da, 0.9)/*rgba(#FFB407,.9), rgba(#F46C21,.9)
@@ -91,15 +90,23 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+html,
+body {
+    height: 100%;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.my-snack { background-color: var(--color-secondary-dark); }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.my-snack {
+    background-color: var(--color-secondary-dark);
+}
 
 button:focus {
     outline: 0;
 }
-
 
 input:focus {
     outline: 0;
@@ -113,4 +120,37 @@ input:focus {
     width: 100%;
     box-shadow: none;
     color: 0;
+}
+
+.mat-form-field-appearance-outline {
+    .mat-form-field-flex {
+        width: 40rem;
+        padding: 0 1em 0 1em !important;
+        font-size: 1.5rem;
+        &:first-child{
+          margin-bottom: -3.25rem;
+        }
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: white;
+    border-radius: 10px;
+    margin: -0.1rem 0 !important;
+}
+
+.mat-error {
+    font-size: 1.5rem;
+}
+
+.mat-form-field-appearance-outline {
+  .mat-form-field-wrapper {
+    margin: .1em 0 !important;
+  }
 }

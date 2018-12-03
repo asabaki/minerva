@@ -27,7 +27,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
             background-color: var(--color-grey-light-3);
             justify-content: center;
             align-items: center;
-            padding: 2rem 0;
+            padding: 1rem 0;
             border-radius: 10px 0 0 10px;
             @media only screen and (max-width: $bp-medium) {
                 flex: 0 0 100%;
@@ -57,19 +57,14 @@ $bp-smallest: 31.25em; //500px  (500/16)
         &-input {
             border: none;
             border-radius: 10px;
-            padding: 1rem 1rem;
-            margin: 1rem 0;
+            padding: 0 1rem;
             font-size: 1.5rem;
             width: 40rem;
             transition: all 0.5s;
-            &:focus {
-                transform: scale(1.05);
-                border-bottom: 3px inset var(--color-secondary-light);
-            }
-            &__error {
-                border-bottom: 3px inset red;
-            }
             @media only screen and (max-width: $bp-small) {
+                width: 30rem;
+            }
+            @media only screen and (max-width: $bp-smallest) {
                 width: 25rem;
             }
         }
@@ -79,38 +74,40 @@ $bp-smallest: 31.25em; //500px  (500/16)
                 text-align: center;
                 font-size: 3rem;
                 color: var(--color-grey-dark-1);
-                @media only screen and (max-width: $bp-small) {
-                    margin: 2rem 0;
+                @media only screen and (max-width: $bp-medium) {
+                    margin: auto;
                 }
             }
             &-2 {
-                margin: auto;
+                margin: 0;
                 text-align: center;
                 font-size: 2rem;
                 font-weight: 100;
-                @media only screen and (max-width: $bp-small) {
+                @media only screen and (max-width: $bp-medium) {
                     font-size: 1.5rem;
+                    margin: auto;
                 }
             }
             &-3 {
-                margin: auto 12rem;
+                margin: 0 12rem;
                 text-align: center;
                 font-size: 3.5rem;
                 padding-bottom: 2.5rem;
                 margin-bottom: 2.5rem;
                 border-bottom: 1px solid var(--color-grey-light-2);
                 color: white;
-                @media only screen and (max-width: $bp-small) {
+                @media only screen and (max-width: $bp-medium) {
                     font-size: 1.5rem;
                 }
             }
         }
     }
     &__social {
-        margin: 0.5rem 0;
+        margin: -0.5rem 0 0.5rem 0;
         justify-content: center;
         display: flex;
         border-bottom: 1px solid var(--color-grey-dark-3);
+        position: relative;
         &>* {
             border-radius: 100px;
             color: white;
@@ -123,6 +120,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
             cursor: pointer;
             display: block;
+            position: relative;
             transition: all 0.5s;
             &:hover,
             &:focus {
@@ -253,7 +251,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     cursor: pointer;
     align-self: flex-end;
     margin-right: 1rem;
-    top: -6.5rem;
+    top: -4.5rem;
     transition: all 0.2s;
     border: none;
     background-color: transparent;
@@ -275,10 +273,14 @@ $bp-smallest: 31.25em; //500px  (500/16)
             align-self: flex-end;
         }
         @media only screen and (max-width: $bp-small) {
-            top: -8rem;
+            top: 8rem;
         }
         @media only screen and (max-width: $bp-smallest) {
-            top: -8.5rem;
+            top: 8.5rem;
         }
     }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+    margin: 0.1rem 0;
 }

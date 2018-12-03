@@ -12,18 +12,26 @@
     </div>
     <div class="border"></div>
     <h2 class="log-in__form-header-2">OR</h2>
-    <input
-      type="text"
-      name="email"
-      placeholder="Email"
-      class="log-in__form-input "
-    />
-    <input
-      type="password"
-      name="password"
-      placeholder="Password"
-      class="log-in__form-input"
-    />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
+      <input matInput placeholder="Email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        placeholder="Password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <mat-icon
+        matSuffix
+        (click)="hide = !hide"
+        class="password-visible-icon"
+        >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+      >
+    </mat-form-field>
+
     <!--
       if input error add class 'log-in__form-input__error' to the input tag
     -->

@@ -11,36 +11,110 @@
           <div class="sign-up__social-facebook">
             <fa name="facebook-f"></fa>
           </div>
-          <div class="sign-up__social-twitter">
-            <fa name="twitter"></fa>
-          </div>
-          <div class="sign-up__social-google">
-            <fa name="google"></fa>
-          </div>
+          <div class="sign-up__social-twitter"><fa name="twitter"></fa></div>
+          <div class="sign-up__social-google"><fa name="google"></fa></div>
         </div>
         <h2 class="sign-up__form-header-2">0r</h2>
       </div>
-      <hr/>
-      <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
-      <hr/>
-      <input type="text" name="firstName" placeholder="First name" class="sign-up__form-input" formControlName="firstName"
-             [ngClass]="('sign-up__form-input ' + (form.get('firstName').invalid && form.touched ? 'sign-up__form-input__error' : ''))"/>
-      <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"
-             formControlName="lastName"
-             [ngClass]="('sign-up__form-input ' + (form.get('lastName').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
-      />
-      <input type="text" name="email" placeholder="Email" class="sign-up__form-input" formControlName="email"
-             [ngClass]="('sign-up__form-input ' + (form.get('email').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
-      />
-      <input type="password" name="password" placeholder="Password" class="sign-up__form-input"
-             formControlName="password"
-             [ngClass]="('sign-up__form-input ' + (form.get('password').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
-      />
-      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="sign-up__form-input"
-             formControlName="cfPassword"
-             [ngClass]="('sign-up__form-input ' + (form.get('cfPassword').invalid && form.touched ? 'sign-up__form-input__error' : ''))"
-      />
-      <mat-error *ngIf="form.invalid">{{getErrorMsg()}}</mat-error>
+      <hr />
+      <h2 class="sign-up__form-header-2">
+        Please fill in this form to create an account.
+      </h2>
+      <hr />
+
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          placeholder="First name"
+          formControlName="firstName"
+          [ngClass]="
+            form.get('firstName').invalid && form.touched
+              ? 'sign-up__form-input__error'
+              : ''
+          "
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="lastName"
+          placeholder="Last name"
+          formControlName="lastName"
+          [ngClass]="
+            form.get('lastName').invalid && form.touched
+              ? 'sign-up__form-input__error'
+              : ''
+          "
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          placeholder="Email"
+          formControlName="email"
+          [ngClass]="
+            form.get('email').invalid && form.touched
+              ? 'sign-up__form-input__error'
+              : ''
+          "
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          name="password"
+          placeholder="Password"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="cfPassword"
+          [ngClass]="
+            form.get('password').invalid && form.touched
+              ? 'sign-up__form-input__error'
+              : ''
+          "
+        />
+        <mat-icon
+          matSuffix
+          (click)="hide = !hide"
+          class="password-visible-icon"
+          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          name="cfPassword"
+          placeholder="Confirm password"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="cfPassword"
+          [ngClass]="
+            form.get('cfPassword').invalid && form.touched
+              ? 'sign-up__form-input__error'
+              : ''
+          "
+        />
+        <mat-icon
+          matSuffix
+          (click)="hide = !hide"
+          class="password-visible-icon"
+          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+        >
+      </mat-form-field>
+
+      <mat-error *ngIf="form.invalid">{{ getErrorMsg() }}</mat-error>
       <button class="sign-up__btn sign-up__btn-submit" type="submit">
         <span class="sign-up__btn-submit__visible">Sign Me Up!</span>
         <span class="sign-up__btn-submit__invisible">Submit</span>
@@ -53,16 +127,13 @@
       </button>
       <h1 class="sign-up__form-header-3">Sign in with social network</h1>
       <button class="sign-up__btn sign-up__btn-facebook">
-        <fa name="facebook-f"></fa>
-        Log in with Facebook
+        <fa name="facebook-f"></fa> Log in with Facebook
       </button>
       <button class="sign-up__btn sign-up__btn-twitter">
-        <fa name="twitter"></fa>
-        Log in with Twitter
+        <fa name="twitter"></fa> Log in with Twitter
       </button>
       <button class="sign-up__btn sign-up__btn-google">
-        <fa name="google"></fa>
-        Log in with Google+
+        <fa name="google"></fa> Log in with Google+
       </button>
     </form>
   </div>
