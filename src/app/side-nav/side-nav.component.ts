@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../w-space/services/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
-
-  constructor() { }
+  status: boolean;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.status = this.authService.getIsAuth();
+    this.authService.getAuthStatus().subscribe((res) => {
+      this.status = res;
+    });
   }
 
 }

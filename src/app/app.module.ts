@@ -18,7 +18,7 @@ import { WSpaceComponent } from './w-space/w-space.component';
 import {SignUpComponent, SuccessSnackComponent} from './w-space/sign-up/sign-up.component';
 import {AuthInterceptor} from './w-space/services/auth-intercepter';
 import {AuthService} from './w-space/services/auth.service';
-import { LogInComponent } from './w-space/log-in/log-in.component';
+import {ErrorLoginSnackComponent, LogInComponent} from './w-space/log-in/log-in.component';
 import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
 
 
@@ -35,7 +35,8 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
     SignUpComponent,
     LogInComponent,
     ErrorSnackComponent,
-    SuccessSnackComponent
+    SuccessSnackComponent,
+    ErrorLoginSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +61,8 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
     ErrorSnackComponent,
     SuccessSnackComponent,
     SignUpComponent,
-    LogInComponent
+    LogInComponent,
+    ErrorLoginSnackComponent
   ]
   ,
   bootstrap: [AppComponent]
