@@ -2,27 +2,27 @@
   <img src="assets/img/minerva_1.png" class="logo" alt="minerva logo" />
 
   <nav class="user-nav">
-    <div class="user-nav__icon-box">
+    <div class="user-nav__icon-box" *ngIf="isAuth">
       <mat-icon class="user-nav__icon">person</mat-icon>
       <span class="user-nav__notification">7</span>
     </div>
-    <div class="user-nav__icon-box">
+    <div class="user-nav__icon-box" *ngIf="isAuth">
       <mat-icon class="user-nav__icon">group</mat-icon>
       <span class="user-nav__notification">13</span>
     </div>
 
-    <button mat-button (click)="signUp_dialog()">Sign up</button>
-    <button mat-button (click)="logIn_dialog()">Log in</button>
+    <button mat-button (click)="signUp_dialog()" *ngIf="!isAuth">Sign up</button>
+    <button mat-button (click)="logIn_dialog()" *ngIf="!isAuth">Log in</button>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user" *ngIf="isAuth">
       <img
         src="assets/img/701987-avatar/png/036-woman.png"
         alt="User photo"
         class="user-nav__user-photo"
       />
-      <span class="user-nav__user-name">Kanpizzzaaaaaa</span>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+      <span class="user-nav__user-name" *ngIf="isAuth">{{getUser()}}</span>
+      <mat-menu #menu="matMenu" >
+        <button mat-menu-item *ngIf="isLogin()">
           <mat-icon>account_circle</mat-icon>
           <span>Account Setting</span>
         </button>
@@ -32,9 +32,9 @@
             <span>Check voicemail</span>
           </button>
         -->
-        <button mat-menu-item>
+        <button mat-menu-item (click)="onLogout()" *ngIf="isAuth">
           <mat-icon>exit_to_app</mat-icon>
-          <span>Sing Out</span>
+          <span>Log Out</span>
         </button>
       </mat-menu>
     </button>

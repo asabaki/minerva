@@ -16,6 +16,7 @@
         </div>
         <h2 class="sign-up__form-header-2">0r</h2>
       </div>
+<<<<<<< HEAD
       <hr />
       <h2 class="sign-up__form-header-2">
         Please fill in this form to create an account.
@@ -115,6 +116,29 @@
       </mat-form-field>
 
       <mat-error *ngIf="form.invalid">{{ getErrorMsg() }}</mat-error>
+=======
+      <hr/>
+      <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
+      <hr/>
+      <input type="text" name="firstName" placeholder="First name" class="sign-up__form-input" formControlName="firstName"
+             [ngClass]="('sign-up__form-input ' + (form.get('firstName').invalid && form.get('firstName').touched ? 'sign-up__form-input__error' : ''))"/>
+      <input type="text" name="lastName" placeholder="Last name" class="sign-up__form-input"
+             formControlName="lastName"
+             [ngClass]="('sign-up__form-input ' + (form.get('lastName').invalid && form.get('lastName').touched ? 'sign-up__form-input__error' : ''))"
+      />
+      <input type="text" name="email" placeholder="Email" class="sign-up__form-input" formControlName="email"
+             [ngClass]="('sign-up__form-input ' + (form.get('email').invalid && form.get('email').touched ? 'sign-up__form-input__error' : ''))"
+      />
+      <input type="password" name="password" placeholder="Password" class="sign-up__form-input"
+             formControlName="password"
+             [ngClass]="('sign-up__form-input ' + (form.get('password').invalid && form.get('password').touched ? 'sign-up__form-input__error' : ''))"
+      />
+      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="sign-up__form-input"
+             formControlName="cfPassword"
+             [ngClass]="('sign-up__form-input ' + (form.get('cfPassword').invalid && form.get('cfPassword').touched ? 'sign-up__form-input__error' : ''))"
+      />
+      <mat-error *ngIf="form.invalid">{{getErrorMsg()}}</mat-error>
+>>>>>>> f67a6103b5d4267d0b5f0248c547f66f5fc5d183
       <button class="sign-up__btn sign-up__btn-submit" type="submit">
         <span class="sign-up__btn-submit__visible">Sign Me Up!</span>
         <span class="sign-up__btn-submit__invisible">Submit</span>

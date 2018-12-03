@@ -1,5 +1,5 @@
 <div class="log-in">
-  <form action="#" class="log-in__form">
+  <form action="#" class="log-in__form" (submit)="onLogin(f)" #f="ngForm">
     <button mat-button mat-dialog-close class="cross">
       <mat-icon>close</mat-icon>
     </button>
@@ -12,6 +12,7 @@
     </div>
     <div class="border"></div>
     <h2 class="log-in__form-header-2">OR</h2>
+<<<<<<< HEAD
 
     <mat-form-field appearance="outline">
       <mat-label>Email Address</mat-label>
@@ -32,10 +33,30 @@
       >
     </mat-form-field>
 
+=======
+    <input
+      ngModel
+      type="text"
+      name="email"
+      placeholder="Email"
+      class="log-in__form-input "
+      required
+      #email
+    />
+    <input
+      ngModel
+      type="password"
+      name="password"
+      placeholder="Password"
+      class="log-in__form-input"
+      required
+      #password
+    />
+>>>>>>> f67a6103b5d4267d0b5f0248c547f66f5fc5d183
     <!--
       if input error add class 'log-in__form-input__error' to the input tag
     -->
-    <button class="log-in__btn log-in__btn-submit">
+    <button class="log-in__btn log-in__btn-submit" type="submit">
       <span class="log-in__btn-submit__visible">Log in!</span>
       <span class="log-in__btn-submit__invisible">Submit</span>
     </button>

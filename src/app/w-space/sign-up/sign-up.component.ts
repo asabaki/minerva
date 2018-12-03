@@ -1,30 +1,34 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Form, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material';
+import {MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import {CustomValidator} from '../services/customValidator';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   hide=true;
 
   constructor(private authService: AuthService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private dialogRef: MatDialogRef<SignUpComponent>) {
   }
 
-  static matchingConfirmPasswords(passwordKey: any) {
-    const passwordInput = passwordKey['value'];
-    if (passwordInput.password === passwordInput.cfPassword) {
-      return null;
-    } else {
-      return passwordKey.controls['cfPassword'].setErrors({passwordNotEquivalent: true});
-    }
-  }
+  // static matchingConfirmPasswords(passwordKey: any) {
+  //   const passwordInput = passwordKey['value'];
+  //   if (passwordInput.password === passwordInput.cfPassword) {
+  //     return null;
+  //   } else {
+  //     return passwordKey.controls['cfPassword'].setErrors({passwordNotEquivalent: true});
+  //   }
+  // }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -34,15 +38,19 @@ export class SignUpComponent implements OnInit {
         'password': new FormControl(null, [Validators.required]),
         'cfPassword': new FormControl(null, Validators.required)
       },
-      SignUpComponent.matchingConfirmPasswords
+      [CustomValidator.matchingConfirmPasswords]
     );
   }
 
   onSignup() {
-    // this.form.value.password !== this.form.value.cfPassword ? console.log('Not match') : console.log('Match');
-    if (this.getErrorMsg() === '') {
-      console.log('Pass');
-      this.authService.signUp(this.form.value.firstName + this.form.value.lastName, this.form.value.email, this.form.value.password).subscribe((res) => {
+    console.log(this.form);
+    this.form.get('email').markAsTouched();
+    this.form.get('firstName').markAsTouched();
+    this.form.get('lastName').markAsTouched();
+    this.form.get('password').markAsTouched();
+    this.form.get('cfPassword').markAsTouched();
+    if (this.getErrorMsg() === '' && this.form.valid) {
+      this.authService.signUp(this.form.value.firstName + ' ' + this.form.value.lastName, this.form.value.email, this.form.value.password).subscribe((res) => {
         console.log(res);
         if (res.user) {
           this.snackBar.openFromComponent(SuccessSnackComponent, {
@@ -51,6 +59,9 @@ export class SignUpComponent implements OnInit {
             panelClass: 'my-snack'
           });
           this.form.reset();
+          this.router.navigate(['/']);
+          this.dialogRef.close();
+
         } else {
           this.snackBar.openFromComponent(ErrorSnackComponent, {
             data: res.emessage,
@@ -60,30 +71,46 @@ export class SignUpComponent implements OnInit {
         }
 
       });
-      // console.log(this.authService.signUp(this.form.value.firstName + this.form.value.lastName, this.form.value.email, this.form.value.password));
-      // console.log(this.form);
     } else {
-      console.log(this.form);
-      console.log('Not Pass!');
+      this.snackBar.openFromComponent(ErrorSnackComponent, {
+        data: 'Something went wrong, Please Contact Support!',
+        duration: 2000,
+        panelClass: 'my-snack'
+      });
     }
   }
 
   getErrorMsg() {
-    if (!this.form.invalid) {
+    if (this.form.valid) {
       return '';
     }
-    if (this.form.invalid && this.form.untouched) {
-      return ' ';
+    if (this.form.get('firstName').touched && this.form.get('firstName').hasError('required')) {
+      return 'Please Enter First Name';
     }
-    if (this.form.get('firstName').hasError('required') || this.form.get('lastName').hasError('required') || this.form.get('email').hasError('required') || this.form.get('password').hasError('required') || this.form.get('cfPassword').hasError('required')) {
-      return 'Please Enter All Fields!';
-    } else if (this.form.get('email').hasError('email')) {
-      return 'Please Enter Valid Email Address!';
-    } else if (this.form.get('cfPassword').hasError('passwordNotEquivalent')) {
-      return 'Please Enter the same password';
-    } else {
-      return '';
+    if (this.form.get('lastName').touched && this.form.get('lastName').hasError('required')) {
+      return 'Please Enter Last Name';
     }
+    if (this.form.get('email').touched && this.form.get('email').hasError('required')) {
+      return 'Please Enter Email';
+    }
+    if (this.form.get('email').touched && this.form.get('email').hasError('email')) {
+      return 'Please Enter Valid Email';
+    }
+    if (this.form.get('password').touched && this.form.get('password').hasError('required')) {
+      return 'Please Enter Password';
+    }
+    if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('required')) {
+      return 'Please Enter Password';
+    }
+    if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('passwordNotEquivalent')) {
+      return 'Please the Same Password';
+    }
+
+
+  }
+
+  ngOnDestroy() {
+
   }
 }
 
