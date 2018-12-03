@@ -11,11 +11,16 @@ import {Router} from '@angular/router';
   styleUrls: ['./log-in.component.scss']
 })
 <<<<<<< HEAD
+<<<<<<< HEAD
 export class LogInComponent {
   hide = true;
 =======
 export class LogInComponent implements OnInit {
+=======
+>>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
 
+export class LogInComponent implements OnInit {
+hide = true;
   constructor(private authService: AuthService,
               private dialogRef: MatDialogRef<LogInComponent>,
               private matSnack: MatSnackBar,
@@ -69,5 +74,8 @@ export class LogInComponent implements OnInit {
 export class ErrorLoginSnackComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
   }
+<<<<<<< HEAD
 >>>>>>> f67a6103b5d4267d0b5f0248c547f66f5fc5d183
+=======
+>>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
 }

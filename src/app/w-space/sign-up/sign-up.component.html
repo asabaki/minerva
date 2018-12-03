@@ -17,6 +17,10 @@
         <h2 class="sign-up__form-header-2">0r</h2>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
       <hr />
       <h2 class="sign-up__form-header-2">
         Please fill in this form to create an account.
@@ -31,11 +35,7 @@
           name="firstName"
           placeholder="First name"
           formControlName="firstName"
-          [ngClass]="
-            form.get('firstName').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+             [ngClass]="('sign-up__form-input ' + (form.get('firstName').invalid && form.get('firstName').touched ? 'sign-up__form-input__error' : ''))"
         />
       </mat-form-field>
 
@@ -46,12 +46,8 @@
           type="text"
           name="lastName"
           placeholder="Last name"
-          formControlName="lastName"
-          [ngClass]="
-            form.get('lastName').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+         formControlName="lastName"
+             [ngClass]="('sign-up__form-input ' + (form.get('lastName').invalid && form.get('lastName').touched ? 'sign-up__form-input__error' : ''))"
         />
       </mat-form-field>
 
@@ -63,11 +59,7 @@
           name="email"
           placeholder="Email"
           formControlName="email"
-          [ngClass]="
-            form.get('email').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+             [ngClass]="('sign-up__form-input ' + (form.get('email').invalid && form.get('email').touched ? 'sign-up__form-input__error' : ''))"
         />
       </mat-form-field>
 
@@ -78,12 +70,9 @@
           name="password"
           placeholder="Password"
           [type]="hide ? 'password' : 'text'"
-          formControlName="cfPassword"
-          [ngClass]="
-            form.get('password').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          formControlName="password"
+             [ngClass]="('sign-up__form-input ' + (form.get('password').invalid && form.get('password').touched ? 'sign-up__form-input__error' : ''))"
+      
         />
         <mat-icon
           matSuffix
@@ -101,11 +90,8 @@
           placeholder="Confirm password"
           [type]="hide ? 'password' : 'text'"
           formControlName="cfPassword"
-          [ngClass]="
-            form.get('cfPassword').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+             [ngClass]="('sign-up__form-input ' + (form.get('cfPassword').invalid && form.get('cfPassword').touched ? 'sign-up__form-input__error' : ''))"
+      
         />
         <mat-icon
           matSuffix
@@ -116,6 +102,7 @@
       </mat-form-field>
 
       <mat-error *ngIf="form.invalid">{{ getErrorMsg() }}</mat-error>
+<<<<<<< HEAD
 =======
       <hr/>
       <h2 class="sign-up__form-header-2">Please fill in this form to create an account.</h2>
@@ -139,6 +126,8 @@
       />
       <mat-error *ngIf="form.invalid">{{getErrorMsg()}}</mat-error>
 >>>>>>> f67a6103b5d4267d0b5f0248c547f66f5fc5d183
+=======
+>>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
       <button class="sign-up__btn sign-up__btn-submit" type="submit">
         <span class="sign-up__btn-submit__visible">Sign Me Up!</span>
         <span class="sign-up__btn-submit__invisible">Submit</span>
