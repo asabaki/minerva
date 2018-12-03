@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class SignUpComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
+  hide=true;
 
   constructor(private authService: AuthService,
               private snackBar: MatSnackBar,

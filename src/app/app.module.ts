@@ -50,7 +50,8 @@ import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
 
   ],
   providers: [
