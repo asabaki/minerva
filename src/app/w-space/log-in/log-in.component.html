@@ -1,5 +1,5 @@
 <div class="log-in">
-  <form action="#" class="log-in__form">
+  <form action="#" class="log-in__form" (submit)="onLogin(f)" #f="ngForm">
     <button mat-button mat-dialog-close class="cross">
       <mat-icon>close</mat-icon>
     </button>
@@ -15,12 +15,18 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Email Address</mat-label>
-      <input matInput placeholder="Email" />
+      <input matInput placeholder="Email" 
+             ngModel
+      required
+      #email/>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input
         matInput
+              ngModel
+required
+      #password
         placeholder="Password"
         [type]="hide ? 'password' : 'text'"
       />
@@ -31,11 +37,10 @@
         >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
       >
     </mat-form-field>
-
     <!--
       if input error add class 'log-in__form-input__error' to the input tag
     -->
-    <button class="log-in__btn log-in__btn-submit">
+    <button class="log-in__btn log-in__btn-submit" type="submit">
       <span class="log-in__btn-submit__visible">Log in!</span>
       <span class="log-in__btn-submit__invisible">Submit</span>
     </button>
