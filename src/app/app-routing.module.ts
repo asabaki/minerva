@@ -5,6 +5,7 @@ import {AuthGuard} from './w-space/services/auth.guard';
 
 const routes: Routes = [
   {path: '', component: WSpaceComponent},
+  {path: '/flash', component: WSpaceComponent},
 ];
 
 @NgModule({
