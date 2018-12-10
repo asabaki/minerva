@@ -1,0 +1,95 @@
+<main class="top-view">
+  <div class="overview">
+    <h1 class="overview__heading">Flashcards</h1>
+    <div class="overview__stars">
+      <svg class="overview__icon-star">
+        <use xlink:href="assets/img/sprite.svg#icon-star"></use>
+      </svg>
+      <svg class="overview__icon-star">
+        <use xlink:href="assets/img/sprite.svg#icon-star"></use>
+      </svg>
+      <svg class="overview__icon-star">
+        <use xlink:href="assets/img/sprite.svg#icon-star"></use>
+      </svg>
+      <svg class="overview__icon-star">
+        <use xlink:href="assets/img/sprite.svg#icon-star"></use>
+      </svg>
+      <svg class="overview__icon-star">
+        <use xlink:href="assets/img/sprite.svg#icon-star"></use>
+      </svg>
+    </div>
+
+    <div class="overview__location">
+      <svg class="overview__icon-location">
+        <use xlink:href="assets/img/sprite.svg#icon-location-pin"></use>
+      </svg>
+      <button class="btn-inline">BKK,Thailand</button>
+    </div>
+
+    <div class="overview__count">
+      <div class="overview__count-average">8</div>
+      <div class="overview__count-count">Collection</div>
+    </div>
+    <div class="star"></div>
+  </div>
+
+  <div class="detail">
+    <div class="description">
+      <div class="description-btn_set">
+        <button
+          mat-raised-button
+          matTooltip="Create new collection of Flashcard"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          class="btn-create"
+          mat-button
+          (click)="openCreateFlashcardDialog()"
+        >
+          Create
+        </button>
+        <button
+          mat-raised-button
+          matTooltip="Edit and remove collection"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          class="btn-edit"
+        >
+          Edit
+        </button>
+      </div>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8"
+      >
+
+      <ng-container matColumnDef="numberOfCard">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of card</th>
+          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Collection Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </div>
+
+
+  <!--<app-add-card></app-add-card>-->
+</main>
+
+<!--<app-collection></app-collection>-->

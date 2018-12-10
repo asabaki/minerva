@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <ul class="side-nav">
-    <li class="side-nav__item side-nav__item--active">
+    <li class="side-nav__item">
       <a href="#" class="side-nav__link">
         <!--
           <svg class="side-nav__icon">
@@ -11,7 +11,7 @@
         <span>Home</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
+    <li class="side-nav__item side-nav__item--active">
       <a href="#" class="side-nav__link">
         <mat-icon class="side-nav__icon">style</mat-icon>
         <span>Flashcards</span>
@@ -38,7 +38,7 @@
     <li class="side-nav__item" *ngIf="status">
       <a href="#" class="side-nav__link">
         <mat-icon class="side-nav__icon">question_answer</mat-icon>
-        <span>Quize</span>
+        <span>Quiz</span>
       </a>
     </li>
     <li class="side-nav__item" *ngIf="status">

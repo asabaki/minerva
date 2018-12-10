@@ -12,25 +12,19 @@
     </div>
     <div class="border"></div>
     <h2 class="log-in__form-header-2">OR</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
 
     <mat-form-field appearance="outline">
       <mat-label>Email Address</mat-label>
-      <input matInput placeholder="Email" 
-             ngModel
-      required
-      #email/>
+      <input matInput placeholder="Email" name="email" ngModel required #email />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input
+        name="password"
         matInput
-              ngModel
-required
-      #password
+        ngModel
+        required
+        #password
         placeholder="Password"
         [type]="hide ? 'password' : 'text'"
       />
@@ -41,30 +35,6 @@ required
         >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
       >
     </mat-form-field>
-<<<<<<< HEAD
-
-=======
-    <input
-      ngModel
-      type="text"
-      name="email"
-      placeholder="Email"
-      class="log-in__form-input "
-      required
-      #email
-    />
-    <input
-      ngModel
-      type="password"
-      name="password"
-      placeholder="Password"
-      class="log-in__form-input"
-      required
-      #password
-    />
->>>>>>> f67a6103b5d4267d0b5f0248c547f66f5fc5d183
-=======
->>>>>>> e87d9478fe12b874d403ee49be0a049af2c16a1f
     <!--
       if input error add class 'log-in__form-input__error' to the input tag
     -->
