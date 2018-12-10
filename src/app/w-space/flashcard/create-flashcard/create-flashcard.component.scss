@@ -1,0 +1,114 @@
+$bp-largest: 75em; //1200px  (1200/16)
+$bp-large: 68.25em; //1100px  (1100/16)
+$bp-medium: 65.25em; //900px  (900/16)
+$bp-small: 37.5em; //600px  (600/16)
+$bp-smallest: 31.25em; //500px  (500/16)
+.create-flashcard {
+    &__container {
+        background: #ffff;
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+        justify-content: center;
+        align-content: center;
+        width: 60rem;
+    }
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        &-left {
+            flex: 0 0 80%;
+            flex-direction: column;
+            display: flex;
+        }
+        &-right {
+            flex: 1;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+    }
+}
+
+.overview__count {
+    background-color: var(--color-primary);
+    color: var(--color-grey-light-1);
+    align-self: stretch;
+    padding: 0 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    &-average {
+        font-size: 2.2rem;
+        font-weight: 300;
+        margin-bottom: -3px;
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+        }
+    }
+    &-count {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        @media only screen and (max-width: $bp-small) {
+            font-size: 0.5rem;
+        }
+    }
+    @media only screen and (max-width: $bp-small) {
+        padding: 0 1.5rem;
+    }
+}
+
+.btn {
+    &-insert {
+        display: flex;
+        justify-content: center;
+    }
+    &-create {
+        background-image: linear-gradient( to bottom left, var(--color-primary-light), var(--color-primary));
+        color: white;
+        margin: 1rem;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        &:hover {
+            box-shadow: 0 .5rem 1rem rgba(black, .2);
+            transform: scale(1.1);
+        }
+        &:active {
+            box-shadow: 0 .5rem .5rem rgba(black, .3);
+            transform: scale(1);
+        }
+    }
+}
+
+.collection {
+    &_description {
+        font-size: 1.4rem;
+        font-weight: 200;
+        border-style: none;
+        border-color: Transparent;
+        background-color: Transparent;
+        overflow: auto;
+        width: 100%;
+        height: 130%;
+        resize: none;
+        cursor: text;
+    }
+    &_name {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+}
+
+mat-tab-group {
+    height: 27rem;
+}

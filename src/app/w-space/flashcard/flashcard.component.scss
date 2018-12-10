@@ -26,8 +26,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
     background-color: white;
     box-shadow: var(--shadow-light);
     padding: 3rem;
-    flex: 0 0 60%;
-    margin-right: 4.5rem;
+    flex: 1;
+    flex-direction: row;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;
@@ -35,6 +35,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: $bp-small) {
         margin-right: 0;
         margin-bottom: 3rem;
+    }
+    &-btn_set{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
     }
 }
 
@@ -80,7 +85,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__icon-location {
         font-size: 0.5rem;
     }
-    &__rating {
+    &__count {
         background-color: var(--color-primary);
         color: var(--color-grey-light-1);
         margin-left: 3rem;
@@ -153,20 +158,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
 }
 
-@keyframes pulsate {
-  0% {
-      transform: scale(1);
-      box-shadow: none;
-  }
-  50% {
-      transform: scale(1.05);
-      box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
-  }
-  100% {
-      transform: scale(1);
-      box-shadow: none;
-  }
-}
 ///////////////Paragraph///////////////
 .paragraph {
     &:not(:last-of-type) {
@@ -341,6 +332,46 @@ $bp-smallest: 31.25em; //500px  (500/16)
         outline: none;
         animation: pulsate 1s infinite;
     }
+    &-create {
+        background-image: linear-gradient(to bottom left, rgb(93, 163, 1), rgb(6, 167, 6));
+        color: white;
+        margin-right: 1rem;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        display: block;
+        &:hover{
+          box-shadow: 0 .5rem 1rem rgba(black,.2);
+          transform: scale(1.1);
+        }
+        &:active{
+          box-shadow: 0 .5rem .5rem rgba(black,.3);
+          transform: scale(1);
+        }
+    }
+    &-edit {
+        background-image: linear-gradient( to bottom left, var(--color-grey-dark-3), rgb(131, 131, 131));
+        color: white;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        display: block;
+        &:hover{
+          box-shadow: 0 .5rem 1rem rgba(black,.2);
+          transform: scale(1.1);
+        }
+        &:active{
+          box-shadow: 0 .5rem .5rem rgba(black,.3);
+          transform: scale(1);
+        }
+
+    }
 }
 
 .cross {
@@ -360,4 +391,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &:visited {
         transform: scale(1);
     }
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
 }
