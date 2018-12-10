@@ -10,8 +10,10 @@ import {Router} from '@angular/router';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.scss']
 })
-export class LogInComponent implements OnInit {
 
+
+export class LogInComponent implements OnInit {
+hide = true;
   constructor(private authService: AuthService,
               private dialogRef: MatDialogRef<LogInComponent>,
               private matSnack: MatSnackBar,
@@ -40,7 +42,6 @@ export class LogInComponent implements OnInit {
       }
     });
   }
-
 }
 
 @Component({
@@ -66,3 +67,4 @@ export class ErrorLoginSnackComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
   }
 }
+
