@@ -8,6 +8,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: center;
     align-items: center;
     font-size: 2rem;
+    z-index: 105;
     &__form {
         margin: auto;
         border-radius: 10px;

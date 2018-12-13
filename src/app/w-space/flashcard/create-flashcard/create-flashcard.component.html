@@ -9,18 +9,8 @@
             type="text"
             class="collection_name"
             placeholder="Collection Name"
-            [(ngModel)]="collection_name"
             #collectionName
           />
-          <button
-            mat-button
-            *ngIf="collection_name"
-            matSuffix
-            mat-icon-button
-            (click)="collection_name = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
         </mat-form-field>
         <mat-form-field>
           <textarea
@@ -28,41 +18,21 @@
             class="collection_description"
             type="text"
             placeholder="Describtion"
-            [(ngModel)]="collection_description"
           ></textarea>
-          <button
-            mat-button
-            *ngIf="collection_description"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="collection_description = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
         </mat-form-field>
       </div>
-      <!--<div class="create-flashcard__header-right">
-        <div class="overview__count">
-          <div class="overview__count-average">0</div>
-          <div class="overview__count-count">Cards</div>
-        </div>
-      </div>-->
     </div>
     <div class="btn-insert">
-        <button
-        mat-raised-button
+      <button
         matTooltip="Create new collection of Flashcard"
-        aria-label="Button that displays a tooltip when focused or hovered over"
-        class="btn-create"
-        mat-button mat-dialog-close
+        mat-button
+        mat-dialog-close
         (click)="openAddCardDialog()"
         [disabled]="!collectionName.value"
-        >
+        [ngClass]="('btn-create ' + (!collectionName.value ? 'btn-create__disabled' : ''))"
+      >
         Create
       </button>
     </div>
   </form>
 </div>
-
-

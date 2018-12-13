@@ -1,30 +1,37 @@
 <div class="add-card__container">
   <h1>Add new card!</h1>
   <form class="add-card__area" #f="ngForm">
-      <button mat-icon-button color="primary" matTooltip="Insert new card">
+      <!--<button mat-icon-button color="primary" matTooltip="Insert new card">
         <mat-icon>add_circle</mat-icon>
-      </button>
+      </button>-->
       <textarea
         ngModel
-        name=""
         class="add-card__information add-card__information-front"
         placeholder="Front"
         #front
       ></textarea>
       <textarea
         ngModel
-        name=""
         class="add-card__information add-card__information-back"
         placeholder="Back"
         #back
       ></textarea>
       <button
-        mat-icon-button
-        color="primary"
-        matTooltip="add to collection"
-        [disabled]="!front.value || !back.value"
+      matTooltip="Add this card"
+      class="add-card__btn"
+      mat-button
+      [disabled]="!front.value || !back.value"
+      [ngClass]="('add-card__btn ' + (!front.value || !back.value ? 'add-card__btn-disabled' : ''))"
       >
         <mat-icon>check_circle </mat-icon>
       </button>
     </form>
+    <button
+    matTooltip="Adding card done"
+    class="add-card__btn-done"
+    mat-button
+    mat-dialog-close
+    >Save
+    </button>
 </div>
+

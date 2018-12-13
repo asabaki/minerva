@@ -10,6 +10,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     font-size: 2rem;
     height: 100%;
     background-color: transparent;
+    z-index: 105;
     &__social {
         margin: 2rem 0 3rem 0;
         display: flex;

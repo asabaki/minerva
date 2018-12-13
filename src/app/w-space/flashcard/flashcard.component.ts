@@ -11,16 +11,16 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'Hydrogen', description: 'aaaaaaa', numberOfCard: 1.0079},
-  {name: 'Helium', description: 'aaaaaaa', numberOfCard: 4.0026},
-  {name: 'Lithium', description: 'aaaaaaa', numberOfCard: 6.941},
-  {name: 'Beryllium', description: 'aaaaaaa', numberOfCard: 9.0122},
-  {name: 'Boron', description: 'aaaaaaa', numberOfCard: 10.811},
-  {name: 'Carbon', description: 'aaaaaaa', numberOfCard: 12.0107},
-  {name: 'Nitrogen', description: 'aaaaaaa', numberOfCard: 14.0067},
-  {name: 'Oxygen', description: 'aaaaaaa', numberOfCard: 15.9994},
-  {name: 'Fluorine', description: 'aaaaaaa', numberOfCard: 18.9984},
-  {name: 'Neon', description: 'aaaaaaa', numberOfCard: 20.1797},
+  {name: 'Hydrogen', description: 'aaaaaaa', numberOfCard: 2},
+  {name: 'Helium', description: 'aaaaaaa', numberOfCard: 20},
+  {name: 'Lithium', description: 'aaaaaaa', numberOfCard: 22},
+  {name: 'Beryllium', description: 'aaaaaaa', numberOfCard: 13},
+  {name: 'Boron', description: 'aaaaaaa', numberOfCard: 30},
+  {name: 'Carbon', description: 'aaaaaaa', numberOfCard: 23},
+  {name: 'Nitrogen', description: 'aaaaaaa', numberOfCard: 14},
+  {name: 'Oxygen', description: 'aaaaaaa', numberOfCard: 99},
+  {name: 'Fluorine', description: 'aaaaaaa', numberOfCard: 18},
+  {name: 'Neon', description: 'aaaaaaa', numberOfCard: 27},
 ];
 
 
@@ -31,7 +31,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class FlashcardComponent implements OnInit {
-  displayedColumns: string[] = ['numberOfCard', 'name', 'description' ];
+  displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   constructor(public dialog: MatDialog) {}
