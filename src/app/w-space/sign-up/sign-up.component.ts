@@ -99,9 +99,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (this.form.get('password').touched && this.form.get('password').hasError('required')) {
       return 'Please Enter Password';
     }
-    if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('required')) {
-      return 'Please Enter Password';
-    }
+    // if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('required')) {
+    //   return 'Please Enter Password';
+    // }
     if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('passwordNotEquivalent')) {
       return 'Please the Same Password';
     }
