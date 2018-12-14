@@ -26,8 +26,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
     background-color: white;
     box-shadow: var(--shadow-light);
     padding: 3rem;
-    flex: 0 0 60%;
-    margin-right: 4.5rem;
+    flex: 1;
+    flex-direction: row;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;
@@ -35,6 +35,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: $bp-small) {
         margin-right: 0;
         margin-bottom: 3rem;
+    }
+    &-btn_set{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1rem;
     }
 }
 
@@ -51,6 +56,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
+    margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -80,12 +86,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__icon-location {
         font-size: 0.5rem;
     }
-    &__rating {
+    &__count {
         background-color: var(--color-primary);
         color: var(--color-grey-light-1);
-        margin-left: 3rem;
-        align-self: stretch;
-        padding: 0 2.25rem;
+        padding: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -139,22 +143,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 @keyframes pulsate {
-    0% {
-        transform: scale(1);
-        box-shadow: none;
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.25);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: none;
-    }
-}
-
-@keyframes pulsate {
-
     0% {
         transform: scale(1);
         box-shadow: none;
@@ -343,6 +331,46 @@ $bp-smallest: 31.25em; //500px  (500/16)
         outline: none;
         animation: pulsate 1s infinite;
     }
+    &-create {
+        background-image: linear-gradient(to bottom left, rgb(93, 163, 1), rgb(6, 167, 6));
+        color: white;
+        margin-right: 1rem;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        display: block;
+        &:hover{
+          box-shadow: 0 .5rem 1rem rgba(black,.2);
+          transform: scale(1.1);
+        }
+        &:active{
+          box-shadow: 0 .5rem .5rem rgba(black,.3);
+          transform: scale(1);
+        }
+    }
+    &-edit {
+        background-image: linear-gradient( to bottom left, var(--color-grey-dark-3), rgb(131, 131, 131));
+        color: white;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        display: block;
+        &:hover{
+          box-shadow: 0 .5rem 1rem rgba(black,.2);
+          transform: scale(1.1);
+        }
+        &:active{
+          box-shadow: 0 .5rem .5rem rgba(black,.3);
+          transform: scale(1);
+        }
+
+    }
 }
 
 .cross {
@@ -364,65 +392,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
 }
 
-.carousel {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    overflow: hidden;
-    margin: 0 auto;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    &:hover {
-        .slide:after,
-        .counter,
-        .slide:before {
-            opacity: 1;
-        }
-    }
+table {
+    width: 100%;
 }
 
-.slide {
-    float: right;
-    position: absolute;
-    z-index: 1;
-    width: 600px;
-    height: 400px;
-    background-color: #eee;
-    text-align: center;
-    transition: opacity 0.4s;
-    opacity: 1;
-    &:before {
-        content: attr(annot);
-        display: block;
-        position: absolute;
-        left: 20px;
-        bottom: 20px;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 14px;
-        font-weight: 300;
-        z-index: 12;
-        opacity: 0;
-        transition: opacity 0.3s;
-        text-shadow: 0 0 1px black;
-    }
-    &:after {
-        content: attr(slide);
-        display: block;
-        position: absolute;
-        bottom: 0;
-        transition: opacity 0.3s;
-        width: 100%;
-        height: 80px;
-        opacity: 0;
-        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
-        text-align: left;
-        text-indent: 549px;
-        line-height: 101px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.9);
-        text-shadow: 0 0 1px black;
-    }
+th.mat-sort-header-sorted {
+    color: black;
 }
-
-
-
-

@@ -66,5 +66,6 @@ hide = true;
 export class ErrorLoginSnackComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
   }
+
 }
 

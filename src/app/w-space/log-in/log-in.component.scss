@@ -10,6 +10,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
     font-size: 2rem;
     height: 100%;
     background-color: transparent;
+    z-index: 105;
+    @media only screen and (max-width: $bp-smallest) {
+      transform: scale(.85);}
     &__social {
         margin: 2rem 0 3rem 0;
         display: flex;
@@ -203,6 +206,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     align-self: flex-end;
     transition: all 0.2s;
     border: none;
+    top: -1rem;
     background-color: transparent;
     &:hover,
     &:focus {
@@ -213,4 +217,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &:visited {
         transform: scale(1);
     }
+}
+
+mat-form-field{
+  @media only screen and (max-width: $bp-smallest) {
+    transform: scale(.9);
+}
 }

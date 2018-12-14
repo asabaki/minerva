@@ -1,9 +1,10 @@
 <main class="top-view">
   <div class="overview">
-    <h1 class="overview__heading"><mat-icon color="primary" style="display: inline-flex; vertical-align: middle;">style</mat-icon> Flashcards </h1>
+
+    <h1 class="overview__heading"><mat-icon color="primary" style="display: inline-flex; vertical-align: middle;">question_answer</mat-icon> Quiz </h1>
     <div class="overview__count">
       <div class="overview__count-average">8</div>
-      <div class="overview__count-count">Collection</div>
+      <div class="overview__count-count">Quizzes</div>
     </div>
   </div>
 
@@ -16,17 +17,8 @@
           aria-label="Button that displays a tooltip when focused or hovered over"
           class="btn-create"
           mat-button
-          (click)="openCreateFlashcardDialog()"
         >
-          Create new collection
-        </button>
-        <button
-          mat-raised-button
-          matTooltip="Edit and remove collection"
-          aria-label="Button that displays a tooltip when focused or hovered over"
-          class="btn-edit"
-        >
-          Edit
+          Create new quiz
         </button>
       </div>
       <table
@@ -36,26 +28,32 @@
         class="mat-elevation-z8"
       >
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Collection Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      <ng-container matColumnDef="numberOfCard">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of question</th>
+          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
         </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Quiz Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
           <td mat-cell *matCellDef="let element">{{ element.description }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="numberOfCard">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of card</th>
-          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
-        </ng-container>
+
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
   </div>
+
+
 </main>
 
-<!--<app-add-card></app-add-card>-->
-<!--<app-collection></app-collection>-->

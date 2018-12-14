@@ -56,6 +56,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
+
+    margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -88,9 +90,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__count {
         background-color: var(--color-primary);
         color: var(--color-grey-light-1);
-        margin-left: 3rem;
-        align-self: stretch;
-        padding: 0 2.25rem;
+
+        padding: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -40,6 +40,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin: 1rem;
         display: flex;
         flex-flow: row nowrap;
+
+        text-align: justify;
+        justify-content: flex-end;
+
     }
 }
 
@@ -48,6 +52,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
+    margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -104,10 +109,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
         justify-content: space-between;
         flex-direction: column;
         &-bottom {
-            background-color: var(--color-grey-light-3);
+
+            background-color: var(--color-grey-light-1);
             display: flex;
-            justify-content: space-between;
-            padding: 1rem 0.5rem;
+            justify-content: center;
+            padding: 2rem 0.5rem;
             align-items: center;
         }
     }
@@ -149,6 +155,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
         text-shadow: 0 0.5rem 0.5rem rgba(black, 0.1);
         margin-left: 2rem;
         font-weight: 500;
+
+        cursor: pointer;
         &:hover {
             transform: scale(1.1);
         }
@@ -171,10 +179,19 @@ $bp-smallest: 31.25em; //500px  (500/16)
         align-items: center;
         box-shadow: 0.5rem 0.5rem 2rem rgba(black, 0.1);
         border-radius: 8px;
-        transition: 2s cubic-bezier(.08,1.01,.26,1);
+        transition: 2s cubic-bezier(0.08, 1.01, 0.26, 1);
         width: 45rem;
         height: 25rem;
         backface-visibility: hidden;
+        @media only screen and (max-width: $bp-small) {
+            width: 30rem;
+            height: 20rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+            width: 20rem;
+            height: 30rem;
+            margin-bottom: 2rem;
+        }
     }
     &-front {
         background-image: linear-gradient( to right bottom, rgba(#ffa000, 0.9), rgba(rgb(255, 174, 0), 0.9));
@@ -183,21 +200,29 @@ $bp-smallest: 31.25em; //500px  (500/16)
         font-weight: 500;
 
     }
-    &-back{
-
-      background-color: var(--color-grey-light-1);
-      transform: rotateX(180deg);
-      color: black;
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 0 1.5rem;
+    &-back {
+        background-color: var(--color-grey-light-1);
+        transform: rotateX(180deg);
+        color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 1.5rem;
+        @media only screen and (max-width: $bp-smallest) {
+            transform: rotateY(180deg);
+        }
     }
-    &:hover  &-front {
-      transform: rotateX(180deg);
+    &:hover &-front {
+        transform: rotateX(180deg);
+        @media only screen and (max-width: $bp-smallest) {
+            transform: rotateY(180deg);
+        }
     }
-    &:hover  &-back {
-      transform: rotateX(0deg);
+    &:hover &-back {
+        transform: rotateX(0deg);
+        @media only screen and (max-width: $bp-smallest) {
+            transform: rotateY(0deg);
+        }
     }
 }
 
@@ -211,3 +236,138 @@ $bp-smallest: 31.25em; //500px  (500/16)
         transform: scale(1.3);
     }
 }
+
+%animation-default {
+    opacity: 1 !important;
+    z-index: 100;
+}
+
+@mixin carousel($items, $animation: "default") {
+    .carousel {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        >input[type="radio"] {
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            top: 0;
+            &:checked {
+                ~.carousel__items .carousel__item,
+                ~.carousel__prev>label,
+                ~.carousel__next>label {
+                    opacity: 0;
+                }
+            }
+            @for $i from 1 through $items {
+                &:nth-child(#{$i}) {
+                    &:checked {
+                        ~.carousel__items .carousel__item {
+                            @if $animation=="default" {
+                                &:nth-child(#{$i}) {
+                                    opacity: 1;
+                                    z-index: ($i + 1);
+                                }
+                            }
+                        }
+                        ~.carousel__prev {
+                            >label {
+                                @if $i==1 {
+                                    &:nth-child(#{$items}) {
+                                        @extend %animation-default;
+                                    }
+                                }
+                                @else if $i==$items {
+                                    &:nth-child(#{$items - 1}) {
+                                        @extend %animation-default;
+                                    }
+                                }
+                                @else {
+                                    &:nth-child(#{$i - 1}) {
+                                        @extend %animation-default;
+                                    }
+                                }
+                            }
+                        }
+                        ~.carousel__next {
+                            >label {
+                                @if $i==$items {
+                                    &:nth-child(1) {
+                                        @extend %animation-default;
+                                    }
+                                }
+                                @else {
+                                    &:nth-child(#{$i + 1}) {
+                                        @extend %animation-default;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &__items {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            width: 100%;
+            height: 600px;
+            position: relative;
+        }
+        &__item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            transition: opacity .8s;
+            -webkit-transition: opacity .8s;
+        }
+        &__prev,
+        &__next {
+            >label {
+                border-radius: 50%;
+                padding-top: .5rem;
+                cursor: pointer;
+                /*display: block;*/
+                width: 4rem;
+                height: 4rem;
+                position: absolute;
+                top: 50%;
+                /*transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);*/
+                transition: all 0.3s ease;
+                -webkit-transition: all 0.3s ease-out;
+                opacity: 0;
+                color: var(--color-primary);
+                background-color: transparent;
+                text-align: center;
+                border: 1px solid var(--color-primary);
+                outline: none;
+                &:hover {
+                    border: 2px solid var(--color-primary);
+                }
+            }
+        }
+        &__prev {
+            >label {
+                left: 2%;
+            }
+        }
+        &__next {
+            >label {
+                right: 2%;
+            }
+        }
+    }
+}
+
+.container {
+    width: 900px;
+    min-width: 900px;
+    margin: 50px auto;
+}
+
+@include carousel(5);

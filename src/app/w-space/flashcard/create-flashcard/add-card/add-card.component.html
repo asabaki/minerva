@@ -19,12 +19,21 @@
         #back
       ></textarea>
       <button
-        mat-icon-button
-        color="primary"
-        matTooltip="add to collection"
-        [disabled]="!front.value || !back.value"
+      matTooltip="Add this card"
+      class="add-card__btn"
+      mat-button
+      [disabled]="!front.value || !back.value"
+      [ngClass]="('add-card__btn ' + (!front.value || !back.value ? 'add-card__btn-disabled' : ''))"
       >
         <mat-icon>check_circle </mat-icon>
       </button>
     </form>
+    <button
+    matTooltip="Adding card done"
+    class="add-card__btn-done"
+    mat-button
+    mat-dialog-close
+    >Save
+    </button>
 </div>
+

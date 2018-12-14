@@ -42,6 +42,10 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
 import { CreateFlashcardComponent } from './w-space/flashcard/create-flashcard/create-flashcard.component';
 import { AddCardComponent } from './w-space/flashcard/create-flashcard/add-card/add-card.component';
 import { CollectionComponent } from './w-space/flashcard/collection/collection.component';
+import { QuizComponent } from './w-space/quiz/quiz.component';
+import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.component';
+
+
 
 
 @NgModule({
@@ -58,7 +62,10 @@ import { CollectionComponent } from './w-space/flashcard/collection/collection.c
     FlashcardComponent,
     CreateFlashcardComponent,
     AddCardComponent,
-    CollectionComponent
+    CollectionComponent,
+    QuizComponent,
+    AddQuestionComponent,
+
   ],
   imports: [
     BrowserModule,

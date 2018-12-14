@@ -73,19 +73,28 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &-create {
         background-image: linear-gradient( to bottom left, var(--color-primary-light), var(--color-primary));
         color: white;
-        margin: 1rem;
+
+        margin: 1rem 1.5rem;
         padding: 1rem 2rem;
         border: none;
+        outline: none;
         border-radius: 100px;
         cursor: pointer;
         transition: all .2s;
+        overflow: hidden;
+        margin-top: 7rem;
+  
         &:hover {
             box-shadow: 0 .5rem 1rem rgba(black, .2);
             transform: scale(1.1);
         }
         &:active {
             box-shadow: 0 .5rem .5rem rgba(black, .3);
-            transform: scale(1);
+            transform: scale(.9);
+        }
+        &__disabled{
+          background-image: linear-gradient( to bottom left, var(--color-grey-dark-3), var(--color-grey-dark-3));
+
         }
     }
 }

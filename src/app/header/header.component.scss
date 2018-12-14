@@ -11,10 +11,18 @@ $bp-smallest: 31.25em; //500px  (500/16)
     display: flex;
     justify-content: space-between;
     align-items: center;
+    overflow: hidden;
     @media only screen and (max-width: $bp-smallest) {
         flex-wrap: wrap;
         height: 11rem;
         align-content: space-around;
+    }
+    &-fixed{
+      position: fixed;
+      width: 100%;
+      @media only screen and (max-width: $bp-small) {
+        position: unset;
+      }
     }
 }
 
