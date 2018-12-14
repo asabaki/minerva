@@ -17,4 +17,8 @@ export class SideNavComponent implements OnInit {
     });
   }
 
+  onClear() {
+    this.authService.seed();
+  }
+
 }

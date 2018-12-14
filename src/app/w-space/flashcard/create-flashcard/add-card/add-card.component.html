@@ -1,17 +1,19 @@
 <div class="add-card__container">
   <h1>Add new card!</h1>
   <form class="add-card__area" #f="ngForm">
-      <!--<button mat-icon-button color="primary" matTooltip="Insert new card">
+      <button mat-icon-button color="primary" matTooltip="Insert new card">
         <mat-icon>add_circle</mat-icon>
-      </button>-->
+      </button>
       <textarea
         ngModel
+        name="front_text"
         class="add-card__information add-card__information-front"
         placeholder="Front"
         #front
       ></textarea>
       <textarea
         ngModel
+        name="back_text"
         class="add-card__information add-card__information-back"
         placeholder="Back"
         #back

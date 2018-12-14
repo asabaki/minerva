@@ -73,6 +73,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &-create {
         background-image: linear-gradient( to bottom left, var(--color-primary-light), var(--color-primary));
         color: white;
+
         margin: 1rem 1.5rem;
         padding: 1rem 2rem;
         border: none;
@@ -82,6 +83,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         transition: all .2s;
         overflow: hidden;
         margin-top: 7rem;
+  
         &:hover {
             box-shadow: 0 .5rem 1rem rgba(black, .2);
             transform: scale(1.1);

@@ -42,6 +42,13 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+  onClear() {
+    console.log(`onClear called`);
+    this.authService.seed();
+  }
+  onGetSecret() {
+    this.authService.getSecret();
+  }
 
   getUser() {
     return this.authService.getUserName();

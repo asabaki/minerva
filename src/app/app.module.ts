@@ -46,6 +46,8 @@ import { QuizComponent } from './w-space/quiz/quiz.component';
 import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +65,7 @@ import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.c
     CollectionComponent,
     QuizComponent,
     AddQuestionComponent,
+
   ],
   imports: [
     BrowserModule,

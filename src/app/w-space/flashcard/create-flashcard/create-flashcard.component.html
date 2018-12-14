@@ -5,6 +5,7 @@
         <h1>Create new flash card collection !</h1>
         <mat-form-field color="primary">
           <input
+            name="title"
             matInput
             type="text"
             class="collection_name"
@@ -14,10 +15,12 @@
         </mat-form-field>
         <mat-form-field>
           <textarea
+            name="description"
             matInput
             class="collection_description"
             type="text"
             placeholder="Describtion"
+            #description
           ></textarea>
         </mat-form-field>
       </div>

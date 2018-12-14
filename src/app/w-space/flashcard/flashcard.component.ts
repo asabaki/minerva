@@ -1,27 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { CreateFlashcardComponent } from './create-flashcard/create-flashcard.component';
-
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
+import {AuthService} from '../services/auth.service';
+import {FlashCardService} from '../services/flash-card.service';
 
 export interface PeriodicElement {
-  name: string;
+  title: string;
   description: string;
   numberOfCard: number;
 
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'Hydrogen', description: 'aaaaaaa', numberOfCard: 2},
-  {name: 'Helium', description: 'aaaaaaa', numberOfCard: 20},
-  {name: 'Lithium', description: 'aaaaaaa', numberOfCard: 22},
-  {name: 'Beryllium', description: 'aaaaaaa', numberOfCard: 13},
-  {name: 'Boron', description: 'aaaaaaa', numberOfCard: 30},
-  {name: 'Carbon', description: 'aaaaaaa', numberOfCard: 23},
-  {name: 'Nitrogen', description: 'aaaaaaa', numberOfCard: 14},
-  {name: 'Oxygen', description: 'aaaaaaa', numberOfCard: 99},
-  {name: 'Fluorine', description: 'aaaaaaa', numberOfCard: 18},
-  {name: 'Neon', description: 'aaaaaaa', numberOfCard: 27},
-];
+const ELEMENT_DATA: PeriodicElement[] = [];
 
 
 @Component({
@@ -31,15 +21,37 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 export class FlashcardComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
+  displayedColumns: string[] = [ 'name', 'description', 'numberOfCard'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog) {}
+  // dataSource = new TableDataSource(this.flash);
+
+  constructor(public dialog: MatDialog,
+              private auth: AuthService,
+              private flash: FlashCardService) {
+  }
+
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.flash.fetchCol().subscribe(
+      (res) => {
+        ELEMENT_DATA.length = 0;
+        res.forEach((data) => {
+            ELEMENT_DATA.push({
+              title: data.title,
+              description: data.description,
+              numberOfCard: data.numberOfCard
+            });
+          }
+        );
+        this.dataSource.sort = this.sort;
+      }
+    );
+
   }
+
+
   openCreateFlashcardDialog() {
     const dialogRef = this.dialog.open(CreateFlashcardComponent, {panelClass: 'myapp-no-padding-dialog'});
 

@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./log-in.component.scss']
 })
 
+
 export class LogInComponent implements OnInit {
 hide = true;
   constructor(private authService: AuthService,
@@ -67,3 +68,4 @@ export class ErrorLoginSnackComponent {
   }
 
 }
+

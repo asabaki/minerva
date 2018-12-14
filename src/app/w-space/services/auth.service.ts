@@ -72,7 +72,6 @@ export class AuthService {
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
             this.router.navigate(['/']);
-            console.log('Login Complete');
             v.next(result);
           }
         },
@@ -110,7 +109,6 @@ export class AuthService {
     const userId = localStorage.getItem('userId');
     const expire = localStorage.getItem('expiration');
     const name = localStorage.getItem('name');
-    console.log(`Getting Called: ${userId} ${expire}`);
     if (!token || !expire) {
       return;
     }
@@ -134,7 +132,6 @@ export class AuthService {
     const now = new Date();
     const expireIn = authInfo.expirationDate.getTime() - now.getTime();
     if (expireIn) {
-      console.log(`expiresIn = ${expireIn} \n token = ${authInfo.token}`);
       this.token = authInfo.token;
       this.isAuthenticated = true;
       this.userId = authInfo.userId;
@@ -145,7 +142,6 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log('Setting Timer' + duration);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
@@ -163,5 +159,21 @@ export class AuthService {
     localStorage.setItem('name', name);
     localStorage.setItem('userId', id);
     localStorage.setItem('expiration', expirationDate.toISOString());
+  }
+
+  seed() {
+    const user = this.getAuthData();
+    this.http.delete('http://localhost:3000/api/user/seed/' + user.userId, { params: { userId: user.userId}}).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  getSecret() {
+    this.http.get('http://localhost:3000/api/user/secret').subscribe((res) => {
+      console.log(res);
+    },
+      (err) => {
+      console.log(err);
+      });
   }
 }
