@@ -5,6 +5,7 @@
         <h1>Create new flash card collection !</h1>
         <mat-form-field color="primary">
           <input
+            name="title"
             matInput
             type="text"
             class="collection_name"
@@ -12,42 +13,19 @@
             [(ngModel)]="collection_name"
             #collectionName
           />
-          <button
-            mat-button
-            *ngIf="collection_name"
-            matSuffix
-            mat-icon-button
-            (click)="collection_name = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
         </mat-form-field>
         <mat-form-field>
           <textarea
+            name="description"
             matInput
             class="collection_description"
             type="text"
-            placeholder="Describtion"
+            placeholder="Description"
             [(ngModel)]="collection_description"
+            #description
           ></textarea>
-          <button
-            mat-button
-            *ngIf="collection_description"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="collection_description = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
         </mat-form-field>
       </div>
-      <!--<div class="create-flashcard__header-right">
-        <div class="overview__count">
-          <div class="overview__count-average">0</div>
-          <div class="overview__count-count">Cards</div>
-        </div>
-      </div>-->
     </div>
     <div class="btn-insert">
         <button
@@ -56,7 +34,7 @@
         aria-label="Button that displays a tooltip when focused or hovered over"
         class="btn-create"
         mat-button mat-dialog-close
-        (click)="openAddCardDialog()"
+        (click)="onAddCollection(collectionName.value,description.value)"
         [disabled]="!collectionName.value"
         >
         Create

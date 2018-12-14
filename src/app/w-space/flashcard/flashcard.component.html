@@ -62,26 +62,20 @@
         class="mat-elevation-z8"
       >
 
-      <ng-container matColumnDef="numberOfCard">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of card</th>
-          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
-        </ng-container>
-
-
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Collection Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
         </ng-container>
-
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
           <td mat-cell *matCellDef="let element">{{ element.description }}</td>
         </ng-container>
 
-
-
-
+        <ng-container matColumnDef="numberOfCard">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>No. of card</th>
+          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>

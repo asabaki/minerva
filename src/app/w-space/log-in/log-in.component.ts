@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./log-in.component.scss']
 })
 
+
 export class LogInComponent implements OnInit {
 hide = true;
   constructor(private authService: AuthService,
@@ -65,5 +66,5 @@ hide = true;
 export class ErrorLoginSnackComponent {
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
   }
-
 }
+
