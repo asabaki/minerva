@@ -1,19 +1,13 @@
 <nav class="sidebar">
   <ul class="side-nav">
-    <li class="side-nav__item">
-      <a href="#" class="side-nav__link">
-        <!--
-          <svg class="side-nav__icon">
-            <use xlink:href="assets/img/sprite.svg#icon-home"></use>
-          </svg>
-        -->
+    <li class="side-nav__item" routerLinkActive="side-nav__item side-nav__item--active" [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="/" class="side-nav__link">
         <mat-icon class="side-nav__icon">home</mat-icon>
         <span>Home</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
-    <li class="side-nav__item side-nav__item--active">
-      <a href="#" class="side-nav__link">
+    <li class="side-nav__item" routerLinkActive="side-nav__item--active" *ngIf="status">
+      <a routerLink="/flash"  class="side-nav__link">
         <mat-icon class="side-nav__icon">style</mat-icon>
         <span>Flashcards</span>
       </a>
@@ -66,6 +60,7 @@
         <span>groups</span>
       </a>
     </li>
+
   </ul>
 
   <div class="legal">&copy; 2018 by Minerva. All right reserved.</div>

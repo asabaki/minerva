@@ -13,6 +13,8 @@
 
     <button mat-button (click)="signUp_dialog()" *ngIf="!isAuth">Sign up</button>
     <button mat-button (click)="logIn_dialog()" *ngIf="!isAuth" class="no-hover">Log in</button>
+    <button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>
+    <button mat-button (click)="onGetSecret()" class="no-hover">Secret</button>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user" *ngIf="isAuth">
       <img
