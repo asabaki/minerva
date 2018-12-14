@@ -9,6 +9,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
     align-items: center;
     font-size: 2rem;
     z-index: 105;
+    @media only screen and (max-width: $bp-smallest) {
+      transform: scaleX(.85) scaleY(.9);}
     &__form {
         margin: auto;
         border-radius: 10px;
@@ -44,6 +46,24 @@ $bp-smallest: 31.25em; //500px  (500/16)
                 display: none;
                 visibility: hidden;
             }
+            p{
+              font-size: 1.5rem;
+              color:white;
+              text-align: center;
+              a{
+                color:white;
+                text-decoration: underline;
+                display: inline-block;
+                transition: all .2s ease;
+                &:hover{
+                  transform: scale(1.1);
+                  color: var(--color-secondary-light);
+                }
+                &:active{
+                  transform: scale(.9);
+                }
+              }
+            }
         }
         &-small {
             visibility: hidden;
@@ -66,7 +86,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
                 width: 30rem;
             }
             @media only screen and (max-width: $bp-smallest) {
-                width: 25rem;
+                width: 22rem;
             }
         }
         &-header {
@@ -242,6 +262,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
         display: none;
         visibility: hidden;
     }
+    @media only screen and (max-width: $bp-largest) {
+        display: none;
+        visibility: hidden;
+    }
 }
 
 .cross {
@@ -252,7 +276,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     cursor: pointer;
     align-self: flex-end;
     margin-right: 1rem;
-    top: -4.5rem;
+    top: -6.5rem;
     transition: all 0.2s;
     border: none;
     background-color: transparent;
@@ -272,16 +296,23 @@ $bp-smallest: 31.25em; //500px  (500/16)
             visibility: visible;
             z-index: 10;
             align-self: flex-end;
+            top: -4rem;
         }
         @media only screen and (max-width: $bp-small) {
-            top: 8rem;
+            top: -4rem;
         }
         @media only screen and (max-width: $bp-smallest) {
-            top: 8.5rem;
+            top: -5rem;
         }
     }
 }
 
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
     margin: 0.1rem 0;
+}
+
+mat-form-field{
+  @media only screen and (max-width: $bp-smallest) {
+    transform: scale(.9);
+}
 }

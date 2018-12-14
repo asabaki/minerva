@@ -81,6 +81,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         cursor: pointer;
         transition: all .2s;
         overflow: hidden;
+        margin-top: 7rem;
         &:hover {
             box-shadow: 0 .5rem 1rem rgba(black, .2);
             transform: scale(1.1);
