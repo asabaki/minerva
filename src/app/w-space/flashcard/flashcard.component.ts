@@ -3,8 +3,10 @@ import {MatSort, MatTableDataSource, MatDialog} from '@angular/material';
 import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
+import {Router} from '@angular/router';
 
 export interface PeriodicElement {
+  _id: string;
   title: string;
   description: string;
   numberOfCard: number;
@@ -28,7 +30,8 @@ export class FlashcardComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private auth: AuthService,
-              private flash: FlashCardService) {
+              private flash: FlashCardService,
+              private router: Router) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -39,6 +42,7 @@ export class FlashcardComponent implements OnInit {
         ELEMENT_DATA.length = 0;
         res.forEach((data) => {
             ELEMENT_DATA.push({
+              _id: data._id,
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard
@@ -51,6 +55,13 @@ export class FlashcardComponent implements OnInit {
 
   }
 
+  onRowClick(r: any) {
+    // TODO - ADD NAVIGATION AFTER CLICK THE ROW
+    const id = r._id;
+    this.router.navigate(['flash/' + id]);
+
+    // console.log(r);
+  }
 
   openCreateFlashcardDialog() {
     const dialogRef = this.dialog.open(CreateFlashcardComponent, {panelClass: 'myapp-no-padding-dialog'});
