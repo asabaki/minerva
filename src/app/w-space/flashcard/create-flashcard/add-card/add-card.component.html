@@ -1,9 +1,6 @@
 <div class="add-card__container">
   <h1>Add new card!</h1>
   <form class="add-card__area" #f="ngForm">
-      <button mat-icon-button color="primary" matTooltip="Insert new card">
-        <mat-icon>add_circle</mat-icon>
-      </button>
       <textarea
         ngModel
         name="front_text"
@@ -22,6 +19,7 @@
       matTooltip="Add this card"
       class="add-card__btn"
       mat-button
+      (click)="onAddCard(front.value,back.value,f)"
       [disabled]="!front.value || !back.value"
       [ngClass]="('add-card__btn ' + (!front.value || !back.value ? 'add-card__btn-disabled' : ''))"
       >
@@ -33,7 +31,7 @@
     class="add-card__btn-done"
     mat-button
     mat-dialog-close
-    >Save
+    >Done
     </button>
 </div>
 
