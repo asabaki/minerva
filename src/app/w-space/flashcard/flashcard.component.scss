@@ -9,25 +9,25 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 .detail {
-    display: flex;
-    padding: 4.5rem;
-    background-color: var(--color-grey-light-1);
-    border-bottom: var(--line);
-    font-size: 1.4rem;
-    @media only screen and (max-width: $bp-medium) {
-        padding: 3rem;
-    }
-    @media only screen and (max-width: $bp-small) {
-        flex-direction: column;
-    }
-}
+  display: flex;
+  padding: 4.5rem;
+  background-color: var(--color-grey-light-1);
+  border-bottom: var(--line);
+  font-size: 1.4rem;
+  height: 100vh;
+  @media only screen and (max-width: $bp-medium) {
+      padding: 3rem;
+  }
+  @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+  }
 
+}
 .description {
     background-color: white;
     box-shadow: var(--shadow-light);
     padding: 3rem;
     flex: 1;
-    flex-direction: row;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;
@@ -63,10 +63,16 @@ $bp-smallest: 31.25em; //500px  (500/16)
         font-weight: 300;
         text-transform: uppercase;
         letter-spacing: 1px;
-        padding: 1.5rem 3rem;
+        padding: 1.5rem 6rem;
         @media only screen and (max-width: $bp-small) {
             font-size: 1.8rem;
             padding: 1.25rem 2rem;
+        }
+        @media only screen and (max-width: $bp-large) {
+          padding: 1.5rem 6rem;
+        }
+        @media only screen and (max-width: $bp-largest) {
+          padding: 1.5rem 6rem;
         }
     }
     &__stars {
