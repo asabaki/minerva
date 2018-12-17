@@ -5,11 +5,11 @@ $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .sidebar {
     background-color: var(--color-grey-dark-1);
-    flex: 0 0 18%;
+    flex: 0 0 17%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 90vh;
+    height: 92vh;
     position: fixed;
     top: 7rem;
     @media only screen and (max-width: $bp-medium) {
@@ -29,13 +29,17 @@ $bp-smallest: 31.25em; //500px  (500/16)
     margin-top: 3.5rem;
 
     @media only screen and (max-width: $bp-medium) {
-        display: flex;
-        margin: 0;
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      height: 100%;
+      margin-top: 0rem;
     }
     &__item {
         @media only screen and (max-width: $bp-medium) {
             flex: 1;
             justify-content: center;
+            margin: .5rem 0;
         }
         position: relative;
         &:not(:last-child) {
@@ -54,6 +58,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
             background-color: var(--color-primary);
             transform: scaleY(0);
             transition: transform 0.15s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.15s, background-color 0.1s;
+            @media only screen and (max-width: $bp-medium) {
+              width: 100%;
+          }
         }
         &--active::before,
         &:hover::before {
@@ -75,10 +82,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
         align-items: center;
         position: relative;
         z-index: 10;
+
         @media only screen and (max-width: $bp-medium) {
             justify-content: center;
-            padding: 2rem;
             text-align: center;
+
         }
         @media only screen and (max-width: $bp-small) {
             flex-direction: column;
