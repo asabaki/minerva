@@ -1,4 +1,4 @@
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
@@ -169,7 +169,7 @@ export class AuthService {
   }
 
   getSecret() {
-    this.http.get('http://localhost:3000/api/user/secret').subscribe((res) => {
+    this.http.get('http://localhost:3000/api/user/secret', { params: new HttpParams().set('name', 'something')}).subscribe((res) => {
       console.log(res);
     },
       (err) => {

@@ -59,6 +59,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
             color: black;
         }
     }
+    &__scroll
+    {
+      height: 20rem;
+      width: 100%;
+
+    }
+
     .icon{
       color:var(--color-secondary-dark);
     }

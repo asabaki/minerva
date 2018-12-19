@@ -31,6 +31,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: $bp-small) {
         flex-direction: column;
     }
+    @media only screen and (max-width: $bp-large) {
+        margin-left: 6rem;
+    }
 }
 
 .description {
@@ -53,6 +56,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin-bottom: 1rem;
     }
 }
+
 ///////////////Overview///////////////
 .overview {
     display: flex;

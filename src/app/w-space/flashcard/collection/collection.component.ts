@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
+<<<<<<< HEAD
 import { Location } from '@angular/common';
+=======
+import {Location} from '@angular/common';
+>>>>>>> f840822c3bb6ea8cbdcabc4fe447eb26f5744a3a
 import {MatDialog} from '@angular/material';
 import {EditCardComponent} from '../collection/edit-card/edit-card.component';
 
@@ -17,13 +21,17 @@ export class CollectionComponent implements OnInit {
   desc: string;
   numberOfCard: number;
   index: number;
+  id: string;
+  cardObj: Object;
   // arr: Array<number>;
   num: number;
+
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
               private flashService: FlashCardService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.index = 1;
@@ -34,6 +42,14 @@ export class CollectionComponent implements OnInit {
           this.desc = res.description;
           this.numberOfCard = res.card.length;
           this.cards = res.card;
+          this.id = params.get('id');
+          this.cardObj = {
+            title: this.title,
+            description: this.desc,
+            noc: this.numberOfCard,
+            cards: this.cards,
+            user_id: this.id
+          };
         });
 
       }
@@ -52,8 +68,13 @@ export class CollectionComponent implements OnInit {
   helper(num: number) {
     return Array(num);
   }
+
   openEditCardDialog() {
-    const dialogRef = this.dialog.open(EditCardComponent, {panelClass: 'myapp-no-padding-dialog'});
+    const dialogRef = this.dialog.open(EditCardComponent,
+      {
+        panelClass: 'myapp-no-padding-dialog',
+        data: this.cardObj
+      });
 
     dialogRef.afterClosed().subscribe(result => {
     });
