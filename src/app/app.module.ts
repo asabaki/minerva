@@ -46,6 +46,7 @@ import { CollectionComponent } from './w-space/flashcard/collection/collection.c
 import { QuizComponent } from './w-space/quiz/quiz.component';
 import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.component';
 import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -90,7 +91,8 @@ import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit
     MatTooltipModule,
     // MatTableDataSource
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ScrollingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -25,7 +25,6 @@ export class FlashCardService {
       const card = {title, description, userId};
       this.http.post<any>('http://localhost:3000/api/flash/add', card).subscribe(
         (res) => {
-          console.log(res);
           this.collectionId = res._id;
         },
         (err) => {
