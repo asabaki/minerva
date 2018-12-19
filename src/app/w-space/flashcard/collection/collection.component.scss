@@ -112,11 +112,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
 }
 
-.top-view {
-    background-color: white;
-    flex: 1;
-}
-
 .flashcard {
     &__container {
         //background-color:var(--color-grey-light-5);
@@ -416,4 +411,4 @@ $bp-smallest: 31.25em; //500px  (500/16)
     margin: 50px auto;
 }
 
-@include carousel(100);
+@include carousel(5);

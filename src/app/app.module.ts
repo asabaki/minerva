@@ -44,7 +44,7 @@ import { CreateFlashcardComponent } from './w-space/flashcard/create-flashcard/c
 import { AddCardComponent } from './w-space/flashcard/create-flashcard/add-card/add-card.component';
 import { CollectionComponent } from './w-space/flashcard/collection/collection.component';
 import { QuizComponent } from './w-space/quiz/quiz.component';
-import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.component';
+import { CreateQuizComponent } from './w-space/quiz/create-quiz/create-quiz.component';
 import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 
@@ -68,8 +68,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     AddCardComponent,
     CollectionComponent,
     QuizComponent,
-    AddQuestionComponent,
     EditCardComponent,
+    CreateQuizComponent,
 
   ],
   imports: [

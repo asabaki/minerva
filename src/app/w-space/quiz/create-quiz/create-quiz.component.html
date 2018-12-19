@@ -1,0 +1,90 @@
+<main class="top-view">
+  <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to quizzes"
+      class="icon-btn"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
+    <h1 class="overview__heading">Create New Quiz</h1>
+    <div class="overview__count">
+      <div class="overview__count-average">10</div>
+      <div class="overview__count-count">Questions</div>
+    </div>
+  </div>
+  <div class="detail">
+    <form>
+      <div class="description">
+        <div class="create-quiz__header">
+          <mat-form-field color="primary">
+            <input
+              name="title"
+              matInput
+              type="text"
+              class="collection_name"
+              placeholder="Collection Name"
+              #collectionName
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+              name="description"
+              matInput
+              class="collection_description"
+              type="text"
+              placeholder="Describtion"
+              #description
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="description">
+        <div class="create-quiz__questions">
+          <div class="create-quiz__questions-btn">
+            <button
+              mat-button
+              [matMenuTriggerFor]="menu"
+              class="btn btn__insert"
+            >
+              <mat-icon class="icon">add</mat-icon>&nbsp;Insert question
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon color="primary"> format_list_bulleted</mat-icon
+                >&nbsp;Multiple Choices
+              </button>
+              <button mat-menu-item>
+                <mat-icon color="primary"> bubble_chart</mat-icon>&nbsp;True or
+                False
+              </button>
+            </mat-menu>
+          </div>
+          <div >
+            <form class="create-quiz__questions-mcq">
+              <mat-form-field class="mcq mcq__question">
+                <input matInput type="text" placeholder="Question" />
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="text" placeholder="Answer" class="mcq__answer"/>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="text" placeholder="Wrong choice" class="mcq__wrong"/>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="text" placeholder="Wrong choice" class="mcq__wrong"/>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="text" placeholder="Wrong choice" class="mcq__wrong"/>
+              </mat-form-field>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="description">
+        <div class="create-quiz__overview">overview</div>
+      </div>
+    </form>
+  </div>
+</main>
