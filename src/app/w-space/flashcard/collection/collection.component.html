@@ -21,7 +21,7 @@
         <p>
           {{ desc }}
         </p>
-        <button mat-button class="btn-edit">Edit</button>
+        <button mat-button (click)="openEditCardDialog()" class="btn-edit">Edit</button>
       </div>
       <div class="flashcard__container">
         <div class="carousel">
@@ -35,6 +35,10 @@
                     {{ card.back_text }}
                   </div>
                 </div>
+                <!--<div class="no-card">
+                  <h1>No card...</h1>
+                  <button class="no-card__btn">Add new card</button>
+                </div>-->
               </div>
             </li>
           </ul>

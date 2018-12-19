@@ -4,31 +4,36 @@ $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .top-view {
-    background-color: white;
+    background-color: var(--color-grey-light-1);
     flex: 1;
+    @media only screen and (max-width: $bp-large) {
+      margin-left: 6rem;
+  }
+
 }
 
 .detail {
   display: flex;
   padding: 4.5rem;
-  background-color: var(--color-grey-light-1);
   border-bottom: var(--line);
   font-size: 1.4rem;
-  height: 100vh;
   @media only screen and (max-width: $bp-medium) {
       padding: 3rem;
   }
   @media only screen and (max-width: $bp-small) {
       flex-direction: column;
   }
+
 }
+
+
 
 .description {
     background-color: white;
     box-shadow: var(--shadow-light);
     padding: 3rem;
     flex: 1;
-    flex-direction: row;
+    height: 100vh;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;
@@ -57,16 +62,23 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
+
     margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
         text-transform: uppercase;
         letter-spacing: 1px;
-        padding: 1.5rem 3rem;
+        padding: 1.5rem 6rem;
         @media only screen and (max-width: $bp-small) {
             font-size: 1.8rem;
             padding: 1.25rem 2rem;
+        }
+        @media only screen and (max-width: $bp-large) {
+          padding: 1.5rem 6rem;
+        }
+        @media only screen and (max-width: $bp-largest) {
+          padding: 1.5rem 6rem;
         }
     }
     &__stars {
@@ -90,6 +102,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__count {
         background-color: var(--color-primary);
         color: var(--color-grey-light-1);
+
         padding: 1.5rem;
         display: flex;
         align-items: center;

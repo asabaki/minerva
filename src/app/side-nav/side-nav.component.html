@@ -30,9 +30,9 @@
         <span>Self Control</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
-      <a href="#" class="side-nav__link">
-        <mat-icon class="side-nav__icon">question_answer</mat-icon>
+    <li class="side-nav__item" routerLinkActive="side-nav__item--active" *ngIf="status">
+      <a routerLink="/quiz"  class="side-nav__link">
+        <mat-icon class="side-nav__icon">style</mat-icon>
         <span>Quiz</span>
       </a>
     </li>

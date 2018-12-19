@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {MatTableModule} from '@angular/material/table';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import {
   MatIconModule,
@@ -44,6 +45,8 @@ import { AddCardComponent } from './w-space/flashcard/create-flashcard/add-card/
 import { CollectionComponent } from './w-space/flashcard/collection/collection.component';
 import { QuizComponent } from './w-space/quiz/quiz.component';
 import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.component';
+import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
+
 
 
 
@@ -65,6 +68,7 @@ import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.c
     CollectionComponent,
     QuizComponent,
     AddQuestionComponent,
+    EditCardComponent,
 
   ],
   imports: [
@@ -85,7 +89,8 @@ import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.c
     MatSortModule,
     MatTooltipModule,
     // MatTableDataSource
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -98,7 +103,8 @@ import { AddQuestionComponent } from './w-space/quiz/add-question/add-question.c
     LogInComponent,
     ErrorLoginSnackComponent,
     CreateFlashcardComponent,
-    AddCardComponent
+    AddCardComponent,
+    EditCardComponent
   ],
   bootstrap: [AppComponent]
 })

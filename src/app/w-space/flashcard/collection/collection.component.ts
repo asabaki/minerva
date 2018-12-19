@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import { Location } from '@angular/common';
+import {MatDialog} from '@angular/material';
+import {EditCardComponent} from '../collection/edit-card/edit-card.component';
 
 @Component({
   selector: 'app-collection',
@@ -20,7 +22,8 @@ export class CollectionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
-              private flashService: FlashCardService) { }
+              private flashService: FlashCardService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.index = 1;
@@ -49,5 +52,10 @@ export class CollectionComponent implements OnInit {
   helper(num: number) {
     return Array(num);
   }
+  openEditCardDialog() {
+    const dialogRef = this.dialog.open(EditCardComponent, {panelClass: 'myapp-no-padding-dialog'});
 
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 }
