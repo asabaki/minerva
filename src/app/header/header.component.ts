@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();
     this.authService.getAuthStatus().subscribe((res) => {
-      console.log('Login: ' + res);
       this.name = this.authService.getUserName();
       this.isAuth = res;
     });
@@ -43,7 +42,6 @@ export class HeaderComponent implements OnInit {
     });
   }
   onClear() {
-    console.log(`onClear called`);
     this.authService.seed();
   }
   onGetSecret() {

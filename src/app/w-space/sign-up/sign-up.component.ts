@@ -43,7 +43,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   onSignup() {
-    console.log(this.form);
     this.form.get('email').markAsTouched();
     this.form.get('firstName').markAsTouched();
     this.form.get('lastName').markAsTouched();
