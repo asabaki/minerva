@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
-<<<<<<< HEAD
-import { Location } from '@angular/common';
-=======
 import {Location} from '@angular/common';
->>>>>>> f840822c3bb6ea8cbdcabc4fe447eb26f5744a3a
 import {MatDialog} from '@angular/material';
 import {EditCardComponent} from '../collection/edit-card/edit-card.component';
 

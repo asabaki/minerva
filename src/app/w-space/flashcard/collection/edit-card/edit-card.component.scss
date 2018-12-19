@@ -57,6 +57,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         .back {
             background-color: var(--color-grey-light-3);
             color: black;
+            font-size: 1rem;
         }
     }
     &__scroll
