@@ -4,17 +4,28 @@ $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .top-view {
-    background-color: white;
+    background-color: var(--color-grey-light-1);
     flex: 1;
+    @media only screen and (max-width: 1400px) {
+      margin-left: 3rem;
+    }
+    @media only screen and (max-width: $bp-largest) {
+      margin-left: 4rem;
+    }
+    @media only screen and (max-width: $bp-large) {
+      margin-left: 5rem;
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      margin-left: 0rem;
+    }
 }
 
 .detail {
   display: flex;
   padding: 4.5rem;
-  background-color: var(--color-grey-light-1);
   border-bottom: var(--line);
   font-size: 1.4rem;
-  height: 100vh;
   @media only screen and (max-width: $bp-medium) {
       padding: 3rem;
   }
@@ -28,6 +39,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     box-shadow: var(--shadow-light);
     padding: 3rem;
     flex: 1;
+    height: 100%;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;
@@ -56,7 +68,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
-
+  background-color: #fff;
     margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
@@ -418,3 +430,19 @@ tr.mat-row.ng-star-inserted {
     background-color: var(--color-grey-light-3);
   }
 }
+
+
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell{
+  max-width: 30rem;
+  text-align: justify;
+}
+
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
+  padding: 1rem;
+}
+
+

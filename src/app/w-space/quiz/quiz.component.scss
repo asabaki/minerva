@@ -4,7 +4,7 @@ $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .top-view {
-    background-color: white;
+    background-color: var(--color-grey-light-1);
     flex: 1;
     @media only screen and (max-width: $bp-large) {
       margin-left: 6rem;
@@ -15,10 +15,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .detail {
   display: flex;
   padding: 4.5rem;
-  background-color: var(--color-grey-light-1);
   border-bottom: var(--line);
   font-size: 1.4rem;
-  height: 100vh;
   @media only screen and (max-width: $bp-medium) {
       padding: 3rem;
   }
@@ -29,12 +27,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 
-}
+
 .description {
     background-color: white;
     box-shadow: var(--shadow-light);
     padding: 3rem;
     flex: 1;
+    height: 100vh;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
         margin-right: 3rem;

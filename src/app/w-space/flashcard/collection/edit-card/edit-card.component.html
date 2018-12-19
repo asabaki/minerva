@@ -1,0 +1,114 @@
+<div class="edit-card">
+  <form>
+    <h1>Edit your flash card collection !</h1>
+
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><mat-icon class="icon">edit</mat-icon>&nbsp;Edit Title and
+            Description</mat-panel-title
+          >
+        </mat-expansion-panel-header>
+        <div class="edit-card__header">
+          <mat-form-field color="primary">
+            <input
+              name="title"
+              matInput
+              type="text"
+              class="collection_name"
+              placeholder="Collection Name"
+              #collectionName
+              value="Collection name here!"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+              name="description"
+              matInput
+              class="collection_description"
+              type="text"
+              placeholder="Describtion"
+              #description
+            >Description here!</textarea>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><mat-icon class="icon">note_add</mat-icon>&nbsp;Insert card
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="edit-card__flashcard">
+          <textarea
+            name="description"
+            matInput
+            class="front"
+            type="text"
+            placeholder="Front"
+            #front
+          ></textarea>
+          <textarea
+            name="description"
+            matInput
+            class="back"
+            type="text"
+            placeholder="Back"
+            #back
+          ></textarea>
+          <button
+            class="btn btn__add"
+            matTooltip="Delete"
+            mat-button
+            [disabled]="!front.value || !back.value"
+            [ngClass]="
+              'btn btn__add ' +
+              (!front.value || !back.value ? 'btn btn__add-disabled' : '')
+            "
+          >
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title
+            ><mat-icon class="icon">delete_sweep</mat-icon>&nbsp;Edit and Remove
+            card
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="edit-card__flashcard">
+          <textarea
+            name="description"
+            matInput
+            class="front"
+            type="text"
+            placeholder="Front"
+          ></textarea>
+          <textarea
+            name="description"
+            matInput
+            class="back"
+            type="text"
+            placeholder="Back"
+          ></textarea>
+          <button class="btn btn__remove" matTooltip="Delete" mat-button>
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <button
+      matTooltip="Editing done"
+      class="btn__done"
+      mat-button
+      mat-dialog-close
+    >
+      Done
+    </button>
+  </form>
+</div>
