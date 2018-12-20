@@ -74,8 +74,11 @@ import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-f
     QuizComponent,
     EditCardComponent,
     CreateQuizComponent,
+
     McqComponent,
     TrueFalseComponent,
+
+
 
   ],
   imports: [
