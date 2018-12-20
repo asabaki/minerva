@@ -1,0 +1,81 @@
+<div class="mcq">
+  <h1>Create multiple choice question!</h1>
+  <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" >
+        <ng-template matStepLabel>Fill out your question</ng-template>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Question"
+            formControlName="firstCtrl"
+            required
+          />
+        </mat-form-field>
+        <div><button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button></div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your correct answer</ng-template>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Answer"
+            formControlName="secondCtrl"
+            required
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">Back</button>
+          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>Fill out your choices</ng-template>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Choice 1"
+            formControlName="thirdCtrl"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Choice 2"
+            formControlName="thirdCtrl"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Choice 3"
+            formControlName="thirdCtrl"
+            required
+          />
+        </mat-form-field>
+        <button  mat-icon-button
+        class="mcq__btn mcq__btn-add"
+        matTooltip="Add more choice"><mat-icon>add</mat-icon></button>
+        <div>
+          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">Back</button>
+          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button>
+        </div>
+
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      Save this quesion?
+      <div>
+        <button mat-button (click)="stepper.reset()" class="mcq__btn mcq__btn-reset">Reset</button>
+        <button mat-button mat-dialog-close class="mcq__btn mcq__btn-save">Save</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+</div>

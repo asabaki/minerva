@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {
   MatIconModule,
@@ -19,7 +20,8 @@ import {
   MatTableDataSource,
   MatSortModule,
   MatTooltipModule,
-  MatTabsModule
+  MatTabsModule,
+  MatStepperModule
 } from '@angular/material';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -47,6 +49,8 @@ import { QuizComponent } from './w-space/quiz/quiz.component';
 import { CreateQuizComponent } from './w-space/quiz/create-quiz/create-quiz.component';
 import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { McqComponent } from './w-space/quiz/create-quiz/mcq/mcq.component';
+import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-false.component';
 
 
 
@@ -71,6 +75,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     EditCardComponent,
     CreateQuizComponent,
 
+    McqComponent,
+    TrueFalseComponent,
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -92,7 +101,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     // MatTableDataSource
     MatTabsModule,
     MatExpansionModule,
-    ScrollingModule
+    ScrollingModule,
+    MatStepperModule,
+    MatRadioModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -106,7 +117,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     ErrorLoginSnackComponent,
     CreateFlashcardComponent,
     AddCardComponent,
-    EditCardComponent
+    EditCardComponent,
+    McqComponent,
+    TrueFalseComponent,
   ],
   bootstrap: [AppComponent]
 })

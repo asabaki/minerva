@@ -35,7 +35,6 @@ $Minerva-theme: mat-light-theme( $Minerva-primary, $Minerva-accent, $Minerva-war
     --color-grey-light-3: #f0eeee;
     --color-grey-light-4: #ccc;
     --color-grey-light-5: rgb(238, 236, 236);
-
     --color-grey-dark-1: #333;
     --color-grey-dark-2: #777;
     --color-grey-dark-3: #999;
@@ -130,8 +129,8 @@ input:focus {
         width: 40rem;
         padding: 0 1em 0 1em !important;
         font-size: 1.5rem;
-        &:first-child{
-          margin-bottom: -3.25rem;
+        &:first-child {
+            margin-bottom: -3.25rem;
         }
     }
 }
@@ -153,7 +152,18 @@ input:focus {
 }
 
 .mat-form-field-appearance-outline {
-  .mat-form-field-wrapper {
-    margin: .1em 0 !important;
-  }
+    .mat-form-field-wrapper {
+        margin: .1em 0 !important;
+    }
+}
+
+.mcq {
+    .mat-step-icon {
+        color: white !important;
+    }
+}
+.tF {
+    .mat-step-icon {
+        color: white !important;
+    }
 }

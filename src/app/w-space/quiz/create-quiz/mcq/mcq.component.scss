@@ -1,0 +1,66 @@
+.mcq{
+  font-size: 1.5rem;
+  width: 70rem;
+  padding: 3rem;
+  border-radius: 5px;
+  background-color: white;
+  display: block;
+  h1{
+    text-align: center;
+  }
+
+  mat-form-field{
+    width: 50rem !important;
+  }
+  &__btn{
+    padding: .3rem .7rem;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: .2s all;
+    &:hover{
+      transform: scale(1.05);
+    }
+    &:active{
+      transform: scale(.95);
+    }
+    &-next{
+      background-color: var(--color-secondary);
+      color: white;
+    }
+    &-back{
+      background-color: var(--color-grey-light-4);
+      color: black
+    }
+    &-save{
+      background-color: var(--color-primary);
+      color: white;
+    }
+    &-reset{
+      background-color: var(--color-grey-light-2);
+      color: green;
+    }
+    &-add{
+      background-color: green;
+      color: var(--color-grey-light-2);
+      display: inline;
+      padding: .2rem;
+      margin: 0 .5rem;
+      border-radius: 50%;
+      transition: .2s all;
+      transform: scale(.7);
+      &:hover{
+        transform: scale(.8);
+      }
+      &:active{
+        transform: scale(.65);
+      }
+    }
+    mat-icon {
+      vertical-align: middle !important;
+    }
+  }
+}
+

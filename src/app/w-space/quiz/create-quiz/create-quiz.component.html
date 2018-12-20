@@ -24,7 +24,9 @@
               matInput
               type="text"
               class="collection_name"
-              placeholder="Collection Name"
+
+              placeholder="Quiz Name"
+
               #collectionName
             />
           </mat-form-field>
@@ -51,16 +53,19 @@
               <mat-icon class="icon">add</mat-icon>&nbsp;Insert question
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
+
+              <button mat-menu-item (click)="openAddMcqDialog()">
                 <mat-icon color="primary"> format_list_bulleted</mat-icon
                 >&nbsp;Multiple Choices
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="openAddTrueFalseDialog()">
+
                 <mat-icon color="primary"> bubble_chart</mat-icon>&nbsp;True or
                 False
               </button>
             </mat-menu>
           </div>
+
           <div >
             <form class="create-quiz__questions-mcq">
               <mat-form-field class="mcq mcq__question">
