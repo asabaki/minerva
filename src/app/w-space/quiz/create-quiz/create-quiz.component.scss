@@ -215,6 +215,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
   border-radius: 5px;
   &__question{
       background-color: rgba(#5a6d89,.2);
-
+  }
+  &__answer{
+      background-color: rgba(#25b800,.2);
+  }
+  &__choice{
+      background-color: rgba(#dd9700,.2);
   }
 }
+
+

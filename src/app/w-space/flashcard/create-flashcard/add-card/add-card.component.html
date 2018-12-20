@@ -1,37 +1,41 @@
 <div class="add-card__container">
   <h1>Add new card!</h1>
   <form class="add-card__area" #f="ngForm">
-      <textarea
-        ngModel
-        name="front_text"
-        class="add-card__information add-card__information-front"
-        placeholder="Front"
-        #front
-      ></textarea>
-      <textarea
-        ngModel
-        name="back_text"
-        class="add-card__information add-card__information-back"
-        placeholder="Back"
-        #back
-      ></textarea>
+    <textarea
+      ngModel
+      name="front_text"
+      class="add-card__information add-card__information-front"
+      placeholder="Front"
+      #front
+    ></textarea>
+    <textarea
+      ngModel
+      name="back_text"
+      class="add-card__information add-card__information-back"
+      placeholder="Back"
+      #back
+    ></textarea>
+
       <button
-      matTooltip="Add this card"
-      class="add-card__btn"
-      mat-button
-      (click)="onAddCard(front.value,back.value,f)"
-      [disabled]="!front.value || !back.value"
-      [ngClass]="('add-card__btn ' + (!front.value || !back.value ? 'add-card__btn-disabled' : ''))"
+        matTooltip="Add this card"
+        class="add-card__btn"
+        mat-button
+        (click)="onAddCard(front.value, back.value, f)"
+        [disabled]="!front.value || !back.value"
+        [ngClass]="
+          'add-card__btn ' +
+          (!front.value || !back.value ? 'add-card__btn-disabled' : '')
+        "
       >
         <mat-icon>check_circle </mat-icon>
       </button>
-    </form>
-    <button
-    matTooltip="Adding card done"
+  </form>
+  <button
+    matTooltip="Click to Finish"
     class="add-card__btn-done"
     mat-button
     mat-dialog-close
-    >Done
-    </button>
+  >
+    Exit
+  </button>
 </div>
-

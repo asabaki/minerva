@@ -1,16 +1,14 @@
 <div class="edit-card">
-  <form>
-    <h1>Edit your flash card collection !</h1>
+  <h1>Edit your flash card collection !</h1>
 
-    <mat-accordion>
+  <mat-accordion>
+    <form>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title
-          >
+          <mat-panel-title>
             <mat-icon class="icon">edit</mat-icon>&nbsp;Edit Title and
             Description
-          </mat-panel-title
-          >
+          </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="edit-card__header">
           <mat-form-field color="primary">
@@ -33,15 +31,25 @@
               placeholder="Description"
               [value]="data.description"
               #description
-            >{{ data.description }}</textarea>
+            >
+              {{ data.description }}</textarea
+            >
           </mat-form-field>
+          <button
+      matTooltip="Save change"
+      class="btn__done"
+      mat-button
+    >
+      Save
+    </button>
         </div>
       </mat-expansion-panel>
 
+    </form>
+    <form>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title
-          >
+          <mat-panel-title>
             <mat-icon class="icon">note_add</mat-icon>&nbsp;Insert card
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -76,48 +84,57 @@
           </button>
         </div>
       </mat-expansion-panel>
-
+    </form>
+    <form>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title
-          >
+          <mat-panel-title>
             <mat-icon class="icon">delete_sweep</mat-icon>&nbsp;Edit and Remove
             card
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <cdk-virtual-scroll-viewport class="edit-card__scroll" [itemSize]="20" >
-          <div class="edit-card__flashcard" *cdkVirtualFor="let i of data.cards">
-          <textarea
-            name="description"
-            matInput
-            class="front"
-            type="text"
-            placeholder="Front"
-
-          >{{i.front_text}}</textarea>
+        <cdk-virtual-scroll-viewport class="edit-card__scroll" [itemSize]="20">
+          <div
+            class="edit-card__flashcard"
+            *cdkVirtualFor="let i of data.cards"
+          >
+            <textarea
+              name="description"
+              matInput
+              class="front"
+              type="text"
+              placeholder="Front"
+            >{{ i.front_text }}</textarea
+            >
             <textarea
               name="description"
               matInput
               class="back"
               type="text"
               placeholder="Back"
-            >{{i.back_text}}</textarea>
+            >{{ i.back_text }}</textarea
+            >
             <button class="btn btn__remove" matTooltip="Delete" mat-button>
               <mat-icon>remove_circle</mat-icon>
             </button>
           </div>
         </cdk-virtual-scroll-viewport>
-
-      </mat-expansion-panel>
-    </mat-accordion>
-
-    <button
-      matTooltip="Editing done"
+        <button
+      matTooltip="Save change"
       class="btn__done"
       mat-button
-      mat-dialog-close
     >
-      Done
+      Save
     </button>
-  </form>
+      </mat-expansion-panel>
+    </form>
+  </mat-accordion>
+  <button
+    matTooltip="Save all change"
+    class="btn__done"
+    mat-button
+    mat-dialog-close
+  >
+    Done
+  </button>
 </div>

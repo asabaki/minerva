@@ -109,3 +109,12 @@
         }
     }
 }
+
+.btn-add__desctiption{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  font-size: .8rem;
+  text-align: center;
+}
