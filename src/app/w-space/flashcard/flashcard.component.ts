@@ -37,7 +37,7 @@ export class FlashcardComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    this.flash.fetchCol().subscribe(
+    this.flash.fetch_collection().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
         res.forEach((data) => {
@@ -56,7 +56,6 @@ export class FlashcardComponent implements OnInit {
   }
 
   onRowClick(r: any) {
-    // TODO - ADD NAVIGATION AFTER CLICK THE ROW
     const id = r._id;
     this.router.navigate(['flash/' + id]);
 
