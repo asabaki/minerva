@@ -66,6 +66,7 @@
             placeholder="Front"
             #front
           ></textarea>
+
             <textarea
               ngModel
               name="description"
@@ -81,6 +82,7 @@
               mat-button
               [disabled]="!front.value || !back.value"
               [ngClass]="
+
               'btn btn__add ' +
               (!front.value || !back.value ? 'btn btn__add-disabled' : '')
             "
@@ -126,13 +128,6 @@
             </button>
           </div>
         </cdk-virtual-scroll-viewport>
-        <button
-          matTooltip="Save change"
-          class="btn__done"
-          mat-button
-        >
-          Save
-        </button>
       </mat-expansion-panel>
     </form>
   </mat-accordion>
