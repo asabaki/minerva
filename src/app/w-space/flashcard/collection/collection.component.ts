@@ -33,18 +33,18 @@ export class CollectionComponent implements OnInit {
     this.index = 1;
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.has('id')) {
-        this.flashService.fetchCard(params.get('id')).subscribe((res) => {
-          this.title = res.title;
-          this.desc = res.description;
-          this.numberOfCard = res.card.length;
-          this.cards = res.card;
+        this.flashService.fetch_card(params.get('id')).subscribe((res) => {
+          this.title = res.body.title;
+          this.desc = res.body.description;
+          this.numberOfCard = res.body.card.length;
+          this.cards = res.body.card;
           this.id = params.get('id');
           this.cardObj = {
             title: this.title,
             description: this.desc,
             noc: this.numberOfCard,
             cards: this.cards,
-            user_id: this.id
+            _id: this.id
           };
         });
 
