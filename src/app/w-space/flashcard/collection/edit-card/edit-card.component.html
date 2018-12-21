@@ -20,6 +20,7 @@
               placeholder="Collection Name"
               #collectionName
               [value]="data.title"
+              #title
             />
           </mat-form-field>
           <mat-form-field>
@@ -36,12 +37,13 @@
             >
           </mat-form-field>
           <button
-      matTooltip="Save change"
-      class="btn__done"
-      mat-button
-    >
-      Save
-    </button>
+            matTooltip="Save change"
+            class="btn__done"
+            mat-button
+            (click)="onUpdate(title.value,description.value)"
+          >
+            Save
+          </button>
         </div>
       </mat-expansion-panel>
 
@@ -53,8 +55,10 @@
             <mat-icon class="icon">note_add</mat-icon>&nbsp;Insert card
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="edit-card__flashcard">
+        <form #f="ngForm">
+          <div class="edit-card__flashcard">
           <textarea
+            ngModel
             name="description"
             matInput
             class="front"
@@ -62,27 +66,30 @@
             placeholder="Front"
             #front
           ></textarea>
-          <textarea
-            name="description"
-            matInput
-            class="back"
-            type="text"
-            placeholder="Back"
-            #back
-          ></textarea>
-          <button
-            class="btn btn__add"
-            matTooltip="Delete"
-            mat-button
-            [disabled]="!front.value || !back.value"
-            [ngClass]="
+            <textarea
+              ngModel
+              name="description"
+              matInput
+              class="back"
+              type="text"
+              placeholder="Back"
+              #back
+            ></textarea>
+            <button
+              class="btn btn__add"
+              matTooltip="Delete"
+              mat-button
+              [disabled]="!front.value || !back.value"
+              [ngClass]="
               'btn btn__add ' +
               (!front.value || !back.value ? 'btn btn__add-disabled' : '')
             "
-          >
-            <mat-icon>add_circle</mat-icon>
-          </button>
-        </div>
+              (click)="onAddCard(front.value,back.value,f)"
+            >
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+        </form>
       </mat-expansion-panel>
     </form>
     <form>
@@ -114,18 +121,18 @@
               placeholder="Back"
             >{{ i.back_text }}</textarea
             >
-            <button class="btn btn__remove" matTooltip="Delete" mat-button>
+            <button class="btn btn__remove" matTooltip="Delete" mat-button (click)="onDelete(i._id)">
               <mat-icon>remove_circle</mat-icon>
             </button>
           </div>
         </cdk-virtual-scroll-viewport>
         <button
-      matTooltip="Save change"
-      class="btn__done"
-      mat-button
-    >
-      Save
-    </button>
+          matTooltip="Save change"
+          class="btn__done"
+          mat-button
+        >
+          Save
+        </button>
       </mat-expansion-panel>
     </form>
   </mat-accordion>

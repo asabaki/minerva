@@ -20,16 +20,16 @@ export class AddCardComponent implements OnInit {
   }
 
   onAddCard(front: string, back: string, f: NgForm) {
-    this.flashService.addCard(front, back).subscribe((response) => {
-      if (response === 'ok') {
+    this.flashService.add_card(front, back).subscribe((response) => {
+      if (response === 'OK') {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'Success Add Card',
           duration: 1500
         });
-        this.flashService.fetchCol();
+        this.flashService.fetch_collection();
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
-          data: 'Something went Wrong!',
+          data: 'Something went Wrong!\n' + response,
           duration: 1500
         });
       }

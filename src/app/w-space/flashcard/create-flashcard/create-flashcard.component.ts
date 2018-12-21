@@ -19,8 +19,8 @@ export class CreateFlashcardComponent implements OnInit {
 
   onAddCollection(title: string, desc: string) {
 
-    this.flashService.createCollection(title, desc);
-    this.flashService.fetchCol();
+    this.flashService.create_collection(title, desc);
+    this.flashService.fetch_collection();
     this.openAddCardDialog();
   }
 
