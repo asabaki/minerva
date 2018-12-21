@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FlashModel} from './flash_collection.model';
+import {RequestOptions} from '@angular/http';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,11 @@ export class FlashCardService {
   collectionId: string;
 
   constructor(private http: HttpClient,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private route: ActivatedRoute) {
   }
 
-  createCollection(title: string, description: string) {
+  create_collection(title: string, description: string) {
     if (this.auth.getIsAuth()) {
       const userId = localStorage.getItem('userId');
       const card = {title, description, userId};
@@ -35,20 +38,26 @@ export class FlashCardService {
     }
   }
 
-  fetchCol() {
+  fetch_collection() {
     const userId = localStorage.getItem('userId');
-    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch/' + userId)
+    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch/' + userId, {observe: 'response'})
       .pipe(map(res => {
+        // console.log(res);
         const ret = [];
-        res.forEach((collection) => {
-          ret.push({
-            _id: collection._id,
-            title: collection.title,
-            description: collection.description,
-            numberOfCard: collection.card.length
+        if (res.status === 200) {
+          res.body.forEach((collection) => {
+            ret.push({
+              _id: collection._id,
+              title: collection.title,
+              description: collection.description,
+              numberOfCard: collection.card.length
+            });
           });
-        });
+        } else {
+          ret.push('err');
+        }
         return ret;
+
       }))
       .subscribe((res) => {
         this.subject.next(res);
@@ -56,22 +65,33 @@ export class FlashCardService {
     return this.subject.asObservable();
   }
 
-  fetchCard(id: string) {
-    this.http.get('http://localhost:3000/api/flash/pull/' + id).subscribe((response) => {
+  fetch_card(id: string) {
+    this.http.get('http://localhost:3000/api/flash/pull/' + id, {observe: 'response'}).subscribe((response) => {
       // console.log(response);
       this.cardSubject.next(response);
     });
     return this.cardSubject.asObservable();
   }
 
-  addCard(front: string, back: string) {
+  delete_card(id: string) {
+    this.http.delete('http://localhost:3000/api/flash/delete',
+      {
+        params: new HttpParams().set('id', id),
+        observe: 'response'
+      }).subscribe((response) => {
+      this.cardSubject.next(response);
+    });
+    return this.cardSubject.asObservable();
+  }
+
+  add_card(front: string, back: string) {
     if (this.collectionId && this.auth.getIsAuth()) {
       const card = {front, back};
-      this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card).subscribe((res) => {
-        if (res.status === 'ok') {
-          this.addSubject.next('ok');
+      this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
+        if (res.ok) {
+          this.addSubject.next(res.statusText);
         } else {
-          this.addSubject.next(res.message);
+          this.addSubject.next(res.statusText);
           // return res.message;
         }
       });
@@ -79,5 +99,14 @@ export class FlashCardService {
       this.addSubject.next('Error');
     }
     return this.addSubject.asObservable();
+  }
+
+  update_card(id: string, title: string, description: string) {
+    const updateBody = {id, title, description};
+    this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
+      console.log(res);
+      this.cardSubject.next(res);
+    });
+    return this.cardSubject.asObservable();
   }
 }
