@@ -54,7 +54,7 @@
             False
           </button>
         </mat-menu>
-        <button mat-button [matMenuTriggerFor]="menu" class="btn btn__edit">
+        <button mat-button class="btn btn__edit">
           <mat-icon class="icon">edit</mat-icon>&nbsp;Edit question
         </button>
       </div>
@@ -66,54 +66,109 @@
           <div class="question-header">
             <div class="question-number">1</div>
             <div class="question-question">what is my name?</div>
+            <div class="question-remove">
+              <button class="btn__remove" matTooltip="Delete" mat-button>
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
           </div>
           <mat-radio-group class="question-choice">
-              <mat-radio-button value="1" color="primary" class="radio-button">Option 1</mat-radio-button>
-              <mat-radio-button value="2" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="3" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="4" color="primary"  class="radio-button">Option 2</mat-radio-button>
-            </mat-radio-group>
+            <mat-radio-button value="1" color="primary" class="radio-button"
+              >Option 1</mat-radio-button
+            >
+            <mat-radio-button value="2" color="primary" class="radio-button"
+              >Option 2</mat-radio-button
+            >
+            <mat-radio-button value="3" color="primary" class="radio-button"
+              >Option 3</mat-radio-button
+            >
+            <mat-radio-button
+              value="4"
+              color="primary"
+              class="radio-button radio-button__correct-answer"
+              checked
+              >Option 4</mat-radio-button
+            >
+          </mat-radio-group>
         </form>
         <form class="question">
           <div class="question-header">
             <div class="question-number">2</div>
             <div class="question-question">what is my name?</div>
+            <div class="question-remove">
+              <button class="btn__remove" matTooltip="Delete" mat-button>
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
           </div>
           <mat-radio-group class="question-choice">
-              <mat-radio-button value="1" color="primary" class="radio-button">Option 1</mat-radio-button>
-              <mat-radio-button value="2" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="3" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="4" color="primary"  class="radio-button">Option 2</mat-radio-button>
-            </mat-radio-group>
+            <mat-radio-button
+              value="2"
+              color="primary"
+              class="radio-button radio-button__correct-answer"
+              checked
+              >True</mat-radio-button
+            >
+            <mat-radio-button value="3" color="primary" class="radio-button"
+              >False</mat-radio-button
+            >
+          </mat-radio-group>
         </form>
         <form class="question">
           <div class="question-header">
             <div class="question-number">3</div>
             <div class="question-question">what is my name?</div>
+            <div class="question-remove">
+              <button class="btn__remove" matTooltip="Delete" mat-button>
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
           </div>
           <mat-radio-group class="question-choice">
-              <mat-radio-button value="1" color="primary" class="radio-button">Option 1</mat-radio-button>
-              <mat-radio-button value="2" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="3" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="4" color="primary"  class="radio-button">Option 2</mat-radio-button>
-            </mat-radio-group>
+            <mat-radio-button value="1" color="primary" class="radio-button"
+              >Option 1</mat-radio-button
+            >
+            <mat-radio-button value="2" color="primary" class="radio-button"
+              >Option 2</mat-radio-button
+            >
+            <mat-radio-button
+              value="3"
+              color="primary"
+              class="radio-button radio-button__correct-answer"
+              checked
+              >Option 3</mat-radio-button
+            >
+            <mat-radio-button value="4" color="primary" class="radio-button"
+              >Option 4</mat-radio-button
+            >
+          </mat-radio-group>
         </form>
+
         <form class="question">
           <div class="question-header">
-            <div class="question-number">4</div>
-            <div class="question-question">what is my name?</div>
+            <div class="question-number">14</div>
+            <div class="question-question">My name is kan</div>
+            <div class="question-remove">
+              <button class="btn__remove" matTooltip="Delete" mat-button>
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
           </div>
           <mat-radio-group class="question-choice">
-              <mat-radio-button value="1" color="primary" class="radio-button">Option 1</mat-radio-button>
-              <mat-radio-button value="2" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="3" color="primary"  class="radio-button">Option 2</mat-radio-button>
-              <mat-radio-button value="4" color="primary"  class="radio-button">Option 2</mat-radio-button>
-            </mat-radio-group>
+            <mat-radio-button
+              value="1"
+              color="primary"
+              class="radio-button radio-button__correct-answer"
+              checked
+              >True</mat-radio-button
+            >
+            <mat-radio-button value="2" color="primary" class="radio-button"
+              >False</mat-radio-button
+            >
+          </mat-radio-group>
         </form>
-
-
-        <button mat-button class="btn btn__save">Save</button>
       </div>
     </div>
+    <button mat-button class="btn btn__save">Save</button>
   </div>
 </main>

@@ -2,7 +2,7 @@
   <h1>Create multiple choice question!</h1>
   <mat-vertical-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" >
+      <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill out your question</ng-template>
         <mat-form-field>
           <input
@@ -12,7 +12,11 @@
             required
           />
         </mat-form-field>
-        <div><button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button></div>
+        <div>
+          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">
+            Next
+          </button>
+        </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
@@ -27,54 +31,101 @@
           />
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">Back</button>
-          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button>
+          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">
+            Back
+          </button>
+          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">
+            Next
+          </button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="thirdFormGroup">
       <form [formGroup]="thirdFormGroup">
         <ng-template matStepLabel>Fill out your choices</ng-template>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Choice 1"
-            formControlName="thirdCtrl"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Choice 2"
-            formControlName="thirdCtrl"
-            required
-          />
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Choice 3"
-            formControlName="thirdCtrl"
-            required
-          />
-        </mat-form-field>
-        <button  mat-icon-button
-        class="mcq__btn mcq__btn-add"
-        matTooltip="Add more choice"><mat-icon>add</mat-icon></button>
-        <div>
-          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">Back</button>
-          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">Next</button>
+        <button
+        mat-icon-button
+        class="mcq__btn mcq__btn-edit mcq__btn-edit__add"
+        matTooltip="Add more choice"
+      >
+        <mat-icon>add</mat-icon> Add more choice
+      </button>
+        <div class="mcq__choice">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Choice 1"
+              formControlName="thirdCtrl"
+              required
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            class="mcq__btn mcq__btn-edit mcq__btn-edit__remove"
+            matTooltip="Remove this choice"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div class="mcq__choice">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Choice 2"
+              formControlName="thirdCtrl"
+              required
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            class="mcq__btn mcq__btn-edit mcq__btn-edit__remove"
+            matTooltip="Remove this choice"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div class="mcq__choice">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Choice 3"
+              formControlName="thirdCtrl"
+              required
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            class="mcq__btn mcq__btn-edit mcq__btn-edit__remove"
+            matTooltip="Remove this choice"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
         </div>
 
+        <div>
+          <button mat-button matStepperPrevious class="mcq__btn mcq__btn-back">
+            Back
+          </button>
+          <button mat-button matStepperNext class="mcq__btn mcq__btn-next">
+            Next
+          </button>
+        </div>
       </form>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       Save this quesion?
       <div>
-        <button mat-button (click)="stepper.reset()" class="mcq__btn mcq__btn-reset">Reset</button>
-        <button mat-button mat-dialog-close class="mcq__btn mcq__btn-save">Save</button>
+        <button
+          mat-button
+          (click)="stepper.reset()"
+          class="mcq__btn mcq__btn-reset"
+        >
+          Reset
+        </button>
+        <button mat-button mat-dialog-close class="mcq__btn mcq__btn-save">
+          Save
+        </button>
       </div>
     </mat-step>
   </mat-vertical-stepper>

@@ -51,6 +51,7 @@ import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { McqComponent } from './w-space/quiz/create-quiz/mcq/mcq.component';
 import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-false.component';
+import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
 
 
 
@@ -77,6 +78,7 @@ import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-f
 
     McqComponent,
     TrueFalseComponent,
+    QuizCollectionComponent,
 
 
 

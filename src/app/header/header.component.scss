@@ -20,6 +20,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &-fixed{
       position: fixed;
       width: 100%;
+      z-index: 10000;
       @media only screen and (max-width: $bp-small) {
         position: unset;
       }
