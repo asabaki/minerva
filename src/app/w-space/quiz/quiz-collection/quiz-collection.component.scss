@@ -215,6 +215,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
       border-radius: 10px;
       margin: auto;
       padding: 1rem 3rem;
+
+      display: inline-flex;
+
       &:hover {
         transform: scale(1.04);
         box-shadow: 0 .3rem .6rem rgba(black, .1);
@@ -224,6 +227,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
         box-shadow: 0 .3rem .6rem rgba(black, .4);
       }
     }
+    &__retest{
+      background-color: var(--color-primary);
+    }
+
+
 }
 
 .question{

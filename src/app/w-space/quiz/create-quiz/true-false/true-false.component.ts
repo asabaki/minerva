@@ -9,6 +9,9 @@ import {MatRadioModule} from '@angular/material/radio';
 })
 export class TrueFalseComponent implements OnInit {
 
+  answer_choice: string;
+  choices: string[] = ['TRUE', 'FALSE'];
+
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -23,6 +26,5 @@ export class TrueFalseComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
   }
-  answer_choice: string;
-  choices: string[] = ['TRUE', 'FALSE'];
+
 }
