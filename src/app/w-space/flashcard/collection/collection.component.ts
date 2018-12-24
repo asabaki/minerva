@@ -49,6 +49,9 @@ export class CollectionComponent implements OnInit, AfterViewInit {
             cards: this.cards,
             _id: this.id,
             index: this.index
+
+
+
           };
         });
 

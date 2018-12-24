@@ -52,6 +52,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 * {
     margin: 0;
     padding: 0;
+    font-family: "Nunito", sans-serif;
 }
 
 *,
@@ -69,7 +70,6 @@ html {
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
     font-weight: 400;
     line-height: 1.6;
     color: var(--color-grey-dark-2);

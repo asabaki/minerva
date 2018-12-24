@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {McqComponent} from '../create-quiz/mcq/mcq.component';
 import {TrueFalseComponent} from '../create-quiz/true-false/true-false.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @Component({
@@ -11,6 +11,8 @@ import {TrueFalseComponent} from '../create-quiz/true-false/true-false.component
   styleUrls: ['./create-quiz.component.scss']
 })
 export class CreateQuizComponent implements OnInit {
+
+
 
   constructor(public dialog: MatDialog) {}
 
@@ -26,7 +28,6 @@ export class CreateQuizComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-
 
 
   ngOnInit() {

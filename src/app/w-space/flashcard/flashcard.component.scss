@@ -389,7 +389,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
           box-shadow: 0 .5rem .5rem rgba(black,.3);
           transform: scale(1);
         }
-
+    }
+    &-delete{
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: rgb(161, 0, 0);
+      cursor: pointer;
+      transition: .2s all;
+      &:hover{
+        transform: scale(1.05);
+      }
+      &:hover{
+        transform: scale(1);
+      }
     }
 }
 

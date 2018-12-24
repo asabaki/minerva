@@ -1,0 +1,80 @@
+<main class="top-view">
+  <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to quizzes"
+      class="icon-btn"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
+    <h1 class="overview__heading">Quiz name</h1>
+    <div class="overview__count">
+      <div class="overview__count-average">10</div>
+      <div class="overview__count-count">Questions</div>
+    </div>
+  </div>
+  <div class="detail">
+    <div class="description">
+      <div class="create-quiz__overview">
+        <form class="question">
+          <div class="question-header">
+            <div class="question-number">1</div>
+            <div class="question-question">what is my name?</div>
+            <div class="question-correction question-correction__false">
+                <mat-icon>close</mat-icon>
+              </div>
+          </div>
+          <mat-radio-group class="question-choice">
+            <mat-radio-button value="1" color="primary" class="radio-button"
+              >Option 1</mat-radio-button
+            >
+            <mat-radio-button value="2" color="primary" class="radio-button"
+              >Option 2</mat-radio-button
+            >
+            <mat-radio-button value="3" color="primary" class="radio-button "
+              >Option 3</mat-radio-button
+            >
+            <mat-radio-button value="4" color="primary" class="radio-button"
+              >Option 4</mat-radio-button
+            >
+          </mat-radio-group>
+          <div class="correction correction-false">
+              <mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !
+            </div>
+        </form>
+
+        <form class="question">
+          <div class="question-header">
+            <div class="question-number">2</div>
+            <div class="question-question">My name is kan</div>
+            <div class="question-correction question-correction__true">
+              <mat-icon>check</mat-icon>
+            </div>
+          </div>
+          <mat-radio-group class="question-choice">
+            <mat-radio-button value="1" color="primary" class="radio-button "
+              >True</mat-radio-button
+            >
+            <mat-radio-button value="2" color="primary" class="radio-button"
+              >False</mat-radio-button
+            >
+          </mat-radio-group>
+          <div class="correction correction-true">
+              <mat-icon>check</mat-icon>&nbsp;Your answer is Correct !
+            </div>
+        </form>
+        <div class="result">
+          <h1>Result</h1>
+          <div class="result-true">Correct answer : 1</div>
+          <div class="result-false">Wrong answer : 1</div>
+              <div class="result-percent">Percentage : 50%</div>
+        </div>
+        <button mat-button class="btn btn__save">Submit</button>
+
+        <button mat-button class="btn btn__save btn__retest">Retest</button>
+
+      </div>
+    </div>
+  </div>
+</main>

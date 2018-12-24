@@ -77,7 +77,6 @@ export class FlashCardService {
   getIndex() {
     return this.index;
   }
-
   delete_card(id: string) {
     this.http.delete('http://localhost:3000/api/flash/delete',
       {
@@ -114,6 +113,4 @@ export class FlashCardService {
     });
     return this.cardSubject.asObservable();
   }
-
-
 }

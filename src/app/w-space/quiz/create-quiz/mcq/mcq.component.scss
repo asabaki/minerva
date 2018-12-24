@@ -8,6 +8,10 @@
   h1{
     text-align: center;
   }
+  &__choice{
+    display: flex;
+
+  }
 
   mat-form-field{
     width: 50rem !important;
@@ -42,12 +46,12 @@
       background-color: var(--color-grey-light-2);
       color: green;
     }
-    &-add{
-      background-color: green;
+    &-edit{
       color: var(--color-grey-light-2);
-      display: inline;
       padding: .2rem;
-      margin: 0 .5rem;
+      margin: auto .5rem;
+      width: 3rem;
+      height: 3rem;
       border-radius: 50%;
       transition: .2s all;
       transform: scale(.7);
@@ -56,6 +60,17 @@
       }
       &:active{
         transform: scale(.65);
+      }
+      &__add{
+        background-color: green;
+        height: 3rem;
+        width: 15rem;
+        border-radius: 5px;
+        margin: auto 1rem;
+        transform: scale(1.05);
+      }
+      &__remove{
+        background-color: rgb(119, 0, 0);
       }
     }
     mat-icon {

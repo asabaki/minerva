@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Inject, Injectable, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Injectable, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {FlashCardService} from '../../../services/flash-card.service';
@@ -7,7 +7,6 @@ import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-up.component';
 import {NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {CollectionComponent} from '../collection.component';
 @Injectable()
 @Component({
   selector: 'app-edit-card',
@@ -64,6 +63,7 @@ export class EditCardComponent implements OnInit {
 
   onUpdate(title: string, desc: string) {
     this.updateSub = this.flashService.update_card(this.data._id, title, desc).subscribe((res) => {
+
       if (res.ok) {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'Update Success!',
