@@ -25,7 +25,7 @@
       </div>
       <div class="flashcard__container">
         <div class="carousel">
-          <input type="radio" *ngFor="let i of helper(numberOfCard); let j = index" id="carousel-{{j+1}}" name="carousel[]" [checked]="j==0" (click)="onChangeCard(j+1)"/>
+          <input type="radio" *ngFor="let i of helper(numberOfCard); let j = index" id="carousel-{{j+1}}" name="carousel[]" [checked]="j==index-1" (click)="onChangeCard(j+1)"/>
           <ul class="carousel__items">
             <li class="carousel__item" *ngFor="let card of cards ;">
               <div class="flashcard__container">

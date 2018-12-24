@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'flash', component: FlashcardComponent},
   {path: 'quiz', component: QuizComponent},
   {path: 'flash/:id', component: CollectionComponent},
+  {path: 'refresh', component: WSpaceComponent},
 
 ];
 
