@@ -40,13 +40,12 @@
             matTooltip="Save change"
             class="btn__done"
             mat-button
-            (click)="onUpdate(title.value,description.value)"
+            (click)="onUpdate(title.value, description.value)"
           >
             Save
           </button>
         </div>
       </mat-expansion-panel>
-
     </form>
     <form>
       <mat-expansion-panel>
@@ -57,15 +56,15 @@
         </mat-expansion-panel-header>
         <form #f="ngForm">
           <div class="edit-card__flashcard">
-          <textarea
-            ngModel
-            name="description"
-            matInput
-            class="front"
-            type="text"
-            placeholder="Front"
-            #front
-          ></textarea>
+            <textarea
+              ngModel
+              name="description"
+              matInput
+              class="front"
+              type="text"
+              placeholder="Front"
+              #front
+            ></textarea>
 
             <textarea
               ngModel
@@ -78,15 +77,14 @@
             ></textarea>
             <button
               class="btn btn__add"
-              matTooltip="Delete"
+              matTooltip="Add"
               mat-button
               [disabled]="!front.value || !back.value"
               [ngClass]="
-
-              'btn btn__add ' +
-              (!front.value || !back.value ? 'btn btn__add-disabled' : '')
-            "
-              (click)="onAddCard(front.value,back.value,f)"
+                'btn btn__add ' +
+                (!front.value || !back.value ? 'btn btn__add-disabled' : '')
+              "
+              (click)="onAddCard(front.value, back.value, f)"
             >
               <mat-icon>add_circle</mat-icon>
             </button>
@@ -113,7 +111,8 @@
               class="front"
               type="text"
               placeholder="Front"
-            >{{ i.front_text }}</textarea
+              #frontCard
+              >{{ i.front_text }}</textarea
             >
             <textarea
               name="description"
@@ -121,13 +120,26 @@
               class="back"
               type="text"
               placeholder="Back"
-            >{{ i.back_text }}</textarea
+              #backCard
+              >{{ i.back_text }}</textarea
             >
-            <button class="btn btn__remove" matTooltip="Delete" mat-button (click)="onDelete(i._id)">
+            <button
+              class="btn btn__remove"
+              matTooltip="Delete"
+              mat-button
+              (click)="onDelete(i._id)"
+            >
               <mat-icon>remove_circle</mat-icon>
             </button>
           </div>
         </cdk-virtual-scroll-viewport>
+        <button
+          matTooltip="Update card"
+          class="btn__done"
+          mat-button
+        >
+          Update
+        </button>
       </mat-expansion-panel>
     </form>
   </mat-accordion>

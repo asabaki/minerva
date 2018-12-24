@@ -36,6 +36,7 @@ export class EditCardComponent implements OnInit {
         data: 'Delete Card Successful'
       });
     });
+    this.flashService.fetch_card(this.data._id);
   }
 
   onAddCard(front: string, back: string, f: NgForm) {

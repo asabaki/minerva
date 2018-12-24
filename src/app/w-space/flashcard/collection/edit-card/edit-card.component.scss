@@ -120,5 +120,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
         box-shadow: 0 1rem 1rem rgba(black, 0.3);
         transform: scale(.9);
       }
+      &-disabled{
+        color: var(--color-grey-light-1);
+        background-color: var(--color-grey-dark-2);
+      }
     }
 }
