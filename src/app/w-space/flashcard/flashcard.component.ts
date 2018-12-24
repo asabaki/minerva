@@ -27,7 +27,7 @@ export class FlashcardComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   // dataSource = new TableDataSource(this.flash);
-
+// TODO - Add edit collection-delete collection
   constructor(public dialog: MatDialog,
               private auth: AuthService,
               private flash: FlashCardService,

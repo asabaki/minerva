@@ -6,6 +6,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-up.component';
 import {NgForm} from '@angular/forms';
+import {Subscription} from 'rxjs';
 @Injectable()
 @Component({
   selector: 'app-edit-card',
@@ -16,6 +17,8 @@ export class EditCardComponent implements OnInit {
   panelOpenState = false;
   title: string;
   desc: string;
+  updateSub: Subscription;
+  index: number;
   // cards: Array;
   constructor(private flashService: FlashCardService,
               private route: ActivatedRoute,
@@ -24,7 +27,8 @@ export class EditCardComponent implements OnInit {
               private matSnack: MatSnackBar) { }
 
   ngOnInit() {
-    console.log(this.data);
+    this.index = this.data.index;
+    this.flashService.index = this.index;
   }
 
   onDelete(id: string) {
@@ -36,7 +40,6 @@ export class EditCardComponent implements OnInit {
         data: 'Delete Card Successful'
       });
     });
-    this.flashService.fetch_card(this.data._id);
   }
 
   onAddCard(front: string, back: string, f: NgForm) {
@@ -59,7 +62,8 @@ export class EditCardComponent implements OnInit {
   }
 
   onUpdate(title: string, desc: string) {
-    this.flashService.update_card(this.data._id, title, desc).subscribe((res) => {
+    this.updateSub = this.flashService.update_card(this.data._id, title, desc).subscribe((res) => {
+
       if (res.ok) {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'Update Success!',

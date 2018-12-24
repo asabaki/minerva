@@ -40,7 +40,9 @@
             matTooltip="Save change"
             class="btn__done"
             mat-button
-            (click)="onUpdate(title.value, description.value)"
+
+            (click)="onUpdate(title.value,description.value)"
+
           >
             Save
           </button>
@@ -56,16 +58,15 @@
         </mat-expansion-panel-header>
         <form #f="ngForm">
           <div class="edit-card__flashcard">
-            <textarea
-              ngModel
-              name="description"
-              matInput
-              class="front"
-              type="text"
-              placeholder="Front"
-              #front
-            ></textarea>
-
+          <textarea
+            ngModel
+            name="description"
+            matInput
+            class="front"
+            type="text"
+            placeholder="Front"
+            #front
+          ></textarea>
             <textarea
               ngModel
               name="description"
@@ -129,6 +130,8 @@
               mat-button
               (click)="onDelete(i._id)"
             >
+            <button class="btn btn__remove" matTooltip="Delete" mat-button (click)="onDelete(i._id)">
+
               <mat-icon>remove_circle</mat-icon>
             </button>
           </div>
@@ -139,6 +142,7 @@
           mat-button
         >
           Update
+
         </button>
       </mat-expansion-panel>
     </form>

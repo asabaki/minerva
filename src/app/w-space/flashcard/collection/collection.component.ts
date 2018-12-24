@@ -1,22 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
-import {EditCardComponent} from '../collection/edit-card/edit-card.component';
+import {EditCardComponent} from './edit-card/edit-card.component';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss']
 })
-export class CollectionComponent implements OnInit {
+export class CollectionComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(EditCardComponent) edit;
   cards: Object = [];
-  title: string;
+  public title: string;
   desc: string;
   numberOfCard: number;
   index: number;
+  prevIndex = 1;
   id: string;
   cardObj: Object;
   // arr: Array<number>;
@@ -26,7 +28,8 @@ export class CollectionComponent implements OnInit {
               private location: Location,
               private router: Router,
               private flashService: FlashCardService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              ) {
   }
 
   ngOnInit() {
@@ -44,14 +47,20 @@ export class CollectionComponent implements OnInit {
             description: this.desc,
             noc: this.numberOfCard,
             cards: this.cards,
-            _id: this.id
+            _id: this.id,
+            index: this.index
+
+
+
           };
         });
 
       }
     });
   }
-
+  ngAfterViewInit() {
+    console.log('After view');
+  }
   onClickBack() {
     // this.router.navigate(back)
     this.location.back();
@@ -66,13 +75,26 @@ export class CollectionComponent implements OnInit {
   }
 
   openEditCardDialog() {
+    this.cardObj = {
+      title: this.title,
+      description: this.desc,
+      noc: this.numberOfCard,
+      cards: this.cards,
+      _id: this.id,
+      index: this.index
+    };
     const dialogRef = this.dialog.open(EditCardComponent,
       {
         panelClass: 'myapp-no-padding-dialog',
-        data: this.cardObj
+        data: this.cardObj,
       });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(this.flashService.getIndex());
+      this.prevIndex = this.flashService.getIndex();
+      if (this.prevIndex > this.numberOfCard) {
+        this.index = this.numberOfCard;
+      }
     });
   }
 }
