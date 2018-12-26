@@ -4,28 +4,28 @@
 
   <nav class="user-nav">
     <div class="user-nav__icon-box" *ngIf="isAuth">
-      <mat-icon class="user-nav__icon">person</mat-icon>
-      <span class="user-nav__notification">7</span>
+      <mat-icon matBadge="1" matBadgeColor="primary" matBadgeSize="medium">person</mat-icon>
     </div>
     <div class="user-nav__icon-box" *ngIf="isAuth">
-      <mat-icon class="user-nav__icon">group</mat-icon>
-      <span class="user-nav__notification">13</span>
+      <mat-icon matBadge="5" matBadgeColor="primary" matBadgeSize="medium">group</mat-icon>
     </div>
 
-    <button mat-button (click)="signUp_dialog()" *ngIf="!isAuth">Sign up</button>
-    <button mat-button (click)="logIn_dialog()" *ngIf="!isAuth" class="no-hover">Log in</button>
-    <button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>
-    <button mat-button (click)="onGetSecret()" class="no-hover">Secret</button>
+
+    <!--<button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>-->
+    <!--<button mat-button (click)="onGetSecret()" class="no-hover">Secret</button>-->
+    <button mat-button (click)="logIn_dialog()" class="btn btn__login" *ngIf="!isAuth">Log in</button>
+    <button mat-button (click)="signUp_dialog()" class="btn btn__signup"*ngIf="!isAuth">Sign up</button>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user" *ngIf="isAuth">
       <img
-        src="assets/img/701987-avatar/png/036-woman.png"
+        src="assets/img/user/k.png"
         alt="User photo"
         class="user-nav__user-photo"
       />
-      <span class="user-nav__user-name" *ngIf="isAuth">{{getUser()}}</span>
+      <span class="user-nav__username user-nav__username1" *ngIf="isAuth">{{getUser()}}</span>
       <mat-menu #menu="matMenu" >
-        <button mat-menu-item *ngIf="isLogin()">
+        <span class="user-nav__username" *ngIf="isAuth">{{getUser()}}</span>
+        <button mat-menu-item *ngIf="isLogin()" class="user-nav__menu">
           <mat-icon>account_circle</mat-icon>
           <span>Account Setting</span>
         </button>
@@ -35,7 +35,7 @@
             <span>Check voicemail</span>
           </button>
         -->
-        <button mat-menu-item (click)="onLogout()" *ngIf="isAuth">
+        <button mat-menu-item (click)="onLogout()" *ngIf="isAuth" class="user-nav__menu">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log Out</span>
         </button>

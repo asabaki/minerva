@@ -6,8 +6,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .header {
     font-size: 1.4rem;
     height: 7rem;
-    background-color: #fff;
-    border-bottom: var(--line);
+    background-color: var(--color-grey-light-1);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,13 +16,16 @@ $bp-smallest: 31.25em; //500px  (500/16)
         height: 11rem;
         align-content: space-around;
     }
-    &-fixed{
-      position: fixed;
-      width: 100%;
-      z-index: 10000;
-      @media only screen and (max-width: $bp-small) {
-        position: unset;
-      }
+    @media only screen and (max-width: $bp-medium) {
+        border-bottom: 1px solid var(--color-grey-dark-1);
+    }
+    &-fixed {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        @media only screen and (max-width: $bp-small) {
+            position: unset;
+        }
     }
 }
 
@@ -70,7 +72,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__input:focus+&__button {
         background-color: var(--color-grey-light-3);
     }
-    &__button {
+    /*&__button {
         border: none;
         background-color: var(--color-grey-light-2);
         &:focus {
@@ -79,7 +81,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         &:active {
             transform: translateY(2px);
         }
-    }
+    }*/
     &__icon {
         height: 2rem;
         width: 2rem;
@@ -91,49 +93,70 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .user-nav {
     display: flex;
     align-items: center;
-    align-self: stretch;
+    /*align-self: stretch;*/
     @media only screen and (max-width: $bp-smallest) {
         margin: 0 auto;
     }
     button {
         border: none;
+        background-color: transparent;
     }
     &>* {
-        padding: 0 2rem;
+        padding: .7rem 2rem;
         cursor: pointer;
         height: 100%;
         display: flex;
         align-items: center;
-    }
-    &>*:hover {
-        background-color: var(--color-grey-light-2);
+        transition: .2s all;
     }
     &__icon-box {
         position: relative;
+        &:hover,
+        &:visited {
+            transform: scale(1.05);
+            background-color: var(--color-grey-light-3) !important;
+            border-radius: 5px;
+        }
     }
     &__icon {
         height: 2.25rem;
         width: 2.25rem;
         fill: var(--color-grey-dark-2);
     }
-    &__notification {
-        font-size: 0.8rem;
-        height: 1.75rem;
-        width: 1.75rem;
-        border-radius: 50%;
-        background-color: var(--color-primary);
-        color: #ffffff;
-        position: absolute;
-        top: 1.5rem;
-        right: 1.1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
     &__user-photo {
-        height: 3.75rem;
+        height: 3.4rem;
         border-radius: 50%;
-        margin-right: 1rem;
+        transition: .3s all;
+        /*margin-right: 1rem;*/
+
+    }
+    &__username {
+        font-size: 1.25rem;
+        font-weight: 700;
+        border-bottom: 1.5px solid var(--color-grey-light-3);
+        text-transform: capitalize;
+        display: block;
+        padding: 1rem;
+        color: var(--color-primary);
+        width: 100%;
+        display: block;
+        text-align: center;
+        &1{
+          border-bottom: none;
+          color: black;
+          margin: 1rem;
+          padding: 0;
+        }
+    }
+    &__user{
+
+
+      &:hover,
+      &:visited {
+          transform: scale(1.05);
+          background-color: var(--color-grey-light-3) !important;
+          border-radius: 5px;
+      }
     }
 }
 
@@ -222,3 +245,44 @@ $bp-smallest: 31.25em; //500px  (500/16)
         display: none;
     }
 }
+
+.btn {
+    margin: 1rem .5rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    padding: 2rem 3rem;
+    outline: none;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .2s;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        transform: scale(.95);
+    }
+    &__signup {
+        border-radius: 5px;
+        background-color: var(--color-primary) !important;
+        color: white;
+        border-bottom: 3px solid var(--color-grey-light-3) !important;
+        margin-right: 2rem;
+        padding: 2rem 3rem;
+        display: block;
+        &:hover {
+            background-color: var(--color-primary) !important;
+        }
+    }
+    &__login {
+        &:hover {
+            background-color: transparent !important;
+        }
+    }
+}
+
+.mat-badge-content {
+    color: white !important;
+}
+
