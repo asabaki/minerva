@@ -13,7 +13,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 export class FlashCardService {
 
   subject = new Subject<any>();
-  addSubject = new Subject<string>();
+  addSubject = new Subject<any>();
   cardSubject = new Subject<any>();
   collectionId: string;
   index: number;
@@ -93,9 +93,10 @@ export class FlashCardService {
       const card = {front, back};
       this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
         if (res.ok) {
-          this.addSubject.next(res.statusText);
+          console.log(res);
+          this.addSubject.next(res);
         } else {
-          this.addSubject.next(res.statusText);
+          this.addSubject.next(res);
           // return res.message;
         }
       });
@@ -105,12 +106,16 @@ export class FlashCardService {
     return this.addSubject.asObservable();
   }
 
-  update_card(id: string, title: string, description: string) {
+  update_card_detail(id: string, title: string, description: string) {
     const updateBody = {id, title, description};
     this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
       console.log(res);
       this.cardSubject.next(res);
     });
     return this.cardSubject.asObservable();
+  }
+
+  update_card(id: string, cards: any) {
+
   }
 }
