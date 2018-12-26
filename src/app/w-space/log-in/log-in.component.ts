@@ -4,6 +4,8 @@ import {NgForm} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {SuccessSnackComponent} from '../sign-up/sign-up.component';
 import {Router} from '@angular/router';
+import {SignUpComponent} from '../sign-up/sign-up.component';
+
 
 @Component({
   selector: 'app-log-in',
@@ -14,12 +16,19 @@ import {Router} from '@angular/router';
 
 export class LogInComponent implements OnInit {
 hide = true;
-  constructor(private authService: AuthService,
+  constructor(public dialog: MatDialog,
+              private authService: AuthService,
               private dialogRef: MatDialogRef<LogInComponent>,
               private matSnack: MatSnackBar,
               private router: Router) { }
 
   ngOnInit() {
+  }
+  signUp_dialog() {
+    const dialogRef = this.dialog.open(SignUpComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
   onLogin(f: NgForm) {
     // console.log(f.value.email);

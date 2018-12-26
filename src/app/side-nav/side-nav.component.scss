@@ -40,7 +40,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
             flex: 1;
             justify-content: center;
             margin: .5rem 0;
+
         }
+        align-self: stretch;
         position: relative;
         &:not(:last-child) {
             margin-bottom: 0.5rem;
@@ -82,7 +84,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
         align-items: center;
         position: relative;
         z-index: 10;
-
         @media only screen and (max-width: $bp-medium) {
             justify-content: center;
             text-align: center;

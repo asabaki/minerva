@@ -164,10 +164,33 @@ $bp-smallest: 31.25em; //500px  (500/16)
         justify-content: space-between;
         width: 100%;
         font-size: 1.3rem;
-        padding: 0 2rem;
+        padding: 0;
         font-weight: 400;
         @media only screen and (max-width: $bp-smallest) {
             padding: 0;
+        }
+        p{
+          font-size: 1.3rem;
+          color: var(--color-secondary);
+          text-align: left;
+
+          button{
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            font-size: 1.3rem;
+            outline: none;
+            text-decoration: underline;
+            display: inline-block;
+            transition: all .2s ease;
+            &:hover{
+              transform: scale(1.1);
+              color: var(--color-secondary-dark);
+            }
+            &:active{
+              transform: scale(.9);
+            }
+          }
         }
     }
     &__link {
