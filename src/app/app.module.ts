@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import {
   MatIconModule,
@@ -105,7 +106,8 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
     MatExpansionModule,
     ScrollingModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatBadgeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

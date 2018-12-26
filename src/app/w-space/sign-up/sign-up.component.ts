@@ -4,7 +4,9 @@ import {AuthService} from '../services/auth.service';
 import {MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {CustomValidator} from '../services/customValidator';
 import {Router} from '@angular/router';
-
+import { LogInComponent} from '../log-in/log-in.component';
+  import { from } from 'rxjs';
+import {MatDialog} from '@angular/material';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -15,7 +17,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   form: FormGroup;
   hide = true;
 
-  constructor(private authService: AuthService,
+  constructor(public dialog: MatDialog,
+              private authService: AuthService,
               private snackBar: MatSnackBar,
               private router: Router,
               private dialogRef: MatDialogRef<SignUpComponent>) {
@@ -29,6 +32,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
   //     return passwordKey.controls['cfPassword'].setErrors({passwordNotEquivalent: true});
   //   }
   // }
+  logIn_dialog() {
+    const dialogRef = this.dialog.open(LogInComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
