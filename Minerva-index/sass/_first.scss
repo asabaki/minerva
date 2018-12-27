@@ -1,0 +1,50 @@
+.first {
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        text-align: initial;
+        h1 {
+            font-size: 4rem;
+            line-height: 4rem;
+            margin-bottom: 2rem;
+        }
+
+    }
+    &__description {
+        flex: 0 0 50%;
+        padding-right: 6rem;
+        &-btn {
+            color: white;
+            margin: 2rem auto;
+            background-color: #27a700;
+            box-shadow: 0 4px 0 green;
+            border-radius: 5px;
+            font-size: 2rem;
+            font-weight: 700;
+            padding: 1rem 5rem;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            transition: all .2s;
+            &:hover {
+                transform: scale(1.1);
+                color: #d7fcd7;
+            }
+            &:active {
+                transform: scale(.95);
+            }
+        }
+    }
+
+    &__photo {
+        flex: 1;
+        margin: auto;
+        .img {
+            width: 65rem;
+        }
+    }
+}
+
