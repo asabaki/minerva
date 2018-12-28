@@ -19,7 +19,7 @@ export class EditCardComponent implements OnInit {
   panelOpenState = false;
   title: string;
   desc: string;
-  card = [];
+  card: Array<Object> = [];
   updateSub: Subscription;
   index: number;
   form: FormGroup;
@@ -38,9 +38,6 @@ export class EditCardComponent implements OnInit {
     this.flashService.index = this.index;
     let i = 0;
     this.data.cards.forEach((card) => {
-      // this.form.addControl(card._id, new FormArray([new FormControl(card.front_text), new FormControl(card.back_text)]));
-      // console.log(card);
-      console.log(i);
       this.form.addControl(i.toString(), new FormGroup({
         id: new FormControl(card._id),
         front_text: new FormControl(card.front_text),
@@ -72,6 +69,14 @@ export class EditCardComponent implements OnInit {
           duration: 1500
         });
         this.data.cards = response.body.card;
+        const newCard = this.data.cards[this.data.cards.length - 1];
+        // console.log(newCard);
+        this.form.addControl((this.data.cards.length - 1).toString(), new FormGroup({
+          id: new FormControl(newCard._id),
+          front_text: new FormControl(newCard.front_text),
+          back_text: new FormControl(newCard.back_text)
+        }, null));
+        // console.log(response.body.card);
         // this.flashService.fetch_card(this.data._id);
         this.changeDet.detectChanges();
       } else {
@@ -102,12 +107,25 @@ export class EditCardComponent implements OnInit {
   }
 
   onUpdateCard() {
-    console.log(this.form.controls);
-    // this.card = [];
-    // this.form.controls.forEach(card => {
-    //   this.card.push({
-    //   })
-    // })
+    // console.log(this.form.value);
+    for (let i = 0; i < this.data.cards.length; i++) {
+      this.card[i] = this.form.value[i];
+    }
+    this.flashService.update_card(this.data._id, this.card).subscribe((res) => {
+      if (res.ok) {
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Update Cards Success!',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went wrong!\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 
+  onAddControl() {
+  }
 }

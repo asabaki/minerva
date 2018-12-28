@@ -77,14 +77,24 @@ export class FlashCardService {
   getIndex() {
     return this.index;
   }
+
   delete_card(id: string) {
-    this.http.delete('http://localhost:3000/api/flash/delete',
+    this.http.delete('http://localhost:3000/api/flash/delete/card',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'
       }).subscribe((response) => {
       this.cardSubject.next(response);
     });
+    return this.cardSubject.asObservable();
+  }
+
+  delete_collection(id: string) {
+    this.http.delete('http://localhost:3000/api/flash/delete/',
+      {
+        params: new HttpParams().set('id', id),
+        observe: 'response'
+      }).subscribe((response) => this.cardSubject.next(response));
     return this.cardSubject.asObservable();
   }
 
@@ -109,13 +119,15 @@ export class FlashCardService {
   update_card_detail(id: string, title: string, description: string) {
     const updateBody = {id, title, description};
     this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
-      console.log(res);
       this.cardSubject.next(res);
     });
     return this.cardSubject.asObservable();
   }
 
-  update_card(id: string, cards: any) {
-
+  update_card(id: string, cards: Object[]) {
+    this.http.patch('http://localhost:3000/api/flash/update/' + id, cards, {observe: 'response'}).subscribe((res) => {
+      this.cardSubject.next(res);
+    });
+    return this.cardSubject.asObservable();
   }
 }
