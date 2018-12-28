@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
   constructor(public dialog: MatDialog,
               public authService: AuthService) {
   }
-
   ngOnInit() {
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();

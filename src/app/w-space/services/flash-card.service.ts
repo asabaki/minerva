@@ -13,7 +13,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 export class FlashCardService {
 
   subject = new Subject<any>();
-  addSubject = new Subject<string>();
+  addSubject = new Subject<any>();
   cardSubject = new Subject<any>();
   collectionId: string;
   index: number;
@@ -77,8 +77,9 @@ export class FlashCardService {
   getIndex() {
     return this.index;
   }
+
   delete_card(id: string) {
-    this.http.delete('http://localhost:3000/api/flash/delete',
+    this.http.delete('http://localhost:3000/api/flash/delete/card',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'
@@ -88,14 +89,24 @@ export class FlashCardService {
     return this.cardSubject.asObservable();
   }
 
+  delete_collection(id: string) {
+    this.http.delete('http://localhost:3000/api/flash/delete/',
+      {
+        params: new HttpParams().set('id', id),
+        observe: 'response'
+      }).subscribe((response) => this.cardSubject.next(response));
+    return this.cardSubject.asObservable();
+  }
+
   add_card(front: string, back: string) {
     if (this.collectionId && this.auth.getIsAuth()) {
       const card = {front, back};
       this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
         if (res.ok) {
-          this.addSubject.next(res.statusText);
+          console.log(res);
+          this.addSubject.next(res);
         } else {
-          this.addSubject.next(res.statusText);
+          this.addSubject.next(res);
           // return res.message;
         }
       });
@@ -105,10 +116,16 @@ export class FlashCardService {
     return this.addSubject.asObservable();
   }
 
-  update_card(id: string, title: string, description: string) {
+  update_card_detail(id: string, title: string, description: string) {
     const updateBody = {id, title, description};
     this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
-      console.log(res);
+      this.cardSubject.next(res);
+    });
+    return this.cardSubject.asObservable();
+  }
+
+  update_card(id: string, cards: Object[]) {
+    this.http.patch('http://localhost:3000/api/flash/update/' + id, cards, {observe: 'response'}).subscribe((res) => {
       this.cardSubject.next(res);
     });
     return this.cardSubject.asObservable();
