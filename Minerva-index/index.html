@@ -6,6 +6,7 @@
     <title>Minerva</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
@@ -34,12 +35,12 @@
     <section class="first">
       <div class="first__container">
         <div class="first__description">
-          <h1>Lets Minerva help you to manage your study and good study habits.</h1>
+          <h1>Let Minerva help you to manage your study and good study habits.</h1>
           <p>
             It has features like flashcards, planners, time trackers and also
-            the facility to band access to social media websites for a while.
+            the facility to ban access to social media websites for a while.
           </p>
-          <button class="first__description-btn">Try out demo &rarr;</button>
+          <button class="first__description-btn">Try our demo &rarr;</button>
         </div>
         <div class="first__photo">
           <img src="/img/1.png" alt="" class="img" />
@@ -48,7 +49,7 @@
     </section>
 
     <section class="second">
-    
+
       <div class="second__container">
         <div class="second__photo">
             <video class="img"  src="/img/flashcard_video.mp4" autoplay loop>
@@ -90,4 +91,19 @@
           </div>
     </section>
   </body>
+  <script>
+    $(document).scroll(function() {
+  var y = $(this).scrollTop();
+  console.log(y);
+  if (y > 50) {
+    $('.nav-logo').height('9rem');
+    $('.nav-logo').css("margin-top","1rem");
+  } else {
+    $('.nav-logo').height('16rem');
+    $('.nav-logo').css("margin-top","10rem");
+  }
+});
+  </script>
 </html>
+
+

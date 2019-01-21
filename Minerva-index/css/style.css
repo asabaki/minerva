@@ -2624,11 +2624,12 @@
     flex: 1; }
   .nav-logo {
     margin-top: 1rem;
-    height: 9rem;
+    height: 16rem;
     display: block;
     position: relative;
-    top: 0.2rem;
-    overflow: hidden; }
+    top: -0.8rem;
+    overflow: hidden;
+    margin-top: 10rem; }
   .nav-btn {
     margin: 1rem .5rem;
     font-size: 1.75rem;

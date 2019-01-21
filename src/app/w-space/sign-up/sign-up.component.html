@@ -1,6 +1,6 @@
 <div class="sign-up">
   <div class="sign-up__form">
-    <form class="sign-up__form-left" (submit)="onSignup()" [formGroup]="form">
+    <form class="sign-up__form-left" (ngSubmit)="onSignup()" [formGroup]="form">
       <h1 class="sign-up__form-header-1">Sign Up</h1>
       <button mat-button mat-dialog-close class="cross cross-small">
         <mat-icon>close</mat-icon>
@@ -18,7 +18,7 @@
       </div>
       <hr />
       <h2 class="sign-up__form-header-2">
-        Please fill in this form to create an account.
+        Please fill in this form to create an account. {{onClicked}}
       </h2>
       <hr />
 
@@ -30,11 +30,9 @@
           name="firstName"
           placeholder="First name"
           formControlName="firstName"
-          [ngClass]="
-            form.get('firstName').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          [errorStateMatcher]="matcher"
+
+
         />
       </mat-form-field>
 
@@ -46,11 +44,9 @@
           name="lastName"
           placeholder="Last name"
           formControlName="lastName"
-          [ngClass]="
-            form.get('lastName').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          [errorStateMatcher]="matcher"
+
+
         />
       </mat-form-field>
 
@@ -62,11 +58,7 @@
           name="email"
           placeholder="Email"
           formControlName="email"
-          [ngClass]="
-            form.get('email').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          [errorStateMatcher]="matcher"
         />
       </mat-form-field>
 
@@ -78,11 +70,7 @@
           placeholder="Password"
           [type]="hide ? 'password' : 'text'"
           formControlName="password"
-          [ngClass]="
-            form.get('password').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          [errorStateMatcher]="matcher"
         />
         <mat-icon
           matSuffix
@@ -100,11 +88,7 @@
           placeholder="Confirm password"
           [type]="hide ? 'password' : 'text'"
           formControlName="cfPassword"
-          [ngClass]="
-            form.get('cfPassword').invalid && form.touched
-              ? 'sign-up__form-input__error'
-              : ''
-          "
+          [errorStateMatcher]="matcher"
         />
         <mat-icon
           matSuffix

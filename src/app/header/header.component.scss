@@ -16,6 +16,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
         height: 11rem;
         align-content: space-around;
     }
+    @media only screen and (max-width: $bp-small) {
+      padding-top: 1rem;
+        height: 14rem;
+    }
     @media only screen and (max-width: $bp-medium) {
         border-bottom: 1px solid var(--color-grey-dark-1);
     }
@@ -100,6 +104,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     button {
         border: none;
         background-color: transparent;
+        margin-right: 1rem;
     }
     &>* {
         padding: .7rem 2rem;
@@ -149,7 +154,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
         }
     }
     &__user{
-
 
       &:hover,
       &:visited {
@@ -286,3 +290,25 @@ $bp-smallest: 31.25em; //500px  (500/16)
     color: white !important;
 }
 
+
+.follow{
+  text-align: center;
+  padding: .7rem 0rem !important;
+  &__container{
+    margin: auto .5rem;
+    padding: 0 .5rem;
+    display: block;
+    &:hover,
+    &:visited {
+        transform: scale(1.05);
+        border-radius: 5px;
+    }
+  }
+  &__text{
+    font-style: italic;
+  }
+  &__no{
+    color: var(--color-primary);
+    font-size: 1.75rem;
+  }
+}

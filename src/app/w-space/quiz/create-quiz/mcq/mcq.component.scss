@@ -59,7 +59,7 @@
         transform: scale(.8);
       }
       &:active{
-        transform: scale(.65);
+        transform: scale(.7);
       }
       &__add{
         background-color: green;
@@ -67,7 +67,14 @@
         width: 15rem;
         border-radius: 5px;
         margin: auto 1rem;
+        margin-left: 38rem;
         transform: scale(1.05);
+        &:hover{
+          transform: scale(1.06);
+        }
+        &:active{
+          transform: scale(1);
+        }
       }
       &__remove{
         background-color: rgb(119, 0, 0);

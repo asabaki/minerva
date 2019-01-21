@@ -4,6 +4,9 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
+import {MatDialog} from '@angular/material';
+import {SignUpComponent} from '../sign-up/sign-up.component';
+import {LogInComponent} from '../log-in/log-in.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,8 @@ export class AuthService {
   private userName: string;
 
   constructor(private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private dialog: MatDialog) {
   }
 
   signUp(name: string, email: string, password: string): Observable<any> {
@@ -90,7 +94,6 @@ export class AuthService {
     this.userId = null;
     this.router.navigate(['/']);
   }
-
 
   getToken() {
     return this.token;
@@ -176,4 +179,5 @@ export class AuthService {
       console.log(err);
       });
   }
+
 }

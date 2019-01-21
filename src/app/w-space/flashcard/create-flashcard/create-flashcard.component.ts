@@ -10,7 +10,7 @@ import {FlashCardService} from '../../services/flash-card.service';
   styleUrls: ['./create-flashcard.component.scss']
 })
 export class CreateFlashcardComponent implements OnInit {
-
+  // TODO - Redirect After Create Collection
   constructor(public dialog: MatDialog,
               private authService: AuthService,
               private flashService: FlashCardService) {}

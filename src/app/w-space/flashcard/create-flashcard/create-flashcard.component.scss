@@ -11,19 +11,17 @@ $bp-smallest: 31.25em; //500px  (500/16)
         font-size: 2rem;
         justify-content: center;
         align-content: center;
-        width: 60rem;
+        /*width: 60rem;
+        @media only screen and (max-width: $bp-small) {
+          width: 50rem;
+        }*/
     }
     &__header {
-        display: flex;
-        justify-content: center;
-        align-content: center;
+      display: flex;
+      padding: 2rem 7rem;
         &-left {
-            flex: 0 0 80%;
             flex-direction: column;
             display: flex;
-        }
-        &-right {
-            flex: 1;
         }
         h1 {
             font-size: 2.5rem;
@@ -82,8 +80,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         cursor: pointer;
         transition: all .2s;
         overflow: hidden;
-        margin-top: 7rem;
-  
+
         &:hover {
             box-shadow: 0 .5rem 1rem rgba(black, .2);
             transform: scale(1.1);

@@ -1,22 +1,30 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Form, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Form, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import {ErrorStateMatcher, MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {CustomValidator} from '../services/customValidator';
 import {Router} from '@angular/router';
 import { LogInComponent} from '../log-in/log-in.component';
-  import { from } from 'rxjs';
 import {MatDialog} from '@angular/material';
+
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (isSubmitted));
+  }
+}
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-
+  @Output() loginPop = new EventEmitter();
   form: FormGroup;
   hide = true;
-
+  onClicked = false;
+  matcher = new CustomErrorStateMatcher();
   constructor(public dialog: MatDialog,
               private authService: AuthService,
               private snackBar: MatSnackBar,
@@ -33,10 +41,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   //   }
   // }
   logIn_dialog() {
-    const dialogRef = this.dialog.open(LogInComponent, {panelClass: 'myapp-no-padding-dialog'});
+    this.dialog.open(LogInComponent, {panelClass: 'myapp-no-padding-dialog'});
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 
   ngOnInit() {
@@ -52,6 +58,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   onSignup() {
+    this.onClicked = true;
     this.form.get('email').markAsTouched();
     this.form.get('firstName').markAsTouched();
     this.form.get('lastName').markAsTouched();
@@ -92,25 +99,25 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       return '';
     }
-    if (this.form.get('firstName').touched && this.form.get('firstName').hasError('required')) {
+    if (this.form.get('firstName').touched && this.form.get('firstName').hasError('required') && this.onClicked) {
       return 'Please Enter First Name';
     }
-    if (this.form.get('lastName').touched && this.form.get('lastName').hasError('required')) {
+    if (this.form.get('lastName').touched && this.form.get('lastName').hasError('required') && this.onClicked) {
       return 'Please Enter Last Name';
     }
-    if (this.form.get('email').touched && this.form.get('email').hasError('required')) {
+    if (this.form.get('email').touched && this.form.get('email').hasError('required') && this.onClicked) {
       return 'Please Enter Email';
     }
-    if (this.form.get('email').touched && this.form.get('email').hasError('email')) {
+    if (this.form.get('email').touched && this.form.get('email').hasError('email') && this.onClicked) {
       return 'Please Enter Valid Email';
     }
-    if (this.form.get('password').touched && this.form.get('password').hasError('required')) {
+    if (this.form.get('password').touched && this.form.get('password').hasError('required') && this.onClicked) {
       return 'Please Enter Password';
     }
     // if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('required')) {
     //   return 'Please Enter Password';
     // }
-    if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('passwordNotEquivalent')) {
+    if (this.form.get('cfPassword').touched && this.form.get('cfPassword').hasError('passwordNotEquivalent') && this.onClicked) {
       return 'Please the Same Password';
     }
 

@@ -93,36 +93,47 @@
         </form>
       </mat-expansion-panel>
     </form>
-    <form>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon class="icon">delete_sweep</mat-icon>&nbsp;Edit and Remove
-            card
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <cdk-virtual-scroll-viewport class="edit-card__scroll" [itemSize]="20">
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon class="icon">delete_sweep</mat-icon>&nbsp;Edit and Remove
+          card
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <cdk-virtual-scroll-viewport class="edit-card__scroll" [itemSize]="20">
+        <form [formGroup]="form" >
           <div
             class="edit-card__flashcard"
-            *cdkVirtualFor="let i of data.cards"
+            *cdkVirtualFor="let i of data.cards; let j = index"
+            [formGroupName]="j"
           >
+            <input
+              formControlName="id"
+              name="id"
+              type="hidden"
+            >
             <textarea
-              name="description"
+              formControlName="front_text"
+              name="front"
               matInput
               class="front"
               type="text"
               placeholder="Front"
+              [value]="i.front_text"
               #frontCard
-              >{{ i.front_text }}</textarea
+            >{{ i.front_text }}</textarea
             >
             <textarea
-              name="description"
+              formControlName="back_text"
+              name="back"
               matInput
               class="back"
               type="text"
               placeholder="Back"
+              [value]="i.back_text"
               #backCard
-              >{{ i.back_text }}</textarea
+            >{{ i.back_text }}</textarea
             >
             <button
               class="btn btn__remove"
@@ -130,21 +141,20 @@
               mat-button
               (click)="onDelete(i._id)"
             >
-
               <mat-icon>remove_circle</mat-icon>
             </button>
           </div>
-        </cdk-virtual-scroll-viewport>
-        <button
-          matTooltip="Update card"
-          class="btn__done"
-          mat-button
-        >
-          Update
-
-        </button>
-      </mat-expansion-panel>
-    </form>
+        </form>
+      </cdk-virtual-scroll-viewport>
+      <button
+        matTooltip="Update card"
+        class="btn__done"
+        mat-button
+        (click)="onUpdateCard()"
+      >
+        Update
+      </button>
+    </mat-expansion-panel>
   </mat-accordion>
   <button
     matTooltip="Save all change"
