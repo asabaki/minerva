@@ -27,4 +27,9 @@ export class McqComponent implements OnInit {
       thirdCtrl: ['', Validators.required]
     });
   }
+  onSubmit() {
+    console.log(this.firstFormGroup);
+    console.log(this.secondFormGroup);
+    console.log(this.thirdFormGroup);
+  }
 }

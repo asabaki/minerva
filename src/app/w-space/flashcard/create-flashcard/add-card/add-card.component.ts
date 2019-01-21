@@ -27,6 +27,8 @@ export class AddCardComponent implements OnInit {
           duration: 1500
         });
         this.flashService.fetch_collection();
+        this.flashService.fetch_card(this.flashService.collectionId);
+        this.flashService.index = 1;
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: 'Something went Wrong!\n' + response.statusText,

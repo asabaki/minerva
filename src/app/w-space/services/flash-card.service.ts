@@ -27,16 +27,18 @@ export class FlashCardService {
     if (this.auth.getIsAuth()) {
       const userId = localStorage.getItem('userId');
       const card = {title, description, userId};
-      this.http.post<any>('http://localhost:3000/api/flash/add', card).subscribe(
+      this.http.post<any>('http://localhost:3000/api/flash/add', card, {observe: 'response'}).subscribe(
         (res) => {
-          this.collectionId = res._id;
+          this.collectionId = res.body._id;
+          this.cardSubject.next(res);
         },
         (err) => {
-          console.log(err);
+          this.cardSubject.next(err);
         }
       );
       // console.log(title, description);
     }
+    return this.cardSubject.asObservable();
   }
 
   fetch_collection() {

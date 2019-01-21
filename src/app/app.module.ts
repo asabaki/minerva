@@ -22,7 +22,7 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTabsModule,
-  MatStepperModule
+  MatStepperModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -101,6 +101,7 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
     MatTableModule,
     MatSortModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
     // MatTableDataSource
     MatTabsModule,
     MatExpansionModule,

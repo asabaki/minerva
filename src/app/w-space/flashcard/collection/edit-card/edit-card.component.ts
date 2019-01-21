@@ -23,6 +23,7 @@ export class EditCardComponent implements OnInit {
   updateSub: Subscription;
   index: number;
   form: FormGroup;
+  isLoading = true;
 
   // cards: Array;
   constructor(private flashService: FlashCardService,
@@ -30,6 +31,7 @@ export class EditCardComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private changeDet: ChangeDetectorRef,
               private matSnack: MatSnackBar) {
+    this.isLoading = true;
     this.form = new FormGroup({}, null);
   }
 
@@ -44,10 +46,13 @@ export class EditCardComponent implements OnInit {
         back_text: new FormControl(card.back_text)
       }, null));
       i++;
+
     });
     i = 0;
     // console.log(this.data);
+    this.isLoading = false;
   }
+
 
   onDelete(id: string) {
     this.flashService.delete_card(id).subscribe((res) => {
@@ -77,7 +82,7 @@ export class EditCardComponent implements OnInit {
           back_text: new FormControl(newCard.back_text)
         }, null));
         // console.log(response.body.card);
-        // this.flashService.fetch_card(this.data._id);
+        this.flashService.fetch_card(this.data._id);
         this.changeDet.detectChanges();
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {

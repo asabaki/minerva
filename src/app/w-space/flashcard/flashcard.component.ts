@@ -35,6 +35,8 @@ export class FlashcardComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
+  data: Observable<Object>;
+  isLoading = true;
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
@@ -62,6 +64,7 @@ export class FlashcardComponent implements OnInit {
           }
         );
         this.dataSource.sort = this.sort;
+        this.isLoading = false;
       }
     );
 
