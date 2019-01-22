@@ -55,6 +55,8 @@ import { McqComponent } from './w-space/quiz/create-quiz/mcq/mcq.component';
 import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-false.component';
 import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
 import { PlannerComponent } from './w-space/planner/planner.component';
+import { HomeComponent } from './w-space/home/home.component';
+
 
 
 
@@ -83,6 +85,8 @@ import { PlannerComponent } from './w-space/planner/planner.component';
     TrueFalseComponent,
     QuizCollectionComponent,
     PlannerComponent,
+    HomeComponent,
+
 
 
 
