@@ -197,3 +197,20 @@ input:focus {
 .br-units{
   justify-content: center;
 }
+
+.fill{
+  & > *{
+    background-color: transparent;
+
+  }
+  &-green{
+    color: green;
+  }
+  &-red{
+    color: red;
+  }
+  &-primary{
+    color: var(--color-primary);
+  }
+}
+
