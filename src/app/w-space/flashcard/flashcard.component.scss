@@ -7,33 +7,36 @@ $bp-smallest: 31.25em; //500px  (500/16)
     background-color: var(--color-grey-light-1);
     flex: 1;
     @media only screen and (max-width: 1400px) {
-      margin-left: 3rem;
+        margin-left: 3rem;
     }
     @media only screen and (max-width: $bp-largest) {
-      margin-left: 4rem;
+        margin-left: 4rem;
     }
     @media only screen and (max-width: $bp-large) {
-      margin-left: 5rem;
+        margin-left: 5rem;
     }
-
     @media only screen and (max-width: $bp-medium) {
-      margin-left: 0rem;
+        margin-left: 0rem;
     }
 }
 
 .detail {
-  display: flex;
-  padding: 4.5rem;
-  border-bottom: var(--line);
-  font-size: 1.4rem;
-  @media only screen and (max-width: $bp-medium) {
-      padding: 3rem;
-  }
-  @media only screen and (max-width: $bp-small) {
-      flex-direction: column;
-  }
-
+    display: flex;
+    padding: 4.5rem;
+    border-bottom: var(--line);
+    font-size: 1.4rem;
+    @media only screen and (max-width: $bp-medium) {
+        padding: 3rem;
+    }
+    @media only screen and (max-width: $bp-small) {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    @media only screen and (max-width: 370px) {
+        padding: .5rem;
+    }
 }
+
 .description {
     background-color: white;
     box-shadow: var(--shadow-light);
@@ -42,16 +45,26 @@ $bp-smallest: 31.25em; //500px  (500/16)
     height: 100%;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
-        margin-right: 3rem;
     }
     @media only screen and (max-width: $bp-small) {
         margin-right: 0;
         margin-bottom: 3rem;
     }
-    &-btn_set{
-      display: flex;
-      justify-content: flex-end;
-      margin-bottom: 1rem;
+    &-btn_set {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        @media only screen and (max-width: $bp-smallest) {
+            flex-direction: column;
+        }
+        &-right {
+            display: flex;
+            flex-direction: row;
+            @media only screen and (max-width: $bp-smallest) {
+                justify-content: center;
+                margin: 1rem 0 0 0;
+            }
+        }
     }
 }
 
@@ -68,7 +81,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: space-between;
     border-bottom: var(--line);
     align-items: center;
-  background-color: #fff;
+    background-color: #fff;
     margin-top: 7rem;
     &__heading {
         font-size: 2.25rem;
@@ -81,10 +94,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
             padding: 1.25rem 2rem;
         }
         @media only screen and (max-width: $bp-large) {
-          padding: 1.5rem 6rem;
+            padding: 1.5rem 6rem;
         }
         @media only screen and (max-width: $bp-largest) {
-          padding: 1.5rem 6rem;
+            padding: 1.5rem 6rem;
         }
     }
     &__stars {
@@ -108,7 +121,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &__count {
         background-color: var(--color-primary);
         color: var(--color-grey-light-1);
-
         padding: 1.5rem;
         display: flex;
         align-items: center;
@@ -130,7 +142,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
             }
         }
         @media only screen and (max-width: $bp-small) {
-            padding: 0 1.5rem;
+            padding: 1.5rem;
         }
     }
 }
@@ -362,13 +374,33 @@ $bp-smallest: 31.25em; //500px  (500/16)
         cursor: pointer;
         transition: all .2s;
         display: block;
-        &:hover{
-          box-shadow: 0 .5rem 1rem rgba(black,.2);
-          transform: scale(1.1);
+        &:hover {
+            box-shadow: 0 .5rem 1rem rgba(black, .2);
+            transform: scale(1.1);
         }
-        &:active{
-          box-shadow: 0 .5rem .5rem rgba(black,.3);
-          transform: scale(1);
+        &:active {
+            box-shadow: 0 .5rem .5rem rgba(black, .3);
+            transform: scale(1);
+        }
+    }
+    &-my {
+        background-color: var(--color-primary);
+        color: white;
+        margin-right: 1rem;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all .2s;
+        display: block;
+        &:hover {
+            box-shadow: 0 .5rem 1rem rgba(black, .2);
+            transform: scale(1.1);
+        }
+        &:active {
+            box-shadow: 0 .5rem .5rem rgba(black, .3);
+            transform: scale(1);
         }
     }
     &-edit {
@@ -381,28 +413,28 @@ $bp-smallest: 31.25em; //500px  (500/16)
         cursor: pointer;
         transition: all .2s;
         display: block;
-        &:hover{
-          box-shadow: 0 .5rem 1rem rgba(black,.2);
-          transform: scale(1.1);
+        &:hover {
+            box-shadow: 0 .5rem 1rem rgba(black, .2);
+            transform: scale(1.1);
         }
-        &:active{
-          box-shadow: 0 .5rem .5rem rgba(black,.3);
-          transform: scale(1);
+        &:active {
+            box-shadow: 0 .5rem .5rem rgba(black, .3);
+            transform: scale(1);
         }
     }
-    &-delete{
-      border: none;
-      outline: none;
-      background-color: transparent;
-      color: rgb(161, 0, 0);
-      cursor: pointer;
-      transition: .2s all;
-      &:hover{
-        transform: scale(1.05);
-      }
-      &:hover{
-        transform: scale(1);
-      }
+    &-delete {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        color: rgb(161, 0, 0);
+        cursor: pointer;
+        transition: .2s all;
+        &:hover {
+            transform: scale(1.05);
+        }
+        &:hover {
+            transform: scale(1);
+        }
     }
 }
 
@@ -427,6 +459,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 table {
     width: 100%;
+    @media only screen and (max-width: 375px) {
+        margin-left: -.6rem;
+    }
+    @media only screen and (max-width: 360px) {
+        margin-left: 0rem;
+    }
 }
 
 th.mat-sort-header-sorted {
@@ -434,28 +472,98 @@ th.mat-sort-header-sorted {
 }
 
 tr.mat-row.ng-star-inserted {
-  cursor: pointer;
-  transition: .2s all;
-  &:hover{
-    background-color: var(--color-grey-light-2);
-  }
-  &:active{
-    background-color: var(--color-grey-light-3);
-  }
+    cursor: pointer;
+    transition: .2s all;
+    &:hover {
+        background-color: var(--color-grey-light-2);
+    }
+    &:active {
+        background-color: var(--color-grey-light-3);
+    }
 }
-
-
 
 td.mat-cell,
 td.mat-footer-cell,
-th.mat-header-cell{
-  max-width: 30rem;
-  text-align: justify;
+th.mat-header-cell {
+    max-width: 30rem;
+    text-align: justify;
+    padding: 1rem;
+    @media only screen and (max-width: $bp-small) {
+        padding: 0rem;
+    }
+    @media only screen and (max-width: 320px) {
+      font-size: .8rem;
+  }
 }
 
 
-td.mat-cell, td.mat-footer-cell, th.mat-header-cell{
-  padding: 1rem;
+
+td.mat-cell:not(:nth-of-type(2)),
+td.mat-footer-cell:not(:nth-of-type(2)),
+th.mat-header-cell:not(:nth-of-type(2)) {
+  text-align: center;
 }
 
+.bar-rating{
+  justify-content: center;
+}
 
+.mat-sort-header-button{
+  margin: auto !important;
+}
+
+.search {
+    flex: 0 0 30%;
+    display: flex;
+    align-items: center;
+    @media only screen and (max-width: $bp-largest) {
+        flex: 0 0 40%;
+    }
+    @media only screen and (max-width: $bp-small) {
+        flex: 0 0 50%;
+    }
+    @media only screen and (max-width: $bp-smallest) {
+        flex: 0 0 30%;
+    }
+    &__input {
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        background-color: var(--color-grey-light-2);
+        border: none;
+        padding: .7rem 2rem;
+        border-radius: 100px;
+        width: 100%;
+        transition: all .2s;
+        margin-right: -3.25rem;
+        &:focus {
+            outline: none;
+            width: 100%;
+            background-color: var(--color-grey-light-3);
+        }
+        &::-webkit-input-placeholder {
+            font-weight: 100;
+            color: var(--color-grey-light-4);
+        }
+    }
+    &__input:focus+&__button {
+        background-color: var(--color-grey-light-3);
+    }
+    &__button {
+        border: none;
+        background-color: var(--color-grey-light-2);
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
+        &:active {
+            transform: translateY(2px);
+        }
+    }
+    &__icon {
+        cursor: pointer;
+        height: 2rem;
+        width: 2rem;
+        fill: var(--color-grey-dark-3);
+    }
+}

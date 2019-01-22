@@ -7,16 +7,17 @@ $bp-smallest: 31.25em; //500px  (500/16)
     background-color: var(--color-grey-light-1);
     flex: 1;
     @media only screen and (max-width: 1400px) {
-        margin-left: 3rem;
+      margin-left: 3rem;
     }
     @media only screen and (max-width: $bp-largest) {
-        margin-left: 4rem;
+      margin-left: 6rem;
     }
     @media only screen and (max-width: $bp-large) {
-        margin-left: 5rem;
+      margin-left: 5rem;
     }
+
     @media only screen and (max-width: $bp-medium) {
-        margin-left: 0rem;
+      margin-left: 0rem;
     }
 }
 
@@ -41,14 +42,25 @@ $bp-smallest: 31.25em; //500px  (500/16)
     flex: 1;
     flex-direction: row;
     height: 100%;
+    margin-top: -1rem;
+    @media only screen and (max-width: 87.5em) {
+      width: 60rem;
+  }
+    @media only screen and (max-width: $bp-largest) {
+      width: 60rem;
+  }
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
-        margin-right: 3rem;
+        font-size: .4rem;
     }
     @media only screen and (max-width: $bp-small) {
         margin-right: 0;
         margin-bottom: 3rem;
+        width: 100%;
+
     }
+
+
     &-btn_set {
         display: flex;
         justify-content: flex-end;
@@ -58,8 +70,25 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin: 1rem;
         display: flex;
         flex-flow: row nowrap;
-        text-align: justify;
+        text-align: center;
         justify-content: space-between;
+        &-p {
+            word-wrap: break-word;
+            width: 70rem;
+            @media only screen and (max-width: $bp-small) {
+              width: 40rem;
+          }
+            @media only screen and (max-width: 430px) {
+              width: 37rem;
+          }
+            @media only screen and (max-width: 320px) {
+              width: 25rem;
+          }
+        }
+        @media only screen and (max-width: $bp-small) {
+          flex-flow: column-reverse;
+          align-items: center;
+      }
     }
 }
 
@@ -86,7 +115,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         color: var(--color-grey-light-1);
         margin-left: 3rem;
         align-self: stretch;
-        padding: 0 2.25rem;
+        padding: 1rem 2.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -107,8 +136,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
             }
         }
         @media only screen and (max-width: $bp-small) {
-            padding: 0 1.5rem;
+            padding: 1.5rem;
         }
+    }
+    &__right{
+      display: flex;
+      align-content: flex-end
     }
 }
 
@@ -120,6 +153,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        @media only screen and (max-width: $bp-small) {
+          transform: translateY(-3rem);
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          transform: translateY(0rem);
+        }
         &-bottom {
             background-color: var(--color-grey-light-1);
             display: flex;
@@ -155,7 +194,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .btn {
     &-edit {
         color: var(--color-primary);
-        text-decoration: underline;
+        text-decoration: none;
         border: none;
         outline: none;
         background-color: transparent;
@@ -163,8 +202,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
         transition: all 0.2s;
         font-size: 1.5rem;
         text-shadow: 0 0.5rem 0.5rem rgba(black, 0.1);
-        margin-left: 2rem;
+        /*margin-left: 2rem;*/
         font-weight: 500;
+        /*align-self: flex-start;*/
         cursor: pointer;
         &:hover {
             transform: scale(1.1);
@@ -173,7 +213,46 @@ $bp-smallest: 31.25em; //500px  (500/16)
             transform: scale(0.9);
             text-shadow: 0 0.5rem 0.5rem rgba(black, 0.3);
         }
+        @media only screen and (max-width: $bp-small) {
+          align-self: flex-end;
+        }
+
     }
+    &-follow {
+      transform: scale(.7);
+      border-radius: 100px;
+      box-shadow: 0 0.2rem 0rem var(--color-secondary);
+      border: .5px solid var(--color-secondary);
+      padding: 0rem 2rem;
+      vertical-align: middle;
+      color: var(--color-secondary-dark);
+      display: inline-block;
+      cursor: pointer;
+      height: 3rem;
+      font-size: 1.6rem;
+      background-color: white;
+      outline: none;
+      transition: .2s all;
+      display: inline-block;
+      span{
+        font-weight: 900;
+        padding-right: .3rem;
+      }
+      &:hover{
+        box-shadow: 0 -0.2rem 0rem var(--color-secondary);
+      transform: scale(.75);
+      }
+      &:active{
+        transform: scale(.69);
+      }
+      &_group{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+      }
+  }
+
 }
 
 .no-card {
@@ -185,10 +264,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
     box-shadow: 0.5rem 0.5rem 2rem rgba(black, 0.1);
     margin: auto;
     padding: 8rem;
-    h1{
-      text-align:center;
+    h1 {
+        text-align: center;
     }
-
     &__btn {
         border-radius: 100px;
         background-image: linear-gradient( to right bottom, rgba(#ffa000, 0.9), rgba(rgb(255, 174, 0), 0.9));
@@ -198,13 +276,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
         padding: 1rem;
         cursor: pointer;
         transition: all .5s;
-        &:hover{
-          transform: scale(1.1);
-          box-shadow: 0 .5rem 1.5rem rgba(black, 0.1);
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 .5rem 1.5rem rgba(black, 0.1);
         }
-        &:active{
-          transform: scale(1);
-          box-shadow: 0 .5rem 1rem rgba(black, 0.3);
+        &:active {
+            transform: scale(1);
+            box-shadow: 0 .5rem 1rem rgba(black, 0.3);
         }
     }
 }
@@ -412,3 +490,43 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 @include carousel(100);
+.rate {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: center;
+}
+
+.rating {
+    align-self: flex-start;
+    &__text {
+        margin-top: -1.5rem;
+        text-align: center;
+    }
+    @media only screen and (max-width: $bp-small) {
+      align-self: center;
+  }
+}
+
+.follow{
+  text-align: center;
+  padding: .7rem 0rem !important;
+  align-content: center;
+  justify-content: center;
+  &__container{
+    margin: auto .5rem;
+    padding: 0 .5rem;
+    display: block;
+    &:hover,
+    &:visited {
+        transform: scale(1.05);
+        border-radius: 5px;
+    }
+  }
+  &__text{
+    font-style: italic;
+  }
+  &__no{
+    color: var(--color-primary);
+    font-size: 2.2rem;
+  }
+}

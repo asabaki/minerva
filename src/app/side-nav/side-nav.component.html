@@ -1,7 +1,7 @@
 <nav class="sidebar">
   <ul class="side-nav">
     <li class="side-nav__item" routerLinkActive="side-nav__item side-nav__item--active" [routerLinkActiveOptions]="{exact: true}">
-      <a routerLink="/" class="side-nav__link">
+      <a routerLink="/home" class="side-nav__link">
         <mat-icon class="side-nav__icon">home</mat-icon>
         <span>Home</span>
       </a>
@@ -12,14 +12,14 @@
         <span>Flashcards</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
-      <a href="#" class="side-nav__link">
-        <mat-icon class="side-nav__icon">table_chart</mat-icon>
-        <span>Time table</span>
+    <li class="side-nav__item" routerLinkActive="side-nav__item--active" *ngIf="status">
+      <a routerLink="/quiz"  class="side-nav__link">
+        <mat-icon class="side-nav__icon">question_answer</mat-icon>
+        <span>Quiz</span>
       </a>
     </li>
     <li class="side-nav__item" *ngIf="status">
-      <a href="#" class="side-nav__link">
+      <a routerLink="/plan" class="side-nav__link">
         <mat-icon class="side-nav__icon">edit_attributes</mat-icon>
         <span>Planner</span>
       </a>
@@ -28,12 +28,6 @@
       <a href="#" class="side-nav__link">
         <mat-icon class="side-nav__icon">block</mat-icon>
         <span>Self Control</span>
-      </a>
-    </li>
-    <li class="side-nav__item" routerLinkActive="side-nav__item--active" *ngIf="status">
-      <a routerLink="/quiz"  class="side-nav__link">
-        <mat-icon class="side-nav__icon">style</mat-icon>
-        <span>Quiz</span>
       </a>
     </li>
     <li class="side-nav__item" *ngIf="status">
@@ -45,7 +39,7 @@
     <li class="side-nav__item" *ngIf="status">
       <a href="#" class="side-nav__link">
         <mat-icon class="side-nav__icon">timer</mat-icon>
-        <span>count Down</span>
+        <span>Count Down</span>
       </a>
     </li>
     <li class="side-nav__item" *ngIf="status">

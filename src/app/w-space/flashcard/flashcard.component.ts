@@ -7,12 +7,16 @@ import {Router} from '@angular/router';
 import {Observable, Observer, Subscription} from 'rxjs';
 import {detectChanges} from '@angular/core/src/render3';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
+import { BarRatingModule } from 'ngx-bar-rating';
 
 export interface PeriodicElement {
   _id: string;
   title: string;
   description: string;
   numberOfCard: number;
+  rating: number;
+  dom: Date;
+  views: number;
   delete: boolean;
 
 }
@@ -27,14 +31,19 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 })
 
 export class FlashcardComponent implements OnInit {
-  columnDef = [{def: 'name', show: true}, {def: 'description', show: true}, {
-    def: 'numberOfCard',
-    show: true
-  }, {def: 'delete', show: false}];
+  columnDef = [{def: 'name', show: true},
+  {def: 'description', show: true},
+  {def: 'rating', show: true},
+  {def: 'dom', show: true},
+  {def: 'views', show: true}];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
+
+
+
+
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
@@ -57,6 +66,9 @@ export class FlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
+              rating: 0,
+              views: 0,
+              dom: new Date(Date.now()),
               delete: false
             });
           }
@@ -87,7 +99,7 @@ export class FlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[3].show = this.editClicked;
+    this.columnDef[5].show = this.editClicked;
 
   }
 
@@ -118,5 +130,7 @@ export class FlashcardComponent implements OnInit {
       .filter((def) => def.show)
       .map((def) => def.def);
   }
+
+
 
 }

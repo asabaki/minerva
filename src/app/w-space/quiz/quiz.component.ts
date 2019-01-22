@@ -36,6 +36,4 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     this.dataSource.sort = this.sort;
   }
-
-
 }

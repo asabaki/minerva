@@ -11,6 +11,12 @@ import {EditCardComponent} from './edit-card/edit-card.component';
   styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit, AfterViewInit {
+  bootRate = 1;
+  faRate = 1;
+  cssRate = 1;
+  faoRate = 2;
+  faoRated = false;
+
 
   @ViewChild(EditCardComponent) edit;
   cards: Object = [];
@@ -96,5 +102,14 @@ export class CollectionComponent implements OnInit, AfterViewInit {
         this.index = this.numberOfCard;
       }
     });
+  }
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
+  }
+
+  faoReset() {
+    this.faoRated = false;
+    this.faoRate = 3.6;
   }
 }

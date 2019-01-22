@@ -6,6 +6,10 @@ import {FlashcardComponent} from './w-space/flashcard/flashcard.component';
 
 import {QuizComponent} from './w-space/quiz/quiz.component';
 import {CollectionComponent} from './w-space/flashcard/collection/collection.component';
+import {PlannerComponent} from './w-space/planner/planner.component';
+import {HomeComponent} from './w-space/home/home.component';
+import {MyFlashcardComponent} from './w-space/my-flashcard/my-flashcard.component';
+
 
 
 const routes: Routes = [
@@ -14,6 +18,10 @@ const routes: Routes = [
   {path: 'quiz', component: QuizComponent},
   {path: 'flash/:id', component: CollectionComponent},
   {path: 'refresh', component: WSpaceComponent},
+  {path: 'plan', component: PlannerComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'my-flash', component: MyFlashcardComponent},
+
 
 ];
 
@@ -23,3 +31,4 @@ const routes: Routes = [
   providers: [AuthGuard]
 })
 export class AppRoutingModule { }
+

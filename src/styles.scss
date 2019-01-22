@@ -42,6 +42,7 @@ $Minerva-theme: mat-light-theme( $Minerva-primary, $Minerva-accent, $Minerva-war
     --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
     --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
     --line: 1px solid var(--color-grey-light-2);
+    --color-primary__1: rgba(#f68b1f, .1);
 }
 
 $bp-largest: 75em; //1200px  (1200/16)
@@ -166,4 +167,33 @@ input:focus {
     .mat-step-icon {
         color: white !important;
     }
+}
+
+@import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
+.br-fontawesome-o {
+  .br-selected:after {
+  content: '\f005';
+  color: var(--color-primary) !important;
+  }
+  .br-fraction:after{
+    content: '\f123';
+    color: var(--color-primary) !important;
+  }
+  .br-active:after {
+  content: '\f005';
+  color: var(--color-primary) !important;}
+}
+.link[_ngcontent-c6] {
+  margin-left: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-primary) !important;
+}
+
+.mat-sort-header-button {
+  margin: auto;
+}
+
+.br-units{
+  justify-content: center;
 }
