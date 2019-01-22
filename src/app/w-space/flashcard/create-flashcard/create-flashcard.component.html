@@ -23,6 +23,11 @@
             #description
           ></textarea>
         </mat-form-field>
+        <div class="privacy-toggle">
+            Do you want to share this collection? &nbsp;
+            <mat-slide-toggle matInput #privacy color="primary" (click)="sliding(privacy.checked)">{{ privacyText}}</mat-slide-toggle>
+        </div>
+
       </div>
     </div>
     <div class="btn-insert">

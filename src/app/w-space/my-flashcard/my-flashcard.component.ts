@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
+import {CreateFlashcardComponent} from '../flashcard/create-flashcard/create-flashcard.component';
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
@@ -14,35 +14,32 @@ export interface PeriodicElement {
   title: string;
   description: string;
   numberOfCard: number;
-  rating: number;
-  dom: Date;
-  views: number;
   delete: boolean;
 
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
-
-
 @Component({
-  selector: 'app-flashcard',
-  templateUrl: './flashcard.component.html',
-  styleUrls: ['./flashcard.component.scss']
+  selector: 'app-my-flashcard2',
+  templateUrl: './my-flashcard.component.html',
+  styleUrls: ['./my-flashcard.component.scss']
 })
-
-export class FlashcardComponent implements OnInit {
+export class MyFlashcardComponent implements OnInit {
   columnDef = [{def: 'name', show: true},
   {def: 'description', show: true},
-  {def: 'rating', show: true},
-  {def: 'dom', show: true},
-  {def: 'views', show: true}];
+  {def: 'numberOfCard', show: true},
+  {def: 'delete', show: false}];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
 
 
-
+  bootRate = 1;
+  faRate = 1;
+  cssRate = 1;
+  faoRate = 2;
+  faoRated = false;
 
 
   constructor(public dialog: MatDialog,
@@ -66,9 +63,6 @@ export class FlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: 0,
-              views: 0,
-              dom: new Date(Date.now()),
               delete: false
             });
           }
@@ -99,7 +93,7 @@ export class FlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[5].show = this.editClicked;
+    this.columnDef[3].show = this.editClicked;
 
   }
 
@@ -131,6 +125,13 @@ export class FlashcardComponent implements OnInit {
       .map((def) => def.def);
   }
 
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
+  }
 
-
+  faoReset() {
+    this.faoRated = false;
+    this.faoRate = 3.6;
+  }
 }

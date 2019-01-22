@@ -11,6 +11,7 @@ import {FlashCardService} from '../../services/flash-card.service';
 })
 export class CreateFlashcardComponent implements OnInit {
   // TODO - Redirect After Create Collection
+  privacyText = 'Private';
   constructor(public dialog: MatDialog,
               private authService: AuthService,
               private flashService: FlashCardService) {}
@@ -29,5 +30,8 @@ export class CreateFlashcardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+  sliding(f: any) {
+    this.privacyText = f ? 'Private' : 'Public' ;
   }
 }

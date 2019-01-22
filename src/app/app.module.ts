@@ -11,7 +11,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BarRatingModule } from 'ngx-bar-rating';
-
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {
   MatIconModule,
   MatInputModule,
@@ -56,6 +56,7 @@ import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-f
 import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
 import { PlannerComponent } from './w-space/planner/planner.component';
 import { HomeComponent } from './w-space/home/home.component';
+import { MyFlashcardComponent } from './w-space/my-flashcard/my-flashcard.component';
 
 
 
@@ -86,6 +87,7 @@ import { HomeComponent } from './w-space/home/home.component';
     QuizCollectionComponent,
     PlannerComponent,
     HomeComponent,
+    MyFlashcardComponent,
 
 
 
@@ -116,7 +118,8 @@ import { HomeComponent } from './w-space/home/home.component';
     MatStepperModule,
     MatRadioModule,
     MatBadgeModule,
-    BarRatingModule
+    BarRatingModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

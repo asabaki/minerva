@@ -139,6 +139,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
             padding: 1.5rem;
         }
     }
+    &__right{
+      display: flex;
+      align-content: flex-end
+    }
 }
 
 .flashcard {
@@ -190,7 +194,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .btn {
     &-edit {
         color: var(--color-primary);
-        text-decoration: underline;
+        text-decoration: none;
         border: none;
         outline: none;
         background-color: transparent;
@@ -198,9 +202,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
         transition: all 0.2s;
         font-size: 1.5rem;
         text-shadow: 0 0.5rem 0.5rem rgba(black, 0.1);
-        margin-left: 2rem;
+        /*margin-left: 2rem;*/
         font-weight: 500;
-        align-self: flex-start;
+        /*align-self: flex-start;*/
         cursor: pointer;
         &:hover {
             transform: scale(1.1);
@@ -212,7 +216,43 @@ $bp-smallest: 31.25em; //500px  (500/16)
         @media only screen and (max-width: $bp-small) {
           align-self: flex-end;
         }
+
     }
+    &-follow {
+      transform: scale(.7);
+      border-radius: 100px;
+      box-shadow: 0 0.2rem 0rem var(--color-secondary);
+      border: .5px solid var(--color-secondary);
+      padding: 0rem 2rem;
+      vertical-align: middle;
+      color: var(--color-secondary-dark);
+      display: inline-block;
+      cursor: pointer;
+      height: 3rem;
+      font-size: 1.6rem;
+      background-color: white;
+      outline: none;
+      transition: .2s all;
+      display: inline-block;
+      span{
+        font-weight: 900;
+        padding-right: .3rem;
+      }
+      &:hover{
+        box-shadow: 0 -0.2rem 0rem var(--color-secondary);
+      transform: scale(.75);
+      }
+      &:active{
+        transform: scale(.69);
+      }
+      &_group{
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        flex-direction: column;
+      }
+  }
+
 }
 
 .no-card {
@@ -464,5 +504,29 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
     @media only screen and (max-width: $bp-small) {
       align-self: center;
+  }
+}
+
+.follow{
+  text-align: center;
+  padding: .7rem 0rem !important;
+  align-content: center;
+  justify-content: center;
+  &__container{
+    margin: auto .5rem;
+    padding: 0 .5rem;
+    display: block;
+    &:hover,
+    &:visited {
+        transform: scale(1.05);
+        border-radius: 5px;
+    }
+  }
+  &__text{
+    font-style: italic;
+  }
+  &__no{
+    color: var(--color-primary);
+    font-size: 2.2rem;
   }
 }
