@@ -10,7 +10,7 @@
       Flashcards
     </h1>
     <div class="overview__count">
-      <div class="overview__count-average">8</div>
+      <div class="overview__count-average">{{ number_collection }}</div>
       <div class="overview__count-count">Collection</div>
     </div>
   </div>
@@ -48,7 +48,7 @@
         matSort
         class="mat-elevation-z8"
       >
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Collection Name
           </th>
@@ -67,12 +67,12 @@
 
         <ng-container matColumnDef="rating">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
-          <td mat-cell *matCellDef="let element">
-            <form action="#">
+          <td mat-cell *matCellDef="let element;">
+            <form #form="ngForm">
               <bar-rating
-                disabled
                 [rate]="element.rating"
                 [max]="5"
+                [disabled]="true"
                 [theme]="'fontawesome-o'"
                 color="primary"
               ></bar-rating>

@@ -24,13 +24,16 @@ export class EditCardComponent implements OnInit {
   index: number;
   form: FormGroup;
   isLoading = true;
-  privacyText = 'Private';
+  privacyText: string;
+
   // cards: Array;
   constructor(private flashService: FlashCardService,
               private route: ActivatedRoute,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private changeDet: ChangeDetectorRef,
               private matSnack: MatSnackBar) {
+    console.log(this.data.privacy);
+    this.privacyText = this.data.privacy ? 'Private' : 'Public';
     this.isLoading = true;
     this.form = new FormGroup({}, null);
   }
@@ -39,6 +42,7 @@ export class EditCardComponent implements OnInit {
     this.index = this.data.index;
     this.flashService.index = this.index;
     let i = 0;
+
     this.data.cards.forEach((card) => {
       this.form.addControl(i.toString(), new FormGroup({
         id: new FormControl(card._id),
@@ -56,7 +60,7 @@ export class EditCardComponent implements OnInit {
 
   onDelete(id: string) {
     this.flashService.delete_card(id).subscribe((res) => {
-      this.data.cards = res.body.card;
+      this.data.cards = res.body.cards.card;
       this.changeDet.detectChanges();
       this.matSnack.openFromComponent(SuccessSnackComponent, {
         duration: 2000,
@@ -94,8 +98,8 @@ export class EditCardComponent implements OnInit {
     f.resetForm();
   }
 
-  onUpdate(title: string, desc: string) {
-    this.updateSub = this.flashService.update_card_detail(this.data._id, title, desc).subscribe((res) => {
+  onUpdate(title: string, desc: string, privacy: boolean) {
+    this.updateSub = this.flashService.update_card_detail(this.data._id, title, desc, privacy).subscribe((res) => {
 
       if (res.ok) {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
@@ -122,6 +126,7 @@ export class EditCardComponent implements OnInit {
           data: 'Update Cards Success!',
           duration: 1500
         });
+        this.flashService.fetch_card(res.body.cards._id);
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: 'Something went wrong!\n' + res.statusText,
@@ -135,6 +140,6 @@ export class EditCardComponent implements OnInit {
   }
 
   sliding(f: any) {
-    this.privacyText = f ? 'Private' : 'Public' ;
+    this.privacyText = f ? 'Private' : 'Public';
   }
 }

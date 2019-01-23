@@ -24,7 +24,7 @@ const ELEMENT_DATA: PeriodicElement[] = [];
   styleUrls: ['./flashcard.component.scss']
 })
 export class FlashcardComponent implements OnInit {
-  columnDef = [{def: 'name', show: true},
+  columnDef = [{def: 'title', show: true},
     {def: 'description', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
@@ -33,7 +33,7 @@ export class FlashcardComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-
+  number_collection: number
 
   bootRate = 1;
   faRate = 1;
@@ -54,18 +54,20 @@ export class FlashcardComponent implements OnInit {
 
   // TODO- Edit data on this page to be observable
   ngOnInit() {
+    let i = 0;
     this.flash.fetch_collection_all().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
+        this.number_collection = res.length;
         res.forEach((data) => {
             ELEMENT_DATA.push({
               _id: data._id,
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: 0,
+              rating: i += 0.1,
               views: 0,
-              dom: new Date(Date.now()),
+              dom: data.updatedAt,
               delete: false
             });
           }

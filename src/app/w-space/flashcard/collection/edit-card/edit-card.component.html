@@ -39,14 +39,14 @@
           </mat-form-field>
           <div class="privacy-toggle">
               Do you want to share this collection? &nbsp;
-              <mat-slide-toggle matInput #privacy color="primary" (click)="sliding(privacy.checked)">{{ privacyText }}</mat-slide-toggle>
+              <mat-slide-toggle matInput #privacy color="primary" (click)="sliding(privacy.checked)" [checked]="!data.privacy">{{ privacyText }}</mat-slide-toggle>
           </div>
           <button
             matTooltip="Save change"
             class="btn__done"
             mat-button
 
-            (click)="onUpdate(title.value,description.value)"
+            (click)="onUpdate(title.value,description.value,!privacy.checked)"
 
           >
             Save
