@@ -20,7 +20,7 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [];
 @Component({
-  selector: 'app-my-flashcard2',
+  selector: 'app-my-flashcard',
   templateUrl: './my-flashcard.component.html',
   styleUrls: ['./my-flashcard.component.scss']
 })
