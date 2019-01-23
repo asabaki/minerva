@@ -19,6 +19,7 @@ export interface PeriodicElement {
   dom: Date;
   views: number;
   delete: boolean;
+  privacy: boolean;
 
 }
 

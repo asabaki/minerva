@@ -185,7 +185,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
     flex-direction: column;
     border-bottom: 1px solid var(--color-grey-light-4);
     box-shadow: 0 .2rem .5rem rgba(#9c9c9c, .2);
-
     &:hover {
         background-color: var(--color-grey-light-1);
     }
@@ -205,7 +204,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
         transition: .2s all;
         display: flex;
         align-self: flex-end;
+        align-items: center;
+        font-size: 1.4rem;
         cursor: pointer;
+        border: none;
+        outline: none;
+        background-color: transparent;
         &:hover {
             color: var(--color-primary);
             transform: scale(1.05);
@@ -213,6 +217,24 @@ $bp-smallest: 31.25em; //500px  (500/16)
         &:active {
             color: var(--color-primary);
             transform: scale(1);
+        }
+        &.side {
+            &-1 {
+                font-size: 1.1rem;
+                color: var(--color-primary);
+                transition: .2s all;
+                &:hover {
+                    color: var(--color-secondary);
+                    transform: scale(1.05);
+                }
+                &:active {
+                    transform: scale(1);
+                }
+            }
+            &-2 {
+              font-size: 1.1rem;
+              margin: auto;
+            }
         }
     }
     &-by {

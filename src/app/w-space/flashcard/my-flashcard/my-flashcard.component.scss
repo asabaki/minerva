@@ -488,7 +488,7 @@ td.mat-footer-cell,
 th.mat-header-cell {
     max-width: 30rem;
     text-align: justify;
-    padding: 1rem;
+    padding: 0rem 1rem;
     @media only screen and (max-width: $bp-small) {
         padding: 0rem;
     }

@@ -204,7 +204,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         text-shadow: 0 0.5rem 0.5rem rgba(black, 0.1);
         /*margin-left: 2rem;*/
         font-weight: 500;
-        align-self: flex-start;
+        align-self: center;
         cursor: pointer;
         &:hover {
             transform: scale(1.1);
