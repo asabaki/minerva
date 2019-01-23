@@ -10,7 +10,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import { BarRatingModule } from 'ngx-bar-rating';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {
   MatIconModule,
   MatInputModule,
@@ -42,9 +43,9 @@ import {
   LogInComponent
 } from './w-space/log-in/log-in.component';
 import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
-import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
-import { CreateFlashcardComponent } from './w-space/flashcard/create-flashcard/create-flashcard.component';
-import { AddCardComponent } from './w-space/flashcard/create-flashcard/add-card/add-card.component';
+import { MyFlashcardComponent } from './w-space/flashcard/my-flashcard/my-flashcard.component';
+import { CreateFlashcardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/create-flashcard.component';
+import { AddCardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/add-card/add-card.component';
 import { CollectionComponent } from './w-space/flashcard/collection/collection.component';
 import { QuizComponent } from './w-space/quiz/quiz.component';
 import { CreateQuizComponent } from './w-space/quiz/create-quiz/create-quiz.component';
@@ -53,6 +54,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import { McqComponent } from './w-space/quiz/create-quiz/mcq/mcq.component';
 import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-false.component';
 import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
+import { PlannerComponent } from './w-space/planner/planner.component';
+import { HomeComponent } from './w-space/home/home.component';
+import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
+
 
 
 
@@ -69,7 +74,7 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
     ErrorSnackComponent,
     SuccessSnackComponent,
     ErrorLoginSnackComponent,
-    FlashcardComponent,
+    MyFlashcardComponent,
     CreateFlashcardComponent,
     AddCardComponent,
     CollectionComponent,
@@ -80,6 +85,11 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
     McqComponent,
     TrueFalseComponent,
     QuizCollectionComponent,
+    PlannerComponent,
+    HomeComponent,
+    FlashcardComponent,
+
+
 
 
 
@@ -108,7 +118,9 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
     ScrollingModule,
     MatStepperModule,
     MatRadioModule,
-    MatBadgeModule
+    MatBadgeModule,
+    BarRatingModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,0 +1,175 @@
+$bp-largest: 75em; //1200px  (1200/16)
+$bp-large: 68.25em; //1100px  (1100/16)
+$bp-medium: 65.25em; //900px  (900/16)
+$bp-small: 37.5em; //600px  (600/16)
+$bp-smallest: 31.25em; //500px  (500/16)
+.top-view {
+    background-color: var(--color-grey-light-1);
+    flex: 1;
+
+    @media only screen and (max-width: 1400px) {
+        margin-left: 3rem;
+    }
+    @media only screen and (max-width: $bp-largest) {
+        margin-left: 4rem;
+        width: 100%;
+    }
+    @media only screen and (max-width: $bp-large) {
+        margin-left: 3rem;
+    }
+    @media only screen and (max-width: $bp-medium) {
+        margin-left: 0rem;
+    }
+}
+
+.detail {
+    display: flex;
+    flex-direction: row;
+    border-bottom: var(--line);
+    font-size: 1.4rem;
+    @media only screen and (max-width: $bp-medium) {
+        padding: 3rem;
+        flex-direction: column;
+    }
+    @media only screen and (max-width: $bp-small) {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    @media only screen and (max-width: 370px) {
+        padding: .5rem;
+    }
+}
+
+.description {
+    &-main {
+        background-color: white;
+        box-shadow: var(--shadow-light);
+        padding: 3rem;
+        flex: 0 0 65%;
+        margin: 2rem 0rem 2rem 3rem;
+        @media only screen and (max-width: $bp-large) {
+          /*  margin: 2rem;*/
+        }
+    }
+    &-side {
+        flex: 1;
+        &__sub {
+            background-color: white;
+            box-shadow: var(--shadow-light);
+            padding: 1.5rem;
+            margin: 2rem;
+        }
+    }
+}
+
+.overview {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: var(--line);
+    align-items: center;
+    background-color: #fff;
+    margin-top: 7rem;
+    &__heading {
+        font-size: 2.25rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 1.5rem 6rem;
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.8rem;
+            padding: 1.25rem 2rem;
+        }
+        @media only screen and (max-width: $bp-large) {
+            padding: 1.5rem 6rem;
+        }
+        @media only screen and (max-width: $bp-largest) {
+            padding: 1.5rem 6rem;
+        }
+    }
+    &__count {
+        background-color: var(--color-primary);
+        color: var(--color-grey-light-1);
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        &-average {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: -3px;
+            @media only screen and (max-width: $bp-small) {
+                font-size: 1.8rem;
+            }
+        }
+        &-count {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            @media only screen and (max-width: $bp-small) {
+                font-size: 0.5rem;
+            }
+        }
+        @media only screen and (max-width: $bp-small) {
+            padding: 1.5rem;
+        }
+    }
+}
+
+.user {
+    display: flex;
+    justify-content: flex-start;
+    &-expore {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid var(--color-grey-light-3);
+        padding: 1rem .5rem;
+        align-items: center;
+    }
+    &-img {
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+    }
+    &-username {
+        font-weight: 700;
+    }
+    &-detail {
+        font-weight: 200;
+    }
+    &-acc {
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+        justify-content: center;
+    }
+}
+
+.btn {
+    &-follow {
+        border-radius: 100px;
+        box-shadow: 0 0.2rem 0rem var(--color-secondary);
+        border: .5px solid var(--color-secondary);
+        padding: 0rem 2rem;
+        vertical-align: middle;
+        color: var(--color-secondary-dark);
+        display: inline-block;
+        cursor: pointer;
+        height: 3rem;
+        font-size: 1.6rem;
+        background-color: white;
+        outline: none;
+        transition: .2s all;
+        display: inline-block;
+        span{
+          font-weight: 900;
+          padding-right: .3rem;
+        }
+        &:hover{
+          box-shadow: 0 -0.2rem 0rem var(--color-secondary);
+        transform: scale(1.02);
+        }
+        &:active{
+          transform: scale(1);
+        }
+    }
+}

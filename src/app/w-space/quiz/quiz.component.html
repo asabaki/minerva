@@ -1,28 +1,28 @@
-<!--<main class="top-view">-->
-  <!--<div class="overview">-->
-    <!--<h1 class="overview__heading">-->
-      <!--<mat-icon-->
-        <!--color="primary"-->
-        <!--style="display: inline-flex; vertical-align: middle;"-->
-        <!--&gt;question_answer</mat-icon-->
-      <!--&gt;-->
-      <!--Quiz-->
-    <!--</h1>-->
-    <!--<div class="overview__count">-->
-      <!--<div class="overview__count-average">8</div>-->
-      <!--<div class="overview__count-count">Quizzes</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
-  <!--<div class="detail">-->
-    <!--<div class="description">-->
-      <!--<div class="description-btn_set">-->
-        <!--<button-->
-          <!--mat-raised-button-->
-          <!--matTooltip="Create new collection of Flashcard"-->
-          <!--aria-label="Button that displays a tooltip when focused or hovered over"-->
-          <!--class="btn-create"-->
-          <!--mat-button-->
+<!--<main>-->
+<!--<main class="top-view">
+  <div class="overview">
+    <h1 class="overview__heading">
+      <mat-icon
+        color="primary"
+        style="display: inline-flex; vertical-align: middle;"
+        >question_answer</mat-icon
+      >
+      Flashcards
+    </h1>
+    <div class="overview__count">
+      <div class="overview__count-average">8</div>
+      <div class="overview__count-count">Collection</div>
+    </div>
+  </div>
+  <div class="detail">
+    <div class="description">
+      <div class="description-btn_set">
+        <button
+          mat-raised-button
+          matTooltip="Create new collection of Flashcard"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          class="btn-create"
+          mat-button
 
         <!--&gt;-->
           <!--Create new Quiz-->
@@ -68,6 +68,20 @@
   <!--</div>-->
 <!--</main>-->
 
+
+        <!--<ng-container matColumnDef="numberOfCard">-->
+          <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>No. of question</th>-->
+          <!--<td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>-->
+        <!--</ng-container>-->
+        <!--<tr mat-header-row *matHeaderRowDef="columnDef"></tr>-->
+        <!--<tr-->
+          <!--mat-row-->
+          <!--*matRowDef="let row; columns: columnDef"-->
+        <!--&gt;</tr>-->
+      <!--</table>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</main>-->
 
 <app-create-quiz></app-create-quiz>
 <!--<app-quiz-collection></app-quiz-collection>-->

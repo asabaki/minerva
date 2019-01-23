@@ -29,7 +29,6 @@ body {
     color: var(--color-grey-dark-2);
     background-image: linear-gradient( to right bottom, var(--color-primary-light), var(--color-primary-dark));
     background-size: cover;
-    background-repeat: no-repeat;
     min-height: 100vh;
 }
 
@@ -37,7 +36,7 @@ body {
     max-width: 100%;
     background-color: var(--color-grey-light-2);
     box-shadow: var(--shadow-dark);
-    height: 100vh;
+    height: 100%;
     @media only screen and(max-width: $bp-largest) {
         margin: 0;
         max-width: 100%;
@@ -113,3 +112,62 @@ mat-icon{
 }
 
 
+.search {
+  flex: 0 0 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media only screen and (max-width: $bp-small) {
+    flex: 0 0 50%;
+}
+  @media only screen and (max-width: $bp-large) {
+    flex: 0 0 50%;
+}
+  @media only screen and (max-width: $bp-largest) {
+    flex: 0 0 40%;
+}
+  @media only screen and (max-width: $bp-medium) {
+    flex: 0 0 40%;
+}
+  &__input {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background-color: var(--color-grey-light-2);
+      border: none;
+      padding: .7rem 2rem;
+      border-radius: 100px;
+      width: 110%;
+      transition: all .2s;
+      margin-right: -3.25rem;
+      color: var(--color-primary);
+      &:focus {
+          outline: none;
+          background-color: var(--color-grey-light-3);
+          width: 110%;
+      }
+      &::-webkit-input-placeholder {
+          font-weight: 100;
+          color: var(--color-grey-light-4);
+      }
+  }
+  &__input:focus+&__button{
+      background-color: var(--color-grey-light-3);
+  }
+  &__button {
+      border: none;
+      background-color: var(--color-grey-light-2);
+      cursor: pointer;
+      &:focus {
+          outline: none;
+      }
+      &:active {
+          transform: translateY(2px);
+      }
+  }
+  &__icon {
+      height: 2rem;
+      width: 2rem;
+      fill: var(--color-primary);
+  }
+}

@@ -3,12 +3,25 @@
   <img src="assets/img/minerva_1.png" class="logo" alt="minerva logo" />
 
   <nav class="user-nav">
-    <div class="user-nav__icon-box" *ngIf="isAuth">
-      <mat-icon matBadge="1" matBadgeColor="primary" matBadgeSize="medium">person</mat-icon>
+
+
+    <div class="follow">
+      <div class="follow__container" *ngIf="isAuth">
+        <div class="follow__no">20</div>
+        <div class="follow__text">Followers</div>
+      </div>
+      <div class="follow__container" *ngIf="isAuth">
+        <div class="follow__no">300</div>
+        <div class="follow__text">Following</div>
+      </div>
     </div>
+
     <div class="user-nav__icon-box" *ngIf="isAuth">
-      <mat-icon matBadge="5" matBadgeColor="primary" matBadgeSize="medium">group</mat-icon>
+      <mat-icon matBadge="8" matBadgeColor="primary" matBadgeSize="medium">notifications_active</mat-icon>
     </div>
+    <!--<div class="user-nav__icon-box" *ngIf="isAuth">
+      <mat-icon>notifications</mat-icon>
+    </div>-->
 
 
     <!--<button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>-->
@@ -30,12 +43,7 @@
           <mat-icon>account_circle</mat-icon>
           <span>Account Setting</span>
         </button>
-        <!--
-          <button mat-menu-item disabled>
-            <mat-icon>voicemail</mat-icon>
-            <span>Check voicemail</span>
-          </button>
-        -->
+
         <button mat-menu-item (click)="onLogout()" *ngIf="isAuth" class="user-nav__menu">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log Out</span>

@@ -10,9 +10,17 @@
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
     <h1 class="overview__heading">{{ title }}</h1>
-    <div class="overview__count">
-      <div class="overview__count-average">{{numberOfCard}}</div>
-      <div class="overview__count-count">Cards</div>
+    <div class="overview__right">
+      <div class="follow">
+        <div class="follow__container">
+          <div class="follow__no">20</div>
+          <div class="follow__text">Views</div>
+        </div>
+      </div>
+      <div class="overview__count">
+        <div class="overview__count-average">{{ numberOfCard }}</div>
+        <div class="overview__count-count">Cards</div>
+      </div>
     </div>
   </div>
   <div class="detail" *ngIf="isLoading">
@@ -21,10 +29,36 @@
   <div class="detail" *ngIf="!isLoading">
     <div class="description">
       <div class="description__area">
-        <p>
-          {{ desc }}
-        </p>
-        <button mat-button (click)="openEditCardDialog()" class="btn-edit">Edit</button>
+        <section class="rating">
+          <bar-rating
+            [rate]="faoRate"
+            (rateChange)="onFaoRate($event)"
+            [max]="5"
+            [theme]="'fontawesome-o'"
+            color="primary"
+          ></bar-rating>
+          <!--<bar-rating [ngModel]="faoRate" (ngModelChange)="onFaoRate($event)" [max]="5" [theme]="'fontawesome-o'"></bar-rating>-->
+          <p *ngIf="!faoRated" class="rating__text">
+            Current rating: {{ faoRate }}
+          </p>
+          <p *ngIf="faoRated" class="rating__text">
+            Your rating: {{ faoRate }}
+            <i class="link fa fa-times-circle" (click)="faoReset(5.6)"></i>
+          </p>
+        </section>
+        <p class="description__area-p">{{ desc }}</p>
+        <div>
+          <button mat-button (click)="openEditCardDialog()" class="btn-edit">
+            Edit
+          </button>
+          <!--<div class="btn-follow_group">
+            <button mat-button class="btn-edit" >
+              Created by <br />
+              Creator
+            </button>
+            <button mat-button matTooltip="Follow Creator" class="btn-follow"><span>+</span>follow</button>
+          </div>-->
+        </div>
       </div>
       <div class="flashcard__container">
         <div class="no-card" *ngIf="cards.length === 0">
@@ -32,32 +66,43 @@
           <button class="no-card__btn" (click)="openAddCardDialog()">Add new card</button>
         </div>
         <div class="carousel" *ngIf="cards.length !== 0">
-          <input type="radio" *ngFor="let i of helper(numberOfCard); let j = index" id="carousel-{{j+1}}" name="carousel[]" [checked]="j==index-1" (click)="onChangeCard(j+1)"/>
+          <input type="radio"
+                 *ngFor="let i of helper(numberOfCard); let j = index"
+                 id="carousel-{{j+1}}"
+                 name="carousel[]"
+                 [checked]="j==index-1"
+                 (click)="onChangeCard(j+1)"
+          />
+
           <ul class="carousel__items">
-            <li class="carousel__item" *ngFor="let card of cards ;">
+            <li class="carousel__item" *ngFor="let card of cards">
               <div class="flashcard__container">
                 <div class="card">
-                  <div class="card-front">{{card.front_text}}</div>
-                  <div class="card-back">
-                    {{ card.back_text }}
-                  </div>
+                  <div class="card-front">{{ card.front_text }}</div>
+                  <div class="card-back">{{ card.back_text }}</div>
                 </div>
 
               </div>
             </li>
           </ul>
           <div class="carousel__next">
-            <label *ngFor="let i of helper(numberOfCard); let j = index" for="carousel-{{j+1}}"
+            <label
+              *ngFor="let i of helper(numberOfCard); let j = index"
+              for="carousel-{{ j + 1 }}"
               ><mat-icon color="primary">arrow_forward</mat-icon></label
             >
           </div>
-          <div class="carousel__prev" >
-            <label *ngFor="let i of helper(numberOfCard); let j = index" for="carousel-{{j+1}}"
+          <div class="carousel__prev">
+            <label
+              *ngFor="let i of helper(numberOfCard); let j = index"
+              for="carousel-{{ j + 1 }}"
               ><mat-icon color="primary">arrow_back</mat-icon></label
             >
           </div>
         </div>
-        <div class="flashcard__container-bottom"><span>{{ index }} of {{ numberOfCard }}</span></div>
+        <div class="flashcard__container-bottom">
+          <span>{{ index }} of {{ numberOfCard }}</span>
+        </div>
       </div>
     </div>
   </div>

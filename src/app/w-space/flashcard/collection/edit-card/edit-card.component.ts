@@ -24,7 +24,7 @@ export class EditCardComponent implements OnInit {
   index: number;
   form: FormGroup;
   isLoading = true;
-
+  privacyText = 'Private';
   // cards: Array;
   constructor(private flashService: FlashCardService,
               private route: ActivatedRoute,
@@ -132,5 +132,9 @@ export class EditCardComponent implements OnInit {
   }
 
   onAddControl() {
+  }
+
+  sliding(f: any) {
+    this.privacyText = f ? 'Private' : 'Public' ;
   }
 }

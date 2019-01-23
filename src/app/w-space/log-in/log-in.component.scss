@@ -13,6 +13,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
     z-index: 105;
     @media only screen and (max-width: $bp-smallest) {
       transform: scale(.85);}
+    @media only screen and (max-width: 425px) {
+      transform: scale(.70);}
+    @media only screen and (max-width: 340px) {
+      transform: scale(.68);}
+    @media only screen and (max-width: 320px) {
+      transform: scale(.65);}
+
     &__social {
         margin: 2rem 0 3rem 0;
         display: flex;
@@ -229,7 +236,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     align-self: flex-end;
     transition: all 0.2s;
     border: none;
-    top: -1rem;
+    top: -3rem;
     background-color: transparent;
     &:hover,
     &:focus {
