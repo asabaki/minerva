@@ -14,10 +14,17 @@ export class FlashCardService {
 
   subject = new Subject<any>();
   addSubject = new Subject<any>();
+  updateSubject = new Subject<any>();
   cardSubject = new Subject<any>();
   collectionId: string;
   index: number;
 
+  //  ---- List of cardSubject ------
+  // * flash/add --> Create Collection (y)
+  // * flash/pull/id --> Pull particular collection based on ID
+  // * flash/delete/card --> Delete card of collection based on ID
+  // * flash/update --> Update Collection Detail
+  // * flash/update/id --> Update Collection Detail based on ID
   constructor(private http: HttpClient,
               private auth: AuthService,
               private route: ActivatedRoute) {
@@ -29,7 +36,7 @@ export class FlashCardService {
       const card = {title, description, userId, privacy};
       this.http.post<any>('http://localhost:3000/api/flash/add', card, {observe: 'response'}).subscribe(
         (res) => {
-          this.collectionId = res.body._id;
+          this.collectionId = res.body.cards._id;
           this.cardSubject.next(res);
         },
         (err) => {
@@ -53,7 +60,11 @@ export class FlashCardService {
               _id: collection._id,
               title: collection.title,
               description: collection.description,
-              numberOfCard: collection.card.length
+              numberOfCard: collection.card.length,
+              privacy: collection.privacy,
+              updatedAt: collection.updatedAt,
+              rating: 0,
+              views: 0
             });
           });
         } else {
@@ -71,7 +82,6 @@ export class FlashCardService {
   fetch_collection_all() {
     this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
       .pipe(map(res => {
-        // console.log(res);
         const ret = [];
         if (res.status === 200) {
           res.body.forEach((collection) => {
@@ -80,6 +90,7 @@ export class FlashCardService {
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length,
+              updatedAt: collection.updatedAt,
               rating: 0,
               views: 0
             });
@@ -98,7 +109,6 @@ export class FlashCardService {
 
   fetch_card(id: string) {
     this.http.get('http://localhost:3000/api/flash/pull/' + id, {observe: 'response'}).subscribe((response) => {
-      // console.log(response);
       this.cardSubject.next(response);
     });
     return this.cardSubject.asObservable();
@@ -131,9 +141,9 @@ export class FlashCardService {
   add_card(front: string, back: string) {
     if (this.collectionId && this.auth.getIsAuth()) {
       const card = {front, back};
+      this.index = this.index ? 1 : this.index;
       this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
         if (res.ok) {
-          console.log(res);
           this.addSubject.next(res);
         } else {
           this.addSubject.next(res);
@@ -146,8 +156,8 @@ export class FlashCardService {
     return this.addSubject.asObservable();
   }
 
-  update_card_detail(id: string, title: string, description: string) {
-    const updateBody = {id, title, description};
+  update_card_detail(id: string, title: string, description: string, privacy: boolean) {
+    const updateBody = {id, title, description, privacy};
     this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
       this.cardSubject.next(res);
     });
@@ -155,9 +165,13 @@ export class FlashCardService {
   }
 
   update_card(id: string, cards: Object[]) {
+    // let status;
     this.http.patch('http://localhost:3000/api/flash/update/' + id, cards, {observe: 'response'}).subscribe((res) => {
-      this.cardSubject.next(res);
+      this.updateSubject.next(res);
+      // status = res.statusText;
     });
-    return this.cardSubject.asObservable();
+    return this.updateSubject.asObservable();
+    // console.log(status);
+    // return status;
   }
 }

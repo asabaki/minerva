@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {Observable, Observer, Subscription} from 'rxjs';
 import {detectChanges} from '@angular/core/src/render3';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
-import { BarRatingModule } from 'ngx-bar-rating';
+import {BarRatingModule} from 'ngx-bar-rating';
 import {Location} from '@angular/common';
 
 export interface PeriodicElement {
@@ -33,17 +33,21 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 
 export class MyFlashcardComponent implements OnInit {
 
-  columnDef = [{def: 'name', show: true},
-  {def: 'description', show: true},
-  {def: 'rating', show: true},
-  {def: 'dom', show: true},
-  {def: 'views', show: true}];
+  columnDef = [
+    {def: 'privacy', show: true},
+    {def: 'name', show: true},
+    {def: 'description', show: true},
+    {def: 'rating', show: true},
+    {def: 'dom', show: true},
+    {def: 'views', show: true},
+    {def: 'delete', show: false}];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
   data: Observable<Object>;
   isLoading = true;
+  number_collection: number;
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
@@ -61,7 +65,9 @@ export class MyFlashcardComponent implements OnInit {
     this.flash.fetch_collection().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
+        this.number_collection = res.length;
         res.forEach((data) => {
+          console.log(data);
             ELEMENT_DATA.push({
               _id: data._id,
               title: data.title,
@@ -69,6 +75,7 @@ export class MyFlashcardComponent implements OnInit {
               numberOfCard: data.numberOfCard,
               rating: 0,
               views: 0,
+              privacy: data.privacy,
               dom: new Date(Date.now()),
               delete: false
             });
@@ -80,6 +87,7 @@ export class MyFlashcardComponent implements OnInit {
     );
 
   }
+
   onClickBack() {
     // this.router.navigate(back)
     this.location.back();
@@ -105,7 +113,7 @@ export class MyFlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[3].show = this.editClicked;
+    this.columnDef[6].show = this.editClicked;
 
   }
 

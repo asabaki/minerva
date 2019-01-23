@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
+import {EditCardComponent} from './edit-card/edit-card.component';
 // import {EditCardComponent} from './edit-card/edit-card.component';
 
 @Component({
@@ -24,9 +25,14 @@ export class CollectionComponent implements OnInit {
   desc: string;
   numberOfCard: number;
   index: number;
+  creator: string;
+  creatorName: string;
   prevIndex = 1;
   id: string;
   cardObj: Object;
+  privacy: boolean;
+  views: number;
+  rating: number;
   // arr: Array<number>;
   isLoading = true;
 
@@ -43,11 +49,16 @@ export class CollectionComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.has('id')) {
         this.flashService.fetch_card(params.get('id')).subscribe((res) => {
-          this.title = res.body.title;
-          this.desc = res.body.description;
-          this.numberOfCard = res.body.card.length;
+          this.creator = res.body.cards.user_id;
+          this.creatorName = res.body.creatorName;
+          this.privacy = res.body.cards.privacy;
+          this.rating = res.body.cards.rating;
+          this.views = res.body.cards.views;
+          this.title = res.body.cards.title;
+          this.desc = res.body.cards.description;
+          this.numberOfCard = res.body.cards.card.length;
           this.index = this.numberOfCard === 0 ? 0 : this.index;
-          this.cards = res.body.card;
+          this.cards = res.body.cards.card;
           this.id = params.get('id');
           this.cardObj = {
             title: this.title,
@@ -78,29 +89,36 @@ export class CollectionComponent implements OnInit {
     return Array(num);
   }
 
-  // openEditCardDialog() {
-  //   this.cardObj = {
-  //     title: this.title,
-  //     description: this.desc,
-  //     noc: this.numberOfCard,
-  //     cards: this.cards,
-  //     _id: this.id,
-  //     index: this.index
-  //   };
-  //   const dialogRef = this.dialog.open(EditCardComponent,
-  //     {
-  //       panelClass: 'myapp-no-padding-dialog',
-  //       data: this.cardObj,
-  //     });
-  //
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     // console.log(this.flashService.getIndex());
-  //     this.prevIndex = this.flashService.getIndex();
-  //     if (this.prevIndex > this.numberOfCard || this.prevIndex === 0) {
-  //       this.index = this.numberOfCard;
-  //     }
-  //   });
-  // }
+  isCreator() {
+    return localStorage.getItem('userId') === this.creator;
+  }
+
+  openEditCardDialog() {
+    this.cardObj = {
+      title: this.title,
+      description: this.desc,
+      noc: this.numberOfCard,
+      cards: this.cards,
+      _id: this.id,
+      index: this.index,
+      views: this.views,
+      privacy: this.privacy,
+      rating: this.rating
+    };
+    const dialogRef = this.dialog.open(EditCardComponent,
+      {
+        panelClass: 'myapp-no-padding-dialog',
+        data: this.cardObj,
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(this.flashService.getIndex());
+      this.prevIndex = this.flashService.getIndex();
+      if (this.prevIndex > this.numberOfCard || this.prevIndex === 0) {
+        this.index = this.numberOfCard;
+      }
+    });
+  }
 
   // openAddCardDialog() {
   //   this.flashService.collectionId = this.id;

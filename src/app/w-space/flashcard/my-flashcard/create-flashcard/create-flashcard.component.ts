@@ -23,10 +23,10 @@ export class CreateFlashcardComponent implements OnInit {
   }
 
   onAddCollection(title: string, desc: string, privacy: boolean) {
-    console.log(privacy);
-    this.flashService.create_collection(title, desc, privacy).subscribe(res => {
+    this.flashService.create_collection(title, desc, !privacy).subscribe(res => {
       if (res.ok) {
-        this.router.navigate(['flash/my/' + res.body._id]);
+        console.log(res);
+        this.router.navigate(['flash/item/' + res.body.cards._id]);
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: 'Something went wrong\n' + res.statusText,
@@ -34,8 +34,8 @@ export class CreateFlashcardComponent implements OnInit {
         });
       }
     });
-    this.flashService.fetch_collection();
     this.openAddCardDialog();
+    this.flashService.fetch_collection();
   }
 
   openAddCardDialog() {
