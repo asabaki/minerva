@@ -1,49 +1,55 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import {CreateFlashcardComponent} from '../flashcard/create-flashcard/create-flashcard.component';
-import {AuthService} from '../services/auth.service';
-import {FlashCardService} from '../services/flash-card.service';
+import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
+import {AuthService} from '../../services/auth.service';
+import {FlashCardService} from '../../services/flash-card.service';
 import {Router} from '@angular/router';
 import {Observable, Observer, Subscription} from 'rxjs';
 import {detectChanges} from '@angular/core/src/render3';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
 import { BarRatingModule } from 'ngx-bar-rating';
+import {Location} from '@angular/common';
 
 export interface PeriodicElement {
   _id: string;
   title: string;
   description: string;
   numberOfCard: number;
+  rating: number;
+  dom: Date;
+  views: number;
   delete: boolean;
 
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
+
+
 @Component({
-  selector: 'app-my-flashcard',
+
+  selector: 'app-flashcard',
+
   templateUrl: './my-flashcard.component.html',
   styleUrls: ['./my-flashcard.component.scss']
 })
+
 export class MyFlashcardComponent implements OnInit {
+
   columnDef = [{def: 'name', show: true},
   {def: 'description', show: true},
-  {def: 'numberOfCard', show: true},
-  {def: 'delete', show: false}];
+  {def: 'rating', show: true},
+  {def: 'dom', show: true},
+  {def: 'views', show: true}];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-
-
-  bootRate = 1;
-  faRate = 1;
-  cssRate = 1;
-  faoRate = 2;
-  faoRated = false;
-
+  data: Observable<Object>;
+  isLoading = true;
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
+              private location: Location,
               private auth: AuthService,
               private flash: FlashCardService,
               private router: Router,
@@ -63,14 +69,22 @@ export class MyFlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
+              rating: 0,
+              views: 0,
+              dom: new Date(Date.now()),
               delete: false
             });
           }
         );
         this.dataSource.sort = this.sort;
+        this.isLoading = false;
       }
     );
 
+  }
+  onClickBack() {
+    // this.router.navigate(back)
+    this.location.back();
   }
 
   onRowClick(r: any) {
@@ -78,7 +92,7 @@ export class MyFlashcardComponent implements OnInit {
       this.deleteClicked = false;
     } else {
       const id = r._id;
-      this.router.navigate(['flash/' + id]);
+      this.router.navigate(['flash/item/' + id]);
     }
 
     // console.log(r);
@@ -125,13 +139,4 @@ export class MyFlashcardComponent implements OnInit {
       .map((def) => def.def);
   }
 
-  onFaoRate(e) {
-    this.faoRated = true;
-    this.faoRate = e;
-  }
-
-  faoReset() {
-    this.faoRated = false;
-    this.faoRate = 3.6;
-  }
 }

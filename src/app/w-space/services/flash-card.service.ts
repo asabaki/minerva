@@ -23,20 +23,22 @@ export class FlashCardService {
               private route: ActivatedRoute) {
   }
 
-  create_collection(title: string, description: string) {
+  create_collection(title: string, description: string, privacy: boolean) {
     if (this.auth.getIsAuth()) {
       const userId = localStorage.getItem('userId');
-      const card = {title, description, userId};
-      this.http.post<any>('http://localhost:3000/api/flash/add', card).subscribe(
+      const card = {title, description, userId, privacy};
+      this.http.post<any>('http://localhost:3000/api/flash/add', card, {observe: 'response'}).subscribe(
         (res) => {
-          this.collectionId = res._id;
+          this.collectionId = res.body._id;
+          this.cardSubject.next(res);
         },
         (err) => {
-          console.log(err);
+          this.cardSubject.next(err);
         }
       );
       // console.log(title, description);
     }
+    return this.cardSubject.asObservable();
   }
 
   fetch_collection() {
@@ -52,6 +54,34 @@ export class FlashCardService {
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length
+            });
+          });
+        } else {
+          ret.push('err');
+        }
+        return ret;
+
+      }))
+      .subscribe((res) => {
+        this.subject.next(res);
+      });
+    return this.subject.asObservable();
+  }
+
+  fetch_collection_all() {
+    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
+      .pipe(map(res => {
+        // console.log(res);
+        const ret = [];
+        if (res.status === 200) {
+          res.body.forEach((collection) => {
+            ret.push({
+              _id: collection._id,
+              title: collection.title,
+              description: collection.description,
+              numberOfCard: collection.card.length,
+              rating: 0,
+              views: 0
             });
           });
         } else {

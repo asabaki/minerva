@@ -1,4 +1,5 @@
-<div class="edit-card">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="edit-card" *ngIf="!isLoading">
   <h1>Edit your flash card collection !</h1>
 
   <mat-accordion>

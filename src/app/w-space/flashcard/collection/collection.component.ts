@@ -1,16 +1,16 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
-import {EditCardComponent} from './edit-card/edit-card.component';
+// import {EditCardComponent} from './edit-card/edit-card.component';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss']
 })
-export class CollectionComponent implements OnInit, AfterViewInit {
+export class CollectionComponent implements OnInit {
   bootRate = 1;
   faRate = 1;
   cssRate = 1;
@@ -18,7 +18,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   faoRated = false;
 
 
-  @ViewChild(EditCardComponent) edit;
+  // @ViewChild(EditCardComponent) edit;
   cards: Object = [];
   public title: string;
   desc: string;
@@ -28,7 +28,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
   id: string;
   cardObj: Object;
   // arr: Array<number>;
-  num: number;
+  isLoading = true;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -46,6 +46,7 @@ export class CollectionComponent implements OnInit, AfterViewInit {
           this.title = res.body.title;
           this.desc = res.body.description;
           this.numberOfCard = res.body.card.length;
+          this.index = this.numberOfCard === 0 ? 0 : this.index;
           this.cards = res.body.card;
           this.id = params.get('id');
           this.cardObj = {
@@ -55,17 +56,14 @@ export class CollectionComponent implements OnInit, AfterViewInit {
             cards: this.cards,
             _id: this.id,
             index: this.index
-
-
-
           };
+          this.isLoading = false;
         });
 
+      } else {
+        this.isLoading = true;
       }
     });
-  }
-  ngAfterViewInit() {
-    console.log('After view');
   }
   onClickBack() {
     // this.router.navigate(back)
@@ -80,29 +78,39 @@ export class CollectionComponent implements OnInit, AfterViewInit {
     return Array(num);
   }
 
-  openEditCardDialog() {
-    this.cardObj = {
-      title: this.title,
-      description: this.desc,
-      noc: this.numberOfCard,
-      cards: this.cards,
-      _id: this.id,
-      index: this.index
-    };
-    const dialogRef = this.dialog.open(EditCardComponent,
-      {
-        panelClass: 'myapp-no-padding-dialog',
-        data: this.cardObj,
-      });
+  // openEditCardDialog() {
+  //   this.cardObj = {
+  //     title: this.title,
+  //     description: this.desc,
+  //     noc: this.numberOfCard,
+  //     cards: this.cards,
+  //     _id: this.id,
+  //     index: this.index
+  //   };
+  //   const dialogRef = this.dialog.open(EditCardComponent,
+  //     {
+  //       panelClass: 'myapp-no-padding-dialog',
+  //       data: this.cardObj,
+  //     });
+  //
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // console.log(this.flashService.getIndex());
+  //     this.prevIndex = this.flashService.getIndex();
+  //     if (this.prevIndex > this.numberOfCard || this.prevIndex === 0) {
+  //       this.index = this.numberOfCard;
+  //     }
+  //   });
+  // }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(this.flashService.getIndex());
-      this.prevIndex = this.flashService.getIndex();
-      if (this.prevIndex > this.numberOfCard) {
-        this.index = this.numberOfCard;
-      }
-    });
-  }
+  // openAddCardDialog() {
+  //   this.flashService.collectionId = this.id;
+  //   const dialogRef = this.dialog.open(AddCardComponent, {panelClass: 'myapp-no-padding-dialog'});
+  //   console.log(this.flashService.getIndex());
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('It closed na');
+  //     this.index = 1;
+  //   });
+  // }
   onFaoRate(e) {
     this.faoRated = true;
     this.faoRate = e;

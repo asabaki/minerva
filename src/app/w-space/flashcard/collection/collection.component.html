@@ -1,4 +1,4 @@
-<main class="top-view">
+<main class="top-view" >
   <div class="overview">
     <button
       mat-icon-button
@@ -23,8 +23,10 @@
       </div>
     </div>
   </div>
-
-  <div class="detail">
+  <div class="detail" *ngIf="isLoading">
+    <mat-progress-spinner style="margin: 0 auto;" mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div class="detail" *ngIf="!isLoading">
     <div class="description">
       <div class="description__area">
         <section class="rating">
@@ -59,15 +61,19 @@
         </div>
       </div>
       <div class="flashcard__container">
-        <div class="carousel">
-          <input
-            type="radio"
-            *ngFor="let i of helper(numberOfCard); let j = index"
-            id="carousel-{{ j + 1 }}"
-            name="carousel[]"
-            [checked]="j == index - 1"
-            (click)="onChangeCard(j + 1)"
+        <div class="no-card" *ngIf="cards.length === 0">
+          <h1>No card...</h1>
+          <button class="no-card__btn" (click)="openAddCardDialog()">Add new card</button>
+        </div>
+        <div class="carousel" *ngIf="cards.length !== 0">
+          <input type="radio"
+                 *ngFor="let i of helper(numberOfCard); let j = index"
+                 id="carousel-{{j+1}}"
+                 name="carousel[]"
+                 [checked]="j==index-1"
+                 (click)="onChangeCard(j+1)"
           />
+
           <ul class="carousel__items">
             <li class="carousel__item" *ngFor="let card of cards">
               <div class="flashcard__container">
@@ -75,10 +81,7 @@
                   <div class="card-front">{{ card.front_text }}</div>
                   <div class="card-back">{{ card.back_text }}</div>
                 </div>
-                <!--<div class="no-card">
-                  <h1>No card...</h1>
-                  <button class="no-card__btn">Add new card</button>
-                </div>-->
+
               </div>
             </li>
           </ul>

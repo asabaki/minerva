@@ -482,35 +482,13 @@ tr.mat-row.ng-star-inserted {
     }
 }
 
-td.mat-cell,
-td.mat-footer-cell,
-th.mat-header-cell {
-    max-width: 30rem;
-    text-align: justify;
-    padding: 1rem;
-    @media only screen and (max-width: $bp-small) {
-        padding: 0rem;
-    }
-    @media only screen and (max-width: 320px) {
-      font-size: .8rem;
-  }
-}
-
-
-
 td.mat-cell:not(:nth-of-type(2)),
 td.mat-footer-cell:not(:nth-of-type(2)),
 th.mat-header-cell:not(:nth-of-type(2)) {
   text-align: center;
 }
 
-.bar-rating{
-  justify-content: center;
-}
 
-.mat-sort-header-button{
-  margin: auto !important;
-}
 
 .search {
     flex: 0 0 30%;
@@ -561,7 +539,7 @@ th.mat-header-cell:not(:nth-of-type(2)) {
         }
     }
     &__icon {
-        cursor: pointer;
+      cursor: pointer;
         height: 2rem;
         width: 2rem;
         fill: var(--color-grey-dark-3);

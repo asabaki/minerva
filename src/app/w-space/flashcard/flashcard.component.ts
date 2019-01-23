@@ -1,13 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
-import {Observable, Observer, Subscription} from 'rxjs';
-import {detectChanges} from '@angular/core/src/render3';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
-import { BarRatingModule } from 'ngx-bar-rating';
 
 export interface PeriodicElement {
   _id: string;
@@ -23,26 +18,28 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [];
 
-
 @Component({
-  selector: 'app-flashcard',
+  selector: 'app-my-flashcard2',
   templateUrl: './flashcard.component.html',
   styleUrls: ['./flashcard.component.scss']
 })
-
 export class FlashcardComponent implements OnInit {
   columnDef = [{def: 'name', show: true},
-  {def: 'description', show: true},
-  {def: 'rating', show: true},
-  {def: 'dom', show: true},
-  {def: 'views', show: true}];
+    {def: 'description', show: true},
+    {def: 'rating', show: true},
+    {def: 'dom', show: true},
+    {def: 'views', show: true}];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
 
 
-
+  bootRate = 1;
+  faRate = 1;
+  cssRate = 1;
+  faoRate = 2;
+  faoRated = false;
 
 
   constructor(public dialog: MatDialog,
@@ -57,7 +54,7 @@ export class FlashcardComponent implements OnInit {
 
   // TODO- Edit data on this page to be observable
   ngOnInit() {
-    this.flash.fetch_collection().subscribe(
+    this.flash.fetch_collection_all().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
         res.forEach((data) => {
@@ -84,45 +81,10 @@ export class FlashcardComponent implements OnInit {
       this.deleteClicked = false;
     } else {
       const id = r._id;
-      this.router.navigate(['flash/' + id]);
+      this.router.navigate(['flash/item/' + id]);
     }
 
     // console.log(r);
-  }
-
-  openCreateFlashcardDialog() {
-    const dialogRef = this.dialog.open(CreateFlashcardComponent, {panelClass: 'myapp-no-padding-dialog'});
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  onClickEdit() {
-    this.editClicked = !this.editClicked;
-    this.columnDef[5].show = this.editClicked;
-
-  }
-
-  onClickDelete(r: any) {
-    this.deleteClicked = true;
-    const id = r._id;
-    this.flash.delete_collection(id).subscribe((res) => {
-      console.log(res);
-      if (res.ok) {
-        this.flash.fetch_collection();
-        this.changeDet.detectChanges();
-        this.matSnack.openFromComponent(SuccessSnackComponent,
-          {
-            data: 'Delete Collection Success!',
-            duration: 1500
-          });
-      } else {
-        this.matSnack.openFromComponent(ErrorSnackComponent, {
-          data: 'Something Error! Please Contact Support\n' + 'Error: ' + res.statusText,
-          duration: 1500
-        });
-      }
-    });
   }
 
   getDisplayedColumn() {
@@ -131,6 +93,17 @@ export class FlashcardComponent implements OnInit {
       .map((def) => def.def);
   }
 
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
+  }
 
+  faoReset() {
+    this.faoRated = false;
+    this.faoRate = 3.6;
+  }
 
+  onMyFlashcard() {
+    this.router.navigate(['flash/my/']);
+  }
 }

@@ -35,7 +35,7 @@
         matTooltip="Create new collection of Flashcard"
         mat-button
         mat-dialog-close
-        (click)="onAddCollection(collectionName.value, description.value)"
+        (click)="onAddCollection(collectionName.value, description.value, privacy.checked)"
         [disabled]="!collectionName.value"
         [ngClass]="('btn-create ' + (!collectionName.value ? 'btn-create__disabled' : ''))"
       >
