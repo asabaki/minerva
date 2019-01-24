@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
 
 export interface PeriodicElement {
   _id: string;
+  privacy: number;
   title: string;
   description: string;
   numberOfCard: number;
@@ -32,11 +33,12 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 })
 
 export class MyFlashcardComponent implements OnInit {
-
+  // TODO - Figure out sorting ( not working )
   columnDef = [
     {def: 'privacy', show: true},
-    {def: 'name', show: true},
+    {def: 'title', show: true},
     {def: 'description', show: true},
+    {def: 'numberOfCard', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
     {def: 'views', show: true},
@@ -62,21 +64,21 @@ export class MyFlashcardComponent implements OnInit {
 
   // TODO- Edit data on this page to be observable
   ngOnInit() {
+    let i = 0;
     this.flash.fetch_collection().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
         this.number_collection = res.length;
         res.forEach((data) => {
-          console.log(data);
             ELEMENT_DATA.push({
               _id: data._id,
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: 0,
+              rating: i += 0.1,
               views: 0,
-              privacy: data.privacy,
-              dom: new Date(Date.now()),
+              privacy: data.privacy ? 1 : 0,
+              dom: data.updatedAt,
               delete: false
             });
           }

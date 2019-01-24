@@ -46,7 +46,7 @@ hide = true;
           duration: 1500,
           panelClass: 'my-snack'
         });
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         this.dialogRef.close();
       }
     });
