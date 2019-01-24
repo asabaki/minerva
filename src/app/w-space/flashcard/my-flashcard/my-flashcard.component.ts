@@ -20,8 +20,6 @@ export interface PeriodicElement {
   dom: Date;
   views: number;
   delete: boolean;
-  privacy: boolean;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
