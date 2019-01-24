@@ -46,6 +46,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.index = 1;
+    this.flashService.index = this.index;
     this.route.paramMap.subscribe((params: ParamMap) => {
       if (params.has('id')) {
         this.flashService.fetch_card(params.get('id')).subscribe((res) => {
@@ -57,7 +58,7 @@ export class CollectionComponent implements OnInit {
           this.title = res.body.cards.title;
           this.desc = res.body.cards.description;
           this.numberOfCard = res.body.cards.card.length;
-          this.index = this.numberOfCard === 0 ? 0 : this.index;
+          this.index = this.numberOfCard === 0 ? 0 : this.flashService.getIndex();
           this.cards = res.body.cards.card;
           this.id = params.get('id');
           this.cardObj = {

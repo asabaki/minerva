@@ -80,9 +80,9 @@
         <ng-container matColumnDef="privacy">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
           </th>
-          <td mat-cell *matCellDef="let element"><mat-icon [ngClass]="!element.privacy ? 'fill-red' : 'fill-green'">{{ element.privacy ? 'public' : 'lock'}}</mat-icon></td>
+          <td mat-cell *matCellDef="let element">{{ element.privacy === 1 ? '1' : '0'}}</td>
         </ng-container>
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             Collection Name
           </th>
@@ -102,9 +102,9 @@
         <ng-container matColumnDef="rating">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
           <td mat-cell *matCellDef="let element">
-            <form action="#">
+            <form #form="ngForm">
               <bar-rating
-                disabled
+                [disabled]="true"
                 [rate]="element.rating"
                 [max]="5"
                 [disabled]="true"
