@@ -57,7 +57,11 @@
               Created by <br />
               {{ creatorName }}
             </button>
-            <button mat-button matTooltip="Follow Creator" class="btn-follow"><span>+</span>follow</button>
+            <button mat-button matTooltip="Follow" class="btn-follow"><span class="bold">+</span>follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" >
+                <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
+                <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+              </button>
           </div>
         </div>
       </div>
