@@ -9,7 +9,7 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading">{{ title }}</h1>
+    <h1 class="overview__heading"><mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon> {{ title }}</h1>
     <div class="overview__right">
       <div class="follow">
         <div class="follow__container">

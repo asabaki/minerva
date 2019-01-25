@@ -53,7 +53,6 @@ export class FlashcardComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO- Edit data on this page to be observable
   ngOnInit() {
     let i = 0;
     this.flash.fetch_collection_all().subscribe(
@@ -94,6 +93,10 @@ export class FlashcardComponent implements OnInit {
     return this.columnDef
       .filter((def) => def.show)
       .map((def) => def.def);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   onFaoRate(e) {

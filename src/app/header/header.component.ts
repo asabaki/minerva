@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
               public authService: AuthService) {
   }
   ngOnInit() {
-    // TODO - Fix Following number after click followe
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();
     this.authService.getFollower().subscribe(flw => {

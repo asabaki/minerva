@@ -147,34 +147,76 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 .btn {
-    &-follow {
-        transform: scale(.8);
-        border-radius: 100px;
-        box-shadow: 0 0.2rem 0rem var(--color-secondary);
-        border: .5px solid var(--color-secondary);
-        padding: 0rem 2rem;
-        vertical-align: middle;
-        color: var(--color-secondary-dark);
-        display: inline-block;
-        cursor: pointer;
-        height: 3rem;
-        font-size: 1.6rem;
-        background-color: white;
-        outline: none;
-        transition: .2s all;
-        display: inline-block;
-        span {
-            font-weight: 900;
-            padding-right: .3rem;
-        }
-        &:hover {
-            box-shadow: 0 -0.2rem 0rem var(--color-secondary);
-            transform: scale(.85);
-        }
-        &:active {
-            transform: scale(.8);
-        }
+  &-follow {
+    transform: scale(.8);
+    border-radius: 100px;
+    box-shadow: 0 0.2rem 0rem var(--color-secondary);
+    border: .5px solid var(--color-secondary);
+    padding: 0rem 2rem;
+    vertical-align: middle;
+    color: var(--color-secondary-dark);
+    display: inline-block;
+    cursor: pointer;
+    height: 3rem;
+    font-size: 1.6rem;
+    background-color: white;
+    outline: none;
+    transition: .2s all;
+    display: inline-block;
+    .bold {
+      font-weight: 900;
+      padding-right: .3rem;
     }
+    &:hover {
+      box-shadow: 0 -0.2rem 0rem var(--color-secondary);
+      transform: scale(.85);
+    }
+    &:active {
+      transform: scale(.8);
+    }
+    &-following {
+      box-shadow: none;
+      border: .5px solid var(--color-grey-dark-3);
+      color: var(--color-grey-dark-3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      width: 10rem;
+      &>* {
+
+        display: inline-block;
+        transition: all 0.2s;
+        height: 100%;
+        width: 100%;
+      }
+      &__visible {
+        padding: 1.5rem 0rem;
+        margin-top: -2rem;
+        margin-left: -3rem;
+      }
+      &__invisible {
+        position: absolute;
+        padding: 1.5rem 0;
+        left: 0;
+        top: -100%;
+        margin-top: -1rem;
+        color: var(--color-secondary);
+      }
+      &:hover{
+        box-shadow: none;
+        border: .5px solid var(--color-secondary);
+      }
+      &:hover &__invisible {
+        top: 0;
+      }
+      &:hover &__visible {
+        transform: translateY(100%);
+      }
+      &:focus {
+        outline: none;
+    }
+  }
 }
 
 .activity {

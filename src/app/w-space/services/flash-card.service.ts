@@ -119,6 +119,15 @@ export class FlashCardService {
     return this.index;
   }
 
+  getRating(id: string) {
+    this.http.get('http://localhost:3000/api/flash/rate', {
+      params: new HttpParams().set('id', id),
+      observe: 'response'
+    }).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   delete_card(id: string) {
     this.http.delete('http://localhost:3000/api/flash/delete/card',
       {

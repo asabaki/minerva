@@ -119,46 +119,21 @@
 
     <div class="description-side__sub">
       <h1>Who to follow :</h1>
-      <div class="user-expore">
+      <div class="user-expore" *ngFor="let user of following">
         <div class="user">
-          <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
+          <img class="user-img" [src]="'assets/img/user/' + user.name.toLowerCase().charAt(0) + '.png'" alt="" />
           <div class="user-acc">
-            <span class="user-username">Username</span>
+            <span class="user-username">{{ user.name }}</span>
             <span class="user-detail">small detail</span>
           </div>
         </div>
-        <button class="btn-follow"><span>+</span>follow</button>
+        <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!user.followed" (click)="onFollow(user._id)"><span class="bold">+</span>Follow</button>
+        <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="user.followed" (click)="onUnfollow(user._id)" >
+          <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
+          <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+        </button>
       </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Username</span>
-            <span class="user-detail">small detail</span>
-          </div>
-        </div>
-        <button class="btn-follow"><span>+</span>follow</button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Username</span>
-            <span class="user-detail">small detail</span>
-          </div>
-        </div>
-        <button class="btn-follow"><span>+</span>follow</button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Username</span>
-            <span class="user-detail">small detail</span>
-          </div>
-        </div>
-        <button class="btn-follow"><span>+</span>follow</button>
-      </div>
+
       <button (click)="search_dialog()"class="activity-see-more side-2"><mat-icon>search</mat-icon>Search</button>
     </div>
   </div>
