@@ -148,6 +148,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 .btn {
     &-follow {
+        transform: scale(.8);
         border-radius: 100px;
         box-shadow: 0 0.2rem 0rem var(--color-secondary);
         border: .5px solid var(--color-secondary);
@@ -168,10 +169,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
         }
         &:hover {
             box-shadow: 0 -0.2rem 0rem var(--color-secondary);
-            transform: scale(1.02);
+            transform: scale(.85);
         }
         &:active {
-            transform: scale(1);
+            transform: scale(.8);
         }
     }
 }
@@ -232,8 +233,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
                 }
             }
             &-2 {
-              font-size: 1.1rem;
-              margin: auto;
+                font-size: 1.1rem;
+                margin:1rem auto 0rem auto
             }
         }
     }

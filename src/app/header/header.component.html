@@ -5,12 +5,12 @@
   <nav class="user-nav">
 
 
-    <div class="follow" *ngIf="isAuth">
+    <div (click)="search_dialog()"  class="follow" *ngIf="isAuth">
       <div class="follow__container" >
         <div class="follow__no">{{follower}}</div>
         <div class="follow__text">Followers</div>
       </div>
-      <div class="follow__container" >
+      <div (click)="search_dialog()" class="follow__container" >
         <div class="follow__no">{{ following }}</div>
         <div class="follow__text">Following</div>
       </div>
