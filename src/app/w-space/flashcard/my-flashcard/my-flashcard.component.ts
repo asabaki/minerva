@@ -23,9 +23,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
-
   selector: 'app-my-flashcard',
-
   templateUrl: './my-flashcard.component.html',
   styleUrls: ['./my-flashcard.component.scss']
 })
@@ -81,7 +79,6 @@ export class MyFlashcardComponent implements OnInit {
               views: 0,
               dom: data.updatedAt,
               privacy: data.privacy,
-
               delete: false
             });
           }
@@ -122,7 +119,9 @@ export class MyFlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[6].show = this.editClicked;
+    this.columnDef
+      .filter( (def) => def.def === 'delete')
+      .map(def => def.show = this.editClicked);
 
   }
 
@@ -155,9 +154,5 @@ export class MyFlashcardComponent implements OnInit {
   faoReset() {
     this.faoRated = false;
     this.faoRate = 3.6;
-  }
-
-  onMyFlashcard() {
-    this.router.navigate(['flash/my/']);
   }
 }
