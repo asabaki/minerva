@@ -14,14 +14,14 @@ import {FlashcardComponent} from './w-space/flashcard/flashcard.component';
 
 const routes: Routes = [
   {path: '', component: WSpaceComponent , pathMatch: 'full'},
-  {path: 'flash', component: FlashcardComponent},
-  {path: 'flash/my', component: MyFlashcardComponent},
-  {path: 'flash/item/:id', component: CollectionComponent},
-  {path: 'quiz', component: QuizComponent},
+  {path: 'flash', component: FlashcardComponent, canActivate: [AuthGuard]},
+  {path: 'flash/my', component: MyFlashcardComponent, canActivate: [AuthGuard]},
+  {path: 'flash/item/:id', component: CollectionComponent, canActivate: [AuthGuard]},
+  {path: 'quiz', component: QuizComponent, canActivate: [AuthGuard]},
   // {path: 'flash/:id', component: CollectionComponent},
   {path: 'refresh', component: WSpaceComponent},
   {path: 'plan', component: PlannerComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
 
 ];

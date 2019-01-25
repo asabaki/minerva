@@ -15,16 +15,25 @@ export class HeaderComponent implements OnInit {
   name: string;
   id: string;
   isAuth: boolean;
+  follower = 0;
+  following = 0;
 
   constructor(public dialog: MatDialog,
               public authService: AuthService) {
   }
   ngOnInit() {
+    // TODO - Fix Following number after click followe
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();
     this.authService.getAuthStatus().subscribe((res) => {
       this.name = this.authService.getUserName();
       this.isAuth = res;
+      this.authService.getFollower().subscribe(flw => {
+        this.follower = flw.body.length;
+      });
+      this.authService.getFollowing().subscribe(fwn => {
+        this.following = fwn.body.length;
+      });
     });
   }
 
@@ -43,9 +52,6 @@ export class HeaderComponent implements OnInit {
   }
   onClear() {
     this.authService.seed();
-  }
-  onGetSecret() {
-    this.authService.getSecret();
   }
 
   getUser() {
