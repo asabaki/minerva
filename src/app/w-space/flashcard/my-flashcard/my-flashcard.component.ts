@@ -9,6 +9,7 @@ import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.comp
 
 export interface PeriodicElement {
   _id: string;
+  privacy: number;
   title: string;
   description: string;
   numberOfCard: number;
@@ -17,7 +18,6 @@ export interface PeriodicElement {
   dom: Date;
   views: number;
   delete: boolean;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -32,6 +32,7 @@ export class MyFlashcardComponent implements OnInit {
     {def: 'privacy', show: true},
     {def: 'title', show: true},
     {def: 'description', show: true},
+    {def: 'numberOfCard', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
     {def: 'views', show: true},
@@ -118,7 +119,9 @@ export class MyFlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[6].show = this.editClicked;
+    this.columnDef
+      .filter( (def) => def.def === 'delete')
+      .map(def => def.show = this.editClicked);
 
   }
 
@@ -151,9 +154,5 @@ export class MyFlashcardComponent implements OnInit {
   faoReset() {
     this.faoRated = false;
     this.faoRate = 3.6;
-  }
-
-  onMyFlashcard() {
-    this.router.navigate(['flash/my/']);
   }
 }

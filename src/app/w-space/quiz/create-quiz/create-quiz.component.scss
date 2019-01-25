@@ -12,11 +12,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: 1350px) {
         margin-left: 3rem;
     }
+    @media only screen and (max-width: 1300px) {
+        margin-left: 4rem;
+    }
+    @media only screen and (max-width: 1250px) {
+        margin-left: 4rem;
+    }
     @media only screen and (max-width: $bp-largest) {
         margin-left: 5rem;
     }
+    @media only screen and (max-width: 1150px) {
+      margin-left: 6rem;
+  }
     @media only screen and (max-width: $bp-large) {
-        margin-left: 5rem;
+        margin-left: 3rem;
     }
     @media only screen and (max-width: $bp-medium) {
         margin-left: 0rem;

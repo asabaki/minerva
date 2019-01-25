@@ -196,8 +196,8 @@ export class AuthService {
     const followerId = localStorage.getItem('userId');
     if (followerId) {
       this.http.post('http://localhost:3000/api/user/follow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
-        console.log(res.body);
-        this.following.next(res.body);
+        console.log(res);
+        this.following.next(res);
       });
     } else {
       return -1;
@@ -207,8 +207,8 @@ export class AuthService {
     const followerId = localStorage.getItem('userId');
     if (followerId) {
       this.http.patch('http://localhost:3000/api/user/unfollow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
-        console.log(res.body);
-        this.following.next(res.body);
+        console.log(res);
+        this.following.next(res);
       });
     } else {
       return -1;

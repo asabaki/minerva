@@ -25,6 +25,12 @@ export class HeaderComponent implements OnInit {
     // TODO - Fix Following number after click followe
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();
+    this.authService.getFollower().subscribe(flw => {
+      this.follower = flw.body.length;
+    });
+    this.authService.getFollowing().subscribe(fwn => {
+      this.following = fwn.body.length;
+    });
     this.authService.getAuthStatus().subscribe((res) => {
       this.name = this.authService.getUserName();
       this.isAuth = res;
