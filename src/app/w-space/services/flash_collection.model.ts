@@ -1,5 +1,6 @@
 export interface FlashModel {
   _id: string;
+  author: string;
   title: string;
   description: string;
   card: Array<Object>;

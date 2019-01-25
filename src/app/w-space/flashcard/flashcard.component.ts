@@ -24,7 +24,8 @@ const ELEMENT_DATA: PeriodicElement[] = [];
   styleUrls: ['./flashcard.component.scss']
 })
 export class FlashcardComponent implements OnInit {
-  columnDef = [{def: 'title', show: true},
+  columnDef = [
+    {def: 'title', show: true},
     {def: 'description', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
@@ -65,7 +66,7 @@ export class FlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: i += 0.1,
+              rating: i += 0.5,
               views: 0,
               dom: data.updatedAt,
               delete: false

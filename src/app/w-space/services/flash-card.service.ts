@@ -87,6 +87,7 @@ export class FlashCardService {
           res.body.forEach((collection) => {
             ret.push({
               _id: collection._id,
+              author: collection.author,
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length,
@@ -159,9 +160,9 @@ export class FlashCardService {
   update_card_detail(id: string, title: string, description: string, privacy: boolean) {
     const updateBody = {id, title, description, privacy};
     this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
-      this.cardSubject.next(res);
+      this.updateSubject.next(res);
     });
-    return this.cardSubject.asObservable();
+    return this.updateSubject.asObservable();
   }
 
   update_card(id: string, cards: Object[]) {

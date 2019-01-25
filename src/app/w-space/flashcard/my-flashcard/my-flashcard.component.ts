@@ -1,14 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
 import {AuthService} from '../../services/auth.service';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Router} from '@angular/router';
-import {Observable, Observer, Subscription} from 'rxjs';
-import {detectChanges} from '@angular/core/src/render3';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
-import {BarRatingModule} from 'ngx-bar-rating';
 import {Location} from '@angular/common';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
+import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
 
 export interface PeriodicElement {
   _id: string;
@@ -17,6 +14,7 @@ export interface PeriodicElement {
   description: string;
   numberOfCard: number;
   rating: number;
+  privacy: boolean;
   dom: Date;
   views: number;
   delete: boolean;
@@ -24,17 +22,14 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [];
 
-
 @Component({
 
-  selector: 'app-flashcard',
+  selector: 'app-my-flashcard',
 
   templateUrl: './my-flashcard.component.html',
   styleUrls: ['./my-flashcard.component.scss']
 })
-
 export class MyFlashcardComponent implements OnInit {
-  // TODO - Figure out sorting ( not working )
   columnDef = [
     {def: 'privacy', show: true},
     {def: 'title', show: true},
@@ -43,19 +38,25 @@ export class MyFlashcardComponent implements OnInit {
     {def: 'rating', show: true},
     {def: 'dom', show: true},
     {def: 'views', show: true},
-    {def: 'delete', show: false}];
+    {def: 'delete', show: false}
+    ];
   // [ 'name', 'description', 'numberOfCard', 'delete'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-  data: Observable<Object>;
-  isLoading = true;
-  number_collection: number;
+  number_collection: number
+
+  bootRate = 1;
+  faRate = 1;
+  cssRate = 1;
+  faoRate = 2;
+  faoRated = false;
+
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
-              private location: Location,
               private auth: AuthService,
+              private location: Location,
               private flash: FlashCardService,
               private router: Router,
               private changeDet: ChangeDetectorRef) {
@@ -76,16 +77,16 @@ export class MyFlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: i += 0.1,
+              rating: i += 0.5,
               views: 0,
-              privacy: data.privacy ? 1 : 0,
               dom: data.updatedAt,
+              privacy: data.privacy,
+
               delete: false
             });
           }
         );
         this.dataSource.sort = this.sort;
-        this.isLoading = false;
       }
     );
 
@@ -96,6 +97,12 @@ export class MyFlashcardComponent implements OnInit {
     this.location.back();
   }
 
+  openCreateFlashcardDialog() {
+    const dialogRef = this.dialog.open(CreateFlashcardComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
   onRowClick(r: any) {
     if (this.deleteClicked) {
       this.deleteClicked = false;
@@ -107,11 +114,10 @@ export class MyFlashcardComponent implements OnInit {
     // console.log(r);
   }
 
-  openCreateFlashcardDialog() {
-    const dialogRef = this.dialog.open(CreateFlashcardComponent, {panelClass: 'myapp-no-padding-dialog'});
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  getDisplayedColumn() {
+    return this.columnDef
+      .filter((def) => def.show)
+      .map((def) => def.def);
   }
 
   onClickEdit() {
@@ -141,11 +147,17 @@ export class MyFlashcardComponent implements OnInit {
       }
     });
   }
-
-  getDisplayedColumn() {
-    return this.columnDef
-      .filter((def) => def.show)
-      .map((def) => def.def);
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
   }
 
+  faoReset() {
+    this.faoRated = false;
+    this.faoRate = 3.6;
+  }
+
+  onMyFlashcard() {
+    this.router.navigate(['flash/my/']);
+  }
 }

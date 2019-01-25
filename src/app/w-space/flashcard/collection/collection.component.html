@@ -57,11 +57,12 @@
               Created by <br />
               {{ creatorName }}
             </button>
-            <button mat-button matTooltip="Follow" class="btn-follow"><span class="bold">+</span>follow</button>
-            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" >
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)"><span class="bold">+</span>follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator) >
                 <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
                 <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
               </button>
+
           </div>
         </div>
       </div>

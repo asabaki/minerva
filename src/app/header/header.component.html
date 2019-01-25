@@ -5,13 +5,13 @@
   <nav class="user-nav">
 
 
-    <div class="follow">
-      <div class="follow__container" *ngIf="isAuth">
-        <div class="follow__no">20</div>
+    <div class="follow" *ngIf="isAuth">
+      <div class="follow__container" >
+        <div class="follow__no">{{follower}}</div>
         <div class="follow__text">Followers</div>
       </div>
-      <div class="follow__container" *ngIf="isAuth">
-        <div class="follow__no">300</div>
+      <div class="follow__container" >
+        <div class="follow__no">{{ following }}</div>
         <div class="follow__text">Following</div>
       </div>
     </div>
@@ -25,7 +25,6 @@
 
 
     <!--<button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>-->
-    <!--<button mat-button (click)="onGetSecret()" class="no-hover">Secret</button>-->
     <button mat-button (click)="logIn_dialog()" class="btn btn__login" *ngIf="!isAuth">Log in</button>
     <button mat-button (click)="signUp_dialog()" class="btn btn__signup"*ngIf="!isAuth">Sign up</button>
 

@@ -4,6 +4,9 @@ import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
 import {EditCardComponent} from './edit-card/edit-card.component';
+import {AddCardComponent} from '../my-flashcard/create-flashcard/add-card/add-card.component';
+import {AuthService} from '../../services/auth.service';
+
 // import {EditCardComponent} from './edit-card/edit-card.component';
 
 @Component({
@@ -33,6 +36,7 @@ export class CollectionComponent implements OnInit {
   privacy: boolean;
   views: number;
   rating: number;
+  isFollowing: boolean;
   // arr: Array<number>;
   isLoading = true;
 
@@ -40,11 +44,13 @@ export class CollectionComponent implements OnInit {
               private location: Location,
               private router: Router,
               private flashService: FlashCardService,
+              private authService: AuthService,
               public dialog: MatDialog,
-              ) {
+  ) {
   }
 
   ngOnInit() {
+
     this.index = 1;
     this.flashService.index = this.index;
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -69,6 +75,7 @@ export class CollectionComponent implements OnInit {
             _id: this.id,
             index: this.index
           };
+          this.authService.isFollowing(localStorage.getItem('userId'), this.creator).subscribe(fol => this.isFollowing = fol);
           this.isLoading = false;
         });
 
@@ -77,8 +84,8 @@ export class CollectionComponent implements OnInit {
       }
     });
   }
+
   onClickBack() {
-    // this.router.navigate(back)
     this.location.back();
   }
 
@@ -93,6 +100,7 @@ export class CollectionComponent implements OnInit {
   isCreator() {
     return localStorage.getItem('userId') === this.creator;
   }
+
 
   openEditCardDialog() {
     this.cardObj = {
@@ -121,15 +129,28 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  // openAddCardDialog() {
-  //   this.flashService.collectionId = this.id;
-  //   const dialogRef = this.dialog.open(AddCardComponent, {panelClass: 'myapp-no-padding-dialog'});
-  //   console.log(this.flashService.getIndex());
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('It closed na');
-  //     this.index = 1;
-  //   });
-  // }
+  onFollow(id: string) {
+    if (this.authService.followUser(id) !== -1) {
+      this.isFollowing = true;
+    }
+  }
+
+  onUnfollow(id: string) {
+    if (this.authService.unfollowUser(id) !== -1) {
+      this.isFollowing = false;
+    }
+  }
+
+  openAddCardDialog() {
+    this.flashService.collectionId = this.id;
+    const dialogRef = this.dialog.open(AddCardComponent, {panelClass: 'myapp-no-padding-dialog'});
+    console.log(this.flashService.getIndex());
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('It closed na');
+      this.index = 1;
+    });
+  }
+
   onFaoRate(e) {
     this.faoRated = true;
     this.faoRate = e;

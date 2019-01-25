@@ -18,7 +18,9 @@ export class AuthService {
   private isAuthenticated = false;
   private userId: string;
   private userName: string;
-
+  followed = new Subject<any>();
+  follower = new Subject<any>();
+  following = new Subject<any>();
   constructor(private http: HttpClient,
               private router: Router,
               private dialog: MatDialog) {
@@ -75,7 +77,7 @@ export class AuthService {
             this.saveAuthData(token, expireDate, this.userId, this.userName);
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
             v.next(result);
           }
         },
@@ -105,6 +107,25 @@ export class AuthService {
 
   getIsAuth() {
     return this.isAuthenticated;
+  }
+
+  getFollower() {
+    this.http.get('http://localhost:3000/api/user/get/follower', {
+      params: new HttpParams().set('id', this.userId),
+      observe: 'response'
+    }).subscribe(res => {
+      this.follower.next(res);
+    });
+    return this.follower.asObservable();
+  }
+  getFollowing() {
+    this.http.get('http://localhost:3000/api/user/get/following', {
+      params: new HttpParams().set('id', this.userId),
+      observe: 'response'
+    }).subscribe(res => {
+      this.following.next(res);
+    });
+    return this.following.asObservable();
   }
 
   private getAuthData() {
@@ -166,18 +187,41 @@ export class AuthService {
 
   seed() {
     const user = this.getAuthData();
-    this.http.delete('http://localhost:3000/api/user/seed/' + user.userId, { params: { userId: user.userId}}).subscribe((res) => {
+    this.http.delete('http://localhost:3000/api/user/seed/' + user.userId, {params: {userId: user.userId}}).subscribe((res) => {
       console.log(res);
     });
   }
 
-  getSecret() {
-    this.http.get('http://localhost:3000/api/user/secret', { params: new HttpParams().set('name', 'something')}).subscribe((res) => {
-      console.log(res);
-    },
-      (err) => {
-      console.log(err);
+  followUser(id: string) {
+    const followerId = localStorage.getItem('userId');
+    if (followerId) {
+      this.http.post('http://localhost:3000/api/user/follow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
+        console.log(res.body);
+        this.following.next(res.body);
       });
+    } else {
+      return -1;
+    }
+  }
+  unfollowUser(id: string) {
+    const followerId = localStorage.getItem('userId');
+    if (followerId) {
+      this.http.patch('http://localhost:3000/api/user/unfollow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
+        console.log(res.body);
+        this.following.next(res.body);
+      });
+    } else {
+      return -1;
+    }
+  }
+
+  isFollowing(follower: string, following: string) {
+    this.http.get('http://localhost:3000/api/user/following/' + follower + '/' + following, {
+      observe: 'response'
+    }).subscribe(res => {
+      this.followed.next(res.body);
+    });
+    return this.followed.asObservable();
   }
 
 }
