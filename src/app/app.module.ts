@@ -57,6 +57,7 @@ import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-col
 import { PlannerComponent } from './w-space/planner/planner.component';
 import { HomeComponent } from './w-space/home/home.component';
 import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
+import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
 
 
 
@@ -88,6 +89,7 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
     PlannerComponent,
     HomeComponent,
     FlashcardComponent,
+    AccountSettingComponent,
 
 
 

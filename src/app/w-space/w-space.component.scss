@@ -3,9 +3,25 @@ $bp-large: 68.25em; //1100px  (1100/16)
 $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
+
 .top-view {
-    background-color: white;
-    flex: 1;
+  background-color: var(--color-grey-light-1);
+  flex: 1;
+  @media only screen and (max-width: 1400px) {
+      margin-left: 3rem;
+  }
+  @media only screen and (max-width: $bp-largest) {
+      margin-left: 4rem;
+  }
+  @media only screen and (max-width: $bp-large) {
+      margin-left: 3rem;
+  }
+  @media only screen and (max-width: $bp-medium) {
+      margin-left: 3rem;
+  }
+  @media only screen and (max-width: 1044px) {
+      margin-left: 0rem;
+  }
 }
 
 .detail {

@@ -34,14 +34,10 @@ body {
 
 .container {
     max-width: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
     background-color: var(--color-grey-light-2);
     box-shadow: var(--shadow-dark);
-    height: 100%;
-    @media only screen and(max-width: $bp-largest) {
-        margin: 0;
-        max-width: 100%;
-        width: 100%;
-    }
 }
 
 .content {
@@ -103,7 +99,7 @@ app-side-nav {
 }
 
 app-w-space {
-    flex: 1;
+  flex: 1;
 }
 
 

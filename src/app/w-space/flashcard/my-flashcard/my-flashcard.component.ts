@@ -9,6 +9,7 @@ import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.comp
 
 export interface PeriodicElement {
   _id: string;
+  privacy: number;
   title: string;
   description: string;
   numberOfCard: number;
@@ -17,13 +18,14 @@ export interface PeriodicElement {
   dom: Date;
   views: number;
   delete: boolean;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
+
   selector: 'app-my-flashcard',
+
   templateUrl: './my-flashcard.component.html',
   styleUrls: ['./my-flashcard.component.scss']
 })
@@ -32,6 +34,7 @@ export class MyFlashcardComponent implements OnInit {
     {def: 'privacy', show: true},
     {def: 'title', show: true},
     {def: 'description', show: true},
+    {def: 'numberOfCard', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
     {def: 'views', show: true},
@@ -78,6 +81,7 @@ export class MyFlashcardComponent implements OnInit {
               views: 0,
               dom: data.updatedAt,
               privacy: data.privacy,
+
               delete: false
             });
           }
