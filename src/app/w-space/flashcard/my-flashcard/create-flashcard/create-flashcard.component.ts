@@ -12,7 +12,6 @@ import {ErrorSnackComponent} from '../../../sign-up/sign-up.component';
   styleUrls: ['./create-flashcard.component.scss']
 })
 export class CreateFlashcardComponent implements OnInit {
-  // TODO - Redirect After Create Collection
   privacyText = 'Private';
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,

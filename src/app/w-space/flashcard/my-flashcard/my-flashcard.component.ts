@@ -9,7 +9,6 @@ import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.comp
 
 export interface PeriodicElement {
   _id: string;
-  privacy: number;
   title: string;
   description: string;
   numberOfCard: number;
@@ -62,7 +61,6 @@ export class MyFlashcardComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO- Edit data on this page to be observable
   ngOnInit() {
     let i = 0;
     this.flash.fetch_collection().subscribe(
@@ -146,6 +144,11 @@ export class MyFlashcardComponent implements OnInit {
       }
     });
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   onFaoRate(e) {
     this.faoRated = true;
     this.faoRate = e;
