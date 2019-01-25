@@ -50,7 +50,7 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // TODO - Get Rating
     this.index = 1;
     this.flashService.index = this.index;
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -60,6 +60,7 @@ export class CollectionComponent implements OnInit {
           this.creatorName = res.body.creatorName;
           this.privacy = res.body.cards.privacy;
           this.rating = res.body.cards.rating;
+          this.faoRate = this.rating;
           this.views = res.body.cards.views;
           this.title = res.body.cards.title;
           this.desc = res.body.cards.description;
@@ -78,6 +79,7 @@ export class CollectionComponent implements OnInit {
           this.authService.isFollowing(localStorage.getItem('userId'), this.creator).subscribe(fol => this.isFollowing = fol);
           this.isLoading = false;
         });
+        // this.flashService.getRating(this.id);
 
       } else {
         this.isLoading = true;

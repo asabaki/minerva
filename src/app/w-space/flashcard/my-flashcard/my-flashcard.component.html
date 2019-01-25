@@ -31,6 +31,7 @@
       <div class="description-btn_set">
         <form action="#" class="search">
           <input
+            (keyup)="applyFilter($event.target.value)"
             type="text"
             class="search__input"
             placeholder="Search for collection name, author"

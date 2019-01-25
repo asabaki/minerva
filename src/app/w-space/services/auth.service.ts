@@ -21,6 +21,7 @@ export class AuthService {
   followed = new Subject<any>();
   follower = new Subject<any>();
   following = new Subject<any>();
+  toFollow = new Subject<any>();
   constructor(private http: HttpClient,
               private router: Router,
               private dialog: MatDialog) {
@@ -148,6 +149,16 @@ export class AuthService {
     return this.userName;
   }
 
+  getToFollow(id: string) {
+    this.http.get('http://localhost:3000/api/user/get/tofollow', {
+      params: new HttpParams().set('id', id),
+      observe: 'response'
+    }).subscribe(res => {
+      this.toFollow.next(res.body);
+    });
+    return this.toFollow.asObservable();
+  }
+
   autoAuthUser() {
     const authInfo = this.getAuthData();
     if (!authInfo) {
@@ -203,6 +214,7 @@ export class AuthService {
       return -1;
     }
   }
+
   unfollowUser(id: string) {
     const followerId = localStorage.getItem('userId');
     if (followerId) {
@@ -214,6 +226,7 @@ export class AuthService {
       return -1;
     }
   }
+
 
   isFollowing(follower: string, following: string) {
     this.http.get('http://localhost:3000/api/user/following/' + follower + '/' + following, {
