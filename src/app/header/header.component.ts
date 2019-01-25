@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {SignUpComponent} from '../w-space/sign-up/sign-up.component';
 import {LogInComponent} from '../w-space/log-in/log-in.component';
 import {AuthService} from '../w-space/services/auth.service';
+import {SearchUserComponent} from '../w-space/search-user/search-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
@@ -69,5 +70,12 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  search_dialog() {
+    const dialogRef = this.dialog.open(SearchUserComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { SearchUserComponent } from '../search-user/search-user.component';
+import {MatDialog} from '@angular/material';
 import {AuthService} from '../services/auth.service';
+
 
 @Component({
   selector: 'app-home',
@@ -10,8 +14,10 @@ export class HomeComponent implements OnInit {
   id: string;
   following = [];
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private dialog: MatDialog) {
   }
+
 
   ngOnInit() {
     this.id = localStorage.getItem('userId');
@@ -43,6 +49,12 @@ export class HomeComponent implements OnInit {
         .filter(user => user._id === id)
         .map(user => user.followed = false);
     }
+  }
+  search_dialog() {
+    const dialogRef = this.dialog.open(SearchUserComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

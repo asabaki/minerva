@@ -58,6 +58,7 @@ import { PlannerComponent } from './w-space/planner/planner.component';
 import { HomeComponent } from './w-space/home/home.component';
 import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
 import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
+import { SearchUserComponent } from './w-space/search-user/search-user.component';
 
 
 
@@ -90,6 +91,7 @@ import { AccountSettingComponent } from './w-space/account-setting/account-setti
     HomeComponent,
     FlashcardComponent,
     AccountSettingComponent,
+    SearchUserComponent,
 
 
 
@@ -139,6 +141,7 @@ import { AccountSettingComponent } from './w-space/account-setting/account-setti
     EditCardComponent,
     McqComponent,
     TrueFalseComponent,
+    SearchUserComponent
   ],
   bootstrap: [AppComponent]
 })
