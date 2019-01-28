@@ -183,7 +183,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
       overflow: hidden;
       cursor: pointer;
       width: 10rem;
-      &>* {
+      & > * {
 
         display: inline-block;
         transition: all 0.2s;
@@ -203,7 +203,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin-top: -1rem;
         color: var(--color-secondary);
       }
-      &:hover{
+      &:hover {
         box-shadow: none;
         border: .5px solid var(--color-secondary);
       }
@@ -215,6 +215,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
       }
       &:focus {
         outline: none;
+      }
     }
   }
 }
