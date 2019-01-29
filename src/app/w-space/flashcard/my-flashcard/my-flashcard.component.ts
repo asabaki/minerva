@@ -12,6 +12,7 @@ export interface PeriodicElement {
   title: string;
   description: string;
   numberOfCard: number;
+  privacy: boolean;
   rating: number;
   privacy: boolean;
   dom: Date;
@@ -41,7 +42,7 @@ export class MyFlashcardComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-  number_collection: number
+  number_collection: number;
 
   bootRate = 1;
   faRate = 1;

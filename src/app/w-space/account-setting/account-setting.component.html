@@ -11,7 +11,7 @@
   </div>
   <div class="detail" *ngIf="isLoading">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
+  </div>s
   <div class="detail" *ngIf="!isLoading">
     <div class="description">
       <div class="description__container">
@@ -32,9 +32,42 @@
 
       <div class="description__container">
         <div class="img-upload__container">
-          <div class="img-upload__text"><h3>Profile</h3></div>
-
+          <div class="img-upload__text">
+            <h3>Profile</h3>
+            <form class="update-form">
+                <mat-form-field>
+                  <input matInput placeholder="First name" required>
+                </mat-form-field>
+                <mat-form-field>
+                  <input matInput placeholder="Last name" required>
+                </mat-form-field>
+                <div class="update-form__btn">
+                    <button mat-button class="img-upload__btn save">Save</button>
+                </div>
+              </form>
+          </div>
         </div>
+
+      </div>
+
+      <div class="description__container">
+        <div class="img-upload__container">
+          <div class="img-upload__text">
+            <h3>Change password</h3>
+            <form class="update-form">
+              <mat-form-field>
+                <input matInput placeholder="Password" type="password" />
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Confirm password" type="password"/>
+              </mat-form-field>
+              <div class="update-form__btn">
+                  <button mat-button class="img-upload__btn save">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
