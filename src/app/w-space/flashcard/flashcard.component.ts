@@ -13,6 +13,7 @@ export interface PeriodicElement {
   dom: Date;
   views: number;
   delete: boolean;
+  daysUpdated: string;
 
 }
 
@@ -60,6 +61,8 @@ export class FlashcardComponent implements OnInit {
         ELEMENT_DATA.length = 0;
         this.number_collection = res.length;
         res.forEach((data) => {
+          const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / ( 1000 * 60));
+          console.log(lastUpdated);
             ELEMENT_DATA.push({
               _id: data._id,
               title: data.title,
@@ -68,8 +71,10 @@ export class FlashcardComponent implements OnInit {
               rating: i += 0.5,
               views: 0,
               dom: data.updatedAt,
+              daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
               delete: false
             });
+            console.log(ELEMENT_DATA);
           }
         );
         this.dataSource.sort = this.sort;

@@ -14,7 +14,6 @@ export interface PeriodicElement {
   numberOfCard: number;
   privacy: boolean;
   rating: number;
-  privacy: boolean;
   dom: Date;
   views: number;
   delete: boolean;
