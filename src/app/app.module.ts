@@ -12,6 +12,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BarRatingModule } from 'ngx-bar-rating';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CKEditorModule } from 'ngx-ckeditor';
 import {
   MatIconModule,
   MatInputModule,
@@ -124,7 +125,8 @@ import { SearchUserComponent } from './w-space/search-user/search-user.component
     MatRadioModule,
     MatBadgeModule,
     BarRatingModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CKEditorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

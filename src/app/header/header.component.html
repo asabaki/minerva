@@ -37,11 +37,14 @@
       <span class="user-nav__username user-nav__username1" *ngIf="isAuth">{{getUser()}}</span>
       <mat-menu #menu="matMenu" >
         <span class="user-nav__username" *ngIf="isAuth">{{getUser()}}</span>
+        <button mat-menu-item routerLink="/home" class="user-nav__menu">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
         <button mat-menu-item *ngIf="isLogin()" class="user-nav__menu" routerLink="/acc" >
           <mat-icon>account_circle</mat-icon>
           <span>Account Setting</span>
         </button>
-
         <button mat-menu-item (click)="onLogout()" *ngIf="isAuth" class="user-nav__menu">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log Out</span>
