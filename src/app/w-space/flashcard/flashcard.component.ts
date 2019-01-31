@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 
 export interface PeriodicElement {
   _id: string;
+  author: string;
   title: string;
   description: string;
   numberOfCard: number;
@@ -27,6 +28,7 @@ const ELEMENT_DATA: PeriodicElement[] = [];
 export class FlashcardComponent implements OnInit {
   columnDef = [
     {def: 'title', show: true},
+    {def: 'author', show: true},
     {def: 'description', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
@@ -62,9 +64,9 @@ export class FlashcardComponent implements OnInit {
         this.number_collection = res.length;
         res.forEach((data) => {
           const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / ( 1000 * 60));
-          console.log(lastUpdated);
             ELEMENT_DATA.push({
               _id: data._id,
+              author: data.author,
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
@@ -74,7 +76,6 @@ export class FlashcardComponent implements OnInit {
               daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
               delete: false
             });
-            console.log(ELEMENT_DATA);
           }
         );
         this.dataSource.sort = this.sort;
