@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 @Component({
   selector: 'app-search-user',
   templateUrl: './search-user.component.html',
