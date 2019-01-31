@@ -80,14 +80,14 @@ export class FlashCardService {
   }
 
   fetch_collection_all() {
-    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
+    this.http.get<any>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
       .pipe(map(res => {
         const ret = [];
         if (res.status === 200) {
-          res.body.forEach((collection) => {
+          res.body.collections.forEach((collection, index) => {
             ret.push({
               _id: collection._id,
-              author: collection.author,
+              author: res.body.users[index],
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length,
@@ -108,7 +108,7 @@ export class FlashCardService {
     return this.subject.asObservable();
   }
 
-  fetch_card(id: string) {
+  fetch_card(id: string) { // Collection Component
     this.http.get('http://localhost:3000/api/flash/pull/' + id, {observe: 'response'}).subscribe((response) => {
       this.cardSubject.next(response);
     });
@@ -183,5 +183,15 @@ export class FlashCardService {
     return this.updateSubject.asObservable();
     // console.log(status);
     // return status;
+  }
+
+  rate_collection(id: string, rate: number) {
+    this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, { observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        console.log(res);
+        this.cardSubject.next(res);
+      }
+    });
+    return this.cardSubject.asObservable();
   }
 }

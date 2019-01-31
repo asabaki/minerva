@@ -2,10 +2,11 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {EditCardComponent} from './edit-card/edit-card.component';
 import {AddCardComponent} from '../my-flashcard/create-flashcard/add-card/add-card.component';
 import {AuthService} from '../../services/auth.service';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
 
 // import {EditCardComponent} from './edit-card/edit-card.component';
 
@@ -43,6 +44,7 @@ export class CollectionComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
+              private matSnack: MatSnackBar,
               private flashService: FlashCardService,
               private authService: AuthService,
               public dialog: MatDialog,
@@ -154,11 +156,25 @@ export class CollectionComponent implements OnInit {
   }
 
   onFaoRate(e) {
-    this.faoRated = true;
-    this.faoRate = e;
+    this.flashService.rate_collection(this.id, e).subscribe(r => {
+      if (r.ok) {
+        this.faoRated = true;
+        this.faoRate = r.body.cards.rating;
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Submitted\n Thank you for your feedback!',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went wrong!\n' + r.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 
   faoReset() {
+    // TODO - Add Unvote
     this.faoRated = false;
     this.faoRate = 3.6;
   }
