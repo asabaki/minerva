@@ -10,6 +10,7 @@ import {PlannerComponent} from './w-space/planner/planner.component';
 import {HomeComponent} from './w-space/home/home.component';
 import {FlashcardComponent} from './w-space/flashcard/flashcard.component';
 import {AccountSettingComponent} from './w-space/account-setting/account-setting.component';
+import {NoteComponent} from './w-space/note/note.component';
 
 
 
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'plan', component: PlannerComponent},
   {path: 'home', component: HomeComponent},
   {path: 'acc', component: AccountSettingComponent},
+  {path: 'note', component: NoteComponent},
 
 
 

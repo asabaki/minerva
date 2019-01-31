@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   id: string;
   following = [];
 
+
+
   constructor(private authService: AuthService,
               private dialog: MatDialog) {
   }

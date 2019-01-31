@@ -219,6 +219,15 @@ input:focus {
   vertical-align: middle;
 }
 
-i{
-  color: var(--color-primary);
+.cke_contents{
+  min-height: 30rem;
+}
+
+.cke_path{
+  visibility: hidden;
+  display: none;
+}
+#cke_1_path{
+  visibility: hidden;
+  display: none;
 }

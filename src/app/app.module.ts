@@ -12,7 +12,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BarRatingModule } from 'ngx-bar-rating';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { CKEditorModule } from 'ngx-ckeditor';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 import {
   MatIconModule,
   MatInputModule,
@@ -60,6 +61,7 @@ import { HomeComponent } from './w-space/home/home.component';
 import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
 import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
 import { SearchUserComponent } from './w-space/search-user/search-user.component';
+import { NoteComponent } from './w-space/note/note.component';
 
 
 
@@ -93,6 +95,7 @@ import { SearchUserComponent } from './w-space/search-user/search-user.component
     FlashcardComponent,
     AccountSettingComponent,
     SearchUserComponent,
+    NoteComponent,
 
 
 
