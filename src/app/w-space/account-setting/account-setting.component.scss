@@ -137,6 +137,14 @@ $bp-smallest: 31.25em; //500px  (500/16)
                 transform: scale(1.05);
                 animation: pulsate 1s infinite;
             }
+            &.edit{
+              color: rgb(138, 3, 3);
+                border: 1px solid rgb(138, 3, 3);
+                &:hover {
+                    transform: scale(1.05);
+                    animation: none;
+                }
+            }
             &.delete {
                 color: rgb(138, 3, 3);
                 border: 1px solid rgb(138, 3, 3);

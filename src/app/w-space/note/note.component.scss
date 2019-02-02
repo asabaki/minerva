@@ -79,6 +79,17 @@ $bp-smallest: 31.25em; //500px  (500/16)
         text-align: justify;
         justify-content: space-between;
     }
+
+
+
+}
+.ckeditor{
+  ul{
+    list-style-type: circle;
+  }
+  ol{
+    list-style-type: decimal;
+  }
 }
 
 .overview {

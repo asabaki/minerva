@@ -40,8 +40,9 @@
           </div>
         </div>
     <div class="description">
-      <ckeditor [editor]="Editor" [config]="toolbarConfig"></ckeditor>
+      <ckeditor class="ckeditor" [editor]="EditorDe" (ready)="onReady($event)"></ckeditor>
     </div>
     <button mat-button class="btn btn__save">Save</button>
   </div>
 </main>
+

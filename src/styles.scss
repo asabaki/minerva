@@ -219,15 +219,18 @@ input:focus {
   vertical-align: middle;
 }
 
-.cke_contents{
-  min-height: 30rem;
+.ck-editor__editable {
+  min-height: 35rem;
 }
 
-.cke_path{
-  visibility: hidden;
-  display: none;
+.ck.ck-editor__editable_inline{
+  border-color: rgb(196,196,196) !important;
 }
-#cke_1_path{
-  visibility: hidden;
-  display: none;
+.ck .ck-content{
+  ol{
+    list-style-type: decimal;
+  }
+  ul{
+    list-style-type: circle;
+  }
 }
