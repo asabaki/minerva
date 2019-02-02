@@ -33,7 +33,7 @@ export class EditCardComponent implements OnInit {
               private changeDet: ChangeDetectorRef,
               private matSnack: MatSnackBar) {
     console.log(this.data.privacy);
-    this.privacyText = this.data.privacy ? 'Private' : 'Public';
+    this.privacyText = this.data.privacy ? 'Only Me' : 'Publish';
     this.isLoading = true;
     this.form = new FormGroup({}, null);
   }
@@ -140,6 +140,6 @@ export class EditCardComponent implements OnInit {
   }
 
   sliding(f: any) {
-    this.privacyText = f ? 'Private' : 'Public';
+    this.privacyText = f ? 'Only Me' : 'Publish';
   }
 }
