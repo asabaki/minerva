@@ -16,6 +16,7 @@ export class FlashCardService {
   addSubject = new Subject<any>();
   updateSubject = new Subject<any>();
   cardSubject = new Subject<any>();
+  ratedSubject = new Subject<any>();
   collectionId: string;
   index: number;
 
@@ -92,7 +93,7 @@ export class FlashCardService {
               description: collection.description,
               numberOfCard: collection.card.length,
               updatedAt: collection.updatedAt,
-              rating: 0,
+              rating: collection.rating,
               views: 0
             });
           });
@@ -117,6 +118,14 @@ export class FlashCardService {
 
   getIndex() {
     return this.index;
+  }
+
+  getRated(id: string) {
+    this.http.get('http://localhost:3000/api/flash/rate/' + id, {observe: 'response'}).subscribe(res => {
+      console.log(res);
+      this.ratedSubject.next(res);
+    });
+    return this.ratedSubject.asObservable();
   }
 
   getRating(id: string) {
@@ -186,12 +195,13 @@ export class FlashCardService {
   }
 
   rate_collection(id: string, rate: number) {
+    // TODO - Rating must not update LAST UPDATED FIELD
     this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, { observe: 'response'}).subscribe(res => {
       if (res.ok) {
         console.log(res);
-        this.cardSubject.next(res);
+        this.updateSubject.next(res);
       }
     });
-    return this.cardSubject.asObservable();
+    return this.updateSubject.asObservable();
   }
 }

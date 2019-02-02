@@ -40,6 +40,7 @@ export class CollectionComponent implements OnInit {
   isFollowing: boolean;
   // arr: Array<number>;
   isLoading = true;
+  isRated = false;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
@@ -52,7 +53,6 @@ export class CollectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO - Get Rating
     this.index = 1;
     this.flashService.index = this.index;
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -79,6 +79,10 @@ export class CollectionComponent implements OnInit {
             index: this.index
           };
           this.authService.isFollowing(localStorage.getItem('userId'), this.creator).subscribe(fol => this.isFollowing = fol);
+          this.flashService.getRated(this.id).subscribe(rate => {
+            this.isRated = rate.body;
+            this.faoRated = this.isRated;
+          });
           this.isLoading = false;
         });
         // this.flashService.getRating(this.id);
@@ -87,6 +91,11 @@ export class CollectionComponent implements OnInit {
         this.isLoading = true;
       }
     });
+
+  }
+
+  onClickGetRate() {
+    this.flashService.getRated(this.id);
   }
 
   onClickBack() {

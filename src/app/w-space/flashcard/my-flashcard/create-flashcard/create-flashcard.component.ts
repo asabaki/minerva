@@ -44,6 +44,6 @@ export class CreateFlashcardComponent implements OnInit {
     });
   }
   sliding(f: any) {
-    this.privacyText = f ? 'Private' : 'Public' ;
+    this.privacyText = f ? 'Only Me' : 'Publish' ;
   }
 }
