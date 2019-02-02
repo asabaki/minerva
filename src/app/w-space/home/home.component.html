@@ -66,6 +66,7 @@
         <button class="activity-see-more">See more<mat-icon>arrow_right</mat-icon></button>
       </div>
 
+
     </div>
 
 
@@ -73,7 +74,7 @@
     <div class="description-side__sub">
       <h1>Trending :</h1>
 
-      <div class="user-expore">
+      <div class="user-explore">
         <div class="user">
           <img class="user-img" src="../../../assets/img/flashcard.png" alt="" />
           <div class="user-acc">
@@ -83,7 +84,7 @@
         </div>
         <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
       </div>
-      <div class="user-expore">
+      <div class="user-explore">
         <div class="user">
           <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
           <div class="user-acc">
@@ -93,21 +94,11 @@
         </div>
         <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
       </div>
-      <div class="user-expore">
+      <div class="user-explore">
         <div class="user">
           <img class="user-img" src="../../../assets/img/note.png" alt="" />
           <div class="user-acc">
             <span class="user-username">Note</span>
-            <span class="user-detail">Created by : Creator</span>
-          </div>
-        </div>
-        <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/mindmap.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Mindmap</span>
             <span class="user-detail">Created by : Creator</span>
           </div>
         </div>
@@ -119,7 +110,7 @@
 
     <div class="description-side__sub">
       <h1>Who to follow :</h1>
-      <div class="user-expore" *ngFor="let user of following">
+      <div class="user-explore" *ngFor="let user of following">
         <div class="user">
           <img class="user-img" [src]="'assets/img/user/' + user.name.toLowerCase().charAt(0) + '.png'" alt="" />
           <div class="user-acc">

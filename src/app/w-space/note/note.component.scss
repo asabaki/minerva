@@ -228,10 +228,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
       border-radius: 10px;
       margin: auto;
       padding: 1rem 3rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
       &:hover {
         transform: scale(1.04);
         box-shadow: 0 .3rem .6rem rgba(black, .1);
+        animation: pulsate 2s infinite;
       }
       &:active {
         transform: scale(.95);
@@ -320,3 +321,4 @@ $bp-smallest: 31.25em; //500px  (500/16)
   }
 
 }
+
