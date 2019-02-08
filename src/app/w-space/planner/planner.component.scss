@@ -53,6 +53,9 @@ font-size: 1.4rem;
     justify-content: flex-end;
     margin-bottom: 1rem;
   }
+  i{
+    color: var(--color-primary) !important;
+  }
 }
 
 .user-reviews {
@@ -177,3 +180,106 @@ background-color: #fff;
       box-shadow: none;
   }
 }
+
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  &-edit{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+}
+.btn{
+  &-group{
+    display: flex;
+    border-radius: 100px;
+    background-color: var(--color-primary);
+    overflow: hidden;
+
+  }
+  &.addnew{
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+    transition: all .2s;
+    &:hover{
+      background-color:#13a300;
+      transform: scale(1.05);
+    }
+  }
+  &.delete{
+    color: white;
+    background-color: rgb(145, 1, 1);
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+    transition: all .2s;
+    &:hover{
+      background-color: rgb(110, 0, 0);
+      transform: scale(1.05);
+    }
+  }
+  color: white;
+  padding:1rem 1.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover{
+    background-color:var(--color-primary-dark-1);
+  }
+  &.active{
+    background-color:var(--color-primary-dark-1);
+  }
+  &.today{
+    background-color:white;
+    border-top: 1px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    transition: .2s all;
+    &:hover{
+      background-color:rgba(white,0.25);
+      color: white;
+    }
+  }
+}
+
+.event{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  table, th, td{
+    border: 1px solid rgb(233, 233, 233);
+    padding: 1rem;
+    text-align: center;
+  }
+  table{
+    border-collapse: collapse;
+  }
+}
+
+.form-control{
+  border-radius: 100px;
+  padding: .5rem 1rem;
+  border: 1px solid rgb(233, 233, 233);
+  width: 100%;
+  transition: .2s all;
+  &:focus{
+    border: 1px solid var(--color-primary);
+  }
+}
+.color-picker{
+  border: none;
+  cursor: pointer;
+}
+
+.date_time-picker{
+  border: 1px solid red !important;
+}
+
+
+

@@ -12,17 +12,38 @@
     <div class="description">
       <div class="description__container">
         <div class="img-upload__container">
-          <img class="img" src="../../../assets/img/user/a.png" alt="" />
+
+          <img
+          [src]="'assets/img/user/' + getUser().toLowerCase().charAt(0) + '.png'"
+          alt="User photo"
+          class="img"
+        />
           <div class="img-upload__text">
             <h3>Your profile photo</h3>
             <div>
-              <button mat-button class="img-upload__btn edit">Edit</button>
-              <!--<button mat-button class="img-upload__btn">Upload</button>-->
-              <!--<button mat-button class="img-upload__btn delete disabled">
-                Delete
-              </button>-->
+              <button
+                mat-button
+                class="img-upload__btn edit"
+                (click)="onClick()"
+                *ngIf="!hide"
+              >
+                Edit
+              </button>
+              <div *ngIf="hide">
+                <div class="img-upload__btn-group">
+                  <div>
+                    <button mat-button class="img-upload__btn">Upload
+                    <input mat-button type="file" name="my-pic" accept=".png,.jpg,.jpeg"></button>
+                    <button mat-button class="img-upload__btn delete disabled">
+                      Delete
+                    </button>
+                  </div>
+                  <button mat-button class="img-upload__btn save" (click)="onClick()"
+                  *ngIf="hide">Save</button>
+                </div>
+                <span>JPG, JPEG or PNG Maximum size 10MB.</span>
+              </div>
             </div>
-            <!--<span>JPG or PNG Maximum size 10MB.</span>-->
           </div>
         </div>
       </div>
@@ -42,7 +63,7 @@
                 <textarea matInput placeholder="About you"></textarea>
               </mat-form-field>
               <div class="update-form__btn">
-                <button mat-button class="img-upload__btn save">Save</button>
+                <button mat-button class="img-upload__btn save" >Save</button>
               </div>
             </form>
           </div>

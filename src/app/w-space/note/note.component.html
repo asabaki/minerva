@@ -15,34 +15,41 @@
     </div>
   </div>
   <div class="detail">
-      <div class="description">
-          <div class="create-quiz__header">
-            <mat-form-field color="primary">
-              <input
-                name="title"
-                matInput
-                type="text"
-                class="collection_name"
-                placeholder="Note Name"
-                #collectionName
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <textarea
-                name="description"
-                matInput
-                class="collection_description"
-                type="text"
-                placeholder="Description"
-                #description
-              ></textarea>
-            </mat-form-field>
-          </div>
-        </div>
     <div class="description">
-      <ckeditor class="ckeditor" [editor]="EditorDe" (ready)="onReady($event)"></ckeditor>
+      <div class="create-quiz__header">
+        <mat-form-field color="primary">
+          <input
+            name="title"
+            matInput
+            type="text"
+            class="collection_name"
+            placeholder="Note Name"
+            #collectionName
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+            name="description"
+            matInput
+            class="collection_description"
+            type="text"
+            placeholder="Description"
+            #description
+          ></textarea>
+        </mat-form-field>
+      </div>
     </div>
-    <button mat-button class="btn btn__save">Save</button>
+    <div class="description">
+      <ckeditor
+        class="ckeditor"
+        [editor]="Editor"
+        (ready)="onReady($event)"
+        id="editor"
+      ></ckeditor>
+    </div>
+    <div class="btn-group">
+      <button mat-button class="btn btn__save pdf"><i class="far fa-file-pdf" (click)="captureScreen()"></i>&nbsp;Save as PDF</button>
+      <button mat-button class="btn btn__save">Save</button>
+    </div>
   </div>
 </main>
-

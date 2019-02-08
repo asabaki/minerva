@@ -22,8 +22,8 @@
             <div class="question-number">1</div>
             <div class="question-question">what is my name?</div>
             <div class="question-correction question-correction__false">
-                <mat-icon>close</mat-icon>
-              </div>
+              <mat-icon>close</mat-icon>
+            </div>
           </div>
           <mat-radio-group class="question-choice">
             <mat-radio-button value="1" color="primary" class="radio-button"
@@ -40,8 +40,8 @@
             >
           </mat-radio-group>
           <div class="correction correction-false">
-              <mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !
-            </div>
+            <mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !
+          </div>
         </form>
 
         <form class="question">
@@ -61,19 +61,13 @@
             >
           </mat-radio-group>
           <div class="correction correction-true">
-              <mat-icon>check</mat-icon>&nbsp;Your answer is Correct !
-            </div>
+            <mat-icon>check</mat-icon>&nbsp;Your answer is Correct !
+          </div>
         </form>
-        <div class="result">
-          <h1>Result</h1>
-          <div class="result-true">Correct answer : 1</div>
-          <div class="result-false">Wrong answer : 1</div>
-              <div class="result-percent">Percentage : 50%</div>
+        <div class="btn__group">
+          <button mat-button class="btn btn__save" (click)="resultDialog()">Submit</button>
+          <button mat-button class="btn btn__save btn__retest">Retest</button>
         </div>
-        <button mat-button class="btn btn__save">Submit</button>
-
-        <button mat-button class="btn btn__save btn__retest">Retest</button>
-
       </div>
     </div>
   </div>

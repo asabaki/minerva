@@ -127,6 +127,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
         border-bottom: 2px solid var(--color-grey-light-3);
         padding: 1rem .5rem;
         align-items: center;
+        &:hover{
+          background-color: whitesmoke;
+        }
     }
     &-img {
         border-radius: 50%;
@@ -321,4 +324,19 @@ $bp-smallest: 31.25em; //500px  (500/16)
             margin: 0rem 2rem;
         }
     }
+}
+
+.days{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary);
+  color: white;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: .5rem 1.5rem;
+  &-num{
+    font-size: 3rem;
+    text-align: center;
+  }
 }

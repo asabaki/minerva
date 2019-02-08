@@ -13,6 +13,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { BarRatingModule } from 'ngx-bar-rating';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 import {
   MatIconModule,
@@ -62,8 +65,10 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
 import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
 import { SearchUserComponent } from './w-space/search-user/search-user.component';
 import { NoteComponent } from './w-space/note/note.component';
-
-
+import { CommonModule } from '@angular/common';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlanDetailComponent } from './w-space/planner/plan-detail/plan-detail.component';
+import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dialog/result-dialog.component';
 
 
 
@@ -96,6 +101,8 @@ import { NoteComponent } from './w-space/note/note.component';
     AccountSettingComponent,
     SearchUserComponent,
     NoteComponent,
+    PlanDetailComponent,
+    ResultDialogComponent,
 
 
 
@@ -129,7 +136,13 @@ import { NoteComponent } from './w-space/note/note.component';
     MatBadgeModule,
     BarRatingModule,
     MatSlideToggleModule,
-    CKEditorModule
+    CKEditorModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -146,7 +159,9 @@ import { NoteComponent } from './w-space/note/note.component';
     EditCardComponent,
     McqComponent,
     TrueFalseComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    PlanDetailComponent,
+    ResultDialogComponent
   ],
   bootstrap: [AppComponent]
 })
