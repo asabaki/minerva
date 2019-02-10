@@ -4,9 +4,9 @@
       <mat-icon
         color="primary"
         style="display: inline-flex; vertical-align: middle;"
-        >edit_attributes</mat-icon
+        >table</mat-icon
       >
-      Planner
+      schedule
     </h1>
     <div class="overview__count">
       <div class="overview__count-average">3</div>
@@ -136,6 +136,9 @@
         <div class="header-edit">
           <h3>Edit events</h3>
           <div>
+            <button class="btn completed" >
+              Completed events
+            </button>
             <button class="btn addnew" (click)="addEvent()">
               Add new
             </button>
@@ -152,6 +155,7 @@
               <th>Starts at</th>
               <th>Ends at</th>
               <th>Remove</th>
+              <th>Done?</th>
             </tr>
           </thead>
 
@@ -217,6 +221,11 @@
                   (click)="events.splice(index, 1); refresh.next()"
                 >
                   Delete
+                </button>
+              </td>
+              <td>
+                <button class="btn done">
+                    <i class="fas fa-check i"></i>
                 </button>
               </td>
             </tr>

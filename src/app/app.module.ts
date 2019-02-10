@@ -16,6 +16,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { CountdownModule } from 'ngx-countdown';
+
 
 import {
   MatIconModule,
@@ -69,7 +71,9 @@ import { CommonModule } from '@angular/common';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { PlanDetailComponent } from './w-space/planner/plan-detail/plan-detail.component';
 import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dialog/result-dialog.component';
-
+import { CountdownComponent } from './w-space/planner/countdown/countdown.component';
+import { SelfControlComponent } from './w-space/self-control/self-control.component';
+import { WebsiteBlockingComponent } from './w-space/self-control/website-blocking/website-blocking.component';
 
 
 
@@ -103,11 +107,9 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
     NoteComponent,
     PlanDetailComponent,
     ResultDialogComponent,
-
-
-
-
-
+    CountdownComponent,
+    SelfControlComponent,
+    WebsiteBlockingComponent,
   ],
   imports: [
     BrowserModule,
@@ -142,7 +144,8 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    CountdownModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -161,7 +164,8 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
     TrueFalseComponent,
     SearchUserComponent,
     PlanDetailComponent,
-    ResultDialogComponent
+    ResultDialogComponent,
+    WebsiteBlockingComponent
   ],
   bootstrap: [AppComponent]
 })

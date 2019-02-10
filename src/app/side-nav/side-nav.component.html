@@ -37,31 +37,31 @@
       </a>
     </li>
     <li class="side-nav__item dropdown" *ngIf="status">
-      <a routerLink="#" class="side-nav__link dropdown" (click)="onClick()">
+      <a routerLink="#" class="side-nav__link dropdown" (click)="onClick()" id="plan">
         <div>
             <mat-icon class="side-nav__icon">edit_attributes</mat-icon>
             <span>Planner</span>
         </div>
-        <div>
+        <div class="arrow-1">
           <mat-icon *ngIf="!hide">keyboard_arrow_down</mat-icon>
           <mat-icon *ngIf="hide">keyboard_arrow_up</mat-icon>
         </div>
       </a>
     </li>
     <li class="side-nav__item dropdown_item" *ngIf="status">
-        <a routerLink="/plan" class="side-nav__link" *ngIf="hide">
+        <a routerLink="/plan" class="side-nav__link" *ngIf="hide" >
           <mat-icon class="side-nav__icon">table</mat-icon>
           <span>Schedule</span>
         </a>
       </li>
     <li class="side-nav__item dropdown_item" *ngIf="status">
-      <a routerLink="/countdown" class="side-nav__link" *ngIf="hide">
+      <a routerLink="/countdown" class="side-nav__link" *ngIf="hide" >
         <mat-icon class="side-nav__icon">timer</mat-icon>
         <span>Count Down</span>
       </a>
     </li>
     <li class="side-nav__item" *ngIf="status">
-      <a routerLink="" class="side-nav__link">
+      <a routerLink="/self-control" class="side-nav__link ">
         <mat-icon class="side-nav__icon">block</mat-icon>
         <span>Self Control</span>
       </a>

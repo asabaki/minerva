@@ -1,0 +1,64 @@
+<main class="top-view">
+  <div class="overview">
+    <h1 class="overview__heading">
+      <mat-icon
+        color="primary"
+        style="display: inline-flex; vertical-align: middle;"
+        >block
+      </mat-icon>
+      Self-control
+    </h1>
+    <div class="overview__count">
+      <div class="overview__count-average">01</div>
+      <div class="overview__count-count">Restric</div>
+    </div>
+  </div>
+  <div class="detail">
+    <div class="container">
+
+        <div class="btn-group">
+          <button mat-icon class="btn-block" (click)="openWebBlockingialog()"><i class="fas fa-ban"></i>&nbsp;Block the site</button>
+        </div>
+
+      <div class="container-sub">
+        <div class="container-box">
+          <div class="block-icon"><i class="fas fa-ban"></i></div>
+          <p class="block-url"><a href="https://www.facebook.com">www.facebook.com</a></p>
+          <countdown
+            [config]="{ leftTime: 6000 }"
+            class="countdown-time"
+          ></countdown>
+          <p class="block-use">
+            The site can be used again at <span>12:00</span>
+          </p>
+          <button mat-button class="btn-unblock">unblock</button>
+        </div>
+        <div class="container-box">
+          <div class="block-icon"><i class="fas fa-ban"></i></div>
+          <p class="block-url"><a href="https://www.youtube.com">www.youtube.com</a></p>
+
+          <countdown
+            [config]="{ leftTime: 1200 }"
+            class="countdown-time"
+          ></countdown>
+          <p class="block-use">
+            The site can be used again at <span>12:00</span>
+          </p>
+          <button mat-button class="btn-unblock">unblock</button>
+        </div>
+        <div class="container-box">
+          <div class="block-icon"><i class="fas fa-ban"></i></div>
+          <p class="block-url"><a href="https://www.pornhub.com">www.pornhub.com</a></p>
+          <countdown
+            [config]="{ leftTime: 36000 }"
+            class="countdown-time"
+          ></countdown>
+          <p class="block-use">
+            The site can be used again at <span>12:00</span>
+          </p>
+          <button mat-button class="btn-unblock">unblock</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

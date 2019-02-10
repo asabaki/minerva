@@ -11,6 +11,8 @@ import {HomeComponent} from './w-space/home/home.component';
 import {FlashcardComponent} from './w-space/flashcard/flashcard.component';
 import {AccountSettingComponent} from './w-space/account-setting/account-setting.component';
 import {NoteComponent} from './w-space/note/note.component';
+import {CountdownComponent} from './w-space/planner/countdown/countdown.component';
+import {SelfControlComponent} from './w-space/self-control/self-control.component';
 
 
 
@@ -26,6 +28,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'acc', component: AccountSettingComponent},
   {path: 'note', component: NoteComponent},
+  {path: 'countdown', component: CountdownComponent},
+  {path: 'self-control', component: SelfControlComponent},
 
 
 

@@ -205,10 +205,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin: auto 1rem;
         padding: 1rem 3rem;
         margin-top: 1rem;
+        transition: .2s all;
         &:hover {
             transform: scale(1.04);
             box-shadow: 0 .3rem .6rem rgba(black, .1);
-            animation: pulsate 2s infinite;
         }
         &:active {
             transform: scale(.95);

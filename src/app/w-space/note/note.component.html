@@ -44,11 +44,11 @@
         class="ckeditor"
         [editor]="Editor"
         (ready)="onReady($event)"
-        id="editor"
+        id="pdfCreate"
       ></ckeditor>
     </div>
     <div class="btn-group">
-      <button mat-button class="btn btn__save pdf"><i class="far fa-file-pdf" (click)="captureScreen()"></i>&nbsp;Save as PDF</button>
+      <button mat-button class="btn btn__save pdf" (click)="captureScreen()"><i class="far fa-file-pdf" ></i>&nbsp;Save as PDF</button>
       <button mat-button class="btn btn__save">Save</button>
     </div>
   </div>

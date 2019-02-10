@@ -42,7 +42,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
         align-self: stretch;
         position: relative;
         &:not(:last-child) {
-
             @media only screen and (max-width: $bp-medium) {
                 margin: 0;
             }
@@ -57,26 +56,28 @@ $bp-smallest: 31.25em; //500px  (500/16)
             background-color: var(--color-primary);
             transform: scaleY(0);
             transition: transform 0.15s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.15s, background-color 0.1s;
-            @media only screen and (max-width: $bp-medium) {
-                width: 100%;
-            }
+
         }
         &--active::before,
         &:hover::before {
             transform: scaleY(1);
             width: 100%;
         }
-        &:active::before {
+        &:active::before{
             background-color: var(--color-primary-light);
+
         }
     }
-    &__link{
-      &.dropdown{
-        display: flex;
-        justify-content: space-between;
-      }
+    &__link {
+        &.dropdown {
+            display: flex;
+            justify-content: space-between;
+            @media only screen and (max-width: $bp-medium) {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
-
     &__link:link,
     &__link:visited {
         color: var(--color-grey-light-1);
@@ -139,16 +140,23 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
 }
 
-.dropdown{
-  &_item{
-    background-color: rgb(63, 63, 63);
-  }
+.dropdown {
+    &_item {
+        background-color: rgb(63, 63, 63);
+        /*@media only screen and (max-width: $bp-medium) {
+         background-color: red;
+        }*/
+    }
 }
-.border{
-  &-top{
-    border-top: 2px solid rgb(56, 56, 56);
-  }
-  &-bottom{
-    border-bottom: 2px solid rgb(56, 56, 56);
-  }
+
+.border {
+    &-top {
+        border-top: 2px solid rgb(56, 56, 56);
+    }
+    &-bottom {
+      @media only screen and (max-width: $bp-medium) {
+        border-bottom: none;
+    }
+        border-bottom: 2px solid rgb(56, 56, 56);
+    }
 }
