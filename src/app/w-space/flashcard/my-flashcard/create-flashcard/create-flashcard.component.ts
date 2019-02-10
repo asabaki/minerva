@@ -12,7 +12,7 @@ import {ErrorSnackComponent} from '../../../sign-up/sign-up.component';
   styleUrls: ['./create-flashcard.component.scss']
 })
 export class CreateFlashcardComponent implements OnInit {
-  privacyText = 'Private';
+  privacyText = 'Only Me';
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
               private authService: AuthService,

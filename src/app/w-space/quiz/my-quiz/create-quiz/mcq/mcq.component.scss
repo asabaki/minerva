@@ -95,3 +95,9 @@ $bp-smallest: 31.25em; //500px  (500/16)
         }
     }
 }
+.create-choice{
+  &__scroll{
+    width: 100%;
+    height: 20rem;
+  }
+}

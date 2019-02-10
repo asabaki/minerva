@@ -2,13 +2,22 @@
   <!--&lt;!&ndash;<main class="top-view">-->
   <div class="overview">
     <h1 class="overview__heading">
+      <button
+        mat-icon-button
+        color="primary"
+        matTooltip="Back to quizzes"
+        class="icon-btn"
+        (click)="onClickBack()"
+      >
+        <mat-icon color="primary">arrow_back</mat-icon>
+      </button>
       <mat-icon
         color="primary"
         style="display: inline-flex; vertical-align: middle;"
       >question_answer
       </mat-icon
       >
-      Quiz
+      MY QUIZZES
     </h1>
     <div class="overview__count">
       <div class="overview__count-average">8</div>
@@ -20,12 +29,21 @@
       <div class="description-btn_set">
         <button
           mat-raised-button
+          matTooltip="Create new collection of Flashcard"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          class="btn-create"
+          mat-button
+          (click)="onOpenCreate()"
+        >
+          Create new Quiz
+        </button>
+        <button
+          mat-raised-button
           matTooltip="Edit and remove collection"
           aria-label="Button that displays a tooltip when focused or hovered over"
-          class="btn-my"
-          (click)="onMyQuiz()"
+          class="btn-edit"
         >
-          My Quiz
+          Edit
         </button>
       </div>
       <table

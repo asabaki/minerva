@@ -6,6 +6,8 @@ import {map} from 'rxjs/operators';
 import {FlashModel} from './flash_collection.model';
 import {RequestOptions} from '@angular/http';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,8 @@ export class FlashCardService {
   // * flash/update/id --> Update Collection Detail based on ID
   constructor(private http: HttpClient,
               private auth: AuthService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private matSnack: MatSnackBar) {
   }
 
   create_collection(title: string, description: string, privacy: boolean) {
@@ -92,7 +95,7 @@ export class FlashCardService {
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length,
-              updatedAt: collection.updatedAt,
+              updatedAt: collection.lastUpdate,
               rating: collection.rating,
               views: 0
             });
@@ -122,7 +125,6 @@ export class FlashCardService {
 
   getRated(id: string) {
     this.http.get('http://localhost:3000/api/flash/rate/' + id, {observe: 'response'}).subscribe(res => {
-      console.log(res);
       this.ratedSubject.next(res);
     });
     return this.ratedSubject.asObservable();
@@ -133,7 +135,6 @@ export class FlashCardService {
       params: new HttpParams().set('id', id),
       observe: 'response'
     }).subscribe(res => {
-      console.log(res);
     });
   }
 
@@ -195,13 +196,28 @@ export class FlashCardService {
   }
 
   rate_collection(id: string, rate: number) {
-    // TODO - Rating must not update LAST UPDATED FIELD
-    this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, { observe: 'response'}).subscribe(res => {
+    this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
-        console.log(res);
         this.updateSubject.next(res);
       }
     });
     return this.updateSubject.asObservable();
+  }
+
+  unrate_collection(id: string) {
+    this.http.patch('http://localhost:3000/api/flash/unrate', {id}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.updateSubject.next(res);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You have unrated this collection',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went wrong\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 }

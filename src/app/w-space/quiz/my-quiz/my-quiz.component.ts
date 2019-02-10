@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { CreateQuizComponent } from './my-quiz/create-quiz/create-quiz.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -23,24 +23,30 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {name: 'Neon', description: 'aaaaaaa', numberOfCard: 27},
 ];
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  selector: 'app-my-quiz',
+  templateUrl: './my-quiz.component.html',
+  styleUrls: ['./my-quiz.component.scss']
 })
-export class QuizComponent implements OnInit {
+export class MyQuizComponent implements OnInit {
+
   displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   constructor(public dialog: MatDialog,
-              private router: Router) {}
+              private router: Router,
+              private location: Location) {}
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
   }
 
-
-  onMyQuiz() {
-    this.router.navigate(['quiz/my/']);
+  onOpenCreate() {
+    this.router.navigate(['quiz/my/create']);
   }
+
+  onClickBack() {
+    this.location.back();
+  }
+
 }

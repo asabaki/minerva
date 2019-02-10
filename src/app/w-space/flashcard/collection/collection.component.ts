@@ -80,8 +80,7 @@ export class CollectionComponent implements OnInit {
           };
           this.authService.isFollowing(localStorage.getItem('userId'), this.creator).subscribe(fol => this.isFollowing = fol);
           this.flashService.getRated(this.id).subscribe(rate => {
-            this.isRated = rate.body;
-            this.faoRated = this.isRated;
+            this.faoRated = rate.body;
           });
           this.isLoading = false;
         });
@@ -157,9 +156,7 @@ export class CollectionComponent implements OnInit {
   openAddCardDialog() {
     this.flashService.collectionId = this.id;
     const dialogRef = this.dialog.open(AddCardComponent, {panelClass: 'myapp-no-padding-dialog'});
-    console.log(this.flashService.getIndex());
     dialogRef.afterClosed().subscribe(result => {
-      console.log('It closed na');
       this.index = 1;
     });
   }
@@ -167,7 +164,8 @@ export class CollectionComponent implements OnInit {
   onFaoRate(e) {
     this.flashService.rate_collection(this.id, e).subscribe(r => {
       if (r.ok) {
-        this.faoRated = true;
+        // this.faoRated = true;
+        this.flashService.getRated(this.id).subscribe(rated => this.faoRated = rated.body);
         this.faoRate = r.body.cards.rating;
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'Submitted\n Thank you for your feedback!',
@@ -182,9 +180,7 @@ export class CollectionComponent implements OnInit {
     });
   }
 
-  faoReset() {
-    // TODO - Add Unvote
-    this.faoRated = false;
-    this.faoRate = 3.6;
+  faoReset(rate: number) {
+    this.flashService.unrate_collection(this.id);
   }
 }
