@@ -36,7 +36,7 @@ import {
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, helpSnackComponent } from './header/header.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
 import {
@@ -110,6 +110,7 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     CountdownComponent,
     SelfControlComponent,
     WebsiteBlockingComponent,
+    helpSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -165,7 +166,8 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     SearchUserComponent,
     PlanDetailComponent,
     ResultDialogComponent,
-    WebsiteBlockingComponent
+    WebsiteBlockingComponent,
+    helpSnackComponent
   ],
   bootstrap: [AppComponent]
 })
