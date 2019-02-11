@@ -9,6 +9,10 @@ import {CollectionComponent} from './w-space/flashcard/collection/collection.com
 import {PlannerComponent} from './w-space/planner/planner.component';
 import {HomeComponent} from './w-space/home/home.component';
 import {FlashcardComponent} from './w-space/flashcard/flashcard.component';
+import {AccountSettingComponent} from './w-space/account-setting/account-setting.component';
+import {CreateQuizComponent} from './w-space/quiz/my-quiz/create-quiz/create-quiz.component';
+import {MyQuizComponent} from './w-space/quiz/my-quiz/my-quiz.component';
+import {QuizCollectionComponent} from './w-space/quiz/quiz-collection/quiz-collection.component';
 
 
 
@@ -18,10 +22,14 @@ const routes: Routes = [
   {path: 'flash/my', component: MyFlashcardComponent, canActivate: [AuthGuard]},
   {path: 'flash/item/:id', component: CollectionComponent, canActivate: [AuthGuard]},
   {path: 'quiz', component: QuizComponent, canActivate: [AuthGuard]},
-  // {path: 'flash/:id', component: CollectionComponent},
+  {path: 'quiz/my', component: MyQuizComponent, canActivate: [AuthGuard]},
+  {path: 'quiz/my/create', component: CreateQuizComponent, canActivate: [AuthGuard]},
+  {path: 'quiz/item/:id', component: QuizCollectionComponent, canActivate: [AuthGuard]},
   {path: 'refresh', component: WSpaceComponent},
   {path: 'plan', component: PlannerComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent},
+  {path: 'acc', component: AccountSettingComponent},
+
 
 
 ];

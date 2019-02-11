@@ -48,15 +48,18 @@ import { CreateFlashcardComponent } from './w-space/flashcard/my-flashcard/creat
 import { AddCardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/add-card/add-card.component';
 import { CollectionComponent } from './w-space/flashcard/collection/collection.component';
 import { QuizComponent } from './w-space/quiz/quiz.component';
-import { CreateQuizComponent } from './w-space/quiz/create-quiz/create-quiz.component';
+import { CreateQuizComponent } from './w-space/quiz/my-quiz/create-quiz/create-quiz.component';
 import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import { McqComponent } from './w-space/quiz/create-quiz/mcq/mcq.component';
-import { TrueFalseComponent } from './w-space/quiz/create-quiz/true-false/true-false.component';
+import { McqComponent } from './w-space/quiz/my-quiz/create-quiz/mcq/mcq.component';
+import { TrueFalseComponent } from './w-space/quiz/my-quiz/create-quiz/true-false/true-false.component';
 import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
 import { PlannerComponent } from './w-space/planner/planner.component';
 import { HomeComponent } from './w-space/home/home.component';
 import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
+import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
+import { SearchUserComponent } from './w-space/search-user/search-user.component';
+import { MyQuizComponent } from './w-space/quiz/my-quiz/my-quiz.component';
 
 
 
@@ -88,6 +91,9 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
     PlannerComponent,
     HomeComponent,
     FlashcardComponent,
+    AccountSettingComponent,
+    SearchUserComponent,
+    MyQuizComponent,
 
 
 
@@ -133,10 +139,12 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
     LogInComponent,
     ErrorLoginSnackComponent,
     CreateFlashcardComponent,
+    CreateQuizComponent,
     AddCardComponent,
     EditCardComponent,
     McqComponent,
     TrueFalseComponent,
+    SearchUserComponent
   ],
   bootstrap: [AppComponent]
 })

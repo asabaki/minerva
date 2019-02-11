@@ -9,7 +9,7 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading">{{ title }}</h1>
+    <h1 class="overview__heading"><mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon> {{ title }}</h1>
     <div class="overview__right">
       <div class="follow">
         <div class="follow__container">
@@ -44,7 +44,7 @@
           </p>
           <p *ngIf="faoRated" class="rating__text">
             Your rating: {{ faoRate }}
-            <i class="link fa fa-times-circle" (click)="faoReset(5.6)"></i>
+            <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
           </p>
         </section>
         <p class="description__area-p">{{ desc }}</p>
@@ -57,8 +57,12 @@
               Created by <br />
               {{ creatorName }}
             </button>
-            <button mat-button matTooltip="Follow Creator" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)" ><span>+</span>Follow</button>
-            <button mat-button matTooltip="Follow Creator" class="btn-follow" *ngIf="isFollowing" (click)="onUnfollow(creator)"><span>+</span>Unfollow</button>
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)"><span class="bold">+</span>Follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator)" >
+                <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
+                <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+              </button>
+
           </div>
         </div>
       </div>

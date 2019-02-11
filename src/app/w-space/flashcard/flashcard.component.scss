@@ -13,9 +13,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
         margin-left: 4rem;
     }
     @media only screen and (max-width: $bp-large) {
-        margin-left: 5rem;
+        margin-left: 3rem;
     }
     @media only screen and (max-width: $bp-medium) {
+        margin-left: 3rem;
+    }
+    @media only screen and (max-width: 1044px) {
         margin-left: 0rem;
     }
 }
@@ -484,11 +487,16 @@ tr.mat-row.ng-star-inserted {
 
 td.mat-cell:not(:nth-of-type(2)),
 td.mat-footer-cell:not(:nth-of-type(2)),
-th.mat-header-cell:not(:nth-of-type(2)) {
+th.mat-header-cell:not(:nth-of-type(2)),
+ {
   text-align: center;
 }
-
-
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type,
+ {
+  text-align: left;
+}
 
 .search {
     flex: 0 0 30%;

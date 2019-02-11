@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {SignUpComponent} from '../w-space/sign-up/sign-up.component';
 import {LogInComponent} from '../w-space/log-in/log-in.component';
 import {AuthService} from '../w-space/services/auth.service';
+import {SearchUserComponent} from '../w-space/search-user/search-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 
 @Component({
@@ -25,6 +26,12 @@ export class HeaderComponent implements OnInit {
     // TODO - Fix Following number after click followe
     this.isAuth = this.authService.getIsAuth();
     this.name = this.authService.getUserName();
+    this.authService.getFollower().subscribe(flw => {
+      this.follower = flw.body.length;
+    });
+    this.authService.getFollowing().subscribe(fwn => {
+      this.following = fwn.body.length;
+    });
     this.authService.getAuthStatus().subscribe((res) => {
       this.name = this.authService.getUserName();
       this.isAuth = res;
@@ -64,5 +71,12 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  search_dialog() {
+    const dialogRef = this.dialog.open(SearchUserComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

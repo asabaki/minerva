@@ -488,7 +488,7 @@ td.mat-footer-cell,
 th.mat-header-cell {
     max-width: 30rem;
     text-align: justify;
-    padding: 1rem;
+    padding: 0rem 1rem;
     @media only screen and (max-width: $bp-small) {
         padding: 0rem;
     }
@@ -501,9 +501,17 @@ th.mat-header-cell {
 
 td.mat-cell:not(:nth-of-type(2)),
 td.mat-footer-cell:not(:nth-of-type(2)),
-th.mat-header-cell:not(:nth-of-type(2)) {
+th.mat-header-cell:not(:nth-of-type(2)),
+ {
   text-align: center;
 }
+td.mat-cell:nth-of-type(3),
+td.mat-footer-cell:nth-of-type(3),
+th.mat-header-cell:nth-of-type(3),
+ {
+  text-align: left;
+}
+
 
 .bar-rating{
   justify-content: center;

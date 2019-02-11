@@ -12,12 +12,12 @@ export interface PeriodicElement {
   title: string;
   description: string;
   numberOfCard: number;
+  privacy: boolean;
   rating: number;
   privacy: boolean;
   dom: Date;
   views: number;
   delete: boolean;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -32,6 +32,7 @@ export class MyFlashcardComponent implements OnInit {
     {def: 'privacy', show: true},
     {def: 'title', show: true},
     {def: 'description', show: true},
+    {def: 'numberOfCard', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
     {def: 'views', show: true},
@@ -41,8 +42,7 @@ export class MyFlashcardComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-  number_collection: number
-
+  number_collection: number;
   bootRate = 1;
   faRate = 1;
   cssRate = 1;
@@ -61,7 +61,6 @@ export class MyFlashcardComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  // TODO- Edit data on this page to be observable
   ngOnInit() {
     let i = 0;
     this.flash.fetch_collection().subscribe(
@@ -106,8 +105,6 @@ export class MyFlashcardComponent implements OnInit {
       const id = r._id;
       this.router.navigate(['flash/item/' + id]);
     }
-
-    // console.log(r);
   }
 
   getDisplayedColumn() {
@@ -118,7 +115,9 @@ export class MyFlashcardComponent implements OnInit {
 
   onClickEdit() {
     this.editClicked = !this.editClicked;
-    this.columnDef[6].show = this.editClicked;
+    this.columnDef
+      .filter( (def) => def.def === 'delete')
+      .map(def => def.show = this.editClicked);
 
   }
 
@@ -148,12 +147,18 @@ export class MyFlashcardComponent implements OnInit {
     this.faoRate = e;
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
+  }
+
   faoReset() {
     this.faoRated = false;
     this.faoRate = 3.6;
-  }
 
-  onMyFlashcard() {
-    this.router.navigate(['flash/my/']);
   }
 }

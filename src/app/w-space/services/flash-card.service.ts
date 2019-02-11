@@ -6,6 +6,8 @@ import {map} from 'rxjs/operators';
 import {FlashModel} from './flash_collection.model';
 import {RequestOptions} from '@angular/http';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class FlashCardService {
   addSubject = new Subject<any>();
   updateSubject = new Subject<any>();
   cardSubject = new Subject<any>();
+  ratedSubject = new Subject<any>();
   collectionId: string;
   index: number;
 
@@ -27,7 +30,8 @@ export class FlashCardService {
   // * flash/update/id --> Update Collection Detail based on ID
   constructor(private http: HttpClient,
               private auth: AuthService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private matSnack: MatSnackBar) {
   }
 
   create_collection(title: string, description: string, privacy: boolean) {
@@ -80,19 +84,19 @@ export class FlashCardService {
   }
 
   fetch_collection_all() {
-    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
+    this.http.get<any>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
       .pipe(map(res => {
         const ret = [];
         if (res.status === 200) {
-          res.body.forEach((collection) => {
+          res.body.collections.forEach((collection, index) => {
             ret.push({
               _id: collection._id,
-              author: collection.author,
+              author: res.body.users[index],
               title: collection.title,
               description: collection.description,
               numberOfCard: collection.card.length,
-              updatedAt: collection.updatedAt,
-              rating: 0,
+              updatedAt: collection.lastUpdate,
+              rating: collection.rating,
               views: 0
             });
           });
@@ -108,7 +112,7 @@ export class FlashCardService {
     return this.subject.asObservable();
   }
 
-  fetch_card(id: string) {
+  fetch_card(id: string) { // Collection Component
     this.http.get('http://localhost:3000/api/flash/pull/' + id, {observe: 'response'}).subscribe((response) => {
       this.cardSubject.next(response);
     });
@@ -117,6 +121,21 @@ export class FlashCardService {
 
   getIndex() {
     return this.index;
+  }
+
+  getRated(id: string) {
+    this.http.get('http://localhost:3000/api/flash/rate/' + id, {observe: 'response'}).subscribe(res => {
+      this.ratedSubject.next(res);
+    });
+    return this.ratedSubject.asObservable();
+  }
+
+  getRating(id: string) {
+    this.http.get('http://localhost:3000/api/flash/rate', {
+      params: new HttpParams().set('id', id),
+      observe: 'response'
+    }).subscribe(res => {
+    });
   }
 
   delete_card(id: string) {
@@ -174,5 +193,31 @@ export class FlashCardService {
     return this.updateSubject.asObservable();
     // console.log(status);
     // return status;
+  }
+
+  rate_collection(id: string, rate: number) {
+    this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.updateSubject.next(res);
+      }
+    });
+    return this.updateSubject.asObservable();
+  }
+
+  unrate_collection(id: string) {
+    this.http.patch('http://localhost:3000/api/flash/unrate', {id}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.updateSubject.next(res);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You have unrated this collection',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went wrong\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 }

@@ -2,10 +2,12 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router, Routes} from '@angular/router';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Location} from '@angular/common';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {EditCardComponent} from './edit-card/edit-card.component';
 import {AddCardComponent} from '../my-flashcard/create-flashcard/add-card/add-card.component';
 import {AuthService} from '../../services/auth.service';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
+
 
 // import {EditCardComponent} from './edit-card/edit-card.component';
 
@@ -39,10 +41,12 @@ export class CollectionComponent implements OnInit {
   isFollowing: boolean;
   // arr: Array<number>;
   isLoading = true;
+  isRated = false;
 
   constructor(private route: ActivatedRoute,
               private location: Location,
               private router: Router,
+              private matSnack: MatSnackBar,
               private flashService: FlashCardService,
               private authService: AuthService,
               public dialog: MatDialog,
@@ -60,6 +64,7 @@ export class CollectionComponent implements OnInit {
           this.creatorName = res.body.creatorName;
           this.privacy = res.body.cards.privacy;
           this.rating = res.body.cards.rating;
+          this.faoRate = this.rating;
           this.views = res.body.cards.views;
           this.title = res.body.cards.title;
           this.desc = res.body.cards.description;
@@ -76,13 +81,22 @@ export class CollectionComponent implements OnInit {
             index: this.index
           };
           this.authService.isFollowing(localStorage.getItem('userId'), this.creator).subscribe(fol => this.isFollowing = fol);
+          this.flashService.getRated(this.id).subscribe(rate => {
+            this.faoRated = rate.body;
+          });
           this.isLoading = false;
         });
+        // this.flashService.getRating(this.id);
 
       } else {
         this.isLoading = true;
       }
     });
+
+  }
+
+  onClickGetRate() {
+    this.flashService.getRated(this.id);
   }
 
   onClickBack() {
@@ -144,20 +158,31 @@ export class CollectionComponent implements OnInit {
   openAddCardDialog() {
     this.flashService.collectionId = this.id;
     const dialogRef = this.dialog.open(AddCardComponent, {panelClass: 'myapp-no-padding-dialog'});
-    console.log(this.flashService.getIndex());
     dialogRef.afterClosed().subscribe(result => {
-      console.log('It closed na');
       this.index = 1;
     });
   }
 
   onFaoRate(e) {
-    this.faoRated = true;
-    this.faoRate = e;
+    this.flashService.rate_collection(this.id, e).subscribe(r => {
+      if (r.ok) {
+        // this.faoRated = true;
+        this.flashService.getRated(this.id).subscribe(rated => this.faoRated = rated.body);
+        this.faoRate = r.body.cards.rating;
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Submitted\n Thank you for your feedback!',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went wrong!\n' + r.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 
-  faoReset() {
-    this.faoRated = false;
-    this.faoRate = 3.6;
+  faoReset(rate: number) {
+    this.flashService.unrate_collection(this.id);
   }
 }
