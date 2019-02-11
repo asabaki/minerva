@@ -15,9 +15,15 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/Minerva",
+          "builder": "@angular-builders/custom-webpack:browser",
+			    "options": {
+				    "customWebpackConfig": {
+					  "path": "./extra-webpack-config.js",
+					    "mergeStrategies": {
+						  "module.rules": "replace"
+				    	}
+            },
+            "outputPath": "lib/Angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -26,8 +32,11 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "showCircularDependencies": false,
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/font-awesome/scss/font-awesome.scss",
+              "src/theme.scss"
             ],
             "scripts": []
           },
@@ -83,7 +92,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "assets": [

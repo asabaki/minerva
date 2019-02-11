@@ -1,0 +1,159 @@
+
+<main class="top-view" *ngIf="true">
+  <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to flashcards"
+      class="icon-btn"
+      (click)="onClickBack()"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
+    <h1 class="overview__heading">
+      <mat-icon
+        color="primary"
+        style="display: inline-flex; vertical-align: middle;"
+      >style</mat-icon
+      >
+      My Flashcards
+    </h1>
+    <div class="overview__count">
+      <div class="overview__count-average">{{ number_collection }}</div>
+      <div class="overview__count-count">Collection</div>
+    </div>
+  </div>
+  <div class="detail" *ngIf="isLoading">
+    <mat-progress-spinner mode="indeterminate" ></mat-progress-spinner>
+  </div>
+  <div class="detail" *ngIf="!isLoading">
+    <div class="description">
+      <div class="description-btn_set">
+        <form action="#" class="search">
+          <input
+            (keyup)="applyFilter($event.target.value)"
+            type="text"
+            class="search__input"
+            placeholder="Search for collection name, author"
+          />
+          <button class="search__button">
+            <mat-icon class="search__icon" color="primary">search</mat-icon>
+          </button>
+        </form>
+        <div class="description-btn_set-right">
+          <button
+            mat-raised-button
+            matTooltip="Create new collection of Flashcard"
+            class="btn-create"
+            mat-button
+            (click)="openCreateFlashcardDialog()"
+          >
+            Create new collection
+          </button>
+          <button
+            mat-raised-button
+            matTooltip="Remove collection"
+            class="btn-edit"
+            (click)="onClickEdit()"
+            *ngIf="!editClicked"
+          >
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            matTooltip="Remove collection"
+            class="btn-edit"
+            (click)="onClickEdit()"
+            *ngIf="editClicked"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="privacy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Privacy
+          </th>
+          <td mat-cell *matCellDef="let element"><mat-icon [ngClass]="element.privacy ? 'fill-red' : 'fill-green'">{{ element.privacy ? 'lock' : 'public' }}</mat-icon></td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Collection Name
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description.length > 50 ? (element.description | slice : 0 : 50) + ' .....' : element.description  }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="rating">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Rating</th>
+          <td mat-cell *matCellDef="let element;">
+            <form #form="ngForm">
+              <bar-rating
+                [rate]="element.rating"
+                [max]="5"
+                [disabled]="true"
+                [theme]="'fontawesome-o'"
+                color="primary"
+              ></bar-rating>
+            </form>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dom">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Date of Modified
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.dom | date : 'medium' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="numberOfCard">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            No. of card
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.numberOfCard }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="views">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Views</th>
+          <td mat-cell *matCellDef="let element">{{ element.views }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef ></th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-raised-button
+              matTooltip="Remove collection"
+              class="btn-delete"
+              (click)="onClickDelete(element)"
+            >
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="getDisplayedColumn()"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: getDisplayedColumn()"
+          (click)="onRowClick(row)"
+        ></tr>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!--<app-add-card></app-add-card>-->
+<!--<app-collection></app-collection>-->

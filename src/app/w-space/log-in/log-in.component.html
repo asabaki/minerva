@@ -1,0 +1,47 @@
+<div class="log-in">
+  <form action="#" class="log-in__form" (submit)="onLogin(f)" #f="ngForm">
+    <h1 class="log-in__form-header-1">Log in</h1>
+    <h2 class="log-in__form-header-2">Log in with Social media</h2>
+    <div class="log-in__social">
+      <div class="log-in__social-facebook"><fa name="facebook-f"></fa></div>
+      <div class="log-in__social-twitter"><fa name="twitter"></fa></div>
+      <div class="log-in__social-google"><fa name="google"></fa></div>
+    </div>
+    <div class="border"></div>
+    <h2 class="log-in__form-header-2">OR</h2>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email Address</mat-label>
+      <input matInput placeholder="Email" name="email" ngModel required #email />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        name="password"
+        matInput
+        ngModel
+        required
+        #password
+        placeholder="Password"
+        [type]="hide ? 'password' : 'text'"
+      />
+      <mat-icon
+        matSuffix
+        (click)="hide = !hide"
+        class="password-visible-icon"
+        >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+      >
+    </mat-form-field>
+    <!--
+      if input error add class 'log-in__form-input__error' to the input tag
+    -->
+    <button class="log-in__btn log-in__btn-submit" type="submit">
+      <span class="log-in__btn-submit__visible">Log in!</span>
+      <span class="log-in__btn-submit__invisible">Submit</span>
+    </button>
+    <div class="log-in__message">
+      <p>Need an account? <button mat-button mat-dialog-close class="log-in__link" (click)="signUp_dialog()">Signup!</button></p>
+      <a class="log-in__link">Forgot Password?</a>
+    </div>
+  </form>
+</div>

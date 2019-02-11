@@ -1,0 +1,44 @@
+.result{
+  background-color: var(--color-grey-light-2);
+  border-radius: 5px;
+  border: none;
+  padding: 5rem;
+  border: 2px solid var(--color-secondary);
+  text-align: center;
+  margin: 1rem auto;
+  font-size: 2.5rem;
+  h1{
+    color:var(--color-secondary-dark);
+    text-align: center;
+
+  }
+  &-false{
+    color: rgb(187, 3, 3);
+  }
+  &-true{
+    color: green;
+  }
+  &-percent{
+    color: var(--color-secondary-dark);
+  }
+
+}
+.btn{
+  &__done{
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 100px;
+    cursor: pointer;
+    padding: 1rem 3rem;
+    border: none;
+    transition: .2s all;
+    &:hover {
+      transform: scale(1.04);
+
+    }
+    &:active {
+      transform: scale(.95);
+
+    }
+  }
+}

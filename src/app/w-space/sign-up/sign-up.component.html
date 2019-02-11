@@ -1,0 +1,120 @@
+<div class="sign-up">
+  <div class="sign-up__form">
+    <form class="sign-up__form-left" (ngSubmit)="onSignup()" [formGroup]="form">
+      <h1 class="sign-up__form-header-1">Sign Up</h1>
+      <div class="sign-up__form-small">
+        <h2 class="sign-up__form-header-2">Sign in with social network</h2>
+        <div class="sign-up__social">
+          <div class="sign-up__social-facebook">
+            <fa name="facebook-f"></fa>
+          </div>
+          <div class="sign-up__social-twitter"><fa name="twitter"></fa></div>
+          <div class="sign-up__social-google"><fa name="google"></fa></div>
+        </div>
+        <h2 class="sign-up__form-header-2">0r</h2>
+      </div>
+      <hr />
+      <h2 class="sign-up__form-header-2">
+        Please fill in this form to create an account. {{onClicked}}
+      </h2>
+      <hr />
+
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          placeholder="First name"
+          formControlName="firstName"
+          [errorStateMatcher]="matcher"
+
+
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="lastName"
+          placeholder="Last name"
+          formControlName="lastName"
+          [errorStateMatcher]="matcher"
+
+
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          placeholder="Email"
+          formControlName="email"
+          [errorStateMatcher]="matcher"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          name="password"
+          placeholder="Password"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="password"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-icon
+          matSuffix
+          (click)="hide = !hide"
+          class="password-visible-icon"
+          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm password</mat-label>
+        <input
+          matInput
+          name="cfPassword"
+          placeholder="Confirm password"
+          [type]="hide ? 'password' : 'text'"
+          formControlName="cfPassword"
+          [errorStateMatcher]="matcher"
+        />
+        <mat-icon
+          matSuffix
+          (click)="hide = !hide"
+          class="password-visible-icon"
+          >{{ hide ? "visibility_off" : "visibility" }}</mat-icon
+        >
+      </mat-form-field>
+
+      <mat-error *ngIf="form.invalid">{{ getErrorMsg() }}</mat-error>
+      <button class="sign-up__btn sign-up__btn-submit" type="submit">
+        <span class="sign-up__btn-submit__visible">Sign Me Up!</span>
+        <span class="sign-up__btn-submit__invisible">Submit</span>
+      </button>
+      <p>already registered? <button mat-button mat-dialog-close (click)="logIn_dialog()">Login!</button></p>
+    </form>
+    <div class="or">Or</div>
+    <form action="#" class="sign-up__form-right">
+      <h1 class="sign-up__form-header-3">Sign in with social network</h1>
+      <button class="sign-up__btn sign-up__btn-facebook">
+        <fa name="facebook-f"></fa> Log in with Facebook
+      </button>
+      <button class="sign-up__btn sign-up__btn-twitter">
+        <fa name="twitter"></fa> Log in with Twitter
+      </button>
+      <button class="sign-up__btn sign-up__btn-google">
+        <fa name="google"></fa> Log in with Google+
+      </button>
+      <p>already registered? <button mat-button mat-dialog-close (click)="logIn_dialog()">Login!</button></p>
+    </form>
+  </div>
+</div>

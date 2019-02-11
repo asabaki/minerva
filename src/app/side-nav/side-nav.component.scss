@@ -3,46 +3,50 @@ $bp-large: 68.25em; //1100px  (1100/16)
 $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
-
-.sidebar
-{
-  background-color: var(--color-grey-dark-1);
-  flex: 0 0 18%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-
+.sidebar {
+    background-color: var(--color-grey-dark-1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 92vh;
+    position: fixed;
+    top: 7rem;
+    @media only screen and (max-width: $bp-medium) {
+        position: relative;
+        height: 100%;
+    }
+    @media only screen and (max-width: $bp-small) {
+        margin-top: -7rem;
+    }
 }
 
 ///////////////Side-navigation///////////////
-.side-nav
-{
+.side-nav {
     font-size: 1.4rem;
     list-style: none;
     margin-top: 3.5rem;
-    @media only screen and (max-width: $bp-medium){
+    @media only screen and (max-width: $bp-medium) {
         display: flex;
-        margin: 0;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        height: 100%;
+        margin-top: 0rem;
     }
-    &__item
-    {
-        @media only screen and (max-width: $bp-medium){
+    &__item {
+        display: block;
+        @media only screen and (max-width: $bp-medium) {
             flex: 1;
             justify-content: center;
+            margin: .5rem 0;
         }
-
+        align-self: stretch;
         position: relative;
-        &:not(:last-child)
-        {
-            margin-bottom: .5rem;
-            @media only screen and (max-width: $bp-medium){
-
+        &:not(:last-child) {
+            @media only screen and (max-width: $bp-medium) {
                 margin: 0;
             }
         }
-        &::before
-        {
+        &::before {
             content: "";
             position: absolute;
             top: 0;
@@ -51,26 +55,31 @@ $bp-smallest: 31.25em; //500px  (500/16)
             width: 3px;
             background-color: var(--color-primary);
             transform: scaleY(0);
+            transition: transform 0.15s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.15s, background-color 0.1s;
 
-            transition: transform .15s,
-                        width .3s cubic-bezier(1,0,0,1) .15s,
-                        background-color .1s;
         }
         &--active::before,
-        &:hover::before
-        {
+        &:hover::before {
             transform: scaleY(1);
             width: 100%;
         }
-
-        &:active::before
-        {
+        &:active::before{
             background-color: var(--color-primary-light);
+
+        }
+    }
+    &__link {
+        &.dropdown {
+            display: flex;
+            justify-content: space-between;
+            @media only screen and (max-width: $bp-medium) {
+                display: flex;
+                justify-content: space-between;
+            }
         }
     }
     &__link:link,
-    &__link:visited
-    {
+    &__link:visited {
         color: var(--color-grey-light-1);
         text-decoration: none;
         text-transform: uppercase;
@@ -80,27 +89,23 @@ $bp-smallest: 31.25em; //500px  (500/16)
         align-items: center;
         position: relative;
         z-index: 10;
-        @media only screen and (max-width: $bp-medium){
-           justify-content: center;
-           padding: 2rem;
-           text-align: center;
-
-
+        @media only screen and (max-width: $bp-medium) {
+            justify-content: center;
+            text-align: center;
         }
-        @media only screen and (max-width: $bp-small){
+        @media only screen and (max-width: $bp-small) {
             flex-direction: column;
-            padding: 1.5rem .5rem;
+            padding: 1.5rem 0.5rem;
             text-align: center;
             font-size: 70%;
         }
     }
-    &__icon
-    {
+    &__icon {
         width: 1.75rem;
         height: 1.75rem;
         margin-right: 2rem;
         fill: currentColor;
-        @media only screen and (max-width: $bp-small){
+        @media only screen and (max-width: $bp-small) {
             margin-right: 1rem;
             align-items: center;
             margin-bottom: 0.7rem;
@@ -108,32 +113,50 @@ $bp-smallest: 31.25em; //500px  (500/16)
             height: 1.5rem;
         }
     }
-    mat-icon{
-      height: 2.5rem;
+    mat-icon {
+        height: 2.5rem;
     }
 }
 
 ///////////////legal text///////////////
-.legal
-{
+.legal {
     font-size: 1.2rem;
     color: var(--color-grey-light-4);
     text-align: center;
     padding: 2.5rem;
-    @media only screen and (max-width: $bp-medium){
+    @media only screen and (max-width: $bp-medium) {
         display: none;
     }
 }
 
-
 ///////////////legal text///////////////
-.legal
-{
+.legal {
     font-size: 1.2rem;
     color: var(--color-grey-light-4);
     text-align: center;
     padding: 2.5rem;
-    @media only screen and (max-width: $bp-medium){
+    @media only screen and (max-width: $bp-medium) {
         display: none;
+    }
+}
+
+.dropdown {
+    &_item {
+        background-color: rgb(63, 63, 63);
+        /*@media only screen and (max-width: $bp-medium) {
+         background-color: red;
+        }*/
+    }
+}
+
+.border {
+    &-top {
+        border-top: 2px solid rgb(56, 56, 56);
+    }
+    &-bottom {
+      @media only screen and (max-width: $bp-medium) {
+        border-bottom: none;
+    }
+        border-bottom: 2px solid rgb(56, 56, 56);
     }
 }

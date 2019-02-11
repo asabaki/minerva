@@ -1,39 +1,61 @@
+<div class="header-fixed">
 <header class="header">
-  <img src="assets/img/minerva_1.png" class="logo" alt="minerva logo" />
+  <a href="../../../Minerva-index/index.html"><img src="assets/img/minerva_1.png" class="logo" alt="minerva logo" /></a>
+
 
   <nav class="user-nav">
-    <div class="user-nav__icon-box">
-      <mat-icon class="user-nav__icon">person</mat-icon>
-      <span class="user-nav__notification">7</span>
+
+
+    <div (click)="search_dialog()"  class="follow" *ngIf="isAuth">
+      <div class="follow__container" >
+        <div class="follow__no">{{follower}}</div>
+        <div class="follow__text">Followers</div>
+      </div>
+      <div (click)="search_dialog()" class="follow__container" >
+        <div class="follow__no">{{ following }}</div>
+        <div class="follow__text">Following</div>
+      </div>
     </div>
-    <div class="user-nav__icon-box">
-      <mat-icon class="user-nav__icon">group</mat-icon>
-      <span class="user-nav__notification">13</span>
+
+    <div class="user-nav__icon-box" *ngIf="isAuth">
+      <mat-icon matBadge="8" matBadgeColor="primary" matBadgeSize="medium">notifications_active</mat-icon>
     </div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user">
+    <!--<div class="user-nav__icon-box" *ngIf="isAuth">
+      <mat-icon>notifications</mat-icon>
+    </div>-->
+
+
+    <!--<button mat-button (click)="onClear()" *ngIf="isAuth" class="no-hover">Clear</button>-->
+    <button mat-button (click)="logIn_dialog()" class="btn btn__login" *ngIf="!isAuth">Log in</button>
+    <button mat-button (click)="signUp_dialog()" class="btn btn__signup"*ngIf="!isAuth">Sign up</button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user" *ngIf="isAuth">
       <img
-        src="assets/img/701987-avatar/png/036-woman.png"
+        [src]="'assets/img/user/' + getUser().toLowerCase().charAt(0) + '.png'"
         alt="User photo"
         class="user-nav__user-photo"
       />
-      <span class="user-nav__user-name">Kanpizzzaaaaaa</span>
-      <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            <span>Account Setting</span>
-          </button>
-          <!--
-            <button mat-menu-item disabled>
-              <mat-icon>voicemail</mat-icon>
-              <span>Check voicemail</span>
-            </button>
-          -->
-          <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Sing Out</span>
-          </button>
-        </mat-menu>
+      <span class="user-nav__username user-nav__username1" *ngIf="isAuth">{{getUser()}}</span>
+      <mat-menu #menu="matMenu" >
+        <span class="user-nav__username" *ngIf="isAuth">{{getUser()}}</span>
+        <button mat-menu-item routerLink="/home" class="user-nav__menu">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item *ngIf="isLogin()" class="user-nav__menu" routerLink="/acc" >
+          <mat-icon>account_circle</mat-icon>
+          <span>Account Setting</span>
+        </button>
+        <button mat-menu-item class="user-nav__menu" (click)="openHelpSnackBar()">
+          <mat-icon>help</mat-icon>
+          <span>Help</span>
+        </button>
+        <button mat-menu-item (click)="onLogout()" *ngIf="isAuth" class="user-nav__menu">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Log Out</span>
+        </button>
+      </mat-menu>
     </button>
-
   </nav>
 </header>
+</div>

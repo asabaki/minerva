@@ -1,0 +1,73 @@
+<div class="user-search">
+  <div class="user-search__form">
+    <form action="#" class="search">
+      <input
+        type="text"
+        class="search__input"
+        placeholder="Search for the user"
+      />
+      <button class="search__button">
+        <mat-icon class="search__icon" color="primary">search</mat-icon>
+      </button>
+    </form>
+    <div class="description-side__sub">
+        <div class="user-explore">
+          <div class="user">
+            <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
+            <div class="user-acc">
+              <span class="user-username">Username</span>
+              <span class="user-detail">small detail</span>
+            </div>
+          </div>
+          <button
+            mat-button
+            matTooltip="Follow"
+            class="btn btn-follow"
+            *ngIf="!isFollowing"
+          >
+            <span class="bold">+</span>Follow
+          </button>
+          <!--<button
+            mat-button
+            matTooltip="Unfollow"
+            class="btn btn-follow btn-follow-following"
+          >
+            <span class="btn btn-follow-following__visible">
+              &#10004;&nbsp;Following</span
+            >
+            <span class="btn btn-follow-following__invisible"
+              >&#10006;&nbsp;Unfollow</span
+            >
+          </button>-->
+        </div>
+        <div class="user-explore">
+          <div class="user">
+            <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
+            <div class="user-acc">
+              <span class="user-username">Username</span>
+              <span class="user-detail">small detail</span>
+            </div>
+          </div>
+          <!--<button mat-button matTooltip="Follow" class="btn btn-follow">
+            <span class="bold">+</span>follow
+          </button>-->
+          <button
+            mat-button
+            matTooltip="Unfollow"
+            class="btn btn-follow btn-follow-following"
+          >
+            <span class="btn-follow-following__visible">
+              &#10004;&nbsp;Following</span
+            >
+            <span class="btn-follow-following__invisible"
+              >&#10006;&nbsp;Unfollow</span
+            >
+          </button>
+        </div>
+        <!--<div class="user-notfound">
+          <mat-icon>sentiment_dissatisfied</mat-icon>
+          User not found
+        </div>-->
+    </div>
+  </div>
+</div>

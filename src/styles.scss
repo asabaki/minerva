@@ -1,93 +1,271 @@
-
+// Hello
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
-
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
-
+//
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $Minerva-primary: mat-palette($mat-indigo);
 $Minerva-accent: mat-palette($mat-pink, A200, A100, A400);
-
 // The warn palette is optional (defaults to red).
 $Minerva-warn: mat-palette($mat-red);
-
 // Create the theme object (a Sass map containing all of the palettes).
-$Minerva-theme: mat-light-theme($Minerva-primary, $Minerva-accent, $Minerva-warn);
-
+$Minerva-theme: mat-light-theme( $Minerva-primary, $Minerva-accent, $Minerva-warn);
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($Minerva-theme);
-
 /* You can add global styles to this file, and also import other style files */
 
-:root{
-  --color-primary:#F68B1F;
-  --color-primary-light:#F4B821;
-  --color-primary-dark:#F46C21;
-
-  --color-grey-light-1: #faf9f9;
-  --color-grey-light-2: #f4f2f2;
-  --color-grey-light-3: #f0eeee;
-  --color-grey-light-4: #ccc;
-
-  --color-grey-dark-1: #333;
-  --color-grey-dark-2: #777;
-  --color-grey-dark-3: #999;
-
-  --shadow-dark:0 2rem 6rem rgba(0,0,0,0.3);
-  --shadow-light:0 2rem 5rem rgba(0,0,0,.06);
-
-  --line:1px solid var(--color-grey-light-2);
+:root {
+    --color-primary: #f68b1f;
+    --color-primary-light: #f4b821;
+    --color-primary-dark: #f46c21;
+    --color-secondary: #5a6d89;
+    --color-secondary-dark: rgb(68, 82, 102);
+    --color-secondary-light: rgb(152, 179, 219);
+    --color-grey-light-1: #faf9f9;
+    --color-grey-light-2: #f4f2f2;
+    --color-grey-light-3: #f0eeee;
+    --color-grey-light-4: #ccc;
+    --color-grey-light-5: rgb(238, 236, 236);
+    --color-grey-dark-1: #333;
+    --color-grey-dark-2: #777;
+    --color-grey-dark-3: #999;
+    --color-grey-dark-4: rgb(182, 182, 182);
+    --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+    --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+    --line: 1px solid var(--color-grey-light-2);
+    --color-primary__1: rgba(#f68b1f, .1);
+    --color-primary-dark-1: #ca741e;
+    ;
 }
+
 $bp-largest: 75em; //1200px  (1200/16)
 $bp-large: 68.25em; //1100px  (1100/16)
 $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
-
-*{
-
-  margin: 0;
-  padding: 0;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Nunito", sans-serif;
 }
 
 *,
 *::after,
-*::before
-{
-  box-sizing: inherit;
+*::before {
+    box-sizing: inherit;
 }
 
-html{
-  box-sizing: border-box;
-  font-size: 62.5%; //1rem=10px , 10px/16px=62.5%
-
-  @media only screen and (max-width: $bp-large){
-      font-size: 50%;
-  }
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem=10px , 10px/16px=62.5%
+    @media only screen and (max-width: $bp-large) {
+        font-size: 50%;
+    }
 }
 
-body{
- font-family: "Open Sans", sans-serif;
- font-weight: 400;
- line-height: 1.6;
- color: var(--color-grey-dark-2);
- background-image: linear-gradient(to right bottom, var(--color-primary-light), var(--color-primary-dark));
- background-size: cover;
- background-repeat: no-repeat;
-
- min-height: 100vh;
+body {
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-grey-dark-2);
+    background-image: linear-gradient( to right bottom, var(--color-primary-light), var(--color-primary-dark)), url(https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=954560871844da528c60343dc344ccbf&auto=format&fit=crop&w=1650&q=80);
+    /*background-size: cover;
+    background-repeat: no-repeat;
+    background-image: linear-gradient( to right bottom, rgba(#fbf9c6, 0.9), rgba(rgb(251, 222, 198), 0.9), rgba(#6ac3da, 0.9)/*rgba(#FFB407,.9), rgba(#F46C21,.9)
+    ), url("https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=954560871844da528c60343dc344ccbf&auto=format&fit=crop&w=1650&q=80");*/
+    background-size: cover;
+    min-height: 100vh;
 }
 
+html,
+body {
+    height: 100%;
+}
 
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.my-snack {
+    background-color: var(--color-secondary-dark);
+}
+
+button:focus {
+    outline: 0;
+}
+
+input:focus {
+    outline: 0;
+}
+
+.myapp-no-padding-dialog .mat-dialog-container {
+    padding: 0;
+    background: none;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    box-shadow: none;
+    color: 0;
+}
+
+.mat-form-field-appearance-outline {
+    .mat-form-field-flex {
+        width: 40rem;
+        padding: 0 1em 0 1em !important;
+        font-size: 1.5rem;
+        &:first-child {
+            margin-bottom: -3.25rem;
+        }
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: white;
+    border-radius: 10px;
+    margin: -0.1rem 0 !important;
+}
+
+.mat-error {
+    font-size: 1.5rem;
+}
+
+.mat-form-field-appearance-outline {
+    .mat-form-field-wrapper {
+        margin: .1em 0 !important;
+    }
+}
+
+.mcq {
+    .mat-step-icon {
+        color: white !important;
+    }
+}
+
+.tF {
+    .mat-step-icon {
+        color: white !important;
+    }
+}
+
+@import '~ngx-bar-rating/themes/br-fontawesome-o-theme';
+.br-fontawesome-o {
+    .br-selected:after {
+        content: '\f005';
+        color: var(--color-primary) !important;
+    }
+    .br-fraction:after {
+        content: '\f123';
+        color: var(--color-primary) !important;
+    }
+    .br-active:after {
+        content: '\f005';
+        color: var(--color-primary) !important;
+    }
+}
+
+.link[_ngcontent-c6] {
+    margin-left: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-primary) !important;
+}
+
+.mat-sort-header-button {
+    margin: auto;
+}
+
+.br-units {
+    justify-content: center;
+}
+
+.fill {
+    &>* {
+        background-color: transparent;
+    }
+    &-green {
+        color: green;
+    }
+    &-red {
+        color: red;
+    }
+    &-primary {
+        color: var(--color-primary);
+    }
+}
+
+.mat-icon {
+    vertical-align: middle;
+}
+
+.ck-editor__editable {
+    min-height: 35rem;
+}
+
+.ck.ck-editor__editable_inline {
+    border-color: rgb(196, 196, 196) !important;
+}
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+.fa-fw {
+    color: var(--color-grey-dark-4) !important;
+}
+
+.flatpickr-input[readonly] {
+    cursor: pointer;
+    border-radius: 100px;
+    border: 1px solid var(--color-grey-light-5);
+    padding: .5rem 1rem;
+    width: 100%;
+    &:hover {
+        border: 1px solid var(--color-primary);
+    }
+}
+
+.ck {
+    color: black;
+    ol {
+        list-style: none;
+        counter-reset: item;
+        li {
+            display: block;
+            margin-left: 1rem;
+            &::before {
+                content: counters(item, ".") ". ";
+                counter-increment: item;
+                margin-right: 1rem;
+            }
+        }
+    }
+    ul {
+        counter-reset: item;
+        margin-left: 2rem;
+        li {
+            margin-left: 1rem;
+        }
+    }
+}
