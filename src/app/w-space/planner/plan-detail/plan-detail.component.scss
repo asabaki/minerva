@@ -46,17 +46,19 @@
 }
 
 .color-picker{
-  margin-right: 10rem;
+ margin-left: -8rem;
   border: none;
   cursor: pointer;
+
 &-group{
   color: var(--color-grey-dark-2);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-right: 20rem;
   padding-top: 1rem;
   span{
     margin-right: 2rem;
+    width: 20rem;
   }
 }
 }

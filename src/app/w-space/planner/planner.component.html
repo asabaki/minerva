@@ -136,7 +136,7 @@
         <div class="header-edit">
           <h3>Edit events</h3>
           <div>
-            <button class="btn completed" >
+            <button class="btn completed">
               Completed events
             </button>
             <button class="btn addnew" (click)="addEvent()">
@@ -150,8 +150,7 @@
           <thead>
             <tr>
               <th>Title</th>
-              <th>Primary color</th>
-              <th>Secondary color</th>
+              <th>Priority</th>
               <th>Starts at</th>
               <th>Ends at</th>
               <th>Remove</th>
@@ -177,14 +176,7 @@
                   class="color-picker"
                 />
               </td>
-              <td>
-                <input
-                  type="color"
-                  [(ngModel)]="event.color.secondary"
-                  (change)="refresh.next()"
-                  class="color-picker"
-                />
-              </td>
+
               <td>
                 <input
                   class="date_time-picker"
@@ -225,7 +217,7 @@
               </td>
               <td>
                 <button class="btn done">
-                    <i class="fas fa-check i"></i>
+                  <i class="fas fa-check i"></i>
                 </button>
               </td>
             </tr>

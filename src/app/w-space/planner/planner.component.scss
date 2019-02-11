@@ -268,12 +268,12 @@ background-color: #fff;
   }
   &.done{
     color: white;
-    background-color: rgb(27, 187, 27);
+    background-color: var(--color-grey-dark-4);
     border: none;
-    border-radius: 100px;
+    border-radius: 50%;
     text-align: center;
     transition: all .2s;
-
+    padding:.5rem 0.65rem !important;
     i::before{
       color: white !important;
     }

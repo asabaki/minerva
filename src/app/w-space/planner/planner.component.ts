@@ -41,7 +41,12 @@ const colors: any = {
   black: {
     primary: '#000000',
     secondary: '#A3A3A3'
+  },
+  green: {
+    primary: 'rgb(27, 187, 27)',
+    secondary: 'rgb(27, 187, 27)'
   }
+
 };
 
 
@@ -141,7 +146,7 @@ export class PlannerComponent {
     this.events.push({
       title: 'New event',
       start: startOfDay(new Date()),
-      color: colors.black,
+      color: colors.green,
       draggable: false,
       resizable: {
         beforeStart: true,
