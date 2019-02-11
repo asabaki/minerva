@@ -4,12 +4,13 @@ import {McqComponent} from './mcq/mcq.component';
 import {TrueFalseComponent} from './true-false/true-false.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {Location} from '@angular/common';
+import {QuizService} from '../../../services/quiz.service';
 
 export class QuizModel {
   title: string;
   description: string;
   questions: [{
-    question: string,
+    question_text: string,
     choice: [{
       choice_text: string,
       answer: boolean
@@ -18,6 +19,7 @@ export class QuizModel {
 }
 // TODO - Add Tips about how choice sequence will be random
 // TODO - Add Tips about how to create TRUE/FALSE question
+// TODO - Add Publish Button
 @Component({
   selector: 'app-create-quiz',
   templateUrl: './create-quiz.component.html',
@@ -25,19 +27,23 @@ export class QuizModel {
 })
 export class CreateQuizComponent implements OnInit {
 
-  quiz = new QuizModel;
+  quiz: QuizModel;
 
   constructor(public dialog: MatDialog,
-              private location: Location) {
-  }
-
-  ngOnInit() {
+              private location: Location,
+              private quizService: QuizService) {
+    this.quiz = new QuizModel();
     this.quiz.questions = [];
   }
 
-  onCreate(title: string, description: string) {
+  ngOnInit() {
 
-    console.log(title, description);
+  }
+
+  onCreate(title: string, description: string) {
+    this.quiz.title = title;
+    this.quiz.description = description;
+    this.quizService.add_quiz(this.quiz);
   }
 
   onClickBack() {

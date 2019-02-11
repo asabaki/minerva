@@ -52,7 +52,7 @@ export class McqComponent implements OnInit {
 
   onSubmit() {
     this.Question = {
-      question: this.firstFormGroup.value['question'],
+      question_text: this.firstFormGroup.value['question'],
       choice: [{
         choice_text: this.secondFormGroup.value['answer'],
         answer: true

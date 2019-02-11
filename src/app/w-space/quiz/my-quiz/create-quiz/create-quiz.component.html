@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="detail">
-    <form (submit)="onCreate(title.value, description.value)">
+    <form>
       <div class="description">
         <div class="create-quiz__header">
           <mat-form-field color="primary">
@@ -85,6 +85,6 @@
 
       </div>
     </div>
-    <button type="submit" mat-button class="btn btn__save">Save</button>
+    <button mat-button class="btn btn__save" (click)="onCreate(title.value, description.value)">Save</button>
   </div>
 </main>

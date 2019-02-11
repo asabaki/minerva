@@ -1,27 +1,23 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {QuizService} from '../../services/quiz.service';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
 
 export interface PeriodicElement {
-  name: string;
+  _id: string;
+  title: string;
   description: string;
-  numberOfCard: number;
-
+  noOfQuestions: number;
+  privacy: boolean;
+  rating: number;
+  dom: Date;
+  views: number;
+  delete: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'Hydrogen', description: 'aaaaaaa', numberOfCard: 2},
-  {name: 'Helium', description: 'aaaaaaa', numberOfCard: 20},
-  {name: 'Lithium', description: 'aaaaaaa', numberOfCard: 22},
-  {name: 'Beryllium', description: 'aaaaaaa', numberOfCard: 13},
-  {name: 'Boron', description: 'aaaaaaa', numberOfCard: 30},
-  {name: 'Carbon', description: 'aaaaaaa', numberOfCard: 23},
-  {name: 'Nitrogen', description: 'aaaaaaa', numberOfCard: 14},
-  {name: 'Oxygen', description: 'aaaaaaa', numberOfCard: 99},
-  {name: 'Fluorine', description: 'aaaaaaa', numberOfCard: 18},
-  {name: 'Neon', description: 'aaaaaaa', numberOfCard: 27},
-];
+const ELEMENT_DATA: PeriodicElement[] = [];
 @Component({
   selector: 'app-my-quiz',
   templateUrl: './my-quiz.component.html',
@@ -29,16 +25,51 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class MyQuizComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
+  columnDef = [
+    {def: 'privacy', show: true},
+    {def: 'title', show: true},
+    {def: 'description', show: true},
+    {def: 'noOfQuestions', show: true},
+    {def: 'rating', show: true},
+    {def: 'dom', show: true},
+    {def: 'views', show: true},
+    {def: 'delete', show: false}
+  ];
+  deleteClicked: boolean;
+  editClicked: boolean;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+  number_quiz: number;
   constructor(public dialog: MatDialog,
               private router: Router,
-              private location: Location) {}
+              private location: Location,
+              private quizService: QuizService,
+              private changeDet: ChangeDetectorRef,
+              private matSnack: MatSnackBar) {}
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    let i = 0;
+    this.quizService.get_myquizzes().subscribe(res => {
+      ELEMENT_DATA.length = 0;
+      this.number_quiz = res.length;
+      res.forEach((data) => {
+        // console.log(data);
+        ELEMENT_DATA.push({
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          noOfQuestions: data.questions.length,
+          rating: i += 0.5,
+          views: 0,
+          dom: data.updatedAt,
+          privacy: data.privacy,
+          delete: false
+        });
+      });
+      this.dataSource.sort = this.sort;
+      // console.log(ELEMENT_DATA);
+    });
   }
 
   onOpenCreate() {
@@ -48,5 +79,51 @@ export class MyQuizComponent implements OnInit {
   onClickBack() {
     this.location.back();
   }
+
+  onRowClick(r: any) {
+    if (this.deleteClicked) {
+      this.deleteClicked = false;
+    } else {
+      const id = r._id;
+      this.router.navigate(['quiz/item/' + id]);
+    }
+  }
+
+  onClickEdit() {
+    this.editClicked = !this.editClicked;
+    this.columnDef
+      .filter( (def) => def.def === 'delete')
+      .map(def => def.show = this.editClicked);
+
+  }
+
+  onClickDelete(r: any) {
+    this.deleteClicked = true;
+    const id = r._id;
+    this.quizService.delete_quiz(id).subscribe((res) => {
+      console.log(res);
+      if (res.ok) {
+        this.quizService.get_myquizzes();
+        this.changeDet.detectChanges();
+        this.matSnack.openFromComponent(SuccessSnackComponent,
+          {
+            data: 'Delete Collection Success!',
+            duration: 1500
+          });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something Error! Please Contact Support\n' + 'Error: ' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
+  }
+
+  getDisplayedColumn() {
+    return this.columnDef
+      .filter((def) => def.show)
+      .map((def) => def.def);
+  }
+
 
 }
