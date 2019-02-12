@@ -67,8 +67,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
             font-weight: 100;
             color: var(--color-grey-dark-1);
         }
-        &:focus {
-            border: 1px solid black;
+        &:focus{
+          border: 1px solid black;
         }
     }
     &__button {

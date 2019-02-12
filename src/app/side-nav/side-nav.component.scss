@@ -56,7 +56,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
             background-color: var(--color-primary);
             transform: scaleY(0);
             transition: transform 0.15s, width 0.3s cubic-bezier(1, 0, 0, 1) 0.15s, background-color 0.1s;
-
         }
         &--active::before,
         &:hover::before {

@@ -178,6 +178,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 ///////////////Paragraph///////////////
 .paragraph {
+
     &:not(:last-of-type) {
         margin-bottom: 2rem;
     }
@@ -403,6 +404,26 @@ $bp-smallest: 31.25em; //500px  (500/16)
             transform: scale(1);
         }
     }
+  &-my{
+    background-color: var(--color-primary);
+    color: white;
+    margin-right: 1rem;
+    padding: 1rem;
+    outline: none;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all .2s;
+    display: block;
+    &:hover {
+      box-shadow: 0 .5rem 1rem rgba(black, .2);
+      transform: scale(1.1);
+    }
+    &:active {
+      box-shadow: 0 .5rem .5rem rgba(black, .3);
+      transform: scale(1);
+    }
+  }
 }
 
 .cross {
