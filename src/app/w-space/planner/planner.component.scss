@@ -40,18 +40,46 @@ font-size: 1.4rem;
   padding: 3rem;
   flex: 1;
   height: 100%;
-  @media only screen and (max-width: $bp-medium) {
-      padding: 2rem;
-      margin-right: 3rem;
+  @media only screen and (max-width: 740px) {
+    transform: scale(0.9);
+    margin-top: -5rem;
+    margin-left: -2.5rem;
   }
-  @media only screen and (max-width: $bp-small) {
-      margin-right: 0;
-      margin-bottom: 3rem;
+  @media only screen and (max-width: 700px) {
+    margin-left: -4.5rem;
   }
+
+  @media only screen and (max-width: 685px) {
+    margin-left: -5.5rem;
+}
+  @media only screen and (max-width: 677px) {
+    transform: scale(0.86);
+    margin-top: -8rem;
+    margin-left: -5.5rem;
+}
+  @media only screen and (max-width: 660px) {
+    margin-left: -6.5rem;
+}
+  @media only screen and (max-width: 650px) {
+    margin-left: -7.5rem;
+    transform: scale(0.84);
+}
+  @media only screen and (max-width: 630px) {
+    margin-left: -8.5rem;
+    -webkit-transform: scale(0.84);
+    transform: scale(0.80);
+    margin-top: -10rem;
+}
+  @media only screen and (max-width: 600px) {
+}
+
   &-btn_set{
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
+  }
+  i{
+    color: var(--color-primary) !important;
   }
 }
 
@@ -70,6 +98,7 @@ font-size: 1.4rem;
   align-items: center;
 background-color: #fff;
   margin-top: 7rem;
+  padding-left: 2rem;
   &__heading {
       font-size: 2.25rem;
       font-weight: 300;
@@ -176,3 +205,137 @@ background-color: #fff;
       box-shadow: none;
   }
 }
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  &-edit{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+}
+.btn{
+  &-group{
+    display: flex;
+    border-radius: 100px;
+    background-color: var(--color-primary);
+    overflow: hidden;
+
+  }
+  &.addnew{
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+    transition: all .2s;
+    &:hover{
+      background-color:#13a300;
+      transform: scale(1.05);
+    }
+  }
+  &.delete{
+    color: white;
+    background-color: rgb(145, 1, 1);
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+    transition: all .2s;
+    &:hover{
+      background-color: rgb(110, 0, 0);
+      transform: scale(1.05);
+    }
+  }
+  &.completed{
+    color: white;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 100px;
+    text-align: center;
+    transition: all .2s;
+    margin-right: .3rem;
+    &:hover{
+      background-color: var(--color-primary);
+      transform: scale(1.05);
+    }
+    &:active{
+      transform: scale(.95);
+    }
+  }
+  &.done{
+    color: white;
+    background-color: var(--color-grey-dark-4);
+    border: none;
+    border-radius: 50%;
+    text-align: center;
+    transition: all .2s;
+    padding:.5rem 0.65rem !important;
+    i::before{
+      color: white !important;
+    }
+    &:hover{
+      background-color:  rgb(27, 187, 27);
+      transform: scale(1.05);
+    }
+    &:active{
+      background-color:  rgb(27, 187, 27);
+      transform: scale(.95);
+    }
+  }
+  color: white;
+  padding:1rem 1.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  &:hover{
+    background-color:var(--color-primary-dark-1);
+  }
+  &.active{
+    background-color:var(--color-primary-dark-1);
+  }
+  &.today{
+    background-color:white;
+    border-top: 1px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    transition: .2s all;
+    &:hover{
+      background-color:rgba(white,0.25);
+      color: white;
+    }
+  }
+}
+
+.event{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  table, th, td{
+    border: 1px solid rgb(233, 233, 233);
+    padding: 1rem;
+    text-align: center;
+  }
+  table{
+    border-collapse: collapse;
+  }
+}
+
+.form-control{
+  border-radius: 100px;
+  padding: .5rem 1rem;
+  border: 1px solid rgb(233, 233, 233);
+  width: 100%;
+  transition: .2s all;
+  &:focus{
+    border: 1px solid var(--color-primary);
+  }
+}
+.color-picker{
+  border: none;
+  cursor: pointer;
+}
+
+
+

@@ -1,73 +1,103 @@
 <main class="top-view" *ngIf="true">
   <div class="overview">
     <h1 class="overview__heading">
-      <mat-icon
-        color="primary"
-        style="display: inline-flex; vertical-align: middle;"
-        >person</mat-icon
-      >
+      <i class="fas fa-user"></i>
       Account Setting
     </h1>
   </div>
   <div class="detail" *ngIf="isLoading">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>s
+  </div>
   <div class="detail" *ngIf="!isLoading">
     <div class="description">
       <div class="description__container">
         <div class="img-upload__container">
-          <img class="img" src="../../../assets/img/user/a.png" alt="" />
+
+          <img
+          [src]="'assets/img/user/' + getUser().toLowerCase().charAt(0) + '.png'"
+          alt="User photo"
+          class="img"
+        />
           <div class="img-upload__text">
             <h3>Your profile photo</h3>
             <div>
-              <button mat-button class="img-upload__btn">Upload</button>
-              <button mat-button class="img-upload__btn delete disabled">
-                Delete
+              <button
+                mat-button
+                class="img-upload__btn edit"
+                (click)="onClick()"
+                *ngIf="!hide"
+              >
+                Edit
               </button>
-            </div>
-            <span>JPG or PNG Maximum size 10MB.</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="description__container">
-        <div class="img-upload__container">
-          <div class="img-upload__text">
-            <h3>Profile</h3>
-            <form class="update-form">
-                <mat-form-field>
-                  <input matInput placeholder="First name" required>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput placeholder="Last name" required>
-                </mat-form-field>
-                <div class="update-form__btn">
-                    <button mat-button class="img-upload__btn save">Save</button>
+              <div *ngIf="hide">
+                <div class="img-upload__btn-group">
+                  <div>
+                    <button mat-button class="img-upload__btn">Upload
+                    <input mat-button type="file" name="my-pic" accept=".png,.jpg,.jpeg"></button>
+                    <button mat-button class="img-upload__btn delete disabled">
+                      Delete
+                    </button>
+                  </div>
+                  <button mat-button class="img-upload__btn save" (click)="onClick()"
+                  *ngIf="hide">Save</button>
                 </div>
-              </form>
+                <span>JPG, JPEG or PNG Maximum size 10MB.</span>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
 
       <div class="description__container">
         <div class="img-upload__container">
           <div class="img-upload__text">
-            <h3>Change password</h3>
+            <h3><i class="fas fa-user"></i>&nbsp;Profile</h3>
             <form class="update-form">
               <mat-form-field>
-                <input matInput placeholder="Password" type="password" />
+                <input matInput placeholder="First name" required />
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Confirm password" type="password"/>
+                <input matInput placeholder="Last name" required />
+              </mat-form-field>
+              <mat-form-field>
+                <textarea matInput placeholder="About you"></textarea>
               </mat-form-field>
               <div class="update-form__btn">
-                  <button mat-button class="img-upload__btn save">Save</button>
+                <button mat-button class="img-upload__btn save" >Save</button>
               </div>
             </form>
           </div>
         </div>
+      </div>
 
+      <div class="description__container">
+        <div class="img-upload__container">
+          <div class="img-upload__text">
+            <h3><i class="fas fa-key"></i>&nbsp;Change password</h3>
+            <form class="update-form">
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Current password"
+                  type="password"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="New password" type="password" />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Confirm new password"
+                  type="password"
+                />
+              </mat-form-field>
+              <div class="update-form__btn">
+                <button mat-button class="img-upload__btn save">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

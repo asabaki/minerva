@@ -70,6 +70,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     align-items: center;
     background-color: #fff;
     margin-top: 7rem;
+    padding-left: 2rem;
     &__heading {
         font-size: 2.25rem;
         font-weight: 300;
@@ -120,12 +121,15 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .user {
     display: flex;
     justify-content: flex-start;
-    &-expore {
+    &-explore {
         display: flex;
         justify-content: space-between;
         border-bottom: 2px solid var(--color-grey-light-3);
         padding: 1rem .5rem;
         align-items: center;
+        &:hover{
+          background-color: whitesmoke;
+        }
     }
     &-img {
         border-radius: 50%;
@@ -320,4 +324,19 @@ $bp-smallest: 31.25em; //500px  (500/16)
             margin: 0rem 2rem;
         }
     }
+}
+
+.days{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary);
+  color: white;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  padding: .5rem 1.5rem;
+  &-num{
+    font-size: 3rem;
+    text-align: center;
+  }
 }

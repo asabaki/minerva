@@ -5,6 +5,7 @@ import {LogInComponent} from '../w-space/log-in/log-in.component';
 import {AuthService} from '../w-space/services/auth.service';
 import {SearchUserComponent} from '../w-space/search-user/search-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
   following = 0;
 
   constructor(public dialog: MatDialog,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private snack: MatSnackBar) {
   }
   ngOnInit() {
     this.isAuth = this.authService.getIsAuth();
@@ -78,4 +80,26 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+  openHelpSnackBar() {
+    this.snack.openFromComponent(helpSnackComponent, {
+      duration: 4800,
+    });
+  }
 }
+
+
+@Component({
+  selector: 'help-snack',
+  templateUrl: 'help-snack.html',
+  styles: [`
+    .help{
+      color: white;
+      font-size: 2rem;
+      text-align:center;
+    }
+  `],
+})
+export class helpSnackComponent {}
+
+

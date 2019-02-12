@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
               private dialog: MatDialog) {
   }
 
-
   ngOnInit() {
     this.id = localStorage.getItem('userId');
     this.authService.getToFollow(localStorage.getItem('userId')).subscribe((res) => {

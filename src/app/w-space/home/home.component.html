@@ -16,126 +16,178 @@
   </div>
 
   <div class="detail">
-
     <div class="description-main">
       <!--<img class="activity-non" src="../../../assets/img/no_activities.png" alt="">-->
       <div class="activity">
         <div class="activity-top">
-        <div class="activity-by">
-          <div class="activity-owner">
-            <div class="user">
-              <img
-                class="user-img"
-                src="../../../assets/img/user/a.png"
-                alt=""
-              />
-              <div class="user-acc">
-                <span class="user-username activity-detail__username" >Asi Baka</span>
+          <div class="activity-by">
+            <div class="activity-owner">
+              <div class="user">
+                <img
+                  class="user-img"
+                  src="../../../assets/img/user/a.png"
+                  alt=""
+                />
+                <div class="user-acc">
+                  <span class="user-username activity-detail__username"
+                    >Asi Baka</span
+                  >
+                </div>
               </div>
             </div>
+            <div class="activity-time"><span>&bull;</span>30 mins ago</div>
           </div>
-          <div class="activity-time"><span>&bull;</span>30 mins ago</div>
         </div>
-      </div>
         <div class="activity-detail">
           Just created new Flascard collection!
         </div>
-        <button class="activity-see-more">See more<mat-icon>arrow_right</mat-icon></button>
+        <button class="activity-see-more">
+          See more<mat-icon>arrow_right</mat-icon>
+        </button>
       </div>
       <div class="activity">
         <div class="activity-top">
-        <div class="activity-by">
-          <div class="activity-owner">
-            <div class="user">
-              <img
-                class="user-img"
-                src="../../../assets/img/user/k.png"
-                alt=""
-              />
-              <div class="user-acc">
-                <span class="user-username activity-detail__username" >Kanpichcha Nokdam</span>
+          <div class="activity-by">
+            <div class="activity-owner">
+              <div class="user">
+                <img
+                  class="user-img"
+                  src="../../../assets/img/user/k.png"
+                  alt=""
+                />
+                <div class="user-acc">
+                  <span class="user-username activity-detail__username"
+                    >Kanpichcha Nokdam</span
+                  >
+                </div>
               </div>
             </div>
+            <div class="activity-time"><span>&bull;</span>45 mins ago</div>
           </div>
-          <div class="activity-time"><span>&bull;</span>45 mins ago</div>
         </div>
-      </div>
         <div class="activity-detail">
           Just created new Quiz collection!
         </div>
-        <button class="activity-see-more">See more<mat-icon>arrow_right</mat-icon></button>
+        <button class="activity-see-more">
+          See more<mat-icon>arrow_right</mat-icon>
+        </button>
       </div>
-
     </div>
 
-
-  <div class="description-side">
-    <div class="description-side__sub">
-      <h1>Trending :</h1>
-
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/flashcard.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Flashcard</span>
-            <span class="user-detail">Created by : Creator</span>
+    <div class="description-side">
+      <div class="description-side__sub">
+        <h1>Counting down :</h1>
+        <div class="user-explore">
+          <div class="user">
+            <div class="days">
+              <div class="days-num">05</div>
+              days
+            </div>
+            <div class="user-acc">
+              <span class="user-username">Math exam</span>
+              <span class="user-detail">Starts at : 12:00</span>
+              <span class="user-detail">Ends at : 14:00</span>
+            </div>
           </div>
         </div>
-        <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Quiz</span>
-            <span class="user-detail">Created by : Creator</span>
-          </div>
-        </div>
-        <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/note.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Note</span>
-            <span class="user-detail">Created by : Creator</span>
-          </div>
-        </div>
-        <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
-      </div>
-      <div class="user-expore">
-        <div class="user">
-          <img class="user-img" src="../../../assets/img/mindmap.png" alt="" />
-          <div class="user-acc">
-            <span class="user-username">Mindmap</span>
-            <span class="user-detail">Created by : Creator</span>
-          </div>
-        </div>
-        <button class="activity-see-more side-1">See more<mat-icon>arrow_right</mat-icon></button>
-      </div>
-      <button (click)="search_dialog()" class="activity-see-more side-2"><mat-icon>search</mat-icon>Search</button>
-    </div>
-
-
-    <div class="description-side__sub">
-      <h1>Who to follow :</h1>
-      <div class="user-expore" *ngFor="let user of following">
-        <div class="user">
-          <img class="user-img" [src]="'assets/img/user/' + user.name.toLowerCase().charAt(0) + '.png'" alt="" />
-          <div class="user-acc">
-            <span class="user-username">{{ user.name }}</span>
-            <span class="user-detail">small detail</span>
-          </div>
-        </div>
-        <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!user.followed" (click)="onFollow(user._id)"><span class="bold">+</span>Follow</button>
-        <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="user.followed" (click)="onUnfollow(user._id)" >
-          <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
-          <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+        <button class="activity-see-more side-2">
+          See more<mat-icon>arrow_right</mat-icon>
         </button>
       </div>
 
-      <button (click)="search_dialog()"class="activity-see-more side-2"><mat-icon>search</mat-icon>Search</button>
+      <div class="description-side__sub">
+        <h1>Trending :</h1>
+
+        <div class="user-explore">
+          <div class="user">
+            <img
+              class="user-img"
+              src="../../../assets/img/flashcard.png"
+              alt=""
+            />
+            <div class="user-acc">
+              <span class="user-username">Flashcard</span>
+              <span class="user-detail">Created by : Creator</span>
+            </div>
+          </div>
+          <button class="activity-see-more side-1">
+            See more<mat-icon>arrow_right</mat-icon>
+          </button>
+        </div>
+        <div class="user-explore">
+          <div class="user">
+            <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
+            <div class="user-acc">
+              <span class="user-username">Quiz</span>
+              <span class="user-detail">Created by : Creator</span>
+            </div>
+          </div>
+          <button class="activity-see-more side-1">
+            See more<mat-icon>arrow_right</mat-icon>
+          </button>
+        </div>
+        <div class="user-explore">
+          <div class="user">
+            <img class="user-img" src="../../../assets/img/note.png" alt="" />
+            <div class="user-acc">
+              <span class="user-username">Note</span>
+              <span class="user-detail">Created by : Creator</span>
+            </div>
+          </div>
+          <button class="activity-see-more side-1">
+            See more<mat-icon>arrow_right</mat-icon>
+          </button>
+        </div>
+        <button (click)="search_dialog()" class="activity-see-more side-2">
+          <mat-icon>search</mat-icon>Search
+        </button>
+      </div>
+
+      <div class="description-side__sub">
+        <h1>Who to follow :</h1>
+        <div class="user-explore" *ngFor="let user of following">
+          <div class="user">
+            <img
+              class="user-img"
+              [src]="
+                'assets/img/user/' + user.name.toLowerCase().charAt(0) + '.png'
+              "
+              alt=""
+            />
+            <div class="user-acc">
+              <span class="user-username">{{ user.name }}</span>
+              <span class="user-detail">small detail</span>
+            </div>
+          </div>
+          <button
+            mat-button
+            matTooltip="Follow"
+            class="btn-follow"
+            *ngIf="!user.followed"
+            (click)="onFollow(user._id)"
+          >
+            <span class="bold">+</span>Follow
+          </button>
+          <button
+            mat-button
+            matTooltip="Unfollow"
+            class="btn-follow btn-follow-following"
+            *ngIf="user.followed"
+            (click)="onUnfollow(user._id)"
+          >
+            <span class="btn-follow-following__visible">
+              &#10004;&nbsp;Following</span
+            >
+            <span class="btn-follow-following__invisible"
+              >&#10006;&nbsp;Unfollow</span
+            >
+          </button>
+        </div>
+
+        <button (click)="search_dialog()" class="activity-see-more side-2">
+          <mat-icon>search</mat-icon>Search
+        </button>
+      </div>
     </div>
-  </div>
   </div>
 </main>

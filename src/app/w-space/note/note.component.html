@@ -1,0 +1,55 @@
+<main class="top-view">
+  <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to quizzes"
+      class="icon-btn"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
+    <h1 class="overview__heading">Create New Note</h1>
+    <div class="overview__count">
+      <div class="overview__count-average">10</div>
+      <div class="overview__count-count">Questions</div>
+    </div>
+  </div>
+  <div class="detail">
+    <div class="description">
+      <div class="create-quiz__header">
+        <mat-form-field color="primary">
+          <input
+            name="title"
+            matInput
+            type="text"
+            class="collection_name"
+            placeholder="Note Name"
+            #collectionName
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <textarea
+            name="description"
+            matInput
+            class="collection_description"
+            type="text"
+            placeholder="Description"
+            #description
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="description">
+      <ckeditor
+        class="ckeditor"
+        [editor]="Editor"
+        (ready)="onReady($event)"
+        id="pdfCreate"
+      ></ckeditor>
+    </div>
+    <div class="btn-group">
+      <button mat-button class="btn btn__save pdf" (click)="captureScreen()"><i class="far fa-file-pdf" ></i>&nbsp;Save as PDF</button>
+      <button mat-button class="btn btn__save">Save</button>
+    </div>
+  </div>
+</main>

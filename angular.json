@@ -15,8 +15,14 @@
       },
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
+          "builder": "@angular-builders/custom-webpack:browser",
+			    "options": {
+				    "customWebpackConfig": {
+					  "path": "./extra-webpack-config.js",
+					    "mergeStrategies": {
+						  "module.rules": "replace"
+				    	}
+            },
             "outputPath": "lib/Angular",
             "index": "src/index.html",
             "main": "src/main.ts",

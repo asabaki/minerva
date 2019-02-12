@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../w-space/services/auth.service';
-
+import { HighlightDelayBarrier } from 'blocking-proxy/built/lib/highlight_delay_barrier';
+import {MatSelectModule} from '@angular/material/select';
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -8,6 +9,7 @@ import {AuthService} from '../w-space/services/auth.service';
 })
 export class SideNavComponent implements OnInit {
   status: boolean;
+  hide = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -17,6 +19,9 @@ export class SideNavComponent implements OnInit {
     });
   }
 
+  onClick() {
+    this.hide = !this.hide;
+  }
   onClear() {
     this.authService.seed();
   }

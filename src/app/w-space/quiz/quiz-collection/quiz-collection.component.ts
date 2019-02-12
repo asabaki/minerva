@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {MatDialog} from '@angular/material';
+import {ResultDialogComponent} from '../quiz-collection/result-dialog/result-dialog.component';
 
 export class QuizCollectionModel {
   _id: string;

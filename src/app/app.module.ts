@@ -12,6 +12,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BarRatingModule } from 'ngx-bar-rating';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CountdownModule } from 'ngx-countdown';
+
+
 import {
   MatIconModule,
   MatInputModule,
@@ -29,7 +36,7 @@ import {
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent, helpSnackComponent } from './header/header.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
 import {
@@ -60,9 +67,14 @@ import { FlashcardComponent } from './w-space/flashcard/flashcard.component';
 import { AccountSettingComponent } from './w-space/account-setting/account-setting.component';
 import { SearchUserComponent } from './w-space/search-user/search-user.component';
 import { MyQuizComponent } from './w-space/quiz/my-quiz/my-quiz.component';
-
-
-
+import { NoteComponent } from './w-space/note/note.component';
+import { CommonModule } from '@angular/common';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlanDetailComponent } from './w-space/planner/plan-detail/plan-detail.component';
+import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dialog/result-dialog.component';
+import { CountdownComponent } from './w-space/planner/countdown/countdown.component';
+import { SelfControlComponent } from './w-space/self-control/self-control.component';
+import { WebsiteBlockingComponent } from './w-space/self-control/website-blocking/website-blocking.component';
 
 
 
@@ -94,11 +106,13 @@ import { MyQuizComponent } from './w-space/quiz/my-quiz/my-quiz.component';
     AccountSettingComponent,
     SearchUserComponent,
     MyQuizComponent,
-
-
-
-
-
+    NoteComponent,
+    PlanDetailComponent,
+    ResultDialogComponent,
+    CountdownComponent,
+    SelfControlComponent,
+    WebsiteBlockingComponent,
+    helpSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +140,15 @@ import { MyQuizComponent } from './w-space/quiz/my-quiz/my-quiz.component';
     MatRadioModule,
     MatBadgeModule,
     BarRatingModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CKEditorModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    CountdownModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -144,7 +166,11 @@ import { MyQuizComponent } from './w-space/quiz/my-quiz/my-quiz.component';
     EditCardComponent,
     McqComponent,
     TrueFalseComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    PlanDetailComponent,
+    ResultDialogComponent,
+    WebsiteBlockingComponent,
+    helpSnackComponent
   ],
   bootstrap: [AppComponent]
 })
