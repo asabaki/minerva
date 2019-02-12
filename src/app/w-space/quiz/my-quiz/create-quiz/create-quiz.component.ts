@@ -33,7 +33,7 @@ export class CreateQuizComponent implements OnInit {
               private location: Location,
               private quizService: QuizService) {
     this.quiz = new QuizModel();
-    this.quiz.questions = [];
+    // this.quiz.questions = [];
   }
 
   ngOnInit() {
