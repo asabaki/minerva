@@ -18,6 +18,7 @@
       rel="stylesheet"
     />
     <link rel="icon" href="img/favicon.png" type="image/png" />
+    <script src="script.js"></script>
   </head>
   <body>
     <div class="nav-fixed">
@@ -100,19 +101,6 @@
     </section>
 
   </body>
-  <script>
-    $(document).scroll(function() {
-  var y = $(this).scrollTop();
-  console.log(y);
-  if (y > 50) {
-    $('.nav-logo').height('9rem');
-    $('.nav-logo').css("margin-top","1rem");
-  } else {
-    $('.nav-logo').height('16rem');
-    $('.nav-logo').css("margin-top","10rem");
-  }
-});
-  </script>
 </html>
 
 
