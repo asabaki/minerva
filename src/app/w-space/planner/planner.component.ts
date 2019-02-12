@@ -14,8 +14,8 @@ import {
   isSameMonth,
   addHours
 } from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -25,6 +25,7 @@ import {
 
 import {MatDialog} from '@angular/material';
 import {PlanDetailComponent} from '../planner/plan-detail/plan-detail.component';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -73,13 +74,13 @@ export class PlannerComponent {
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({event}: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
       }
     },
     {
       label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
+      onClick: ({event}: { event: CalendarEvent }): void => {
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
       }
@@ -107,9 +108,10 @@ export class PlannerComponent {
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal,
-    public dialog: MatDialog) {}
+              public dialog: MatDialog) {
+  }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
       if (
@@ -124,10 +126,10 @@ export class PlannerComponent {
   }
 
   eventTimesChanged({
-    event,
-    newStart,
-    newEnd
-  }: CalendarEventTimesChangedEvent): void {
+                      event,
+                      newStart,
+                      newEnd
+                    }: CalendarEventTimesChangedEvent): void {
     event.start = newStart;
     event.end = newEnd;
     this.handleEvent('Dropped or resized', event);
@@ -155,10 +157,12 @@ export class PlannerComponent {
     });
     this.refresh.next();
   }
+
   planDetailDialog() {
     const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
 
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
 }

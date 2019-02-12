@@ -105,8 +105,6 @@ export class MyFlashcardComponent implements OnInit {
       const id = r._id;
       this.router.navigate(['flash/item/' + id]);
     }
-
-    // console.log(r);
   }
 
   getDisplayedColumn() {

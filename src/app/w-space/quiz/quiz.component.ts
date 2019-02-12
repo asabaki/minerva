@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-
+import { CreateQuizComponent } from './my-quiz/create-quiz/create-quiz.component';
+import {Router} from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -30,10 +31,16 @@ export class QuizComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,
+              private router: Router) {}
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+  }
+
+
+  onMyQuiz() {
+    this.router.navigate(['quiz/my/']);
   }
 }

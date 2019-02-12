@@ -1,0 +1,90 @@
+<main class="top-view">
+  <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to quizzes"
+      class="icon-btn"
+      (click)="onClickBack()"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
+    <h1 class="overview__heading">Create New Quiz</h1>
+    <div class="overview__count">
+      <div class="overview__count-average">10</div>
+      <div class="overview__count-count">Questions</div>
+    </div>
+  </div>
+  <div class="detail">
+    <form>
+      <div class="description">
+        <div class="create-quiz__header">
+          <mat-form-field color="primary">
+            <input
+              name="title"
+              matInput
+              type="text"
+              class="collection_name"
+              placeholder="Quiz Name"
+              required
+              #title
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <textarea
+              name="description"
+              matInput
+              class="collection_description"
+              type="text"
+              placeholder="Description"
+              required
+              #description
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="create-quiz__questions-btn">
+        <button mat-button [matMenuTriggerFor]="menu" class="btn btn__insert">
+          <mat-icon class="icon">add</mat-icon>&nbsp;Insert question
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openAddMcqDialog()">
+            <mat-icon color="primary"> format_list_bulleted</mat-icon
+            >&nbsp;Multiple Choices
+          </button>
+          <button mat-menu-item (click)="openAddTrueFalseDialog()">
+            <mat-icon color="primary"> bubble_chart</mat-icon>&nbsp;True or
+            False
+          </button>
+        </mat-menu>
+        <button mat-button class="btn btn__edit">
+          <mat-icon class="icon">edit</mat-icon>&nbsp;Edit question
+        </button>
+      </div>
+    </form>
+
+    <div class="description" *ngIf="quiz.questions.length > 0">
+      <div class="create-quiz__overview">
+        <form class="question" *ngFor="let question of quiz.questions; let i = index">
+          <div class="question-header">
+            <div class="question-number">{{ i + 1 }}</div>
+            <div class="question-question">{{ question.question }}</div>
+            <div class="question-remove">
+              <button class="btn__remove" matTooltip="Delete" mat-button>
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-radio-group class="question-choice">
+            <mat-radio-button *ngFor="let choice of question.choice; let j = index" [value]="j" color="primary" class="radio-button" [checked]="choice.answer">
+              {{choice.choice_text}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </form>
+
+
+      </div>
+    </div>
+    <button mat-button class="btn btn__save" (click)="onCreate(title.value, description.value)">Save</button>
+  </div>
+</main>
