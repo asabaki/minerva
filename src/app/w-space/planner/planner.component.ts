@@ -2,7 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef, OnInit, ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
@@ -23,8 +23,10 @@ import {
   CalendarView
 } from 'angular-calendar';
 
-import {MatDialog} from '@angular/material';
-import {PlanDetailComponent} from '../planner/plan-detail/plan-detail.component';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {PlanDetailComponent} from './plan-detail/plan-detail.component';
+import {PlannerService} from '../services/planner.service';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
 
 const colors: any = {
   red: {
@@ -38,16 +40,7 @@ const colors: any = {
   yellow: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
-  },
-  black: {
-    primary: '#000000',
-    secondary: '#A3A3A3'
-  },
-  green: {
-    primary: 'rgb(27, 187, 27)',
-    secondary: 'rgb(27, 187, 27)'
   }
-
 };
 
 
@@ -57,8 +50,15 @@ const colors: any = {
   templateUrl: './planner.component.html',
   styleUrls: ['./planner.component.scss']
 })
-export class PlannerComponent {
+export class PlannerComponent implements OnInit {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
+  constructor(private modal: NgbModal,
+              public dialog: MatDialog,
+              private service: PlannerService,
+              private matSnack: MatSnackBar) {
+  }
+
 
   view: CalendarView = CalendarView.Month;
 
@@ -73,42 +73,49 @@ export class PlannerComponent {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
+      label: '<i class="fas fa-pencil-alt"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
+        console.log(event);
         this.handleEvent('Edited', event);
       }
     },
     {
-      label: '<i class="fa fa-fw fa-times"></i>',
+      label: '<i class="fa fa-fw fa-times grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
+        // TODO - Ask User for confirmation before delete
+        this.service.delete_event(event);
         this.events = this.events.filter(iEvent => iEvent !== event);
         this.handleEvent('Deleted', event);
+        this.activeDayIsOpen = false;
       }
     }
   ];
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: false
-    }
-  ];
+  events: CalendarEvent[] = [];
+  temp_events: CalendarEvent[] = [];
+
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal,
-              public dialog: MatDialog) {
+  ngOnInit(): void {
+    this.service.get_events().subscribe(res => {
+      this.events = [];
+      res.forEach(event => {
+        this.events.push({
+          id: event._id,
+          start: new Date(event.start),
+          end: new Date(event.end),
+          title: event.title,
+          color: {primary: event.color, secondary: event.color},
+          actions: this.actions
+        });
+      });
+      console.log(this.events);
+      this.refresh.next();
+    });
+    this.activeDayIsOpen = false;
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -137,25 +144,47 @@ export class PlannerComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    /*this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });*/
-    const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    // TODO - Set dialog according to action(Delete, Edited)
+    // TODO - Ask User Before Deleting Events
+    // TODO - Add Icon Indicator meaning of Color in Calendar(Today for eg.)
+    // TODO - Mark as complete
+    // this.modalData = { event, action };
+    // this.modal.open(this.modalContent, { size: 'lg' });
+    if (action !== 'Deleted') {
+      const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
+      dialogRef.afterClosed().subscribe(result => {
+      });
+    }
   }
 
   addEvent(): void {
-    this.events.push({
+    this.temp_events.push({
       title: 'New event',
       start: startOfDay(new Date()),
       color: colors.green,
-      draggable: false,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
+      actions: this.actions,
+    });
+
+    this.refresh.next();
+  }
+
+  onSave(e: any) {
+    this.service.add_event(e).subscribe(res => {
+      if (res.ok) {
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Event Added Successful!',
+          duration: 1500
+        });
+        this.service.get_events();
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something Went Wrong!\n' + res.statusText,
+          duration: 1500
+        });
       }
     });
-    this.refresh.next();
+    this.temp_events = this.temp_events.filter(iEvent => iEvent !== e);
+    console.log(e);
   }
 
   planDetailDialog() {

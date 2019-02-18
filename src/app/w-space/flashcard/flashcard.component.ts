@@ -38,7 +38,7 @@ export class FlashcardComponent implements OnInit {
   editClicked = false;
   deleteClicked = false;
   number_collection: number;
-
+  isLoaded = false;
   bootRate = 1;
   faRate = 1;
   cssRate = 1;
@@ -79,6 +79,7 @@ export class FlashcardComponent implements OnInit {
           }
         );
         this.dataSource.sort = this.sort;
+        this.isLoaded = true;
       }
     );
 

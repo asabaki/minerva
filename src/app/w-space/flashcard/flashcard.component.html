@@ -1,4 +1,4 @@
-<main class="top-view" *ngIf="true">
+<main class="top-view">
   <div class="overview">
     <h1 class="overview__heading">
       <mat-icon
@@ -14,10 +14,10 @@
       <div class="overview__count-count">Collection</div>
     </div>
   </div>
-  <div class="detail" *ngIf="isLoading">
+  <div *ngIf="!isLoaded" class="spinner">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </div>
-  <div class="detail" *ngIf="!isLoading">
+  <div class="detail" *ngIf="isLoaded">
     <div class="description">
       <div class="description-btn_set">
         <form action="#" class="search">

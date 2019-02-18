@@ -337,5 +337,11 @@ background-color: #fff;
   cursor: pointer;
 }
 
+.fa-pencil-alt:before {
+  content: "\f303";
+  color: var(--color-grey-light-4) !important;
+}
+
+
 
 

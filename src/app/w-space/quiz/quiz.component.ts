@@ -1,27 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
 import { CreateQuizComponent } from './my-quiz/create-quiz/create-quiz.component';
 import {Router} from '@angular/router';
+import {QuizService} from '../services/quiz.service';
 
 export interface PeriodicElement {
-  name: string;
+  _id: string;
+  title: string;
   description: string;
-  numberOfCard: number;
-
+  noOfQuestions: number;
+  rating: number;
+  dom: Date;
+  views: number;
+  delete: boolean;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {name: 'Hydrogen', description: 'aaaaaaa', numberOfCard: 2},
-  {name: 'Helium', description: 'aaaaaaa', numberOfCard: 20},
-  {name: 'Lithium', description: 'aaaaaaa', numberOfCard: 22},
-  {name: 'Beryllium', description: 'aaaaaaa', numberOfCard: 13},
-  {name: 'Boron', description: 'aaaaaaa', numberOfCard: 30},
-  {name: 'Carbon', description: 'aaaaaaa', numberOfCard: 23},
-  {name: 'Nitrogen', description: 'aaaaaaa', numberOfCard: 14},
-  {name: 'Oxygen', description: 'aaaaaaa', numberOfCard: 99},
-  {name: 'Fluorine', description: 'aaaaaaa', numberOfCard: 18},
-  {name: 'Neon', description: 'aaaaaaa', numberOfCard: 27},
-];
+const ELEMENT_DATA: PeriodicElement[] = [];
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
@@ -29,18 +24,65 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class QuizComponent implements OnInit {
   displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
+  columnDef = [
+    {def: 'title', show: true},
+    {def: 'description', show: true},
+    {def: 'noOfQuestions', show: true},
+    {def: 'rating', show: true},
+    {def: 'dom', show: true},
+    {def: 'views', show: true},
+    {def: 'delete', show: false}
+  ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
+  number_quiz: number;
+  isLoaded = false;
   constructor(public dialog: MatDialog,
-              private router: Router) {}
+              private router: Router,
+              private qservice: QuizService,
+              private location: Location) {}
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.qservice.get_allQuizzes().subscribe(res => {
+      ELEMENT_DATA.length = 0;
+      res.forEach(data => {
+        ELEMENT_DATA.push({
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          noOfQuestions: data.questions.length,
+          rating: data.rating,
+          views: data.views,
+          dom: data.lastUpdated,
+          delete: false
+        });
+      });
+      this.dataSource.sort = this.sort;
+      console.log(ELEMENT_DATA);
+      this.isLoaded = true;
+    });
+    // this.dataSource.sort = this.sort;
   }
 
 
   onMyQuiz() {
     this.router.navigate(['quiz/my/']);
   }
+
+  onClickBack() {
+    this.location.back();
+  }
+
+  getDisplayedColumn() {
+    return this.columnDef
+      .filter((def) => def.show)
+      .map((def) => def.def);
+  }
+
+  onRowClick(r: any) {
+    console.log(r);
+    this.router.navigate(['quiz/item/' + r._id]);
+  }
+
+
 }

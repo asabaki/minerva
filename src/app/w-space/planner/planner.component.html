@@ -149,7 +149,7 @@
         <table class="event-table">
           <thead>
             <tr>
-              <th>Title</th>
+              <th>Event</th>
               <th>Priority</th>
               <th>Starts at</th>
               <th>Ends at</th>
@@ -159,7 +159,7 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let event of events; let index = index">
+            <tr *ngFor="let event of temp_events; let index = index">
               <td>
                 <input
                   type="text"
@@ -171,7 +171,7 @@
               <td>
                 <input
                   type="color"
-                  [(ngModel)]="event.color.primary"
+                  [(ngModel)]="event.color"
                   (change)="refresh.next()"
                   class="color-picker"
                 />
@@ -210,13 +210,13 @@
               <td>
                 <button
                   class="btn delete"
-                  (click)="events.splice(index, 1); refresh.next()"
+                  (click)="temp_events.splice(index, 1); refresh.next()"
                 >
                   Delete
                 </button>
               </td>
               <td>
-                <button class="btn done">
+                <button class="btn done" (click)="onSave(event)">
                   <i class="fas fa-check i"></i>
                 </button>
               </td>
