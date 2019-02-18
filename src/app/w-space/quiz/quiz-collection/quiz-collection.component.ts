@@ -3,7 +3,8 @@ import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
-import {ResultDialogComponent} from '../quiz-collection/result-dialog/result-dialog.component';
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+
 
 export class QuizCollectionModel {
   _id: string;
@@ -28,10 +29,10 @@ export class QuizCollectionModel {
 })
 export class QuizCollectionComponent implements OnInit {
 
-
   constructor(private qs: QuizService,
               private route: ActivatedRoute,
-              private location: Location) { }
+              private location: Location,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     // TODO - Add Creator name, rating, views
@@ -42,6 +43,15 @@ export class QuizCollectionComponent implements OnInit {
       // this.qs.get_taken(params.get('id'));
     });
     // this.qs.get_taken()
+  }
+  onClickBack() {
+    this.location.back();
+  }
+  openConfirmdialog() {
+    const dialogRef = this.dialog.open( ConfirmDialogComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

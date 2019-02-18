@@ -16,8 +16,7 @@ import {QuizCollectionComponent} from './w-space/quiz/quiz-collection/quiz-colle
 import {NoteComponent} from './w-space/note/note.component';
 import {CountdownComponent} from './w-space/planner/countdown/countdown.component';
 import {SelfControlComponent} from './w-space/self-control/self-control.component';
-
-
+import {CreateNoteComponent} from './w-space/note/my-note/create-note/create-note.component';
 
 const routes: Routes = [
   {path: '', component: WSpaceComponent , pathMatch: 'full'},
@@ -33,6 +32,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'acc', component: AccountSettingComponent},
   {path: 'note', component: NoteComponent},
+  {path: 'note/my/create', component: CreateNoteComponent, canActivate: [AuthGuard]},
   {path: 'countdown', component: CountdownComponent},
   {path: 'self-control', component: SelfControlComponent},
 

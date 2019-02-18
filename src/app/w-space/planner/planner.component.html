@@ -4,7 +4,8 @@
       <mat-icon
         color="primary"
         style="display: inline-flex; vertical-align: middle;"
-        >table</mat-icon
+      >table
+      </mat-icon
       >
       schedule
     </h1>
@@ -15,6 +16,114 @@
   </div>
 
   <div class="detail">
+    <div class="description">
+
+      <div class="event">
+        <div class="event-header">
+
+          <div class="event-edit">
+            <h3>Edit events</h3>
+            <button
+              mat-raised-button
+              matTooltip="color is today"
+              matTooltipClass="primary-tooltip"
+              class="event-btn__info"
+            >
+              <i class="fas fa-info-circle"></i>
+            </button>
+          </div>
+
+          <div class="event-btn">
+            <button class="btn completed">
+              Completed events
+            </button>
+            <button class="btn addnew" (click)="addEvent()">
+              Add new
+            </button>
+            <div class="clearfix"></div>
+          </div>
+
+        </div>
+
+        <table class="event-table">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Starts at</th>
+            <th>Ends at</th>
+            <th>Remove</th>
+            <th>Done?</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr *ngFor="let event of events; let index = index">
+            <td>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="event.title"
+                (keyup)="refresh.next()"
+              />
+            </td>
+            <td>
+              <input
+                type="color"
+                [(ngModel)]="event.color.primary"
+                (change)="refresh.next()"
+                class="color-picker"
+              />
+            </td>
+
+            <td>
+              <input
+                class="date_time-picker"
+                type="text"
+                mwlFlatpickr
+                [(ngModel)]="event.start"
+                (ngModelChange)="refresh.next()"
+                [altInput]="true"
+                [convertModelValue]="true"
+                [enableTime]="true"
+                dateFormat="Y-m-dTH:i"
+                altFormat="F j, Y H:i"
+                placeholder="Not set"
+              />
+            </td>
+            <td>
+              <input
+                class="date_time-picker"
+                type="text"
+                mwlFlatpickr
+                [(ngModel)]="event.end"
+                (ngModelChange)="refresh.next()"
+                [altInput]="true"
+                [convertModelValue]="true"
+                [enableTime]="true"
+                dateFormat="Y-m-dTH:i"
+                altFormat="F j, Y H:i"
+                placeholder="Not set"
+              />
+            </td>
+            <td>
+              <button
+                class="btn delete"
+                (click)="events.splice(index, 1); refresh.next()"
+              >
+                Delete
+              </button>
+            </td>
+            <td>
+              <button class="btn done">
+                <i class="fas fa-check i"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     <div class="description">
       <ng-template #modalContent let-close="close">
         <div class="modal-header">
@@ -99,7 +208,7 @@
           </div>
         </div>
       </div>
-      <br />
+      <br/>
       <div [ngSwitch]="view">
         <mwl-calendar-month-view
           *ngSwitchCase="CalendarView.Month"
@@ -132,98 +241,7 @@
         </mwl-calendar-day-view>
       </div>
 
-      <div class="event">
-        <div class="header-edit">
-          <h3>Edit events</h3>
-          <div>
-            <button class="btn completed">
-              Completed events
-            </button>
-            <button class="btn addnew" (click)="addEvent()">
-              Add new
-            </button>
-            <div class="clearfix"></div>
-          </div>
-        </div>
 
-        <table class="event-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Priority</th>
-              <th>Starts at</th>
-              <th>Ends at</th>
-              <th>Remove</th>
-              <th>Done?</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let event of events; let index = index">
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  [(ngModel)]="event.title"
-                  (keyup)="refresh.next()"
-                />
-              </td>
-              <td>
-                <input
-                  type="color"
-                  [(ngModel)]="event.color.primary"
-                  (change)="refresh.next()"
-                  class="color-picker"
-                />
-              </td>
-
-              <td>
-                <input
-                  class="date_time-picker"
-                  type="text"
-                  mwlFlatpickr
-                  [(ngModel)]="event.start"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="true"
-                  dateFormat="Y-m-dTH:i"
-                  altFormat="F j, Y H:i"
-                  placeholder="Not set"
-                />
-              </td>
-              <td>
-                <input
-                  class="date_time-picker"
-                  type="text"
-                  mwlFlatpickr
-                  [(ngModel)]="event.end"
-                  (ngModelChange)="refresh.next()"
-                  [altInput]="true"
-                  [convertModelValue]="true"
-                  [enableTime]="true"
-                  dateFormat="Y-m-dTH:i"
-                  altFormat="F j, Y H:i"
-                  placeholder="Not set"
-                />
-              </td>
-              <td>
-                <button
-                  class="btn delete"
-                  (click)="events.splice(index, 1); refresh.next()"
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <button class="btn done">
-                  <i class="fas fa-check i"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
   </div>
 </main>

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {McqComponent} from './mcq/mcq.component';
-import {TrueFalseComponent} from './true-false/true-false.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
@@ -28,12 +27,25 @@ export class QuizModel {
 export class CreateQuizComponent implements OnInit {
 
   quiz: QuizModel;
-
+  privacyText = 'Only Me';
   constructor(public dialog: MatDialog,
               private location: Location,
               private quizService: QuizService) {
     this.quiz = new QuizModel();
-    // this.quiz.questions = [];
+    this.quiz = {
+      title: '',
+      description: '',
+      questions: [
+        {
+          question_text: null,
+          choice: [{
+            choice_text: null,
+            answer: null
+          }]
+        }
+      ]
+    };
+    this.quiz.questions.pop();
   }
 
   ngOnInit() {
@@ -61,13 +73,10 @@ export class CreateQuizComponent implements OnInit {
       console.log(this.quiz);
     });
   }
-
-  openAddTrueFalseDialog() {
-    const dialogRef = this.dialog.open(TrueFalseComponent, {panelClass: 'myapp-no-padding-dialog'});
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  sliding(f: any) {
+    this.privacyText = f ? 'Only Me' : 'Publish' ;
   }
+
 
 
 }

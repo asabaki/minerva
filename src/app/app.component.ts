@@ -7,6 +7,7 @@ import {AuthService} from './w-space/services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+// TODO Check matToolTip again after add table
   title = 'Minerva';
   constructor (private authService: AuthService) {}
   ngOnInit() {

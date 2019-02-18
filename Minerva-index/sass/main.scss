@@ -32,6 +32,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 @import "first";
 @import "second";
 @import "third";
+@import "footer";
 
 
 
@@ -60,6 +61,7 @@ body {
     line-height: 1.6;
     color: var(--color-grey-dark-2);
     margin: 0;
+
 }
 
 

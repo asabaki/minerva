@@ -1,26 +1,24 @@
-<main>
-  <!--&lt;!&ndash;<main class="top-view">-->
+<main class="top-view" *ngIf="true">
   <div class="overview">
+    <button
+      mat-icon-button
+      color="primary"
+      matTooltip="Back to flashcards"
+      class="icon-btn"
+      (click)="onClickBack()"
+    >
+      <mat-icon color="primary">arrow_back</mat-icon>
+    </button>
     <h1 class="overview__heading">
-      <button
-        mat-icon-button
-        color="primary"
-        matTooltip="Back to quizzes"
-        class="icon-btn"
-        (click)="onClickBack()"
-      >
-        <mat-icon color="primary">arrow_back</mat-icon>
-      </button>
       <mat-icon
         color="primary"
         style="display: inline-flex; vertical-align: middle;"
-      >question_answer
-      </mat-icon
+      >question_answer</mat-icon
       >
-      MY QUIZZES
+      My Quizzes
     </h1>
     <div class="overview__count">
-      <div class="overview__count-average">{{ number_quiz }}</div>
+      <div class="overview__count-average">{{ number_collection }}</div>
       <div class="overview__count-count">Collection</div>
     </div>
   </div>

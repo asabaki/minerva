@@ -173,7 +173,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
     &-block {
         color: white;
-        background-color: #960000;
+        background-color: var(--color-primary);
         border: none;
         border-radius: 100px;
         padding: .5rem 1rem 1rem 1rem;

@@ -25,9 +25,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 .detail {
     display: flex;
-    padding: 4.5rem;
+    padding: 2rem 3rem;
     border-bottom: var(--line);
     font-size: 1.4rem;
+    flex-direction: column;
     @media only screen and (max-width: $bp-medium) {
         padding: 3rem;
     }
@@ -38,6 +39,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: 370px) {
         padding: .5rem;
     }
+    &-sub {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .description {
@@ -45,13 +50,26 @@ $bp-smallest: 31.25em; //500px  (500/16)
     box-shadow: var(--shadow-light);
     padding: 3rem;
     flex: 1;
-    height: 100%;
     @media only screen and (max-width: $bp-medium) {
         padding: 2rem;
     }
     @media only screen and (max-width: $bp-small) {
         margin-right: 0;
         margin-bottom: 3rem;
+    }
+    &.sub {
+        &__1 {
+            flex: 0 0 65%;
+            margin: 1rem 1rem 1rem 0rem;
+            display: flex;
+            flex-direction: column;
+        }
+        &__2 {
+            flex: 1;
+            margin: 1rem 0rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+        }
     }
     &-btn_set {
         display: flex;
@@ -66,6 +84,23 @@ $bp-smallest: 31.25em; //500px  (500/16)
             @media only screen and (max-width: $bp-smallest) {
                 justify-content: center;
                 margin: 1rem 0 0 0;
+            }
+        }
+    }
+    &__flex-start {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        &__info {
+            color: var(--color-primary);
+            background-color: transparent;
+            border: none;
+            outline: none;
+            font-size: 2rem;
+            margin-left: 1rem;
+            transition: .2s all;
+            &:hover {
+                transform: scale(1.1);
             }
         }
     }
@@ -398,6 +433,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         cursor: pointer;
         transition: all .2s;
         display: block;
+        width: 100%;
         &:hover {
             box-shadow: 0 .5rem 1rem rgba(black, .2);
             transform: scale(1.1);
@@ -488,15 +524,14 @@ tr.mat-row.ng-star-inserted {
 
 td.mat-cell:not(:nth-of-type(2)),
 td.mat-footer-cell:not(:nth-of-type(2)),
-th.mat-header-cell:not(:nth-of-type(2))
- {
-  text-align: center;
+th.mat-header-cell:not(:nth-of-type(2)) {
+    text-align: center;
 }
+
 td.mat-cell:first-of-type,
 td.mat-footer-cell:first-of-type,
-th.mat-header-cell:first-of-type
-{
-  text-align: left;
+th.mat-header-cell:first-of-type {
+    text-align: left;
 }
 
 .search {
@@ -548,15 +583,156 @@ th.mat-header-cell:first-of-type
         }
     }
     &__icon {
-      cursor: pointer;
+        cursor: pointer;
         height: 2rem;
-       width: 2rem;
+        width: 2rem;
         fill: var(--color-grey-dark-3);
     }
 }
 
-.author-name{
-  i{
-    color: var(--color-primary);
-  }
+.author-name {
+    i {
+        color: var(--color-primary);
+    }
+}
+
+.feature {
+    &-img {
+        display: block;
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+    }
+    &-heading {
+        display: flex;
+        justify-content: center;
+        color: var(--color-primary);
+        h1 {
+            color: var(--color-primary);
+            font-size: 5rem;
+            text-align: center;
+            &:hover {
+                animation: heartBeat 2s infinite;
+            }
+        }
+    }
+    &-description {
+        margin: 1rem 0;
+        font-size: 1.75rem;
+        color: black;
+        text-align: justify;
+        button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            i {
+              align-self: center;
+              font-size: 1.5rem;
+              color: var(--color-primary);
+          }
+          transition: .2s all;
+          &:hover{
+            transform: scale(1.05);
+          }
+          &:active{
+            transform: scale(.95);
+          }
+        }
+        h2 {
+            color: var(--color-secondary);
+            margin: .5rem 0;
+            display: block;
+            transition: .2s all;
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+        &__help {
+            margin-left: 1rem;
+            ul {
+                li {
+                    list-style-type: none;
+                    display: block;
+                    transition: .2s all;
+                    &::before {
+                        content: "\f0da";
+                        font-family: "FontAwesome";
+                        margin: 0rem 1rem 0 2rem;
+                    }
+                    &:hover {
+                        transform: translateX(1.5rem);
+                        color: var(--color-primary);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.user {
+    display: flex;
+    justify-content: flex-start;
+    &-explore {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid var(--color-grey-light-3);
+        padding: 1rem .5rem;
+        align-items: center;
+        &:hover {
+            background-color: whitesmoke;
+        }
+    }
+    &-img {
+        border-radius: 50%;
+        width: 5rem;
+        height: 5rem;
+    }
+    &-username {
+        font-weight: 700;
+    }
+    &-detail {
+        font-weight: 200;
+    }
+    &-acc {
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+        justify-content: center;
+    }
+}
+
+.btn-see-more {
+    color: var(--color-secondary-dark);
+    transition: .2s all;
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    &:hover {
+        color: var(--color-primary);
+        transform: scale(1.05);
+    }
+    &:active {
+        color: var(--color-primary);
+        transform: scale(1);
+    }
+    &.side {
+        &-1 {
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            transition: .2s all;
+            &:hover {
+                color: var(--color-secondary);
+                transform: scale(1.05);
+            }
+            &:active {
+                transform: scale(1);
+            }
+        }
+    }
 }

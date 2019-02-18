@@ -175,6 +175,15 @@ $bp-smallest: 31.25em; //500px  (500/16)
         display: flex;
         flex-direction: column;
         font-size: 2rem;
+      span{
+        font-size: 1.5rem;
+        font-style: italic;
+      }
+      p{
+        text-align: justify;
+        font-size: 1.75rem;
+        margin: 1rem auto;
+      }
     }
     &__questions {
         &-btn {
@@ -232,6 +241,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
       }
     }
+  &__start{
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 100px;
+    padding: 1rem 3rem;
+    margin:  auto;
+    transition: .2s all;
+    &:hover {
+      transform: scale(1.04);
+    }
+    &:active {
+      transform: scale(.95);
+    }
+  }
     &__retest{
       background-color: var(--color-primary);
     }

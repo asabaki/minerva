@@ -30,14 +30,16 @@
         <span>Quiz</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
+    <li class="side-nav__item"
+        routerLinkActive="side-nav__item--active"
+        *ngIf="status">
       <a routerLink="/note" class="side-nav__link border-bottom">
         <mat-icon class="side-nav__icon">assignment</mat-icon>
         <span>Note</span>
       </a>
     </li>
-    <li class="side-nav__item dropdown" *ngIf="status">
-      <a routerLink="#" class="side-nav__link dropdown" (click)="onClick()" id="plan">
+    <li class="side-nav__item" *ngIf="status">
+      <div class="side-nav__link dropdown" (click)="onClick()" id="plan">
         <div>
             <mat-icon class="side-nav__icon">edit_attributes</mat-icon>
             <span>Planner</span>
@@ -46,21 +48,28 @@
           <mat-icon *ngIf="!hide">keyboard_arrow_down</mat-icon>
           <mat-icon *ngIf="hide">keyboard_arrow_up</mat-icon>
         </div>
-      </a>
+      </div>
     </li>
-    <li class="side-nav__item dropdown_item" *ngIf="status">
+
+    <li class="side-nav__item dropdown_item"
+        routerLinkActive="side-nav__item--active"
+        *ngIf="status">
         <a routerLink="/plan" class="side-nav__link" *ngIf="hide" >
           <mat-icon class="side-nav__icon">table</mat-icon>
           <span>Schedule</span>
         </a>
       </li>
-    <li class="side-nav__item dropdown_item" *ngIf="status">
+    <li class="side-nav__item dropdown_item"
+        routerLinkActive="side-nav__item--active"
+        *ngIf="status">
       <a routerLink="/countdown" class="side-nav__link" *ngIf="hide" >
         <mat-icon class="side-nav__icon">timer</mat-icon>
         <span>Count Down</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
+    <li class="side-nav__item"
+        routerLinkActive="side-nav__item--active"
+        *ngIf="status">
       <a routerLink="/self-control" class="side-nav__link ">
         <mat-icon class="side-nav__icon">block</mat-icon>
         <span>Self Control</span>
