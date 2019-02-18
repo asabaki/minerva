@@ -560,3 +560,8 @@ th.mat-header-cell:first-of-type
     color: var(--color-primary);
   }
 }
+
+.spinner{
+  display: flex;
+  justify-content: center;
+}

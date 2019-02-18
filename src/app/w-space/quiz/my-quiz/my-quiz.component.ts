@@ -49,7 +49,6 @@ export class MyQuizComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
-    let i = 0;
     this.quizService.get_myquizzes().subscribe(res => {
       ELEMENT_DATA.length = 0;
       this.number_quiz = res.length;
@@ -60,7 +59,7 @@ export class MyQuizComponent implements OnInit {
           title: data.title,
           description: data.description,
           noOfQuestions: data.questions.length,
-          rating: i += 0.5,
+          rating: data.rating,
           views: 0,
           dom: data.updatedAt,
           privacy: data.privacy,
