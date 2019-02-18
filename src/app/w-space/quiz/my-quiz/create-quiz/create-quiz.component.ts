@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
+
 import {McqComponent} from './mcq/mcq.component';
 import {TrueFalseComponent} from './true-false/true-false.component';
 import {MatRadioModule} from '@angular/material/radio';

@@ -28,6 +28,7 @@ import {PlanDetailComponent} from './plan-detail/plan-detail.component';
 import {PlannerService} from '../services/planner.service';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
 
+
 const colors: any = {
   red: {
     primary: '#ad2121',

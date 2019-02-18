@@ -32,6 +32,7 @@ export class QuizCollectionComponent implements OnInit {
   isTaken: boolean = false;
   point = [];
   mark = 0;
+
   constructor(private qs: QuizService,
               private route: ActivatedRoute,
               private location: Location) { }

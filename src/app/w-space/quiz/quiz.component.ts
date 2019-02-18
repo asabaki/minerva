@@ -40,6 +40,7 @@ export class QuizComponent implements OnInit {
               private router: Router,
               private qservice: QuizService,
               private location: Location) {}
+
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {

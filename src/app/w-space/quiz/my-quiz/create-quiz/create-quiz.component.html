@@ -68,6 +68,7 @@
         <form class="question" *ngFor="let question of quiz.questions; let i = index">
           <div class="question-header">
             <div class="question-number">{{ i + 1 }}</div>
+
             <div class="question-question">{{ question.question_text }}</div>
             <div class="question-remove">
               <button class="btn__remove" matTooltip="Delete" mat-button>

@@ -20,9 +20,6 @@
       <div class="description-btn_set">
         <button
           mat-raised-button
-          matTooltip="Create new collection of Flashcard"
-          aria-label="Button that displays a tooltip when focused or hovered over"
-          class="btn-create"
           mat-button
           (click)="onMyQuiz()"
         >
@@ -87,7 +84,6 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Modified</th>
           <td mat-cell *matCellDef="let element">{{ element.dom | date : 'medium' }}</td>
         </ng-container>
-
         <ng-container matColumnDef="delete">
           <th mat-header-cell *matHeaderCellDef ></th>
           <td mat-cell *matCellDef="let element">

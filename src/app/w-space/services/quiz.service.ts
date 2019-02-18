@@ -43,7 +43,6 @@ export class QuizService {
       observe: 'response'
     }).subscribe(res => {
       this.myQuizzes_subject.next(res.body);
-      // console.log(res);
     });
     return this.myQuizzes_subject.asObservable();
   }
@@ -58,7 +57,6 @@ export class QuizService {
     });
     return this.quiz_subject.asObservable();
   }
-
   get_taken(id: string) {
     this.http.get('http://localhost:3000/api/quiz/get/quiz_taken', {
       params: new HttpParams().set('id', id),
