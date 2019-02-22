@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
 import {McqComponent} from './mcq/mcq.component';
-import {TrueFalseComponent} from './true-false/true-false.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
@@ -10,6 +9,7 @@ import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-
 import {Router} from '@angular/router';
 
 export interface QuizModel {
+  privacy: boolean;
   title: string;
   description: string;
   questions?: [{
@@ -31,7 +31,7 @@ export interface QuizModel {
 export class CreateQuizComponent implements OnInit {
 
   quiz: QuizModel;
-
+  privacyText = 'Only Me';
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
               private location: Location,
@@ -41,6 +41,7 @@ export class CreateQuizComponent implements OnInit {
 
   ngOnInit() {
     this.quiz = {
+      privacy: false,
       title: '',
       description: '',
       questions: [
@@ -56,9 +57,11 @@ export class CreateQuizComponent implements OnInit {
     this.quiz.questions.pop();
   }
 
-  onCreate(title: string, description: string) {
+  onCreate(title: string, description: string, privacy: boolean) {
+    // console.log(privacy);
     this.quiz.title = title;
     this.quiz.description = description;
+    this.quiz.privacy = !privacy;
     this.quizService.add_quiz(this.quiz).subscribe(res => {
       if (res.ok) {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
@@ -90,13 +93,10 @@ export class CreateQuizComponent implements OnInit {
       console.log(this.quiz);
     });
   }
-
-  openAddTrueFalseDialog() {
-    const dialogRef = this.dialog.open(TrueFalseComponent, {panelClass: 'myapp-no-padding-dialog'});
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  sliding(f: any) {
+    this.privacyText = f ? 'Only Me' : 'Publish' ;
   }
+
 
 
 }

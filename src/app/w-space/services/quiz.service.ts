@@ -26,6 +26,7 @@ export class QuizService {
     this.http.get('http://localhost:3000/api/quiz/get/all_quizzes', {
       observe: 'response'
     }).subscribe(res => {
+      // console.log(res)
       if (res.ok) {
         this.all_quizzes_subject.next(res.body);
       } else {

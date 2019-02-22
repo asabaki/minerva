@@ -1,5 +1,6 @@
 .first {
-    &__container {
+
+  &__container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -38,6 +39,10 @@
             &:active {
                 transform: scale(.95);
             }
+          a {
+            text-decoration: none;
+          }
+
         }
     }
 

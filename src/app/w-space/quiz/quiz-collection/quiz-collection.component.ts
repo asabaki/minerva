@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {MatDialog} from '@angular/material';
-import {ResultDialogComponent} from '../quiz-collection/result-dialog/result-dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+import {ResultDialogComponent} from './result-dialog/result-dialog.component';
+import {first, take} from 'rxjs/operators';
+
 
 export class QuizCollectionModel {
   _id: string;
@@ -32,10 +35,14 @@ export class QuizCollectionComponent implements OnInit {
   isTaken: boolean = false;
   point = [];
   mark = 0;
+  startQuiz = false;
+  dialogRef: MatDialogRef<ConfirmDialogComponent> = null;
 
   constructor(private qs: QuizService,
               private route: ActivatedRoute,
-              private location: Location) { }
+              private location: Location,
+              public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     // TODO - Add Creator name, rating, views
@@ -70,30 +77,52 @@ export class QuizCollectionComponent implements OnInit {
     });
   }
 
+  onClickBack() {
+    this.location.back();
+  }
+
   onSubmit(f: any) {
-    this.mark = 0;
-    // TODO - Ask User before submit
-    this.quiz.questions.forEach((question, index) => {
-      this.point[index] = 0;
-      for (let i = 0; i < question.choice.length; i++) {
-        if (question.choice[i].answer && i === f.value[index]) {
-          this.point[index] = 1;
-          this.mark++;
+      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to submit ?', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      confirmDialog.afterClosed().pipe(first()).subscribe(yon => {
+        console.log(yon);
+        if (yon) {
+          this.mark = 0;
+          this.quiz.questions.forEach((question, index) => {
+            this.point[index] = 0;
+            for (let i = 0; i < question.choice.length; i++) {
+              if (question.choice[i].answer && i === f.value[index]) {
+                this.point[index] = 1;
+                this.mark++;
+              }
+            }
+          });
+          // this.dialog.open(ResultDialogComponent);
+          this.quiz.isTaken = true;
+          this.qs.taken_quiz(this.quiz._id, this.mark);
+        } else {
         }
-      }
-      // TODO - Show Dialog of Mark User gets
-    });
-    this.quiz.isTaken = true;
-    this.qs.taken_quiz(this.quiz._id, this.mark);
+      });
   }
 
   onRetest() {
-    // TODO - Ask user to Retest
-    this.quiz.isTaken = false;
-    this.isTaken = false;
+      const retest = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to re-test ?', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      retest.afterClosed().pipe(first()).subscribe(res =>  {
+        this.dialogRef = null;
+        if (res) {
+          this.quiz.isTaken = false;
+          this.isTaken = false;
+        }
+      });
   }
-  onClickBack() {
-    this.location.back();
+
+  onStartQuiz() {
+    this.startQuiz = !this.startQuiz;
   }
 
   shuffle(array) {

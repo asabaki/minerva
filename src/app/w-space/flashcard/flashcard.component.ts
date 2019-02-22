@@ -3,6 +3,7 @@ import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/mate
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
+import {TutorialVideoComponent} from '../shared-dialog/tutorial-video/tutorial-video.component';
 
 export interface PeriodicElement {
   _id: string;
@@ -118,5 +119,11 @@ export class FlashcardComponent implements OnInit {
 
   onMyFlashcard() {
     this.router.navigate(['flash/my/']);
+  }
+
+  onOpenVideo() {
+    this.dialog.open(TutorialVideoComponent, {
+      panelClass: 'myapp-no-padding-dialog'
+    });
   }
 }

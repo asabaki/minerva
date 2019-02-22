@@ -27,6 +27,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {PlanDetailComponent} from './plan-detail/plan-detail.component';
 import {PlannerService} from '../services/planner.service';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
+import {ConfirmDialogComponent} from '../quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
 
 
 const colors: any = {
@@ -74,7 +75,7 @@ export class PlannerComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-pencil-alt"></i>',
+      label: '<i class="fas fa-pencil-alt grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
         console.log(event);
         this.handleEvent('Edited', event);
@@ -83,11 +84,20 @@ export class PlannerComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-times grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
-        // TODO - Ask User for confirmation before delete
-        this.service.delete_event(event);
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-        this.activeDayIsOpen = false;
+        const deleteCfrm = this.dialog.open(ConfirmDialogComponent, {
+          data: { mssg: 'Do you want to delete this event?', type: 'alert'},
+          panelClass: 'myapp-no-padding-dialog'
+        });
+        deleteCfrm.afterClosed().subscribe(res => {
+          console.log(res);
+          if (res) {
+            this.service.delete_event(event);
+            this.events = this.events.filter(iEvent => iEvent !== event);
+            this.handleEvent('Deleted', event);
+            this.refresh.next();
+            this.activeDayIsOpen = false;
+          }
+        });
       }
     }
   ];

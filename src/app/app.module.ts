@@ -18,7 +18,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CountdownModule } from 'ngx-countdown';
 
-
 import {
   MatIconModule,
   MatInputModule,
@@ -59,7 +58,6 @@ import { CreateQuizComponent } from './w-space/quiz/my-quiz/create-quiz/create-q
 import { EditCardComponent } from './w-space/flashcard/collection/edit-card/edit-card.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { McqComponent } from './w-space/quiz/my-quiz/create-quiz/mcq/mcq.component';
-import { TrueFalseComponent } from './w-space/quiz/my-quiz/create-quiz/true-false/true-false.component';
 import { QuizCollectionComponent } from './w-space/quiz/quiz-collection/quiz-collection.component';
 import { PlannerComponent } from './w-space/planner/planner.component';
 import { HomeComponent } from './w-space/home/home.component';
@@ -75,6 +73,10 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
 import { CountdownComponent } from './w-space/planner/countdown/countdown.component';
 import { SelfControlComponent } from './w-space/self-control/self-control.component';
 import { WebsiteBlockingComponent } from './w-space/self-control/website-blocking/website-blocking.component';
+import { MyNoteComponent } from './w-space/note/my-note/my-note.component';
+import { CreateNoteComponent } from './w-space/note/my-note/create-note/create-note.component';
+import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
+import { TutorialVideoComponent } from './w-space/shared-dialog/tutorial-video/tutorial-video.component';
 
 
 
@@ -98,7 +100,6 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     CreateQuizComponent,
 
     McqComponent,
-    TrueFalseComponent,
     QuizCollectionComponent,
     PlannerComponent,
     HomeComponent,
@@ -112,7 +113,11 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     CountdownComponent,
     SelfControlComponent,
     WebsiteBlockingComponent,
-    helpSnackComponent
+    helpSnackComponent,
+    MyNoteComponent,
+    CreateNoteComponent,
+    ConfirmDialogComponent,
+    TutorialVideoComponent
   ],
   imports: [
     BrowserModule,
@@ -165,12 +170,13 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     AddCardComponent,
     EditCardComponent,
     McqComponent,
-    TrueFalseComponent,
     SearchUserComponent,
     PlanDetailComponent,
     ResultDialogComponent,
     WebsiteBlockingComponent,
-    helpSnackComponent
+    helpSnackComponent,
+    ConfirmDialogComponent,
+    TutorialVideoComponent
   ],
   bootstrap: [AppComponent]
 })

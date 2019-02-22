@@ -21,8 +21,12 @@
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your correct answer</ng-template>
+        <ng-template matStepLabel>Fill out your correct<i class="fas fa-info-circle info-btn"
+                                                          matTooltip="To create True or False question, just fill either true or false in both question and answer field"></i>
+        </ng-template>
         <mat-form-field>
+
+
           <input
             matInput
             placeholder="Answer"
@@ -40,20 +44,22 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="thirdFormGroup">
 
-
+      <div class="mcq__btn-edit__add-group">
         <button
-          mat-icon-button
-          class="mcq__btn mcq__btn-edit mcq__btn-edit__add"
+          class="mcq__btn-edit__add"
           matTooltip="Add more choice"
           (click)="onAddChoice()"
         >
-          <mat-icon>add</mat-icon>
+          <i class="fas fa-plus"></i>
           Add more choice
         </button>
+      </div>
       <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>Fill out your choices</ng-template>
+        <ng-template matStepLabel>Fill out your choices<i class="fas fa-info-circle info-btn"
+                                                          matTooltip="Choices will be aligned in random position"></i></ng-template>
         <cdk-virtual-scroll-viewport class="create-choice__scroll" [itemSize]="20">
           <div class="mcq__choice" *cdkVirtualFor="let control of helper(i); let j = index;" [formGroupName]="j+1">
             <mat-form-field>
@@ -87,6 +93,7 @@
 
 
     </mat-step>
+
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       Save this quesion?
@@ -98,7 +105,8 @@
         >
           Reset
         </button>
-        <button mat-button mat-dialog-close class="mcq__btn mcq__btn-save" (click)="onSubmit()" [mat-dialog-close]="data.questions">
+        <button mat-button mat-dialog-close class="mcq__btn mcq__btn-save" (click)="onSubmit()"
+                [mat-dialog-close]="data.questions">
           Save
         </button>
       </div>
