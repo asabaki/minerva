@@ -1,14 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+
 import {McqComponent} from './mcq/mcq.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
+import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-up.component';
+import {Router} from '@angular/router';
 
-export class QuizModel {
+export interface QuizModel {
+  privacy: boolean;
   title: string;
   description: string;
-  questions: [{
+  questions?: [{
     question_text: string,
     choice: [{
       choice_text: string,
@@ -29,10 +33,15 @@ export class CreateQuizComponent implements OnInit {
   quiz: QuizModel;
   privacyText = 'Only Me';
   constructor(public dialog: MatDialog,
+              private matSnack: MatSnackBar,
               private location: Location,
+              private router: Router,
               private quizService: QuizService) {
-    this.quiz = new QuizModel();
+  }
+
+  ngOnInit() {
     this.quiz = {
+      privacy: false,
       title: '',
       description: '',
       questions: [
@@ -48,14 +57,25 @@ export class CreateQuizComponent implements OnInit {
     this.quiz.questions.pop();
   }
 
-  ngOnInit() {
-
-  }
-
-  onCreate(title: string, description: string) {
+  onCreate(title: string, description: string, privacy: boolean) {
+    // console.log(privacy);
     this.quiz.title = title;
     this.quiz.description = description;
-    this.quizService.add_quiz(this.quiz);
+    this.quiz.privacy = !privacy;
+    this.quizService.add_quiz(this.quiz).subscribe(res => {
+      if (res.ok) {
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Successfully Create Quiz!',
+          duration: 1500
+        });
+        this.router.navigate(['quiz/item/' + res.body._id]);
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Error: Something Went Wrong!\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 
   onClickBack() {

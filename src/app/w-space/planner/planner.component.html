@@ -19,21 +19,9 @@
     <div class="description">
 
       <div class="event">
-        <div class="event-header">
-
-          <div class="event-edit">
-            <h3>Edit events</h3>
-            <button
-              mat-raised-button
-              matTooltip="color is today"
-              matTooltipClass="primary-tooltip"
-              class="event-btn__info"
-            >
-              <i class="fas fa-info-circle"></i>
-            </button>
-          </div>
-
-          <div class="event-btn">
+        <div class="header-edit">
+          <h3>Edit events</h3>
+          <div class="event-btn__group">
             <button class="btn completed">
               Completed events
             </button>
@@ -42,13 +30,12 @@
             </button>
             <div class="clearfix"></div>
           </div>
-
         </div>
 
-        <table class="event-table">
+        <table class="event-table" *ngIf="temp_events.length > 0">
           <thead>
           <tr>
-            <th>Title</th>
+            <th>Event</th>
             <th>Priority</th>
             <th>Starts at</th>
             <th>Ends at</th>
@@ -58,7 +45,7 @@
           </thead>
 
           <tbody>
-          <tr *ngFor="let event of events; let index = index">
+          <tr *ngFor="let event of temp_events; let index = index">
             <td>
               <input
                 type="text"
@@ -70,7 +57,7 @@
             <td>
               <input
                 type="color"
-                [(ngModel)]="event.color.primary"
+                [(ngModel)]="event.color"
                 (change)="refresh.next()"
                 class="color-picker"
               />
@@ -109,13 +96,13 @@
             <td>
               <button
                 class="btn delete"
-                (click)="events.splice(index, 1); refresh.next()"
+                (click)="temp_events.splice(index, 1); refresh.next()"
               >
                 Delete
               </button>
             </td>
             <td>
-              <button class="btn done">
+              <button class="btn done" (click)="onSave(event)">
                 <i class="fas fa-check i"></i>
               </button>
             </td>
@@ -240,7 +227,6 @@
         >
         </mwl-calendar-day-view>
       </div>
-
 
     </div>
   </div>

@@ -3,6 +3,7 @@ import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/mate
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
+import {TutorialVideoComponent} from '../shared-dialog/tutorial-video/tutorial-video.component';
 
 export interface PeriodicElement {
   _id: string;
@@ -38,7 +39,7 @@ export class FlashcardComponent implements OnInit {
   editClicked = false;
   deleteClicked = false;
   number_collection: number;
-
+  isLoaded = false;
   bootRate = 1;
   faRate = 1;
   cssRate = 1;
@@ -79,6 +80,7 @@ export class FlashcardComponent implements OnInit {
           }
         );
         this.dataSource.sort = this.sort;
+        this.isLoaded = true;
       }
     );
 
@@ -117,5 +119,11 @@ export class FlashcardComponent implements OnInit {
 
   onMyFlashcard() {
     this.router.navigate(['flash/my/']);
+  }
+
+  onOpenVideo() {
+    this.dialog.open(TutorialVideoComponent, {
+      panelClass: 'myapp-no-padding-dialog'
+    });
   }
 }

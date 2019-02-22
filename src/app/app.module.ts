@@ -76,6 +76,7 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
 import { MyNoteComponent } from './w-space/note/my-note/my-note.component';
 import { CreateNoteComponent } from './w-space/note/my-note/create-note/create-note.component';
 import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
+import { TutorialVideoComponent } from './w-space/shared-dialog/tutorial-video/tutorial-video.component';
 
 
 
@@ -115,7 +116,8 @@ import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-d
     helpSnackComponent,
     MyNoteComponent,
     CreateNoteComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TutorialVideoComponent
   ],
   imports: [
     BrowserModule,
@@ -173,7 +175,8 @@ import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-d
     ResultDialogComponent,
     WebsiteBlockingComponent,
     helpSnackComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    TutorialVideoComponent
   ],
   bootstrap: [AppComponent]
 })

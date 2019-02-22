@@ -4,32 +4,23 @@ $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .top-view {
-    background-color: var(--color-grey-light-1);
-    flex: 1;
-    @media only screen and (max-width: 1400px) {
-        margin-left: 2rem;
-    }
-    @media only screen and (max-width: 1350px) {
-        margin-left: 3rem;
-    }
-    @media only screen and (max-width: 1300px) {
-        margin-left: 4rem;
-    }
-    @media only screen and (max-width: 1250px) {
-        margin-left: 4rem;
-    }
-    @media only screen and (max-width: $bp-largest) {
-        margin-left: 5rem;
-    }
-    @media only screen and (max-width: 1150px) {
-        margin-left: 6rem;
-    }
-    @media only screen and (max-width: $bp-large) {
-        margin-left: 3rem;
-    }
-    @media only screen and (max-width: $bp-medium) {
-        margin-left: 0rem;
-    }
+  background-color: var(--color-grey-light-1);
+  flex: 1;
+  @media only screen and (max-width: 1400px) {
+    margin-left: 3rem;
+  }
+  @media only screen and (max-width: $bp-largest) {
+    margin-left: 4rem;
+  }
+  @media only screen and (max-width: $bp-large) {
+    margin-left: 3rem;
+  }
+  @media only screen and (max-width: $bp-medium) {
+    margin-left: 3rem;
+  }
+  @media only screen and (max-width: 1044px) {
+    margin-left: 0rem;
+  }
 }
 
 .detail {
@@ -75,53 +66,84 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 .overview {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: var(--line);
+  align-items: center;
+  background-color: #fff;
+  margin-top: 7rem;
+  padding-left: 2rem;
+
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.5rem 6rem;
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
+    @media only screen and (max-width: $bp-large) {
+      padding: 1.5rem 6rem;
+    }
+    @media only screen and (max-width: $bp-largest) {
+      padding: 1.5rem 6rem;
+    }
+  }
+
+  &__stars {
+    margin-right: auto;
     display: flex;
-    justify-content: space-between;
-    border-bottom: var(--line);
+  }
+
+  &__icon-star,
+  &__icon-location {
+    height: 1.75rem;
+    width: 1.75rem;
+    fill: var(--color-primary);
+  }
+
+  &__location {
+    font-size: 1.25rem;
+    display: flex;
     align-items: center;
-    margin-top: 7rem;
-    background-color: #fff;
-    padding-left: 2rem;
-    &__heading {
-        font-size: 2.25rem;
-        font-weight: 300;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        padding: 1.5rem 3rem;
-        @media only screen and (max-width: $bp-small) {
-            font-size: 1.8rem;
-            padding: 1.25rem 2rem;
-        }
+  }
+
+  &__icon-location {
+    font-size: 0.5rem;
+  }
+
+  &__count {
+    background-color: var(--color-primary);
+    color: var(--color-grey-light-1);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &-average {
+      font-size: 2.2rem;
+      font-weight: 300;
+      margin-bottom: -3px;
+      @media only screen and (max-width: $bp-small) {
+        font-size: 1.8rem;
+      }
     }
-    &__count {
-        background-color: var(--color-primary);
-        color: var(--color-grey-light-1);
-        margin-left: 3rem;
-        align-self: stretch;
-        padding: 0 2.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        &-average {
-            font-size: 2.2rem;
-            font-weight: 300;
-            margin-bottom: -3px;
-            @media only screen and (max-width: $bp-small) {
-                font-size: 1.8rem;
-            }
-        }
-        &-count {
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            @media only screen and (max-width: $bp-small) {
-                font-size: 0.5rem;
-            }
-        }
-        @media only screen and (max-width: $bp-small) {
-            padding: 0 1.5rem;
-        }
+
+    &-count {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      @media only screen and (max-width: $bp-small) {
+        font-size: 0.5rem;
+      }
     }
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 1.5rem;
+    }
+  }
 }
 
 .countdown-time {

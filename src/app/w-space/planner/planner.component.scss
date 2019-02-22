@@ -13,14 +13,15 @@ $bp-smallest: 31.25em; //500px  (500/16)
     margin-left: 4rem;
   }
   @media only screen and (max-width: $bp-large) {
-    margin-left: 5rem;
+    margin-left: 3rem;
   }
-
   @media only screen and (max-width: $bp-medium) {
+    margin-left: 3rem;
+  }
+  @media only screen and (max-width: 1044px) {
     margin-left: 0rem;
   }
 }
-
 .detail {
   display: flex;
   padding: 4.5rem;
@@ -150,7 +151,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
   &__count {
     background-color: var(--color-primary);
     color: var(--color-grey-light-1);
-
     padding: 1.5rem;
     display: flex;
     align-items: center;
@@ -175,7 +175,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     }
 
     @media only screen and (max-width: $bp-small) {
-      padding: 0 1.5rem;
+      padding: 1.5rem;
     }
   }
 }
@@ -360,12 +360,19 @@ $bp-smallest: 31.25em; //500px  (500/16)
     justify-content: flex-start;
     width: 100%;
     margin-bottom: 1rem;
+
   }
+
 
   &-btn{
    justify-content: flex-end;
     width: 100%;
     display: flex;
+    &__group{
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 2rem;
+    }
 
     &__info{
       background-color: transparent;
@@ -407,10 +414,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
   cursor: pointer;
 }
 
+.fa-pencil-alt:before {
+  content: "\f303";
+  color: var(--color-grey-light-4) !important;
+}
+
+
 
 ::ng-deep .primary-tooltip {
   span{
     color: #e8fde7  !important;
   }
   background-color: #e8fde7 !important;
+}
+
+.grey{
+  color: grey;
 }

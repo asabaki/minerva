@@ -1,4 +1,4 @@
-<main class="top-view" *ngIf="true">
+<main class="top-view">
   <div class="overview">
     <h1 class="overview__heading">
       <mat-icon
@@ -13,21 +13,20 @@
       <div class="overview__count-count">Collection</div>
     </div>
   </div>
-  <div class="detail" *ngIf="isLoading">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
 
   <div class="detail" *ngIf="!isLoading">
     <div class="detail-sub">
       <div class="description sub__1">
         <div class="feature-heading">
           <h1>Flashcard</h1>
+          <button mat-button matTooltip="See how it works!" (click)="onOpenVideo()"><i class="far fa-play-circle"></i>
+          </button>
         </div>
         <div class="feature-description">
           Flashcards may have a reputation as being one of the most boring ways
           to study. But there’s a reason that flashcards have been a preferred
           study method for hundreds of years!
-          <button mat-button matTooltip="See how it works!"><i class="far fa-play-circle"></i></button>
+
           <h2>Why Flashcards Help Us Learn?</h2>
           <div class="feature-description__help">
             <ul>
@@ -37,6 +36,7 @@
             </ul>
           </div>
         </div>
+        <a onclick="scroll_to_div('flashcardTable')" class="feature__btn">Discover More</a>
       </div>
       <div class="description sub__2">
         <h1>Flashcard on trend :</h1>
@@ -114,7 +114,11 @@
       </div>
     </div>
 
-    <div class="description">
+    <div *ngIf="!isLoaded" class="spinner">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+
+    <div class="description" id="flashcardTable">
       <div class="description-btn_set">
         <div class="description__flex-start">
           <form action="#" class="search">
@@ -172,7 +176,7 @@
             Author
           </th>
           <td mat-cell *matCellDef="let element" class="author-name ">
-            <i class="fas fa-pencil-alt"></i>&nbsp;{{ element.author }}
+            <i class="fas fa-pencil-alt o"></i>&nbsp;{{ element.author }}
           </td>
         </ng-container>
 
@@ -238,6 +242,7 @@
     </div>
   </div>
 </main>
+
 
 <!--<app-add-card></app-add-card>-->
 <!--<app-collection></app-collection>-->

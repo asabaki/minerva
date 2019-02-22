@@ -9,79 +9,70 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading">Quiz name</h1>
-    <div class="overview__count">
-      <div class="overview__count-average">10</div>
-      <div class="overview__count-count">Questions</div>
+    <h1 class="overview__heading">{{ quiz.title }}</h1>
+    <div class="overview__right">
+      <div class="follow">
+        <div class="follow__container">
+          <div class="follow__no">1</div>
+          <div class="follow__text">Taken</div>
+        </div>
+      </div>
+      <div class="overview__count">
+        <div class="overview__count-average">{{ quiz.noq }}</div>
+        <div class="overview__count-count">Questions</div>
+      </div>
     </div>
   </div>
   <div class="detail">
     <div class="description">
-      <div class="create-quiz__header">
+      <div class="create-quiz__header" *ngIf="!startQuiz">
         <span>Description : </span>
-       <p class="collection-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, aspernatur commodi dicta earum esse est et exercitationem, explicabo laboriosam minus modi molestias neque nihil odit perferendis quod saepe soluta, tempora.</p>
-        <button mat-button class="btn btn__start" (click)="openConfirmdialog()">Start now!</button>
+        <p class="collection-description">{{ quiz.description }}</p>
+        <button mat-button class="btn btn__start" (click)="onStartQuiz()">Start now!</button>
       </div>
-      <!--<div class="create-quiz__overview">-->
-        <!--<form class="question">-->
-          <!--<div class="question-header">-->
-            <!--<div class="question-number">1</div>-->
-            <!--<div class="question-question">what is my name?</div>-->
-            <!--&lt;!&ndash;<div class="question-correction question-correction__false">&ndash;&gt;-->
-                <!--&lt;!&ndash;<mat-icon>close</mat-icon>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-          <!--</div>-->
-          <!--<mat-radio-group class="question-choice">-->
-            <!--<mat-radio-button value="1" color="primary" class="radio-button"-->
-              <!--&gt;Option 1</mat-radio-button-->
-            <!--&gt;-->
-            <!--<mat-radio-button value="2" color="primary" class="radio-button"-->
-              <!--&gt;Option 2</mat-radio-button-->
-            <!--&gt;-->
-            <!--<mat-radio-button value="3" color="primary" class="radio-button "-->
-              <!--&gt;Option 3</mat-radio-button-->
-            <!--&gt;-->
-            <!--<mat-radio-button value="4" color="primary" class="radio-button"-->
-              <!--&gt;Option 4</mat-radio-button-->
-            <!--&gt;-->
-          <!--</mat-radio-group>-->
-          <!--<div class="correction correction-false">-->
-              <!--<mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !-->
-            <!--</div>-->
-        <!--</form>-->
+      <div class="create-quiz__overview" *ngIf="startQuiz">
+        <form #f='ngForm' (ngSubmit)="onSubmit(f)">
+          <div class="question" *ngFor="let question of quiz.questions; let i = index;">
+            <div class="question-header">
+              <div class="question-number">{{ i + 1 }}</div>
+              <div class="question-question">{{question.question_text}}</div>
+              <div class="question-correction question-correction__false" *ngIf="quiz.isTaken && point[i] === 0">
+                <mat-icon>close</mat-icon>
+              </div>
+              <div class="question-correction question-correction__true" *ngIf="quiz.isTaken && point[i] === 1">
+                <mat-icon>check</mat-icon>
+              </div>
+            </div>
+            <mat-radio-group class="question-choice" [name]="i.toString()" ngModel>
+              <mat-radio-button *ngFor="let choice of question.choice; let j = index;" [value]="j" color="primary"
+                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}}</mat-radio-button
+              >
+            </mat-radio-group>
+            <div class="correction correction-false" *ngIf="quiz.isTaken && point[i] === 0">
+              <mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !
+            </div>
+            <div class="correction correction-true" *ngIf="quiz.isTaken && point[i] === 1">
+              <mat-icon>check</mat-icon>&nbsp;Your answer is Correct !
+            </div>
 
-        <!--<form class="question">-->
-          <!--<div class="question-header">-->
-            <!--<div class="question-number">2</div>-->
-            <!--<div class="question-question">My name is kan</div>-->
-            <!--<div class="question-correction question-correction__true">-->
-              <!--<mat-icon>check</mat-icon>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<mat-radio-group class="question-choice">-->
-            <!--<mat-radio-button value="1" color="primary" class="radio-button "-->
-              <!--&gt;True</mat-radio-button-->
-            <!--&gt;-->
-            <!--<mat-radio-button value="2" color="primary" class="radio-button"-->
-              <!--&gt;False</mat-radio-button-->
-            <!--&gt;-->
-          <!--</mat-radio-group>-->
-          <!--<div class="correction correction-true">-->
-              <!--<mat-icon>check</mat-icon>&nbsp;Your answer is Correct !-->
-            <!--</div>-->
-        <!--</form>-->
-        <!--<div class="result">-->
-          <!--<h1>Result</h1>-->
-          <!--<div class="result-true">Correct answer : 1</div>-->
-          <!--<div class="result-false">Wrong answer : 1</div>-->
-              <!--<div class="result-percent">Percentage : 50%</div>-->
-        <!--</div>-->
-        <!--<div class="btn-group">-->
-          <!--<button mat-button class="btn btn__save">Submit</button>-->
-          <!--<button mat-button class="btn btn__save btn__retest">Retest</button>-->
-        <!--</div>-->
+          </div>
+          <div class="btn-group">
+            <button mat-button class="btn btn__save" type="submit" [disabled]="isTaken">Submit</button>
+            <button mat-button class="btn btn__save btn__retest" type="button" [disabled]="!isTaken"
+                    (click)="onRetest()">Retest
+            </button>
+          </div>
+        </form>
 
-      <!--</div>-->
+        <div class="result" *ngIf="isTaken">
+          <h1>Your latest result</h1>
+          <div class="result-true">Correct answer : {{ mark }}</div>
+          <div class="result-false">Wrong answer : {{ quiz.questions.length - mark}}</div>
+          <div class="result-percent">Percentage : {{ (mark / quiz.questions.length) * 100 }}%</div>
+        </div>
+
+
+      </div>
     </div>
   </div>
 </main>

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../services/quiz.service';
 import {ActivatedRoute, Route, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
+import {ResultDialogComponent} from './result-dialog/result-dialog.component';
+import {first, take} from 'rxjs/operators';
 
 
 export class QuizCollectionModel {
@@ -29,29 +31,112 @@ export class QuizCollectionModel {
 })
 export class QuizCollectionComponent implements OnInit {
 
+  quiz = new QuizCollectionModel();
+  isTaken: boolean = false;
+  point = [];
+  mark = 0;
+  startQuiz = false;
+  dialogRef: MatDialogRef<ConfirmDialogComponent> = null;
+
   constructor(private qs: QuizService,
               private route: ActivatedRoute,
               private location: Location,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     // TODO - Add Creator name, rating, views
     this.route.paramMap.subscribe(params => {
       this.qs.get_quiz(params.get('id')).subscribe(res => {
+        this.qs.get_taken(res.quiz._id).subscribe(taken => {
+          console.log(taken > 0);
+          this.mark = taken.score;
+          this.isTaken = !!taken;
+          // console.log(taken);
+        });
+        this.quiz = {
+          _id: res.quiz._id,
+          title: res.quiz.title,
+          description: res.quiz.description,
+          noq: res.quiz.questions.length,
+          questions: res.quiz.questions,
+          creator_id: res.creator._id,
+          creator_name: res.creator.name,
+          privacy: res.quiz.privacy,
+          views: res.quiz.views,
+          rating: res.quiz.rating,
+          isFollowing: false,
+          isTaken: false
+        };
+        this.quiz.questions.forEach((question, index) => {
+          question.choice = this.shuffle(question.choice);
+          this.point[index] = 0;
+        });
 
       });
-      // this.qs.get_taken(params.get('id'));
     });
-    // this.qs.get_taken()
   }
+
   onClickBack() {
     this.location.back();
   }
-  openConfirmdialog() {
-    const dialogRef = this.dialog.open( ConfirmDialogComponent, {panelClass: 'myapp-no-padding-dialog'});
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+  onSubmit(f: any) {
+      const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to submit ?', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      confirmDialog.afterClosed().pipe(first()).subscribe(yon => {
+        console.log(yon);
+        if (yon) {
+          this.mark = 0;
+          this.quiz.questions.forEach((question, index) => {
+            this.point[index] = 0;
+            for (let i = 0; i < question.choice.length; i++) {
+              if (question.choice[i].answer && i === f.value[index]) {
+                this.point[index] = 1;
+                this.mark++;
+              }
+            }
+          });
+          // this.dialog.open(ResultDialogComponent);
+          this.quiz.isTaken = true;
+          this.qs.taken_quiz(this.quiz._id, this.mark);
+        } else {
+        }
+      });
   }
+
+  onRetest() {
+      const retest = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to re-test ?', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      retest.afterClosed().pipe(first()).subscribe(res =>  {
+        this.dialogRef = null;
+        if (res) {
+          this.quiz.isTaken = false;
+          this.isTaken = false;
+        }
+      });
+  }
+
+  onStartQuiz() {
+    this.startQuiz = !this.startQuiz;
+  }
+
+  shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
 
 }

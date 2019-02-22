@@ -1,31 +1,22 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import { CreateQuizComponent } from './my-quiz/create-quiz/create-quiz.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+import {Location} from '@angular/common';
+import {CreateQuizComponent} from './my-quiz/create-quiz/create-quiz.component';
 import {Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
-import {FlashCardService} from '../services/flash-card.service';
+import {QuizService} from '../services/quiz.service';
+
 export interface PeriodicElement {
   _id: string;
-  author: string;
   title: string;
   description: string;
-  numberOfCard: number;
+  noOfQuestions: number;
   rating: number;
   dom: Date;
   views: number;
   delete: boolean;
-  daysUpdated: string;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
-
-export interface PeriodicElement {
-  name: string;
-  description: string;
-  numberOfCard: number;
-
-}
 
 @Component({
   selector: 'app-quiz',
@@ -33,73 +24,65 @@ export interface PeriodicElement {
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
+
+  displayedColumns: string[] = ['name', 'description', 'numberOfCard'];
   columnDef = [
     {def: 'title', show: true},
-    {def: 'author', show: true},
     {def: 'description', show: true},
+    {def: 'noOfQuestions', show: true},
     {def: 'rating', show: true},
     {def: 'dom', show: true},
-    {def: 'views', show: true}];
-  // [ 'name', 'description', 'numberOfCard', 'delete'];
+    {def: 'views', show: true},
+    {def: 'delete', show: false}
+  ];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  editClicked = false;
-  deleteClicked = false;
-  number_collection: number;
-
-  bootRate = 1;
-  faRate = 1;
-  cssRate = 1;
-  faoRate = 2;
-  faoRated = false;
-
+  number_quiz: number;
+  isLoaded = false;
 
   constructor(public dialog: MatDialog,
-              private matSnack: MatSnackBar,
-              private auth: AuthService,
-              private flash: FlashCardService,
               private router: Router,
-              private changeDet: ChangeDetectorRef) {
+              private qservice: QuizService,
+              private location: Location) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    let i = 0;
-    this.flash.fetch_collection_all().subscribe(
-      (res) => {
-        ELEMENT_DATA.length = 0;
-        this.number_collection = res.length;
-        res.forEach((data) => {
-            const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / ( 1000 * 60));
-            // ELEMENT_DATA.push({
-            //   _id: data._id,
-            //   author: data.author,
-            //   title: data.title,
-            //   description: data.description,
-            //   numberOfCard: data.numberOfCard,
-            //   rating: data.rating,
-            //   views: 0,
-            //   dom: data.updatedAt,
-            //   daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
-            //   delete: false
-            // });
-          }
-        );
-        this.dataSource.sort = this.sort;
-      }
-    );
-
+    this.qservice.get_allQuizzes().subscribe(res => {
+      // console.log(res);
+      ELEMENT_DATA.length = 0;
+      res.forEach(data => {
+        ELEMENT_DATA.push({
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          noOfQuestions: data.questions.length,
+          rating: data.rating,
+          views: data.views,
+          dom: data.lastUpdated,
+          delete: false
+        });
+      });
+      this.number_quiz = ELEMENT_DATA.length;
+      this.dataSource.sort = this.sort;
+      console.log(ELEMENT_DATA);
+      this.isLoaded = true;
+    });
+    // this.qservice.get_allQuizzes().subscribe(res => {
+    // });
+    // this.dataSource.sort = this.sort;
   }
 
-  onRowClick(r: any) {
-    if (this.deleteClicked) {
-      this.deleteClicked = false;
-    } else {
-      const id = r._id;
-      this.router.navigate(['flash/item/' + id]);
-    }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
-    // console.log(r);
+  onMyQuiz() {
+    this.router.navigate(['quiz/my/']);
+  }
+
+  onClickBack() {
+    this.location.back();
   }
 
   getDisplayedColumn() {
@@ -108,25 +91,10 @@ export class QuizComponent implements OnInit {
       .map((def) => def.def);
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  onRowClick(r: any) {
+    console.log(r);
+    this.router.navigate(['quiz/item/' + r._id]);
   }
 
-  onFaoRate(e) {
-    this.faoRated = true;
-    this.faoRate = e;
-  }
 
-  faoReset() {
-    this.faoRated = false;
-    this.faoRate = 3.6;
-  }
-
-  onMyFlashcard() {
-    this.router.navigate(['flash/my/']);
-  }
-
-  onMyQuiz() {
-    this.router.navigate(['quiz/my/']);
-  }
 }
