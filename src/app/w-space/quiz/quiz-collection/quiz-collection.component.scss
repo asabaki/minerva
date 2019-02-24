@@ -497,7 +497,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 .follow {
   text-align: center;
-  padding: .7rem 0rem !important;
+  padding: .7rem 1.5rem !important;
   align-content: center;
   justify-content: center;
   margin: auto;
@@ -520,5 +520,120 @@ $bp-smallest: 31.25em; //500px  (500/16)
   &__no {
     color: var(--color-primary);
     font-size: 2.2rem;
+  }
+}
+
+.btn {
+  &-edit {
+    color: var(--color-primary);
+    text-decoration: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    display: block;
+    transition: all 0.2s;
+    font-size: 1.5rem;
+    text-shadow: 0 0.5rem 0.5rem rgba(black, 0.1);
+    margin: auto;
+    font-weight: 500;
+    align-self: center;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.9);
+      text-shadow: 0 0.5rem 0.5rem rgba(black, 0.3);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      align-self: flex-end;
+    }
+  }
+
+  &-follow {
+    transform: scale(.7);
+    border-radius: 100px;
+    box-shadow: 0 0.2rem 0rem var(--color-secondary);
+    border: .5px solid var(--color-secondary);
+    padding: 0rem 2rem;
+    vertical-align: middle;
+    color: var(--color-secondary-dark);
+    display: inline-block;
+    cursor: pointer;
+    height: 3rem;
+    font-size: 1.6rem;
+    background-color: white;
+    outline: none;
+    transition: .2s all;
+    display: inline-block;
+
+    .bold {
+      font-weight: 900;
+      padding-right: .3rem;
+    }
+
+    &:hover {
+      box-shadow: 0 -0.2rem 0rem var(--color-secondary);
+      transform: scale(.75);
+    }
+
+    &:active {
+      transform: scale(.69);
+    }
+
+    &-following {
+      box-shadow: none;
+      border: .5px solid var(--color-grey-dark-3);
+      color: var(--color-grey-dark-3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      width: 10rem;
+
+      & > * {
+        display: inline-block;
+        transition: all 0.2s;
+        height: 100%;
+        width: 100%;
+      }
+
+      &__visible {
+        padding: 1.5rem 0rem;
+        margin-top: -2rem;
+        margin-left: -3rem;
+      }
+
+      &__invisible {
+        position: absolute;
+        padding: 1.5rem 0;
+        left: 0;
+        top: -100%;
+        margin-top: -1rem;
+        color: var(--color-secondary);
+      }
+
+      &:hover {
+        box-shadow: none;
+        border: .5px solid var(--color-secondary);
+        transform: scale(.75);
+      }
+
+      &:hover &__invisible {
+        top: 0;
+      }
+
+      &:hover &__visible {
+        transform: translateY(100%);
+      }
+
+      &:focus {
+        outline: none;
+        /*animation: pulsate 1s infinite;*/
+      }
+    }
   }
 }

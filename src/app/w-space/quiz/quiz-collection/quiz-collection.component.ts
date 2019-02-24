@@ -6,6 +6,7 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {ResultDialogComponent} from './result-dialog/result-dialog.component';
 import {first, take} from 'rxjs/operators';
+import {AuthService} from '../../services/auth.service';
 
 
 export class QuizCollectionModel {
@@ -30,18 +31,28 @@ export class QuizCollectionModel {
   styleUrls: ['./quiz-collection.component.scss']
 })
 export class QuizCollectionComponent implements OnInit {
-
+  bootRate = 1;
+  faRate = 1;
+  cssRate = 1;
+  faoRate = 2;
+  faoRated = false;
   quiz = new QuizCollectionModel();
   isTaken: boolean = false;
   point = [];
   mark = 0;
   startQuiz = false;
   dialogRef: MatDialogRef<ConfirmDialogComponent> = null;
+  isFollowing: boolean;
+  creator: string;
+  // arr: Array<number>;
+
+
 
   constructor(private qs: QuizService,
               private route: ActivatedRoute,
               private location: Location,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -67,6 +78,7 @@ export class QuizCollectionComponent implements OnInit {
           rating: res.quiz.rating,
           isFollowing: false,
           isTaken: false
+
         };
         this.quiz.questions.forEach((question, index) => {
           question.choice = this.shuffle(question.choice);
@@ -137,6 +149,18 @@ export class QuizCollectionComponent implements OnInit {
 
     return array;
   }
+  onFaoRate(e) {
+    this.faoRated = true;
+    this.faoRate = e;
+  }
 
+  faoReset() {
+    this.faoRated = false;
+    this.faoRate = 3.6;
+  }
+
+  isCreator() {
+    return localStorage.getItem('userId') === this.creator;
+  }
 
 }

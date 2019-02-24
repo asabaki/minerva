@@ -35,6 +35,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
 .logo {
     height: 6rem;
+
     margin-left: 2rem;
     @media only screen and (max-width: $bp-smallest) {
         margin: auto;
@@ -129,7 +130,8 @@ $bp-smallest: 31.25em; //500px  (500/16)
         fill: var(--color-grey-dark-2);
     }
     &__user-photo {
-        height: 3.4rem;
+        height: 4.5rem;
+        width: 4.5rem;
         border-radius: 50%;
         transition: .3s all;
         /*margin-right: 1rem;*/

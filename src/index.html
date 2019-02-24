@@ -66,10 +66,13 @@
 <app-root></app-root>
 </body>
 <script>
-  function scroll_to_div(div_id)
-  {
-    $('html,body').animate(
-      {  scrollTop: $("#"+div_id).offset().top},100);
-  }
+
+        function scroll_to_div(div_id) {
+          $('html,body').animate(
+            {scrollTop: $("#" + div_id).offset().top - 80}, 100);
+        }
+
+
+
 </script>
 </html>
