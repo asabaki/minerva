@@ -25,9 +25,49 @@
   </div>
   <div class="detail">
     <div class="description">
+
+      <div class="description__area">
+        <section class="rating">
+          <bar-rating
+            [rate]="faoRate"
+            (rateChange)="onFaoRate($event)"
+            [disabled]="isCreator()"
+            [max]="5"
+            [theme]="'fontawesome-o'"
+            color="primary"
+          ></bar-rating>
+          <!--<bar-rating [ngModel]="faoRate" (ngModelChange)="onFaoRate($event)" [max]="5" [theme]="'fontawesome-o'"></bar-rating>-->
+          <p *ngIf="!faoRated" class="rating__text">
+            Current rating: {{ faoRate }}
+          </p>
+          <p *ngIf="faoRated" class="rating__text">
+            Your rating: {{ faoRate }}
+            <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
+          </p>
+        </section>
+        <p class="description__area-p">{{ quiz.description }}</p>
+        <div style="text-align: center;">
+          <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
+            <!--Edit-->
+          <!--</button>-->
+          <div class="btn-follow_group" *ngIf="!isCreator()">
+            <button mat-button class="btn-edit" >
+              Created by <br />
+              {{ quiz.creator_name }}
+            </button>
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)"><span class="bold">+</span>Follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator)" >
+              <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
+              <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
       <div class="create-quiz__header" *ngIf="!startQuiz">
-        <span>Description : </span>
-        <p class="collection-description">{{ quiz.description }}</p>
+        <!--<span>Description : </span>-->
+        <!--<p class="collection-description">{{ quiz.description }}</p>-->
         <button mat-button class="btn btn__start" (click)="onStartQuiz()">Start now!</button>
       </div>
       <div class="create-quiz__overview" *ngIf="startQuiz">

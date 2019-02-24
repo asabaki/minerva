@@ -28,6 +28,7 @@ import {PlanDetailComponent} from './plan-detail/plan-detail.component';
 import {PlannerService} from '../services/planner.service';
 import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
 import {ConfirmDialogComponent} from '../quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
+import {AddTaskComponent} from './add-task/add-task.component';
 
 
 const colors: any = {
@@ -200,6 +201,12 @@ export class PlannerComponent implements OnInit {
 
   planDetailDialog() {
     const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  addTaskDialog() {
+    const dialogRef = this.dialog.open(AddTaskComponent, {panelClass: 'myapp-no-padding-dialog'});
 
     dialogRef.afterClosed().subscribe(result => {
     });
