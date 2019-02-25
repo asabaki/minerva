@@ -10,24 +10,77 @@
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
     <h1 class="overview__heading">{{ quiz.title }}</h1>
-    <div class="overview__count">
-      <div class="overview__count-average">{{ quiz.noq }}</div>
-      <div class="overview__count-count">Questions</div>
+    <div class="overview__right">
+      <div class="follow">
+        <div class="follow__container">
+          <div class="follow__no">1</div>
+          <div class="follow__text">Taken</div>
+        </div>
+      </div>
+      <div class="overview__count">
+        <div class="overview__count-average">{{ quiz.noq }}</div>
+        <div class="overview__count-count">Questions</div>
+      </div>
     </div>
   </div>
   <div class="detail">
     <div class="description">
-      <div class="create-quiz__overview">
-        <form class="question" #f='ngForm' (ngSubmit)="onSubmit(f)">
-          <div *ngFor="let question of quiz.questions; let i = index;">
+
+      <div class="description__area">
+        <section class="rating">
+          <bar-rating
+            [rate]="faoRate"
+            (rateChange)="onFaoRate($event)"
+            [disabled]="isCreator()"
+            [max]="5"
+            [theme]="'fontawesome-o'"
+            color="primary"
+          ></bar-rating>
+          <!--<bar-rating [ngModel]="faoRate" (ngModelChange)="onFaoRate($event)" [max]="5" [theme]="'fontawesome-o'"></bar-rating>-->
+          <p *ngIf="!faoRated" class="rating__text">
+            Current rating: {{ faoRate }}
+          </p>
+          <p *ngIf="faoRated" class="rating__text">
+            Your rating: {{ faoRate }}
+            <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
+          </p>
+        </section>
+        <p class="description__area-p">{{ quiz.description }}</p>
+        <div style="text-align: center;">
+          <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
+            <!--Edit-->
+          <!--</button>-->
+          <div class="btn-follow_group" *ngIf="!isCreator()">
+            <button mat-button class="btn-edit" >
+              Created by <br />
+              {{ quiz.creator_name }}
+            </button>
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)"><span class="bold">+</span>Follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator)" >
+              <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
+              <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="create-quiz__header" *ngIf="!startQuiz">
+        <!--<span>Description : </span>-->
+        <!--<p class="collection-description">{{ quiz.description }}</p>-->
+        <button mat-button class="btn btn__start" (click)="onStartQuiz()">Start now!</button>
+      </div>
+      <div class="create-quiz__overview" *ngIf="startQuiz">
+        <form #f='ngForm' (ngSubmit)="onSubmit(f)">
+          <div class="question" *ngFor="let question of quiz.questions; let i = index;">
             <div class="question-header">
               <div class="question-number">{{ i + 1 }}</div>
               <div class="question-question">{{question.question_text}}</div>
               <div class="question-correction question-correction__false" *ngIf="quiz.isTaken && point[i] === 0">
-              <mat-icon>close</mat-icon>
+                <mat-icon>close</mat-icon>
               </div>
               <div class="question-correction question-correction__true" *ngIf="quiz.isTaken && point[i] === 1">
-              <mat-icon>check</mat-icon>
+                <mat-icon>check</mat-icon>
               </div>
             </div>
             <mat-radio-group class="question-choice" [name]="i.toString()" ngModel>
@@ -45,12 +98,14 @@
           </div>
           <div class="btn-group">
             <button mat-button class="btn btn__save" type="submit" [disabled]="isTaken">Submit</button>
-            <button mat-button class="btn btn__save btn__retest" [disabled]="!isTaken" (click)="onRetest()">Retest</button>
+            <button mat-button class="btn btn__save btn__retest" type="button" [disabled]="!isTaken"
+                    (click)="onRetest()">Retest
+            </button>
           </div>
         </form>
 
         <div class="result" *ngIf="isTaken">
-          <h1>Result</h1>
+          <h1>Your latest result</h1>
           <div class="result-true">Correct answer : {{ mark }}</div>
           <div class="result-false">Wrong answer : {{ quiz.questions.length - mark}}</div>
           <div class="result-percent">Percentage : {{ (mark / quiz.questions.length) * 100 }}%</div>

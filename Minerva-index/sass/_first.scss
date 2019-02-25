@@ -1,11 +1,14 @@
 .first {
-    &__container {
+
+  &__container {
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
         font-size: 2rem;
         text-align: initial;
+        margin-top: 5rem;
+
         h1 {
             font-size: 4rem;
             line-height: 4rem;
@@ -36,6 +39,10 @@
             &:active {
                 transform: scale(.95);
             }
+          a {
+            text-decoration: none;
+          }
+
         }
     }
 

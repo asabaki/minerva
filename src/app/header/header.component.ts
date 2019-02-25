@@ -86,6 +86,7 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+  // TODO - Dialog open twice
 
   openHelpSnackBar() {
     this.snack.openFromComponent(helpSnackComponent, {

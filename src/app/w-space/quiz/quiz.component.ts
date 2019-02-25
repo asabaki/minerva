@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
-import { Location } from '@angular/common';
-import { CreateQuizComponent } from './my-quiz/create-quiz/create-quiz.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+import {Location} from '@angular/common';
+import {CreateQuizComponent} from './my-quiz/create-quiz/create-quiz.component';
 import {Router} from '@angular/router';
 import {QuizService} from '../services/quiz.service';
 
@@ -17,13 +17,15 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
+
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'description', 'numberOfCard' ];
+
+  displayedColumns: string[] = ['name', 'description', 'numberOfCard'];
   columnDef = [
     {def: 'title', show: true},
     {def: 'description', show: true},
@@ -36,14 +38,18 @@ export class QuizComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   number_quiz: number;
   isLoaded = false;
+
   constructor(public dialog: MatDialog,
               private router: Router,
               private qservice: QuizService,
-              private location: Location) {}
+              private location: Location) {
+  }
+
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     this.qservice.get_allQuizzes().subscribe(res => {
+      // console.log(res);
       ELEMENT_DATA.length = 0;
       res.forEach(data => {
         ELEMENT_DATA.push({
@@ -57,13 +63,19 @@ export class QuizComponent implements OnInit {
           delete: false
         });
       });
+      this.number_quiz = ELEMENT_DATA.length;
       this.dataSource.sort = this.sort;
       console.log(ELEMENT_DATA);
       this.isLoaded = true;
     });
+    // this.qservice.get_allQuizzes().subscribe(res => {
+    // });
     // this.dataSource.sort = this.sort;
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   onMyQuiz() {
     this.router.navigate(['quiz/my/']);

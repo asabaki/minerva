@@ -67,6 +67,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 html {
   box-sizing: border-box;
   font-size: 62.5%; //1rem=10px , 10px/16px=62.5%
+  scroll-behavior: smooth;
   @media only screen and (max-width: $bp-large) {
     font-size: 50%;
   }
@@ -268,4 +269,8 @@ input:focus {
       margin-left: 1rem;
     }
   }
+}
+
+.fa-pencil-alt:before {
+  color: var(--color-grey-light-2) !important;
 }

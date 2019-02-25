@@ -28,6 +28,7 @@ export class QuizService {
     this.http.get(BACKEND_URL + 'get/all_quizzes', {
       observe: 'response'
     }).subscribe(res => {
+      // console.log(res)
       if (res.ok) {
         this.all_quizzes_subject.next(res.body);
       } else {
@@ -45,7 +46,6 @@ export class QuizService {
       observe: 'response'
     }).subscribe(res => {
       this.myQuizzes_subject.next(res.body);
-      // console.log(res);
     });
     return this.myQuizzes_subject.asObservable();
   }
@@ -60,7 +60,6 @@ export class QuizService {
     });
     return this.quiz_subject.asObservable();
   }
-
   get_taken(id: string) {
     this.http.get(BACKEND_URL + 'get/quiz_taken', {
       params: new HttpParams().set('id', id),

@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+// TODO Check matToolTip again after add table
   title = 'Minerva';
   constructor (private authService: AuthService,
                private router: Router) {}

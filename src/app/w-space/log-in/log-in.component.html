@@ -12,7 +12,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Email Address</mat-label>
-      <input matInput placeholder="Email" name="email" ngModel required #email />
+      <input matInput placeholder="Email" name="email" ngModel  #email />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
@@ -20,7 +20,6 @@
         name="password"
         matInput
         ngModel
-        required
         #password
         placeholder="Password"
         [type]="hide ? 'password' : 'text'"
@@ -36,12 +35,12 @@
       if input error add class 'log-in__form-input__error' to the input tag
     -->
     <button class="log-in__btn log-in__btn-submit" type="submit">
-      <span class="log-in__btn-submit__visible">Log in!</span>
+      <span class="log-in__btn-submit__visible" >Log in!</span>
       <span class="log-in__btn-submit__invisible">Submit</span>
     </button>
     <div class="log-in__message">
-      <p>Need an account? <button mat-button mat-dialog-close class="log-in__link" (click)="signUp_dialog()">Signup!</button></p>
-      <a class="log-in__link">Forget Password?</a>
+      <p>Need an account? <button mat-button mat-dialog-close class="log-in__link" (click)="signUp_dialog()" autofocus>Signup!</button></p>
+      <a class="log-in__link" >Forget Password?</a>
     </div>
   </form>
 </div>

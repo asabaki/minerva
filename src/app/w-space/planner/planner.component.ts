@@ -28,6 +28,9 @@ import {PlanDetailComponent} from './plan-detail/plan-detail.component';
 import {PlannerService} from '../services/planner.service';
 import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+import {ConfirmDialogComponent} from '../quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
+import {AddTaskComponent} from './add-task/add-task.component';
+
 
 const colors: any = {
   red: {
@@ -74,7 +77,7 @@ export class PlannerComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-pencil-alt"></i>',
+      label: '<i class="fas fa-pencil-alt grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
         console.log(event);
         this.handleEvent('Edited', event);
@@ -83,11 +86,20 @@ export class PlannerComponent implements OnInit {
     {
       label: '<i class="fa fa-fw fa-times grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
-        // TODO - Ask User for confirmation before delete
-        this.service.delete_event(event);
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-        this.activeDayIsOpen = false;
+        const deleteCfrm = this.dialog.open(ConfirmDialogComponent, {
+          data: { mssg: 'Do you want to delete this event?', type: 'alert'},
+          panelClass: 'myapp-no-padding-dialog'
+        });
+        deleteCfrm.afterClosed().subscribe(res => {
+          console.log(res);
+          if (res) {
+            this.service.delete_event(event);
+            this.events = this.events.filter(iEvent => iEvent !== event);
+            this.handleEvent('Deleted', event);
+            this.refresh.next();
+            this.activeDayIsOpen = false;
+          }
+        });
       }
     }
   ];
@@ -190,6 +202,12 @@ export class PlannerComponent implements OnInit {
 
   planDetailDialog() {
     const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  addTaskDialog() {
+    const dialogRef = this.dialog.open(AddTaskComponent, {panelClass: 'myapp-no-padding-dialog'});
 
     dialogRef.afterClosed().subscribe(result => {
     });
