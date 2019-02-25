@@ -26,7 +26,8 @@ import {
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {PlanDetailComponent} from './plan-detail/plan-detail.component';
 import {PlannerService} from '../services/planner.service';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
 
 const colors: any = {
   red: {

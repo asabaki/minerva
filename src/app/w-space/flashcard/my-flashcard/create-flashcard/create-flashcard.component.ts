@@ -4,7 +4,7 @@ import { AddCardComponent } from './add-card/add-card.component';
 import {AuthService} from '../../../services/auth.service';
 import {FlashCardService} from '../../../services/flash-card.service';
 import {Router} from '@angular/router';
-import {ErrorSnackComponent} from '../../../sign-up/sign-up.component';
+import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-snack.component';
 
 @Component({
   selector: 'app-create-flashcard',

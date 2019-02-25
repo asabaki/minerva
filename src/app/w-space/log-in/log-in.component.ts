@@ -2,9 +2,10 @@ import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {MAT_SNACK_BAR_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {SuccessSnackComponent} from '../sign-up/sign-up.component';
 import {Router} from '@angular/router';
 import {SignUpComponent} from '../sign-up/sign-up.component';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
 
 
 @Component({
@@ -33,9 +34,8 @@ hide = true;
   onLogin(f: NgForm) {
     // console.log(f.value.email);
     this.authService.login(f.value.email, f.value.password).subscribe((res) => {
-      // console.log(res);
       if (res.error) {
-        this.matSnack.openFromComponent(ErrorLoginSnackComponent, {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: res.error.message,
           duration: 1500,
           panelClass: 'my-snack'
@@ -51,30 +51,5 @@ hide = true;
       }
     });
   }
-}
-
-@Component({
-  selector: 'error-snack',
-  templateUrl: 'error-snack.html',
-  styles: [`
-    .error-snack {
-      color: white;
-      font-size: 15px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      padding: auto;
-    }
-
-    .icon {
-      color: red;
-      font-weight: 700;
-    }
-  `],
-})
-export class ErrorLoginSnackComponent {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
-  }
-
 }
 

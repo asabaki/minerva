@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
 import {SearchUserComponent} from '../search-user/search-user.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {mimeType} from './mime-type.validator';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+
 @Component({
   selector: 'app-account-setting',
   templateUrl: './account-setting.component.html',
@@ -10,21 +15,38 @@ import {MatDialog} from '@angular/material';
 export class AccountSettingComponent implements OnInit {
   hide = false;
 
-  name: string;
+  name: string[];
   id: string;
   isAuth: boolean;
   follower = 0;
   following = 0;
+  form: FormGroup;
+  imagePreview: string;
+  imgUrl: string;
+  testimg: string;
 
   onClick() {
     this.hide = !this.hide;
   }
+
   constructor(public dialog: MatDialog,
-    public authService: AuthService) {
-}
-    ngOnInit() {
+              public authService: AuthService,
+              private matSnack: MatSnackBar) {
+  }
+
+  ngOnInit() {
+    // TODO - ขยายรูปตรงนี้หน่อยเดะ จัดใหม่ด้วย
+    this.authService.getProfileUrl().subscribe(res => {
+      this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
+    });
+    this.form = new FormGroup({
+      'image': new FormControl(null, {
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
+      })
+    });
     this.isAuth = this.authService.getIsAuth();
-    this.name = this.authService.getUserName();
+    this.name = this.authService.getUserName().split(' ');
     this.authService.getFollower().subscribe(flw => {
       this.follower = flw.body.length;
     });
@@ -32,7 +54,7 @@ export class AccountSettingComponent implements OnInit {
       this.following = fwn.body.length;
     });
     this.authService.getAuthStatus().subscribe((res) => {
-      this.name = this.authService.getUserName();
+      this.name = this.authService.getUserName().split(' ');
       this.isAuth = res;
       this.authService.getFollower().subscribe(flw => {
         this.follower = flw.body.length;
@@ -43,27 +65,45 @@ export class AccountSettingComponent implements OnInit {
     });
   }
 
-  onClear() {
-    this.authService.seed();
+  onImagePick(eventTarget: EventTarget) {
+    console.log((eventTarget as HTMLInputElement).files);
+    const file = (eventTarget as HTMLInputElement).files[0];
+    this.form.patchValue({
+      'image': file
+    });
+    this.form.get('image').updateValueAndValidity();
+    console.log(file);
+    console.log(this.form);
+    const reader = new FileReader();
+    reader.onload = () => {
+      // @ts-ignore
+      this.imagePreview = reader.result;
+    };
+    reader.readAsDataURL(file);
+    console.log(this.imagePreview);
+  }
+
+  onSaveImage() {
+    if (this.form.valid) {
+      this.authService.profileUpload(this.form.value.image).subscribe(url => {
+        if (url.ok) {
+          this.matSnack.openFromComponent(SuccessSnackComponent, {
+            data: 'Profile Picture Updated',
+            duration: 1500
+          });
+          this.imgUrl = url.body;
+        } else {
+          this.matSnack.openFromComponent(ErrorSnackComponent, {
+            data: 'Something went Wrong! \n' + url.statusText,
+            duration: 1500
+          });
+        }
+      });
+    }
   }
 
   getUser() {
     return this.authService.getUserName();
-  }
-
-  isLogin() {
-    return this.isAuth;
-  }
-
-  onLogout() {
-    this.authService.logout();
-  }
-
-  search_dialog() {
-    const dialogRef = this.dialog.open(SearchUserComponent, {panelClass: 'myapp-no-padding-dialog'});
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 }
 

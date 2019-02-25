@@ -4,10 +4,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {FlashCardService} from '../../../services/flash-card.service';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MAT_SNACK_BAR_DATA, MatSnackBar} from '@angular/material';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-up.component';
 import {FormArray, FormControl, FormGroup, NgForm} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {stringify} from 'querystring';
+import {SuccessSnackComponent} from '../../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-snack.component';
 
 @Injectable()
 @Component({

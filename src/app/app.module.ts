@@ -30,7 +30,7 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTabsModule,
-  MatStepperModule, MatProgressSpinnerModule
+  MatStepperModule, MatProgressSpinnerModule, MAT_DIALOG_DATA
 } from '@angular/material';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -41,15 +41,12 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
 import {
   SignUpComponent,
-  SuccessSnackComponent
 } from './w-space/sign-up/sign-up.component';
 import { AuthInterceptor } from './w-space/services/auth-intercepter';
 import { AuthService } from './w-space/services/auth.service';
 import {
-  ErrorLoginSnackComponent,
   LogInComponent
 } from './w-space/log-in/log-in.component';
-import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
 import { MyFlashcardComponent } from './w-space/flashcard/my-flashcard/my-flashcard.component';
 import { CreateFlashcardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/create-flashcard.component';
 import { AddCardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/add-card/add-card.component';
@@ -75,7 +72,8 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
 import { CountdownComponent } from './w-space/planner/countdown/countdown.component';
 import { SelfControlComponent } from './w-space/self-control/self-control.component';
 import { WebsiteBlockingComponent } from './w-space/self-control/website-blocking/website-blocking.component';
-
+import {SuccessSnackComponent} from './w-space/shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from './w-space/shared-components/error-snack/error-snack.component';
 
 
 @NgModule({
@@ -86,9 +84,6 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     WSpaceComponent,
     SignUpComponent,
     LogInComponent,
-    ErrorSnackComponent,
-    SuccessSnackComponent,
-    ErrorLoginSnackComponent,
     MyFlashcardComponent,
     CreateFlashcardComponent,
     AddCardComponent,
@@ -96,7 +91,6 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     QuizComponent,
     EditCardComponent,
     CreateQuizComponent,
-
     McqComponent,
     TrueFalseComponent,
     QuizCollectionComponent,
@@ -112,7 +106,9 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     CountdownComponent,
     SelfControlComponent,
     WebsiteBlockingComponent,
-    helpSnackComponent
+    helpSnackComponent,
+    SuccessSnackComponent,
+    ErrorSnackComponent
   ],
   imports: [
     BrowserModule,
@@ -152,14 +148,12 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
     AuthService
   ],
   entryComponents: [
-    ErrorSnackComponent,
-    SuccessSnackComponent,
     SignUpComponent,
     LogInComponent,
-    ErrorLoginSnackComponent,
     CreateFlashcardComponent,
     CreateQuizComponent,
     AddCardComponent,
@@ -170,7 +164,9 @@ import { WebsiteBlockingComponent } from './w-space/self-control/website-blockin
     PlanDetailComponent,
     ResultDialogComponent,
     WebsiteBlockingComponent,
-    helpSnackComponent
+    helpSnackComponent,
+    SuccessSnackComponent,
+    ErrorSnackComponent
   ],
   bootstrap: [AppComponent]
 })

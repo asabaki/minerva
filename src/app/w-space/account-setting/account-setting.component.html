@@ -12,39 +12,54 @@
     <div class="description">
       <div class="description__container">
         <div class="img-upload__container">
-
-          <img
-          [src]="'assets/img/user/' + getUser().toLowerCase().charAt(0) + '.png'"
-          alt="User photo"
-          class="img"
-        />
-          <div class="img-upload__text">
-            <h3>Your profile photo</h3>
-            <div>
-              <button
-                mat-button
-                class="img-upload__btn edit"
-                (click)="onClick()"
-                *ngIf="!hide"
-              >
-                Edit
-              </button>
-              <div *ngIf="hide">
-                <div class="img-upload__btn-group">
-                  <div>
-                    <button mat-button class="img-upload__btn">Upload
-                    <input mat-button type="file" name="my-pic" accept=".png,.jpg,.jpeg"></button>
-                    <button mat-button class="img-upload__btn delete disabled">
-                      Delete
+          <form [formGroup]="form" (submit)="onSaveImage()">
+            <!--<img-->
+              <!--*ngIf="!imagePreview"-->
+              <!--src="https://minerva-project.s3.ap-south-1.amazonaws.com/profile-pic/5c49d1ebd826aa35122ecd8c_1550811925156.jpg"-->
+              <!--alt="User photo"-->
+              <!--class="img"-->
+            <!--/>-->
+            <img
+              *ngIf="!imagePreview"
+              [src]="imgUrl"
+              alt="User photo"
+              class="img"
+            />
+            <img
+              *ngIf="!!imagePreview"
+              [src]="imagePreview"
+              alt="User photo"
+              class="img"
+            />
+            <div class="img-upload__text">
+              <h3>Your profile photo</h3>
+              <div>
+                <button
+                  mat-button
+                  class="img-upload__btn edit"
+                  (click)="onClick()"
+                  *ngIf="!hide"
+                >
+                  Edit
+                </button>
+                <div *ngIf="hide">
+                  <div class="img-upload__btn-group">
+                    <div>
+                      <button mat-stroked-button class="img-upload__btn" (click)="filePicker.click()">Upload</button>
+                        <input #filePicker type="file" (change)="onImagePick($event.target)" accept=".png,.jpg,.jpeg">
+                      <button mat-button class="img-upload__btn delete disabled">
+                        Delete
+                      </button>
+                    </div>
+                    <button mat-button type="submit" class="img-upload__btn save"
+                            *ngIf="hide">Save
                     </button>
                   </div>
-                  <button mat-button class="img-upload__btn save" (click)="onClick()"
-                  *ngIf="hide">Save</button>
+                  <span>JPG, JPEG or PNG Maximum size 10MB.</span>
                 </div>
-                <span>JPG, JPEG or PNG Maximum size 10MB.</span>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -54,16 +69,16 @@
             <h3><i class="fas fa-user"></i>&nbsp;Profile</h3>
             <form class="update-form">
               <mat-form-field>
-                <input matInput placeholder="First name" required />
+                <input matInput placeholder="First name" required [value]="name[0]"/>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Last name" required />
+                <input matInput placeholder="Last name" required [value]="name[1]"/>
               </mat-form-field>
               <mat-form-field>
                 <textarea matInput placeholder="About you"></textarea>
               </mat-form-field>
               <div class="update-form__btn">
-                <button mat-button class="img-upload__btn save" >Save</button>
+                <button mat-button class="img-upload__btn save">Save</button>
               </div>
             </form>
           </div>
@@ -83,7 +98,7 @@
                 />
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="New password" type="password" />
+                <input matInput placeholder="New password" type="password"/>
               </mat-form-field>
               <mat-form-field>
                 <input
