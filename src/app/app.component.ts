@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './w-space/services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,11 @@ import {AuthService} from './w-space/services/auth.service';
 export class AppComponent implements OnInit {
 // TODO Check matToolTip again after add table
   title = 'Minerva';
-  constructor (private authService: AuthService) {}
+  constructor (private authService: AuthService,
+               private router: Router) {}
   ngOnInit() {
-    this.authService.autoAuthUser();
+    this.router.events.subscribe(e => {
+      this.authService.autoAuthUser();
+    });
   }
 }

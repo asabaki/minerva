@@ -4,8 +4,9 @@ import {AuthService} from '../../services/auth.service';
 import {FlashCardService} from '../../services/flash-card.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
 import {CreateFlashcardComponent} from './create-flashcard/create-flashcard.component';
+import {SuccessSnackComponent} from '../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../shared-components/error-snack/error-snack.component';
 
 export interface PeriodicElement {
   _id: string;

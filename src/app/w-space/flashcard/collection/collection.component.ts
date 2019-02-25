@@ -6,7 +6,8 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {EditCardComponent} from './edit-card/edit-card.component';
 import {AddCardComponent} from '../my-flashcard/create-flashcard/add-card/add-card.component';
 import {AuthService} from '../../services/auth.service';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
+import {SuccessSnackComponent} from '../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../shared-components/error-snack/error-snack.component';
 
 // import {EditCardComponent} from './edit-card/edit-card.component';
 

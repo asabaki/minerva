@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {Form, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {ErrorStateMatcher, MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
+import {ErrorStateMatcher, MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar, MatSnackBarRef} from '@angular/material';
 import {CustomValidator} from '../services/customValidator';
 import {Router} from '@angular/router';
 import { LogInComponent} from '../log-in/log-in.component';
 import {MatDialog} from '@angular/material';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
 
 export class CustomErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -42,7 +44,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
   // }
   logIn_dialog() {
     this.dialog.open(LogInComponent, {panelClass: 'myapp-no-padding-dialog'});
-
   }
 
   ngOnInit() {
@@ -126,53 +127,5 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
 
-  }
-}
-
-@Component({
-  selector: 'error-snack',
-  templateUrl: 'error-snack.html',
-  styles: [`
-    .error-snack {
-      color: white;
-      font-size: 15px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      padding: auto;
-    }
-
-    .icon {
-      color: red;
-      font-weight: 700;
-    }
-  `],
-})
-export class ErrorSnackComponent {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
-  }
-}
-
-@Component({
-  selector: 'success-snack',
-  templateUrl: 'success-snack.html',
-  styles: [`
-    .error-snack {
-      color: white;
-      font-size: 15px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      padding: auto;
-    }
-
-    .icon {
-      color: lawngreen;
-      font-weight: 700;
-    }
-  `],
-})
-export class SuccessSnackComponent {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
   }
 }

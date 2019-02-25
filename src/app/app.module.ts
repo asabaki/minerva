@@ -29,7 +29,7 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTabsModule,
-  MatStepperModule, MatProgressSpinnerModule
+  MatStepperModule, MatProgressSpinnerModule, MAT_DIALOG_DATA
 } from '@angular/material';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -40,15 +40,12 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { WSpaceComponent } from './w-space/w-space.component';
 import {
   SignUpComponent,
-  SuccessSnackComponent
 } from './w-space/sign-up/sign-up.component';
 import { AuthInterceptor } from './w-space/services/auth-intercepter';
 import { AuthService } from './w-space/services/auth.service';
 import {
-  ErrorLoginSnackComponent,
   LogInComponent
 } from './w-space/log-in/log-in.component';
-import { ErrorSnackComponent } from './w-space/sign-up/sign-up.component';
 import { MyFlashcardComponent } from './w-space/flashcard/my-flashcard/my-flashcard.component';
 import { CreateFlashcardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/create-flashcard.component';
 import { AddCardComponent } from './w-space/flashcard/my-flashcard/create-flashcard/add-card/add-card.component';
@@ -73,6 +70,8 @@ import { ResultDialogComponent } from './w-space/quiz/quiz-collection/result-dia
 import { CountdownComponent } from './w-space/planner/countdown/countdown.component';
 import { SelfControlComponent } from './w-space/self-control/self-control.component';
 import { WebsiteBlockingComponent } from './w-space/self-control/website-blocking/website-blocking.component';
+import {SuccessSnackComponent} from './w-space/shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from './w-space/shared-components/error-snack/error-snack.component';
 import { MyNoteComponent } from './w-space/note/my-note/my-note.component';
 import { CreateNoteComponent } from './w-space/note/my-note/create-note/create-note.component';
 import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
@@ -89,9 +88,6 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     WSpaceComponent,
     SignUpComponent,
     LogInComponent,
-    ErrorSnackComponent,
-    SuccessSnackComponent,
-    ErrorLoginSnackComponent,
     MyFlashcardComponent,
     CreateFlashcardComponent,
     AddCardComponent,
@@ -99,7 +95,6 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     QuizComponent,
     EditCardComponent,
     CreateQuizComponent,
-
     McqComponent,
     QuizCollectionComponent,
     PlannerComponent,
@@ -115,6 +110,8 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     SelfControlComponent,
     WebsiteBlockingComponent,
     helpSnackComponent,
+    SuccessSnackComponent,
+    ErrorSnackComponent
     MyNoteComponent,
     CreateNoteComponent,
     ConfirmDialogComponent,
@@ -159,14 +156,12 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
     AuthService
   ],
   entryComponents: [
-    ErrorSnackComponent,
-    SuccessSnackComponent,
     SignUpComponent,
     LogInComponent,
-    ErrorLoginSnackComponent,
     CreateFlashcardComponent,
     CreateQuizComponent,
     AddCardComponent,
@@ -177,6 +172,8 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     ResultDialogComponent,
     WebsiteBlockingComponent,
     helpSnackComponent,
+    SuccessSnackComponent,
+    ErrorSnackComponent
     ConfirmDialogComponent,
     TutorialVideoComponent,
     AddTaskComponent

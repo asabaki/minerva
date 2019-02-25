@@ -3,7 +3,8 @@ import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/mate
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {QuizService} from '../../services/quiz.service';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../sign-up/sign-up.component';
+import {SuccessSnackComponent} from '../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../shared-components/error-snack/error-snack.component';
 
 export interface PeriodicElement {
   _id: string;

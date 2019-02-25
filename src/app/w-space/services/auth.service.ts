@@ -1,12 +1,13 @@
-import {HttpClient, HttpClientModule, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {HttpModule} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
-import {MatDialog} from '@angular/material';
-import {SignUpComponent} from '../sign-up/sign-up.component';
-import {LogInComponent} from '../log-in/log-in.component';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {environment} from '../../../environments/environment';
+
+const BACKEND_URL = environment.apiUrl + '/user/';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +23,18 @@ export class AuthService {
   follower = new Subject<any>();
   following = new Subject<any>();
   toFollow = new Subject<any>();
+  profileUrl = new Subject<any>();
+
   constructor(private http: HttpClient,
               private router: Router,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private matSnack: MatSnackBar) {
   }
 
   signUp(name: string, email: string, password: string): Observable<any> {
     const user = {name, email, password};
     const v = new Subject<any>();
-    this.http.post<any>('http://localhost:3000/api/user/signup', user)
+    this.http.post<any>(BACKEND_URL + 'signup', user)
       .pipe(map((res) => {
         return {
           user: res.user,
@@ -53,28 +57,18 @@ export class AuthService {
   login(username: string, password: string) {
     const getUser = {username, password};
     const v = new Subject<any>();
-    this.http.post<{ user, token, eMessage, id, expiresIn }>('http://localhost:3000/api/user/login', getUser)
-      .pipe(map(res => {
-        return {
-          user: res.user,
-          id: res.id,
-          token: res.token,
-          emessage: res.eMessage,
-          expiresIn: res.expiresIn
-        };
-      }))
+    this.http.post<any>(BACKEND_URL + 'login', getUser, {observe: 'response'})
       .subscribe(
         (result) => {
-          // console.log(result);
-          const token = result.token;
+          const token = result.body.token;
           this.token = token;
           if (token) {
-            const expireDuration = result.expiresIn;
+            const expireDuration = result.body.expiresIn;
             this.setAuthTimer(expireDuration);
             const now = new Date();
             const expireDate = new Date(now.getTime() + expireDuration * 1000);
-            this.userName = result.user;
-            this.userId = result.id;
+            this.userName = result.body.user;
+            this.userId = result.body.id;
             this.saveAuthData(token, expireDate, this.userId, this.userName);
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
@@ -83,6 +77,7 @@ export class AuthService {
           }
         },
         (err) => {
+          console.log(err);
           v.next(err);
         });
     return v.asObservable();
@@ -111,21 +106,30 @@ export class AuthService {
   }
 
   getFollower() {
-    this.http.get('http://localhost:3000/api/user/get/follower', {
-      params: new HttpParams().set('id', this.userId),
-      observe: 'response'
-    }).subscribe(res => {
-      this.follower.next(res);
-    });
+    if (this.userId) {
+      this.http.get(BACKEND_URL + 'get/follower', {
+        params: new HttpParams().set('id', this.userId),
+        observe: 'response'
+      }).subscribe(res => {
+        this.follower.next(res);
+      });
+    } else {
+      this.follower.next([]);
+    }
     return this.follower.asObservable();
   }
+
   getFollowing() {
-    this.http.get('http://localhost:3000/api/user/get/following', {
-      params: new HttpParams().set('id', this.userId),
-      observe: 'response'
-    }).subscribe(res => {
-      this.following.next(res);
-    });
+    if (this.userId) {
+      this.http.get(BACKEND_URL + 'get/following', {
+        params: new HttpParams().set('id', this.userId),
+        observe: 'response'
+      }).subscribe(res => {
+        this.following.next(res);
+      });
+    } else {
+      this.following.next([]);
+    }
     return this.following.asObservable();
   }
 
@@ -150,13 +154,20 @@ export class AuthService {
   }
 
   getToFollow(id: string) {
-    this.http.get('http://localhost:3000/api/user/get/tofollow', {
+    this.http.get(BACKEND_URL + 'get/tofollow', {
       params: new HttpParams().set('id', id),
       observe: 'response'
     }).subscribe(res => {
       this.toFollow.next(res.body);
     });
     return this.toFollow.asObservable();
+  }
+
+  getProfileUrl() {
+    this.http.get(BACKEND_URL + 'profile_pic', {observe: 'response'}).subscribe(res => {
+      this.profileUrl.next(res);
+    });
+    return this.profileUrl.asObservable();
   }
 
   autoAuthUser() {
@@ -198,7 +209,7 @@ export class AuthService {
 
   seed() {
     const user = this.getAuthData();
-    this.http.delete('http://localhost:3000/api/user/seed/' + user.userId, {params: {userId: user.userId}}).subscribe((res) => {
+    this.http.delete(BACKEND_URL + 'seed/' + user.userId, {params: {userId: user.userId}}).subscribe((res) => {
       console.log(res);
     });
   }
@@ -206,7 +217,10 @@ export class AuthService {
   followUser(id: string) {
     const followerId = localStorage.getItem('userId');
     if (followerId) {
-      this.http.post('http://localhost:3000/api/user/follow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
+      this.http.post(BACKEND_URL + 'follow', {
+        follower: followerId,
+        following: id
+      }, {observe: 'response'}).subscribe(res => {
         console.log(res);
         this.following.next(res);
       });
@@ -218,7 +232,10 @@ export class AuthService {
   unfollowUser(id: string) {
     const followerId = localStorage.getItem('userId');
     if (followerId) {
-      this.http.patch('http://localhost:3000/api/user/unfollow', {follower: followerId, following: id}, { observe: 'response'}).subscribe(res => {
+      this.http.patch(BACKEND_URL + 'unfollow', {
+        follower: followerId,
+        following: id
+      }, {observe: 'response'}).subscribe(res => {
         console.log(res);
         this.following.next(res);
       });
@@ -229,7 +246,7 @@ export class AuthService {
 
 
   isFollowing(follower: string, following: string) {
-    this.http.get('http://localhost:3000/api/user/following/' + follower + '/' + following, {
+    this.http.get(BACKEND_URL + 'following/' + follower + '/' + following, {
       observe: 'response'
     }).subscribe(res => {
       this.followed.next(res.body);
@@ -237,4 +254,18 @@ export class AuthService {
     return this.followed.asObservable();
   }
 
+  profileUpload(image: File | string) {
+    const imgData = new FormData();
+    imgData.append('image', image);
+    this.http.post(BACKEND_URL + 'profile', imgData, {observe: 'response'}).subscribe(res => {
+      this.profileUrl.next(res);
+    });
+    return this.profileUrl.asObservable();
+  }
+
+  setHttpHeader() {
+    const headers = new HttpHeaders().set('Accept', 'application/json').set('Content-Type', 'application/json');
+    // const options = { headers: headers, observe: 'response'};
+    // return options;
+  }
 }

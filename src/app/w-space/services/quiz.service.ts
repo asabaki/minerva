@@ -4,12 +4,14 @@ import {QuizModel} from '../quiz/my-quiz/create-quiz/create-quiz.component';
 import {AuthService} from './auth.service';
 import {Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
-import {ErrorSnackComponent} from '../sign-up/sign-up.component';
-
+import {environment} from '../../../environments/environment';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+const BACKEND_URL = environment.apiUrl + '/quiz/';
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
+
 
   myQuizzes_subject = new Subject<any>(); // *** MY QUIZ COLLECTIONS
   myQuizzes_subject_delete = new Subject<any>(); // ** DELETED QUIZ
@@ -23,7 +25,7 @@ export class QuizService {
   }
 
   get_allQuizzes() {
-    this.http.get('http://localhost:3000/api/quiz/get/all_quizzes', {
+    this.http.get(BACKEND_URL + 'get/all_quizzes', {
       observe: 'response'
     }).subscribe(res => {
       // console.log(res)
@@ -40,7 +42,7 @@ export class QuizService {
   }
 
   get_myquizzes() {
-    this.http.get('http://localhost:3000/api/quiz/get/my_quizzes', {
+    this.http.get(BACKEND_URL + 'get/my_quizzes', {
       observe: 'response'
     }).subscribe(res => {
       this.myQuizzes_subject.next(res.body);
@@ -49,7 +51,7 @@ export class QuizService {
   }
 
   get_quiz(id: string) {
-    this.http.get('http://localhost:3000/api/quiz/get/quiz', {
+    this.http.get(BACKEND_URL + 'get/quiz', {
       params: new HttpParams().set('id', id),
       observe: 'response'
     }).subscribe(res => {
@@ -59,7 +61,7 @@ export class QuizService {
     return this.quiz_subject.asObservable();
   }
   get_taken(id: string) {
-    this.http.get('http://localhost:3000/api/quiz/get/quiz_taken', {
+    this.http.get(BACKEND_URL + 'get/quiz_taken', {
       params: new HttpParams().set('id', id),
       observe: 'response'
     }).subscribe(res => {
@@ -71,7 +73,7 @@ export class QuizService {
 
   add_quiz(q: QuizModel) {
     // console.log(q);
-    this.http.post('http://localhost:3000/api/quiz/add', q, {observe: 'response'}).subscribe(res => {
+    this.http.post(BACKEND_URL + 'add', q, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
         this.myQuiz_subject_create.next(res);
       }
@@ -80,7 +82,7 @@ export class QuizService {
   }
 
   taken_quiz(id: string, score: number) {
-    this.http.patch('http://localhost:3000/api/quiz/taken/' + id, {score}, { observe: 'response'}).subscribe(res => {
+    this.http.patch(BACKEND_URL + 'taken/' + id, {score}, { observe: 'response'}).subscribe(res => {
       console.log(res.body);
       this.quiz_taken_subject.next(res.body);
     });
@@ -88,7 +90,7 @@ export class QuizService {
   }
 
   delete_quiz(id: string) {
-    this.http.delete('http://localhost:3000/api/quiz/delete/',
+    this.http.delete(BACKEND_URL + 'delete/',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'

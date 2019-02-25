@@ -5,8 +5,9 @@ import {McqComponent} from './mcq/mcq.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {Location} from '@angular/common';
 import {QuizService} from '../../../services/quiz.service';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../../sign-up/sign-up.component';
 import {Router} from '@angular/router';
+import {SuccessSnackComponent} from '../../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-snack.component';
 
 export interface QuizModel {
   privacy: boolean;

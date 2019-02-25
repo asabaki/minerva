@@ -7,8 +7,10 @@ import {FlashModel} from './flash_collection.model';
 import {RequestOptions} from '@angular/http';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../sign-up/sign-up.component';
-
+import {environment} from '../../../environments/environment';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+const BACKEND_URL = environment.apiUrl + '/flash/';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,7 +40,7 @@ export class FlashCardService {
     if (this.auth.getIsAuth()) {
       const userId = localStorage.getItem('userId');
       const card = {title, description, userId, privacy};
-      this.http.post<any>('http://localhost:3000/api/flash/add', card, {observe: 'response'}).subscribe(
+      this.http.post<any>(BACKEND_URL + 'add', card, {observe: 'response'}).subscribe(
         (res) => {
           this.collectionId = res.body.cards._id;
           this.cardSubject.next(res);
@@ -54,7 +56,7 @@ export class FlashCardService {
 
   fetch_collection() {
     const userId = localStorage.getItem('userId');
-    this.http.get<FlashModel[]>('http://localhost:3000/api/flash/fetch/' + userId, {observe: 'response'})
+    this.http.get<FlashModel[]>(BACKEND_URL + 'fetch/' + userId, {observe: 'response'})
       .pipe(map(res => {
         // console.log(res);
         const ret = [];
@@ -84,7 +86,7 @@ export class FlashCardService {
   }
 
   fetch_collection_all() {
-    this.http.get<any>('http://localhost:3000/api/flash/fetch_all/', {observe: 'response'})
+    this.http.get<any>(BACKEND_URL + 'fetch_all/', {observe: 'response'})
       .pipe(map(res => {
         const ret = [];
         if (res.status === 200) {
@@ -113,7 +115,7 @@ export class FlashCardService {
   }
 
   fetch_card(id: string) { // Collection Component
-    this.http.get('http://localhost:3000/api/flash/pull/' + id, {observe: 'response'}).subscribe((response) => {
+    this.http.get(BACKEND_URL + 'pull/' + id, {observe: 'response'}).subscribe((response) => {
       this.cardSubject.next(response);
     });
     return this.cardSubject.asObservable();
@@ -124,14 +126,14 @@ export class FlashCardService {
   }
 
   getRated(id: string) {
-    this.http.get('http://localhost:3000/api/flash/rate/' + id, {observe: 'response'}).subscribe(res => {
+    this.http.get(BACKEND_URL + 'rate/' + id, {observe: 'response'}).subscribe(res => {
       this.ratedSubject.next(res);
     });
     return this.ratedSubject.asObservable();
   }
 
   getRating(id: string) {
-    this.http.get('http://localhost:3000/api/flash/rate', {
+    this.http.get(BACKEND_URL + 'rate', {
       params: new HttpParams().set('id', id),
       observe: 'response'
     }).subscribe(res => {
@@ -140,7 +142,7 @@ export class FlashCardService {
   }
 
   delete_card(id: string) {
-    this.http.delete('http://localhost:3000/api/flash/delete/card',
+    this.http.delete(BACKEND_URL + 'delete/card',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'
@@ -151,7 +153,7 @@ export class FlashCardService {
   }
 
   delete_collection(id: string) {
-    this.http.delete('http://localhost:3000/api/flash/delete/',
+    this.http.delete(BACKEND_URL + 'delete/',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'
@@ -163,7 +165,7 @@ export class FlashCardService {
     if (this.collectionId && this.auth.getIsAuth()) {
       const card = {front, back};
       this.index = this.index ? 1 : this.index;
-      this.http.post<any>('http://localhost:3000/api/flash/add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
+      this.http.post<any>(BACKEND_URL + 'add/' + this.collectionId, card, {observe: 'response'}).subscribe((res) => {
         if (res.ok) {
           this.addSubject.next(res);
         } else {
@@ -179,7 +181,7 @@ export class FlashCardService {
 
   update_card_detail(id: string, title: string, description: string, privacy: boolean) {
     const updateBody = {id, title, description, privacy};
-    this.http.patch<any>('http://localhost:3000/api/flash/update', updateBody, {observe: 'response'}).subscribe((res) => {
+    this.http.patch<any>(BACKEND_URL + 'update', updateBody, {observe: 'response'}).subscribe((res) => {
       this.updateSubject.next(res);
     });
     return this.updateSubject.asObservable();
@@ -187,7 +189,7 @@ export class FlashCardService {
 
   update_card(id: string, cards: Object[]) {
     // let status;
-    this.http.patch('http://localhost:3000/api/flash/update/' + id, cards, {observe: 'response'}).subscribe((res) => {
+    this.http.patch(BACKEND_URL + 'update/' + id, cards, {observe: 'response'}).subscribe((res) => {
       this.updateSubject.next(res);
       // status = res.statusText;
     });
@@ -197,7 +199,7 @@ export class FlashCardService {
   }
 
   rate_collection(id: string, rate: number) {
-    this.http.patch('http://localhost:3000/api/flash/rate', {rate, id}, {observe: 'response'}).subscribe(res => {
+    this.http.patch(BACKEND_URL + 'rate', {rate, id}, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
         this.updateSubject.next(res);
       }
@@ -206,7 +208,7 @@ export class FlashCardService {
   }
 
   unrate_collection(id: string) {
-    this.http.patch('http://localhost:3000/api/flash/unrate', {id}, {observe: 'response'}).subscribe(res => {
+    this.http.patch(BACKEND_URL + 'unrate', {id}, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
         this.updateSubject.next(res);
         this.matSnack.openFromComponent(SuccessSnackComponent, {

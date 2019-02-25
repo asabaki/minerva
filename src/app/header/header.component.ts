@@ -6,6 +6,7 @@ import {AuthService} from '../w-space/services/auth.service';
 import {SearchUserComponent} from '../w-space/search-user/search-user.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,30 +20,34 @@ export class HeaderComponent implements OnInit {
   isAuth: boolean;
   follower = 0;
   following = 0;
+  imgUrl: string;
+
+  // TODO - ขยายรูปหน่อยเดะ
 
   constructor(public dialog: MatDialog,
+              private router: Router,
               public authService: AuthService,
               private snack: MatSnackBar) {
   }
+
   ngOnInit() {
-    this.isAuth = this.authService.getIsAuth();
-    this.name = this.authService.getUserName();
-    this.authService.getFollower().subscribe(flw => {
-      this.follower = flw.body.length;
-    });
-    this.authService.getFollowing().subscribe(fwn => {
-      this.following = fwn.body.length;
-    });
-    this.authService.getAuthStatus().subscribe((res) => {
+
+    this.authService.getAuthStatus().subscribe(status => {
       this.name = this.authService.getUserName();
-      this.isAuth = res;
+      this.isAuth = status;
       this.authService.getFollower().subscribe(flw => {
         this.follower = flw.body.length;
       });
       this.authService.getFollowing().subscribe(fwn => {
         this.following = fwn.body.length;
       });
+      this.authService.getProfileUrl().subscribe(url => {
+        if (url.ok) {
+          this.imgUrl = url.body;
+        }
+      });
     });
+
   }
 
   signUp_dialog() {
@@ -58,6 +63,7 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
   onClear() {
     this.authService.seed();
   }
@@ -94,13 +100,14 @@ export class HeaderComponent implements OnInit {
   selector: 'help-snack',
   templateUrl: 'help-snack.html',
   styles: [`
-    .help{
+    .help {
       color: white;
       font-size: 2rem;
-      text-align:center;
+      text-align: center;
     }
   `],
 })
-export class helpSnackComponent {}
+export class helpSnackComponent {
+}
 
 

@@ -3,7 +3,8 @@ import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/mate
 import {HttpClient} from '@angular/common/http';
 import {FlashCardService} from '../../../../services/flash-card.service';
 import {NgForm} from '@angular/forms';
-import {ErrorSnackComponent, SuccessSnackComponent} from '../../../../sign-up/sign-up.component';
+import {SuccessSnackComponent} from '../../../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../../../shared-components/error-snack/error-snack.component';
 
 @Component({
   selector: 'app-add-card',
