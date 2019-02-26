@@ -78,6 +78,7 @@ import { CreateNoteComponent } from './w-space/note/my-note/create-note/create-n
 import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
 import { TutorialVideoComponent } from './w-space/shared-dialog/tutorial-video/tutorial-video.component';
 import { AddTaskComponent } from './w-space/planner/add-task/add-task.component';
+import { NoteCollectionComponent } from './w-space/note/note-collection/note-collection.component';
 
 
 
@@ -119,7 +120,8 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     CreateNoteComponent,
     ConfirmDialogComponent,
     TutorialVideoComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    NoteCollectionComponent
   ],
   imports: [
     BrowserModule,

@@ -37,6 +37,8 @@ const routes: Routes = [
   {path: 'self-control', component: SelfControlComponent},
 
 
+
+
 ];
 
 @NgModule({
