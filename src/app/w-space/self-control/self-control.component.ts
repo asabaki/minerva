@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {WebsiteBlockingComponent} from '../self-control/website-blocking/website-blocking.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {BlockerService} from '../services/blocker.service';
 
 @Component({
   selector: 'app-self-control',
@@ -10,7 +11,8 @@ import {MatRadioModule} from '@angular/material/radio';
 })
 export class SelfControlComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              private webBlocker: BlockerService) { }
 
   openWebBlockingialog() {
     const dialogRef = this.dialog.open(WebsiteBlockingComponent, {panelClass: 'myapp-no-padding-dialog'});
@@ -19,5 +21,11 @@ export class SelfControlComponent implements OnInit {
   }
   ngOnInit() {
   }
+
+  onBlock() {
+    this.webBlocker.blockWeb();
+  }
+
+
 
 }

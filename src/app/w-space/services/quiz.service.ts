@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
 import {environment} from '../../../environments/environment';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
 const BACKEND_URL = environment.apiUrl + '/quiz/';
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class QuizService {
   quiz_subject = new Subject<any>(); // *** QUIZ COLLECTION
   all_quizzes_subject = new Subject<any>(); // *** ALL QUIZ COLLECTIONS
   quiz_taken_subject = new Subject<any>();
+  rated_subject = new Subject<any>();
+  update_subject = new Subject<any>();
   constructor(private http: HttpClient,
               private authService: AuthService,
               private matSnack: MatSnackBar) {
@@ -71,6 +74,22 @@ export class QuizService {
     return this.quiz_taken_subject.asObservable();
   }
 
+  getRated(id: string) {
+    this.http.get(BACKEND_URL + 'rate/' + id, {observe: 'response'}).subscribe(res => {
+      this.rated_subject.next(res);
+    });
+    return this.rated_subject.asObservable();
+  }
+
+  getRating(id: string) {
+    this.http.get(BACKEND_URL + 'rate', {
+      params: new HttpParams().set('id', id),
+      observe: 'response'
+    }).subscribe(res => {
+
+    });
+  }
+
   add_quiz(q: QuizModel) {
     // console.log(q);
     this.http.post(BACKEND_URL + 'add', q, {observe: 'response'}).subscribe(res => {
@@ -96,5 +115,32 @@ export class QuizService {
         observe: 'response'
       }).subscribe((response) => this.myQuizzes_subject_delete.next(response));
     return this.myQuizzes_subject_delete.asObservable();
+  }
+
+  rate_collection(id: string, rate: number) {
+    this.http.patch(BACKEND_URL + 'rate', {rate, id}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.update_subject.next(res);
+      }
+    });
+    return this.update_subject.asObservable();
+  }
+
+  unrate_collection(id: string) {
+    this.http.patch(BACKEND_URL + 'unrate', {id}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.update_subject.next(res);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You Have Unrated This Quiz',
+          duration: 1500
+        });
+      }
+    }, err => {
+      console.log(err);
+      this.matSnack.openFromComponent(ErrorSnackComponent, {
+        data: 'Something went wrong\n' + err.statusText,
+        duration: 1500
+      });
+    });
   }
 }

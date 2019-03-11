@@ -29,9 +29,9 @@
       <div class="description__area">
         <section class="rating">
           <bar-rating
-            [rate]="faoRate"
+            *ngIf="!isCreator()"
+            [rate]="quiz.rating"
             (rateChange)="onFaoRate($event)"
-            [disabled]="isCreator()"
             [max]="5"
             [theme]="'fontawesome-o'"
             color="primary"
@@ -55,8 +55,8 @@
               Created by <br />
               {{ quiz.creator_name }}
             </button>
-            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator)"><span class="bold">+</span>Follow</button>
-            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator)" >
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing && !isCreator()" (click)="onFollow(quiz.creator_id)"><span class="bold">+</span>Follow</button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing && !isCreator()" (click)="onUnfollow(quiz.creator_id)" >
               <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
               <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
             </button>

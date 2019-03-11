@@ -23,6 +23,8 @@ export class AuthService {
   follower = new Subject<any>();
   following = new Subject<any>();
   toFollow = new Subject<any>();
+  onFollowing = new Subject<any>();
+  onUnFollowing = new Subject<any>();
   profileUrl = new Subject<any>();
 
   constructor(private http: HttpClient,
@@ -72,7 +74,6 @@ export class AuthService {
             this.saveAuthData(token, expireDate, this.userId, this.userName);
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
-            this.router.navigate(['/home']);
             v.next(result);
           }
         },
@@ -82,6 +83,24 @@ export class AuthService {
         });
     return v.asObservable();
   }
+
+  login_social(token: string, expiresIn: number, name: string, id: string) {
+    const v = new Subject<any>();
+    if (token) {
+      const expireDuration = expiresIn;
+      this.setAuthTimer(expireDuration);
+      const now = new Date();
+      const expireDate = new Date(now.getTime() + expireDuration * 1000);
+      this.userName = name;
+      this.userId = id;
+      this.saveAuthData(token, expireDate, this.userId, this.userName);
+      this.isAuthenticated = true;
+      this.authStatusListener.next(true);
+      v.next(true);
+    }
+    return v.asObservable();
+  }
+
 
   logout() {
     this.token = null;
@@ -222,11 +241,15 @@ export class AuthService {
         following: id
       }, {observe: 'response'}).subscribe(res => {
         console.log(res);
-        this.following.next(res);
+        if (res.status === 202) {
+          this.onFollowing.next(-1);
+        } else {
+          this.following.next(res);
+          this.onFollowing.next(1);
+        }
       });
-    } else {
-      return -1;
     }
+    return this.onFollowing.asObservable();
   }
 
   unfollowUser(id: string) {
@@ -237,11 +260,15 @@ export class AuthService {
         following: id
       }, {observe: 'response'}).subscribe(res => {
         console.log(res);
-        this.following.next(res);
+        if (res.status === 200) {
+          this.following.next(res);
+          this.onUnFollowing.next(1);
+        } else {
+          this.onUnFollowing.next(-1);
+        }
       });
-    } else {
-      return -1;
     }
+    return this.onUnFollowing.asObservable();
   }
 
 
@@ -249,6 +276,7 @@ export class AuthService {
     this.http.get(BACKEND_URL + 'following/' + follower + '/' + following, {
       observe: 'response'
     }).subscribe(res => {
+      // console.log(res);
       this.followed.next(res.body);
     });
     return this.followed.asObservable();

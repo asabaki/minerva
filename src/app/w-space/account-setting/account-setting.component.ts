@@ -35,7 +35,6 @@ export class AccountSettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    // TODO - ขยายรูปตรงนี้หน่อยเดะ จัดใหม่ด้วย
     this.authService.getProfileUrl().subscribe(res => {
       this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
     });

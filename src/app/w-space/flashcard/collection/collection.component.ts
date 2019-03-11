@@ -143,15 +143,39 @@ export class CollectionComponent implements OnInit {
   }
 
   onFollow(id: string) {
-    if (this.authService.followUser(id) !== -1) {
-      this.isFollowing = true;
-    }
+    this.authService.followUser(id).subscribe(res => {
+      // console.log(res)
+      if (res !== -1 ) {
+        this.isFollowing = true;
+        this.authService.isFollowing(localStorage.getItem('userId'), this.creator);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You successfully follow ' + this.creatorName,
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'You have already follow this user!',
+          duration: 1500
+        });
+      }
+    });
   }
 
   onUnfollow(id: string) {
-    if (this.authService.unfollowUser(id) !== -1) {
-      this.isFollowing = false;
-    }
+    this.authService.unfollowUser(id).subscribe(res => {
+      if (res !== -1 ) {
+        this.isFollowing = false;
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You successfully unfollow ' + this.creatorName,
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'You have already unfollow this user!',
+          duration: 1500
+        });
+      }
+    });
   }
 
   openAddCardDialog() {

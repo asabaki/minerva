@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
   following = 0;
   imgUrl: string;
 
-  // TODO - ขยายรูปหน่อยเดะ
 
   constructor(public dialog: MatDialog,
               private router: Router,
@@ -39,12 +38,11 @@ export class HeaderComponent implements OnInit {
         this.follower = flw.body.length;
       });
       this.authService.getFollowing().subscribe(fwn => {
+        // console.log(fwn);
         this.following = fwn.body.length;
       });
-      this.authService.getProfileUrl().subscribe(url => {
-        if (url.ok) {
-          this.imgUrl = url.body;
-        }
+      this.authService.getProfileUrl().subscribe(res => {
+        this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
       });
     });
 
@@ -86,7 +84,6 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  // TODO - Dialog open twice
 
   openHelpSnackBar() {
     this.snack.openFromComponent(helpSnackComponent, {

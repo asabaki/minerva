@@ -29,7 +29,7 @@ import {
   MatSortModule,
   MatTooltipModule,
   MatTabsModule,
-  MatStepperModule, MatProgressSpinnerModule, MAT_DIALOG_DATA
+  MatStepperModule, MatProgressSpinnerModule, MAT_DIALOG_DATA, MatPaginatorModule
 } from '@angular/material';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -77,6 +77,9 @@ import { CreateNoteComponent } from './w-space/note/my-note/create-note/create-n
 import { ConfirmDialogComponent } from './w-space/quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
 import { TutorialVideoComponent } from './w-space/shared-dialog/tutorial-video/tutorial-video.component';
 import { AddTaskComponent } from './w-space/planner/add-task/add-task.component';
+import { FacebookComponent } from './w-space/shared-components/profile/facebook/facebook.component';
+import { GoogleComponent } from './w-space/shared-components/profile/google/google.component';
+import { TwitterComponent } from './w-space/shared-components/profile/twitter/twitter.component';
 
 
 
@@ -111,12 +114,15 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     WebsiteBlockingComponent,
     helpSnackComponent,
     SuccessSnackComponent,
-    ErrorSnackComponent
+    ErrorSnackComponent,
     MyNoteComponent,
     CreateNoteComponent,
     ConfirmDialogComponent,
     TutorialVideoComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    FacebookComponent,
+    GoogleComponent,
+    TwitterComponent
   ],
   imports: [
     BrowserModule,
@@ -153,6 +159,7 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
       useFactory: adapterFactory
     }),
     CountdownModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -173,7 +180,7 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
     WebsiteBlockingComponent,
     helpSnackComponent,
     SuccessSnackComponent,
-    ErrorSnackComponent
+    ErrorSnackComponent,
     ConfirmDialogComponent,
     TutorialVideoComponent,
     AddTaskComponent

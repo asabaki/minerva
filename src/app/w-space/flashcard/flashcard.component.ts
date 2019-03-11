@@ -1,11 +1,12 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
+import {MatSort, MatTableDataSource, MatDialog, MatSnackBar, MatPaginator} from '@angular/material';
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
 import {TutorialVideoComponent} from '../shared-dialog/tutorial-video/tutorial-video.component';
 
 export interface PeriodicElement {
+  position;
   _id: string;
   author: string;
   title: string;
@@ -14,7 +15,6 @@ export interface PeriodicElement {
   rating: number;
   dom: Date;
   views: number;
-  delete: boolean;
   daysUpdated: string;
 
 }
@@ -27,6 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [];
   styleUrls: ['./flashcard.component.scss']
 })
 export class FlashcardComponent implements OnInit {
+
   columnDef = [
     {def: 'title', show: true},
     {def: 'author', show: true},
@@ -56,6 +57,7 @@ export class FlashcardComponent implements OnInit {
   }
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
     let i = 0;
@@ -64,8 +66,9 @@ export class FlashcardComponent implements OnInit {
         ELEMENT_DATA.length = 0;
         this.number_collection = res.length;
         res.forEach((data) => {
-          const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / ( 1000 * 60));
+            const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / (1000 * 60));
             ELEMENT_DATA.push({
+              position: ++i,
               _id: data._id,
               author: data.author,
               title: data.title,
@@ -75,11 +78,11 @@ export class FlashcardComponent implements OnInit {
               views: 0,
               dom: data.updatedAt,
               daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
-              delete: false
             });
           }
         );
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         this.isLoaded = true;
       }
     );
