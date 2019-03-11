@@ -80,6 +80,8 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
 import { FacebookComponent } from './w-space/shared-components/profile/facebook/facebook.component';
 import { GoogleComponent } from './w-space/shared-components/profile/google/google.component';
 import { TwitterComponent } from './w-space/shared-components/profile/twitter/twitter.component';
+import { NoteCollectionComponent } from './w-space/note/note-collection/note-collection.component';
+
 
 
 
@@ -123,6 +125,7 @@ import { TwitterComponent } from './w-space/shared-components/profile/twitter/tw
     FacebookComponent,
     GoogleComponent,
     TwitterComponent
+    NoteCollectionComponent
   ],
   imports: [
     BrowserModule,

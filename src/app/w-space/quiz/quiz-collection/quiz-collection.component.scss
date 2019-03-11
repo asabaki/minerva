@@ -71,8 +71,19 @@ $bp-smallest: 31.25em; //500px  (500/16)
     margin: 1rem;
     display: flex;
     flex-flow: row nowrap;
-    text-align: justify;
     justify-content: space-between;
+
+    &-p {
+      span{
+        font-weight: bold;
+      }
+      background-color: rgba(#8ab7bb,.05);
+      margin: auto;
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      width: 60rem;
+      text-align: justify;
+    }
   }
 }
 
@@ -501,6 +512,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
   align-content: center;
   justify-content: center;
   margin: auto;
+
   &__container {
     margin: auto .5rem;
     padding: 0 .5rem;
