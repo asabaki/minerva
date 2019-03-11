@@ -295,7 +295,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
   }
 
   &__save {
-    background-color: var(--color-secondary);
+    background-color: var(--color-primary);
     color: white;
     border-radius: 100px;
     padding: 1rem 3rem;
@@ -331,7 +331,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
   }
 
   &__retest {
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
   }
 
   &__group {

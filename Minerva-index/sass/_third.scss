@@ -1,48 +1,1 @@
-.third {
-    &__container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-secondary);
-        font-size: 2rem;
-        text-align: initial;
-        h1 {
-            font-size: 4rem;
-            line-height: 4rem;
-            margin-bottom: 2rem;
-            animation: pulse 1.5s infinite;
-        }
-    }
-    &__description {
-        flex: 0 0 50%;
-        padding-right: 6rem;
-        &-btn {
-            color: white;
-            margin: 2rem auto;
-            background-color: var(--color-primary);
-            box-shadow: 0 4px 0 var(--color-primary-dark);
-            border-radius: 5px;
-            font-size: 2rem;
-            font-weight: 700;
-            padding: 1rem 5rem;
-            outline: none;
-            border: none;
-            cursor: pointer;
-            transition: all .2s;
-            &:hover {
-                transform: scale(1.1);
-                color: rgb(255, 230, 183);
-            }
-            &:active {
-                transform: scale(.95);
-            }
-        }
-    }
-    &__photo {
-        flex: 1;
-        margin: auto;
-        .img {
-            width: 65rem;
-        }
-    }
-}
+$bp-largest: 75em; //1200px  (1200/16)$bp-large: 68.25em; //1100px  (1100/16)$bp-medium: 65.25em; //900px  (900/16)$bp-small: 37.5em; //600px  (600/16)$bp-smallest: 31.25em; //500px  (500/16).third {  display: flex;  justify-content: center;  @media only screen and (max-width: $bp-medium) {    flex-direction: column;    align-content: center;  }  font-size: 2rem;  text-align: center;  h1 {    color: var(--color-primary);    font-size: 5rem;    text-align: center;  }  & > *{    margin: auto 2rem;    background-color: white;    padding: 4rem;    height: 40rem;    width: 55rem;    box-shadow: 0 .2rem 2rem var(--color-grey-light-4);    border-radius: 10px;    text-align: justify;    @media only screen and (max-width: $bp-medium) {      width: 80rem !important;      margin: 2rem auto;    }  }}
