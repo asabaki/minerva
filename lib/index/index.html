@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Minerva</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet"
+  />
+  <link rel="icon" href="img/favicon.png" type="image/png"/>
+  <script src="script.js"></script>
+</head>
+<body>
+<div class="nav-fixed">
+  <div class="nav">
+    <div class="nav-left">
+      <img class="nav-logo" src="/img/minerva_5.png" alt="logo"/>
+    </div>
+    <div class="nav-right">
+      <!--<button class="nav-btn ">Log in</button>-->
+      <a class="nav-btn nav-btn__signup" href="http://minervaproject-env.z2p9mpzrkw.ap-south-1.elasticbeanstalk.com/">Try our demo &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<section class="first">
+  <div class="first__container">
+    <div class="first__description">
+      <h1>Let Minerva help you to manage your study and good study habits.</h1>
+      <p>
+        It has features like flashcards, planners, time trackers and also
+        the facility to ban access to social media websites for a while.
+      </p>
+      <button class="first__description-btn">Try our demo &rarr;</button>
+    </div>
+    <div class="first__photo">
+      <img src="/img/1.png" alt="" class="img"/>
+    </div>
+  </div>
+</section>
+
+<section class="second">
+
+  <div class="second__container">
+    <div class="second__photo">
+      <video class="img" src="/img/flashcard_video.mp4" autoplay loop>
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="second__description">
+      <h1>Features</h1>
+      <form>
+        <div class="styled-select orange rounded">
+          <select name="feature" id="feature">
+            <option value="1">Flashcard</option>
+            <option value="2">Quiz</option>
+            <option value="3">Note</option>
+            <option value="4">Planner</option>
+            <option value="5">Countdown</option>
+            <option value="6">Self-control</option>
+          </select>
+        </div>
+        <p class="description" id="description"></p>
+      </form>
+    </div>
+  </div>
+</section>
+<!--<section class="third">
+    <div class="third__container">
+        <div class="third__description">
+          <h1>Work with any group.</h1>
+          <p>
+              Whether it’s for work or a side project , Minerva helps your group stay organized.
+          </p>
+          <button class="third__description-btn">Lets do it &rarr;</button>
+        </div>
+        <div class="third__photo">
+          <img src="/img/hero-a.svg" alt="" class="img" />
+        </div>
+      </div>
+</section>-->
+
+<section class="footer">
+
+  <h3 class="footer-h3">Follow us on</h3>
+
+  <div class="icon-group">
+    <a href="" class="icon">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="" class="icon">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="" class="icon">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="" class="icon">
+      <i class="fab fa-pinterest-p"></i>
+    </a>
+  </div>
+
+  <!--<hr>-->
+
+  <div class="footer-menu__1-group">
+    <div class="footer-menu__1">Home</div>
+    <div class="footer-menu__1">About</div>
+    <div class="footer-menu__1">Contact us</div>
+  </div>
+
+
+  <div class="footer-menu__2-group">
+    <div class="footer-menu__2">Terms</div>
+    <span>|</span>
+    <div class="footer-menu__2">Privacy</div>
+  </div>
+
+  <div class="copyright">
+    © 2018 by Minerva. All right reserved.
+  </div>
+
+</section>
+<script>
+  $("select").change(function () {
+    var selected = $('#feature').val();
+    console.log(selected);
+    if (selected == 1) {
+      $('#description').text('Flashcards may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    } else if (selected == 2) {
+      $('#description').text('Quiz may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    } else if (selected == 3) {
+      $('#description').text('Note may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    } else if (selected == 4) {
+      $('#description').text('Planner may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    } else if (selected == 5) {
+      $('#description').text('Countdown may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    } else if (selected == 6) {
+      $('#description').text('Self-control may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+    }
+  }).change();
+</script>
+</body>
+</html>
+
+
