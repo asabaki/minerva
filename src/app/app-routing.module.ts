@@ -41,11 +41,6 @@ const routes: Routes = [
   {path: 'facebook', component: FacebookComponent},
   {path: 'google', component: GoogleComponent},
   {path: 'twitter', component: TwitterComponent},
-  
-
-
-
-
 ];
 
 @NgModule({

@@ -90,6 +90,8 @@ export class HeaderComponent implements OnInit {
       duration: 4800,
     });
   }
+
+
 }
 
 
@@ -105,6 +107,16 @@ export class HeaderComponent implements OnInit {
   `],
 })
 export class helpSnackComponent {
+  onHelp(){
+    const myArray = [
+      'Stopping the mind is the key to success 🙏🏻',
+      'There is no greater happiness than a still mind 🙏🏻',
+      'Obstacles are to be overcome 🙏🏻',
+      'God helps those who help themselves 🙏🏻'
+    ];
+    const randomItemHelp = myArray[Math.floor(Math.random() * myArray.length)];
+    return randomItemHelp;
+  }
 }
 
 

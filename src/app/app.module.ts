@@ -124,7 +124,7 @@ import { NoteCollectionComponent } from './w-space/note/note-collection/note-col
     AddTaskComponent,
     FacebookComponent,
     GoogleComponent,
-    TwitterComponent
+    TwitterComponent,
     NoteCollectionComponent
   ],
   imports: [
