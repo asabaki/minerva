@@ -41,7 +41,7 @@
         It has features like flashcards, planners, time trackers and also
         the facility to ban access to social media websites for a while.
       </p>
-      <button class="first__description-btn">Try our demo &rarr;</button>
+      <a href="#content" class="first__description-btn" >Discover more &darr;</a>
     </div>
     <div class="first__photo">
       <img src="/img/1.png" alt="" class="img"/>
@@ -49,7 +49,7 @@
   </div>
 </section>
 
-<section class="second">
+<section class="second" id="content">
 
   <div class="second__container">
     <div class="second__photo">
@@ -118,11 +118,11 @@
   </div>
 
 
-  <div class="footer-menu__2-group">
-    <div class="footer-menu__2">Terms</div>
-    <span>|</span>
-    <div class="footer-menu__2">Privacy</div>
-  </div>
+  <!--<div class="footer-menu__2-group">-->
+    <!--<div class="footer-menu__2">Terms</div>-->
+    <!--<span>|</span>-->
+    <!--<div class="footer-menu__2">Privacy</div>-->
+  <!--</div>-->
 
   <div class="copyright">
     © 2018 by Minerva. All right reserved.
@@ -134,17 +134,17 @@
     var selected = $('#feature').val();
     console.log(selected);
     if (selected == 1) {
-      $('#description').text('Flashcards may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('Flashcards are a technique that can improve your memory retention. This is one of many techniques that can be used for study purposes but it is especially useful for memorizing facts, word and meaning  and dates etc.');
     } else if (selected == 2) {
-      $('#description').text('Quiz may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('A quiz is a form of mind sport, in which the players (users) attempt to answer questions correctly and it is a form of assessment that measure knowledge, skills and abilities. It is a game to test users knowledge about a certain subject. It allow the users to see where they are excelling or need more focus.');
     } else if (selected == 3) {
-      $('#description').text('Note may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('Note is a brief record of writing something to assist the memory or for future important references.Notes are usually being use for record the speeches or dictations after listening to it or after reading materials like book, magazine or an article.With the assistance of note making, the user may recall the entire information of the past events.For the student, it makes their preparation less strenuous.');
     } else if (selected == 4) {
-      $('#description').text('Planner may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('Planner is an online diary for personal planning for meetings, conferences and events.Planner is to help user plan for specific occasions and needs.It is completely private because it is simultaneously extremely personal');
     } else if (selected == 5) {
-      $('#description').text('Countdown may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('Countdown is a reminder which remind the user when the upcoming events will come');
     } else if (selected == 6) {
-      $('#description').text('Self-control may have a reputation as being one of the most boring ways to study. But there’s a reason that flashcards have been a preferred study method for hundreds of years!');
+      $('#description').text('It restricted the users from the used of a particular website which they provided. And the users can decided the time of restriction.');
     }
   }).change();
 </script>

@@ -82,7 +82,9 @@ export class MyFlashcardComponent implements OnInit {
             });
           }
         );
+        console.log(this.sort);
         this.dataSource.sort = this.sort;
+        console.log(this.dataSource);
       }
     );
 

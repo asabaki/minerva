@@ -17,6 +17,9 @@ import {NoteComponent} from './w-space/note/note.component';
 import {CountdownComponent} from './w-space/planner/countdown/countdown.component';
 import {SelfControlComponent} from './w-space/self-control/self-control.component';
 import {CreateNoteComponent} from './w-space/note/my-note/create-note/create-note.component';
+import {FacebookComponent} from './w-space/shared-components/profile/facebook/facebook.component';
+import {GoogleComponent} from './w-space/shared-components/profile/google/google.component';
+import {TwitterComponent} from './w-space/shared-components/profile/twitter/twitter.component';
 
 const routes: Routes = [
   {path: '', component: WSpaceComponent , pathMatch: 'full'},
@@ -35,6 +38,10 @@ const routes: Routes = [
   {path: 'note/my/create', component: CreateNoteComponent, canActivate: [AuthGuard]},
   {path: 'countdown', component: CountdownComponent},
   {path: 'self-control', component: SelfControlComponent},
+  {path: 'facebook', component: FacebookComponent},
+  {path: 'google', component: GoogleComponent},
+  {path: 'twitter', component: TwitterComponent},
+  
 
 
 

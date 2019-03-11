@@ -4,253 +4,288 @@ $bp-medium: 65.25em; //900px  (900/16)
 $bp-small: 37.5em; //600px  (600/16)
 $bp-smallest: 31.25em; //500px  (500/16)
 .log-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  height: 100%;
+  background-color: transparent;
+  z-index: 105;
+  @media only screen and (max-width: $bp-smallest) {
+    transform: scale(.85);
+  }
+  @media only screen and (max-width: 425px) {
+    transform: scale(.70);
+  }
+  @media only screen and (max-width: 340px) {
+    transform: scale(.68);
+  }
+  @media only screen and (max-width: 320px) {
+    transform: scale(.65);
+  }
+
+  &__social {
+    margin: 2rem 0 3rem 0;
     display: flex;
+
+    & > * {
+      border-radius: 100px;
+      color: white;
+      width: 4rem;
+      height: 4rem;
+      margin: 1rem;
+      text-align: center;
+      padding: 0.5rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      display: block;
+      transition: all 0.5s;
+
+      &:hover,
+      &:focus {
+        transform: scale(1.1);
+      }
+
+      &:visited,
+      &:active {
+        transform: scale(1);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &-facebook {
+      background-color: #3b5998;
+    }
+
+    &-twitter {
+      background-color: #0084b4;
+    }
+
+    &-google {
+      background-color: #d85040;
+    }
+  }
+
+  &__form {
+    border-radius: 10px;
+    box-shadow: 0 1rem 2rem rgba(black, 0.2);
+    background-color: var(--color-grey-light-3);
+    height: 60rem;
+    margin: auto;
+    display: flex;
+    flex: 0 0 32%;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    height: 100%;
-    background-color: transparent;
-    z-index: 105;
-    @media only screen and (max-width: $bp-smallest) {
-      transform: scale(.85);}
-    @media only screen and (max-width: 425px) {
-      transform: scale(.70);}
-    @media only screen and (max-width: 340px) {
-      transform: scale(.68);}
-    @media only screen and (max-width: 320px) {
-      transform: scale(.65);}
+    padding: 1rem 2rem;
 
-    &__social {
-        margin: 2rem 0 3rem 0;
-        display: flex;
-        &>* {
-            border-radius: 100px;
-            color: white;
-            width: 4rem;
-            height: 4rem;
-            margin: 1rem;
-            padding: auto;
-            text-align: center;
-            padding-top: 0.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            display: block;
-            transition: all 0.5s;
-            &:hover,
-            &:focus {
-                transform: scale(1.1);
-            }
-            &:visited,
-            &:active {
-                transform: scale(1);
-                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
-            }
-        }
-        &-facebook {
-            background-color: #3b5998;
-        }
-        &-twitter {
-            background-color: #0084b4;
-        }
-        &-google {
-            background-color: #d85040;
-        }
-    }
-    &__form {
-        border-radius: 10px;
-        box-shadow: 0 1rem 2rem rgba(black, 0.2);
-        background-color: var(--color-grey-light-3);
-        height: 60rem;
-        margin: auto;
-        display: flex;
-        flex: 0 0 32%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 2rem;
-        &-input {
-            border: none;
-            border-radius: 10px;
-            padding: 0 1rem;
-            margin: 1rem 0;
-            font-size: 1.5rem;
-            width: 40rem;
-            transition: all 0.5s;
-            font-size: 2rem;
-            &:focus {
-                transform: scale(1.05);
-                border-bottom: 3px inset var(--color-secondary-light);
-            }
-            &__error {
-                border-bottom: 3px inset red;
-            }
-            @media only screen and (max-width: $bp-small) {
-                width: 30rem;
-            }
-            @media only screen and (max-width: $bp-smallest) {
-                width: 25rem;
-            }
-        }
-        &-header {
-            &-1 {
-                margin: 2rem 13rem 2rem 13rem;
-                text-align: center;
-                font-size: 3rem;
-                color: var(--color-grey-dark-1);
-                @media only screen and (max-width: $bp-small) {
-                    margin: 2rem 5rem;
-                }
-            }
-            &-2 {
-                text-align: center;
-                font-size: 2rem;
-                font-weight: 100;
-            }
-        }
-    }
-    &__btn {
-        font-size: 2rem;
-        text-align: justify;
-        display: block;
-        border-radius: 5px;
-        border: none;
+    &-input {
+      border: none;
+      border-radius: 10px;
+      padding: 0 1rem;
+      margin: 1rem 0;
+      font-size: 1.5rem;
+      width: 40rem;
+      transition: all 0.5s;
+      font-size: 2rem;
+
+      &:focus {
+        transform: scale(1.05);
+        border-bottom: 3px inset var(--color-secondary-light);
+      }
+
+      &__error {
+        border-bottom: 3px inset red;
+      }
+
+      @media only screen and (max-width: $bp-small) {
         width: 30rem;
-        height: 5rem;
-        margin: 0;
-        color: white;
-        @media only screen and (max-width: $bp-smallest) {
-            width: 25rem;
-        }
-        transition: cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
-        &-submit {
-            text-align: center;
-            background-image: linear-gradient( to right, var(--color-secondary), var(--color-secondary-dark));
-            border-radius: 100px;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            &>* {
-                display: inline-block;
-                transition: all 0.2s;
-                height: 100%;
-                width: 100%;
-                margin-bottom: 2rem;
-            }
-            &__visible {
-                padding: 1.5rem 7.5rem;
-            }
-            &__invisible {
-                position: absolute;
-                padding: 1.5rem 0;
-                left: 0;
-                top: -100%;
-            }
-            &:hover {
-                background-image: linear-gradient( to left, var(--color-secondary), var(--color-secondary-dark));
-            }
-            &:hover &__invisible {
-                top: 0;
-            }
-            &:hover &__visible {
-                transform: translateY(100%);
-            }
-            &:focus {
-                outline: none;
-                animation: pulsate 1s infinite;
-            }
-        }
-        &:hover {
-            transform: scale(1.1);
-            animation: pulsate 2s infinite;
-        }
+      }
+      @media only screen and (max-width: $bp-smallest) {
+        width: 25rem;
+      }
     }
-    &__message {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        font-size: 1.3rem;
-        padding: 0;
-        font-weight: 400;
-        @media only screen and (max-width: $bp-smallest) {
-            padding: 0;
-        }
-        p{
-          font-size: 1.3rem;
-          color: var(--color-secondary);
-          text-align: left;
 
-          button{
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            font-size: 1.3rem;
-            outline: none;
-            text-decoration: underline;
-            display: inline-block;
-            transition: all .2s ease;
-            &:hover{
-              transform: scale(1.1);
-              color: var(--color-secondary-dark);
-            }
-            &:active{
-              transform: scale(.9);
-            }
-          }
+    &-header {
+      &-1 {
+        margin: 2rem 13rem 2rem 13rem;
+        text-align: center;
+        font-size: 3rem;
+        color: var(--color-grey-dark-1);
+        @media only screen and (max-width: $bp-small) {
+          margin: 2rem 5rem;
         }
+      }
+
+      &-2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 100;
+      }
     }
-    &__link {
-        color: var(--color-secondary);
-        font-weight: 500;
-        cursor: pointer;
+  }
+
+  &__btn {
+    font-size: 2rem;
+    text-align: justify;
+    display: block;
+    border-radius: 5px;
+    border: none;
+    width: 30rem;
+    height: 5rem;
+    margin: 0;
+    color: white;
+    @media only screen and (max-width: $bp-smallest) {
+      width: 25rem;
+    }
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 2s;
+
+    &-submit {
+      text-align: center;
+      background-image: linear-gradient(to right, var(--color-secondary), var(--color-secondary-dark));
+      border-radius: 100px;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      cursor: pointer;
+
+      & > * {
         display: inline-block;
-        transition: 0.2s all;
-        &:hover,
-        &:focus {
-            transform: scale(1.1);
-            text-decoration: underline;
-        }
-        &:visited,
-        &:active {
-            transform: scale(1);
-        }
+        transition: all 0.2s;
+        height: 100%;
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+
+      &__visible {
+        padding: 1.5rem 7.5rem;
+      }
+
+      &__invisible {
+        position: absolute;
+        padding: 1.5rem 0;
+        left: 0;
+        top: -100%;
+      }
+
+      &:hover {
+        background-image: linear-gradient(to left, var(--color-secondary), var(--color-secondary-dark));
+      }
+
+      &:hover &__invisible {
+        top: 0;
+      }
+
+      &:hover &__visible {
+        transform: translateY(100%);
+      }
+
+      &:focus {
+        outline: none;
+        animation: pulsate 1s infinite;
+      }
     }
+
+    &:hover {
+      transform: scale(1.1);
+      animation: pulsate 2s infinite;
+    }
+  }
+
+  &__message {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 0;
+    font-weight: 400;
+    @media only screen and (max-width: $bp-smallest) {
+      padding: 0;
+    }
+
+    p {
+      font-size: 1.3rem;
+      color: var(--color-secondary);
+      text-align: left;
+
+      button {
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        font-size: 1.3rem;
+        outline: none;
+        text-decoration: underline;
+        display: inline-block;
+        transition: all .2s ease;
+
+        &:hover {
+          transform: scale(1.1);
+          color: var(--color-secondary-dark);
+        }
+
+        &:active {
+          transform: scale(.9);
+        }
+      }
+    }
+  }
+
+  &__link {
+    color: var(--color-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.2s all;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+      text-decoration: underline;
+    }
+
+    &:visited,
+    &:active {
+      transform: scale(1);
+    }
+  }
 }
 
 .border {
-    border-bottom: 2px solid rgb(165, 165, 165);
-    width: 30rem;
-    margin-bottom: 2rem;
-    @media only screen and (max-width: $bp-smallest) {
-        width: 24rem;
-    }
+  border-bottom: 2px solid rgb(165, 165, 165);
+  width: 30rem;
+  margin-bottom: 2rem;
+  @media only screen and (max-width: $bp-smallest) {
+    width: 24rem;
+  }
 }
 
 .cross {
-    color: var(--color-grey-dark-1);
-    display: block;
-    position: relative;
-    font-weight: 700;
-    cursor: pointer;
-    align-self: flex-end;
-    transition: all 0.2s;
-    border: none;
-    top: -3rem;
-    background-color: transparent;
-    &:hover,
-    &:focus {
-        transform: scale(1.1);
+  color: var(--color-grey-dark-1);
+  display: block;
+  position: relative;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-end;
+  transition: all 0.2s;
+  border: none;
+  top: -3rem;
+  background-color: transparent;
 
-    }
-    &:active,
-    &:visited {
-        transform: scale(1);
-    }
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+
+  }
+
+  &:active,
+  &:visited {
+    transform: scale(1);
+  }
 }
 
-mat-form-field{
+mat-form-field {
   @media only screen and (max-width: $bp-smallest) {
     transform: scale(.9);
-}
+  }
 }

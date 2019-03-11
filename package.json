@@ -1,5 +1,10 @@
 {
   "name": "minerva",
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -11,7 +16,6 @@
   },
   "private": true,
   "dependencies": {
-
     "@angular/animations": "~7.2.6",
     "@angular/cdk": "^7.3.3",
     "@angular/common": "~7.2.6",
@@ -96,11 +100,11 @@
     "@ckeditor/ckeditor5-easy-image": "^10.0.4",
     "@types/jasmine": "~3.3.9",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~11.9.5",
+    "@types/node": "^11.9.5",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.0.0",
+    "karma": "^4.0.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.5",
     "karma-jasmine": "~2.0.1",
@@ -110,6 +114,5 @@
     "ts-node": "~8.0.2",
     "tslint": "~5.12.1",
     "typescript": "^3.2.4"
-
   }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource, MatDialog} from '@angular/material';
+import {MatSort, MatTableDataSource, MatDialog, MatPaginator} from '@angular/material';
 import {Location} from '@angular/common';
 import {CreateQuizComponent} from './my-quiz/create-quiz/create-quiz.component';
 import {Router} from '@angular/router';
@@ -46,6 +46,7 @@ export class QuizComponent implements OnInit {
   }
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
     this.qservice.get_allQuizzes().subscribe(res => {
@@ -64,9 +65,9 @@ export class QuizComponent implements OnInit {
         });
       });
       this.number_quiz = ELEMENT_DATA.length;
-      this.dataSource.sort = this.sort;
-      console.log(ELEMENT_DATA);
       this.isLoaded = true;
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     });
     // this.qservice.get_allQuizzes().subscribe(res => {
     // });

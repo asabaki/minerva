@@ -21,9 +21,6 @@ export interface QuizModel {
     }]
   }];
 }
-// TODO - Add Tips about how choice sequence will be random
-// TODO - Add Tips about how to create TRUE/FALSE question
-// TODO - Add Publish Button
 @Component({
   selector: 'app-create-quiz',
   templateUrl: './create-quiz.component.html',
