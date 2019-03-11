@@ -112,7 +112,7 @@ import { NoteCollectionComponent } from './w-space/note/note-collection/note-col
     WebsiteBlockingComponent,
     helpSnackComponent,
     SuccessSnackComponent,
-    ErrorSnackComponent
+    ErrorSnackComponent,
     MyNoteComponent,
     CreateNoteComponent,
     ConfirmDialogComponent,
@@ -175,7 +175,7 @@ import { NoteCollectionComponent } from './w-space/note/note-collection/note-col
     WebsiteBlockingComponent,
     helpSnackComponent,
     SuccessSnackComponent,
-    ErrorSnackComponent
+    ErrorSnackComponent,
     ConfirmDialogComponent,
     TutorialVideoComponent,
     AddTaskComponent

@@ -11,8 +11,8 @@
   <div class="detail" *ngIf="!isLoading">
     <div class="description">
       <div class="description__container">
-        <div class="img-upload__container">
-          <form [formGroup]="form" (submit)="onSaveImage()">
+        <!--<div class="img-upload__container">-->
+          <form class="img-upload__container" [formGroup]="form" (submit)="onSaveImage()">
             <!--<img-->
               <!--*ngIf="!imagePreview"-->
               <!--src="https://minerva-project.s3.ap-south-1.amazonaws.com/profile-pic/5c49d1ebd826aa35122ecd8c_1550811925156.jpg"-->
@@ -60,7 +60,7 @@
               </div>
             </div>
           </form>
-        </div>
+        <!--</div>-->
       </div>
 
       <div class="description__container">

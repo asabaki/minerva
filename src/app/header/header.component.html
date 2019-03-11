@@ -30,8 +30,13 @@
     <button mat-button (click)="signUp_dialog()" class="btn btn__signup"*ngIf="!isAuth">Sign up</button>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" class="user-nav__user" *ngIf="isAuth">
+      <!--<img-->
+        <!--[src]="imgUrl"-->
+        <!--alt="User photo"-->
+        <!--class="user-nav__user-photo"-->
+      <!--/> -->
       <img
-        [src]="imgUrl"
+       src="../../assets/img/user/c.png"
         alt="User photo"
         class="user-nav__user-photo"
       />

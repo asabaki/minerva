@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
-import { AddCardComponent } from './add-card/add-card.component';
+import {AddCardComponent} from './add-card/add-card.component';
 import {AuthService} from '../../../services/auth.service';
 import {FlashCardService} from '../../../services/flash-card.service';
 import {Router} from '@angular/router';
@@ -13,11 +13,14 @@ import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-
 })
 export class CreateFlashcardComponent implements OnInit {
   privacyText = 'Only Me';
+
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
               private authService: AuthService,
               private flashService: FlashCardService,
-              private router: Router ) {}
+              private router: Router) {
+  }
+
   ngOnInit() {
   }
 
@@ -43,7 +46,8 @@ export class CreateFlashcardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
   sliding(f: any) {
-    this.privacyText = f ? 'Only Me' : 'Publish' ;
+    this.privacyText = f ? 'Only Me' : 'Publish';
   }
 }
