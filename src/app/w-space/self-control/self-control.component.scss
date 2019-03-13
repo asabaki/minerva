@@ -51,7 +51,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     width: 100%;
     &-sub {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         flex-wrap: wrap;
         height: 100%;
         margin: 1rem 0;
@@ -62,6 +62,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
         padding: 3rem;
         width: 30%;
         text-align: center;
+        margin: 2rem 0;
     }
 }
 

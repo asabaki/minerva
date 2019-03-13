@@ -9,11 +9,15 @@ $bp-smallest: 31.25em; //500px  (500/16)
   @media only screen and (max-width: 1400px) {
     margin-left: 3rem;
   }
+  @media only screen and (max-width: 1250px) {
+    width: 110%;
+  }
   @media only screen and (max-width: $bp-largest) {
-    margin-left: 4rem;
+    margin-left: 7rem;
   }
   @media only screen and (max-width: $bp-large) {
     margin-left: 3rem;
+    width: 100%;
   }
   @media only screen and (max-width: $bp-medium) {
     margin-left: 3rem;
@@ -79,17 +83,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 1px;
-    padding: 1.5rem 6rem;
+    padding: 1.5rem 1rem;
     @media only screen and (max-width: $bp-small) {
       font-size: 1.8rem;
-      padding: 1.25rem 2rem;
     }
-    @media only screen and (max-width: $bp-large) {
-      padding: 1.5rem 6rem;
-    }
-    @media only screen and (max-width: $bp-largest) {
-      padding: 1.5rem 6rem;
-    }
+
   }
 
   &__stars {
@@ -137,6 +135,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
       font-size: 0.8rem;
       @media only screen and (max-width: $bp-small) {
         font-size: 0.5rem;
+        text-align: center;
       }
     }
 

@@ -80,6 +80,8 @@ import { AddTaskComponent } from './w-space/planner/add-task/add-task.component'
 import { FacebookComponent } from './w-space/shared-components/profile/facebook/facebook.component';
 import { GoogleComponent } from './w-space/shared-components/profile/google/google.component';
 import { TwitterComponent } from './w-space/shared-components/profile/twitter/twitter.component';
+import { NoteCollectionComponent } from './w-space/note/note-collection/note-collection.component';
+
 
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
@@ -126,7 +128,8 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
     AddTaskComponent,
     FacebookComponent,
     GoogleComponent,
-    TwitterComponent
+    TwitterComponent,
+    NoteCollectionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource, MatDialog, MatSnackBar} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {FlashCardService} from '../../../../services/flash-card.service';
@@ -15,7 +15,8 @@ export class AddCardComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private flashService: FlashCardService,
-              private matSnack: MatSnackBar) { }
+              private matSnack: MatSnackBar) {
+  }
 
   ngOnInit() {
   }

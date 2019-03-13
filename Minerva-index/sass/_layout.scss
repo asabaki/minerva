@@ -1,18 +1,35 @@
-.first {
-    height: 100vh;
-    background-color: var(--color-primary);
-    padding: 13rem 9rem 0 9rem;
+$bp-largest: 75em; //1200px  (1200/16)
+$bp-large: 68.25em; //1100px  (1100/16)
+$bp-medium: 65.25em; //900px  (900/16)
+$bp-small: 37.5em; //600px  (600/16)
+$bp-smallest: 31.25em; //500px  (500/16)
 
+.first {
+  height: 85vh;
+  background-color: var(--color-primary);
+  padding: 13rem 9rem 0 9rem;
+  @media only screen and (max-width: $bp-medium) {
+    height: 100%;
+    padding: 7rem 4rem 4rem 4rem;
+  }
 }
 
 .second {
-  height: 100vh;
-    background-color: white;
-    padding: 10rem 13rem 0 13rem;
+  height: 70vh;
+  background-color: white;
+  display: flex;
+  @media only screen and (max-width: $bp-medium) {
+    height: 100%;
+    padding: 2rem 0rem;
+  }
 }
 
+.third{
+  height: 70vh;
+  background-color: white;
+}
 
-.footer{
+.footer {
   height: 100%;
   padding: 5rem;
   background-color: var(--color-grey-dark-1);

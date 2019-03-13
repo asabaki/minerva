@@ -4,7 +4,7 @@ import {AuthService} from '../services/auth.service';
 import {ErrorStateMatcher, MAT_SNACK_BAR_DATA, MatDialogRef, MatSnackBar, MatSnackBarRef} from '@angular/material';
 import {CustomValidator} from '../services/customValidator';
 import {Router} from '@angular/router';
-import { LogInComponent} from '../log-in/log-in.component';
+import {LogInComponent} from '../log-in/log-in.component';
 import {MatDialog} from '@angular/material';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
 import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
@@ -27,6 +27,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   hide = true;
   onClicked = false;
   matcher = new CustomErrorStateMatcher();
+
   constructor(public dialog: MatDialog,
               private authService: AuthService,
               private snackBar: MatSnackBar,
