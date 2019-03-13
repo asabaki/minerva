@@ -162,7 +162,7 @@
         mat-table
         [dataSource]="dataSource"
         matSort
-        class="mat-elevation-z8"
+        class="mat-elevation-z8 tableOfCollection"
       >
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -226,7 +226,7 @@
           (click)="onRowClick(row)"
         ></tr>
       </table>
-      <mat-paginator [length]="number_collection" [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
+      <mat-paginator class="paginator" [length]="number_collection" [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 50]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
 </main>

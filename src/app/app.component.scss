@@ -423,18 +423,13 @@ mat-icon{
   display: flex;
   align-items: center;
   justify-content: center;
-  @media only screen and (max-width: $bp-small) {
-    flex: 0 0 50%;
-  }
-  @media only screen and (max-width: $bp-large) {
-    flex: 0 0 50%;
-  }
-  @media only screen and (max-width: $bp-largest) {
+  @media only screen and (max-width: 820px) {
     flex: 0 0 40%;
-  }
-  @media only screen and (max-width: $bp-medium) {
-    flex: 0 0 40%;
-  }
+  } @media only screen and (max-width: 700px) {
+  flex: 0 0 50%;
+}@media only screen and (max-width: 550px) {
+  flex: 0 0 70%;
+}
   &__input {
     font-family: inherit;
     font-size: inherit;

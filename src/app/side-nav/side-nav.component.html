@@ -38,35 +38,38 @@
         <span>Note</span>
       </a>
     </li>
-    <li class="side-nav__item" *ngIf="status">
-      <div class="side-nav__link dropdown" (click)="onClick()" id="plan">
-        <div>
+
+    <div class="dropdown-display-1">
+      <li class="side-nav__item" *ngIf="status" routerLinkActive="side-nav__item--active">
+        <div class="side-nav__link dropdown" (click)="onClick()" id="plan">
+          <div class="dropdown-display-2">
             <mat-icon class="side-nav__icon">edit_attributes</mat-icon>
             <span>Planner</span>
+          </div>
+          <div class="arrow-1">
+            <mat-icon *ngIf="!hide">keyboard_arrow_down</mat-icon>
+            <mat-icon *ngIf="hide">keyboard_arrow_up</mat-icon>
+          </div>
         </div>
-        <div class="arrow-1">
-          <mat-icon *ngIf="!hide">keyboard_arrow_down</mat-icon>
-          <mat-icon *ngIf="hide">keyboard_arrow_up</mat-icon>
-        </div>
-      </div>
-    </li>
-
-    <li class="side-nav__item dropdown_item"
-        routerLinkActive="side-nav__item--active"
-        *ngIf="status">
-        <a routerLink="/plan" class="side-nav__link" *ngIf="hide" >
+      </li>
+      <li class="side-nav__item dropdown_item"
+          routerLinkActive="side-nav__item--active"
+          *ngIf="status && hide">
+        <a routerLink="/plan" class="side-nav__link" >
           <mat-icon class="side-nav__icon">table</mat-icon>
           <span>Schedule</span>
         </a>
       </li>
-    <li class="side-nav__item dropdown_item"
-        routerLinkActive="side-nav__item--active"
-        *ngIf="status">
-      <a routerLink="/countdown" class="side-nav__link" *ngIf="hide" >
-        <mat-icon class="side-nav__icon">timer</mat-icon>
-        <span>Count Down</span>
-      </a>
-    </li>
+      <li class="side-nav__item dropdown_item"
+          routerLinkActive="side-nav__item--active"
+          *ngIf="status && hide">
+        <a routerLink="/countdown" class="side-nav__link" >
+          <mat-icon class="side-nav__icon">timer</mat-icon>
+          <span>Count Down</span>
+        </a>
+      </li>
+    </div>
+
     <li class="side-nav__item"
         routerLinkActive="side-nav__item--active"
         *ngIf="status">
@@ -79,3 +82,7 @@
 
   <div class="legal">&copy; 2018 by Minerva. All right reserved.</div>
 </nav>
+
+<script>
+  console.log("gooooooood");
+</script>

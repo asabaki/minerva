@@ -38,7 +38,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
     @media only screen and (max-width: $bp-medium) {
       flex: 1;
       justify-content: center;
-      margin: .5rem 0;
+      margin: 0;
     }
     align-self: stretch;
     position: relative;
@@ -77,9 +77,10 @@ $bp-smallest: 31.25em; //500px  (500/16)
     &.dropdown {
       display: flex;
       justify-content: space-between;
+      align-self: stretch;
       @media only screen and (max-width: $bp-medium) {
-        display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        text-align: center;
       }
     }
   }
@@ -89,7 +90,6 @@ $bp-smallest: 31.25em; //500px  (500/16)
     color: var(--color-grey-light-1);
     text-decoration: none;
     text-transform: uppercase;
-    display: block;
     padding: 1.5rem 3rem;
     display: flex;
     align-items: center;
@@ -167,7 +167,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
   }
 }
 
-.planner{
+.planner {
   display: block;
   @media only screen and (max-width: $bp-medium) {
     flex: 1;
@@ -179,7 +179,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
 
   &:not(:last-child) {
     @media only screen and (max-width: $bp-medium) {
-      margin: 0;
+      margin: 0rem;
     }
   }
 
@@ -220,12 +220,50 @@ $bp-smallest: 31.25em; //500px  (500/16)
   @media only screen and (max-width: $bp-medium) {
     justify-content: center;
     text-align: center;
+    flex-direction: row;
+
   }
   @media only screen and (max-width: $bp-small) {
-    flex-direction: column;
-    padding: 1.5rem 0.5rem;
+    flex-direction: row;
     text-align: center;
-    font-size: 70%;
+  }
 
+  &-display {
+    &-1 {
+      @media only screen and (max-width: $bp-medium) {
+        flex-direction: row;
+        text-align: center;
+        display: flex;
+      }
+    }
+
+    &-2 {
+      @media only screen and (max-width: $bp-medium) {
+        color: var(--color-grey-light-1);
+        text-decoration: none;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+        justify-content: center;
+        text-align: center;
+      }
+      @media only screen and (max-width: $bp-small) {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 70%;
+      }
+
+    }
+  }
+}
+
+.arrow-1 {
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+    visibility: hidden;
   }
 }
