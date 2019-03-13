@@ -84,10 +84,8 @@ export class QuizCollectionComponent implements OnInit {
         };
         this.faoRate = this.quiz.rating;
         this.qs.getRated(this.quiz._id).subscribe(rated => {
-          console.log(rated.body);
           this.faoRated = !!rated.body;
         });
-        console.log(this.quiz);
         this.authService.isFollowing(localStorage.getItem('userId'), this.quiz.creator_id)
           .subscribe(fol => {
             this.isFollowing = fol;
@@ -111,7 +109,6 @@ export class QuizCollectionComponent implements OnInit {
       panelClass: 'myapp-no-padding-dialog'
     });
     confirmDialog.afterClosed().pipe(first()).subscribe(yon => {
-      console.log(yon);
       if (yon) {
         this.mark = 0;
         this.quiz.questions.forEach((question, index) => {
@@ -165,7 +162,6 @@ export class QuizCollectionComponent implements OnInit {
   onFaoRate(e) {
     this.qs.rate_collection(this.quiz._id, e).subscribe(r => {
       if (r.ok) {
-        console.log(r);
         this.faoRated = true;
         this.qs.getRated(this.quiz._id).subscribe(rated => this.faoRated = rated.body);
         this.faoRate = r.body.cards.rating;
@@ -191,9 +187,7 @@ export class QuizCollectionComponent implements OnInit {
   }
 
   onFollow(id: string) {
-    console.log(id);
     this.authService.followUser(id).subscribe(res => {
-      console.log(res);
       if (res !== -1 ) {
         this.isFollowing = true;
         this.matSnack.openFromComponent(SuccessSnackComponent, {

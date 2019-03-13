@@ -81,6 +81,10 @@ import { FacebookComponent } from './w-space/shared-components/profile/facebook/
 import { GoogleComponent } from './w-space/shared-components/profile/google/google.component';
 import { TwitterComponent } from './w-space/shared-components/profile/twitter/twitter.component';
 
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+
+
 
 
 @NgModule({
@@ -159,7 +163,8 @@ import { TwitterComponent } from './w-space/shared-components/profile/twitter/tw
       useFactory: adapterFactory
     }),
     CountdownModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    Angulartics2Module.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

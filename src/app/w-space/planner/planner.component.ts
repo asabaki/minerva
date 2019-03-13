@@ -79,7 +79,6 @@ export class PlannerComponent implements OnInit {
     {
       label: '<i class="fas fa-pencil-alt grey"></i>',
       onClick: ({event}: { event: CalendarEvent }): void => {
-        console.log(event);
         this.handleEvent('Edited', event);
       }
     },
@@ -91,7 +90,6 @@ export class PlannerComponent implements OnInit {
           panelClass: 'myapp-no-padding-dialog'
         });
         deleteCfrm.afterClosed().subscribe(res => {
-          console.log(res);
           if (res) {
             this.service.delete_event(event);
             this.events = this.events.filter(iEvent => iEvent !== event);
@@ -125,7 +123,6 @@ export class PlannerComponent implements OnInit {
           actions: this.actions
         });
       });
-      console.log(this.events);
       this.refresh.next();
     });
     this.activeDayIsOpen = false;
@@ -197,7 +194,6 @@ export class PlannerComponent implements OnInit {
       }
     });
     this.temp_events = this.temp_events.filter(iEvent => iEvent !== e);
-    console.log(e);
   }
 
   planDetailDialog() {

@@ -229,7 +229,6 @@ export class AuthService {
   seed() {
     const user = this.getAuthData();
     this.http.delete(BACKEND_URL + 'seed/' + user.userId, {params: {userId: user.userId}}).subscribe((res) => {
-      console.log(res);
     });
   }
 
@@ -240,7 +239,6 @@ export class AuthService {
         follower: followerId,
         following: id
       }, {observe: 'response'}).subscribe(res => {
-        console.log(res);
         if (res.status === 202) {
           this.onFollowing.next(-1);
         } else {
@@ -259,7 +257,6 @@ export class AuthService {
         follower: followerId,
         following: id
       }, {observe: 'response'}).subscribe(res => {
-        console.log(res);
         if (res.status === 200) {
           this.following.next(res);
           this.onUnFollowing.next(1);

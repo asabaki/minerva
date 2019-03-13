@@ -24,7 +24,6 @@ export class CreateFlashcardComponent implements OnInit {
   onAddCollection(title: string, desc: string, privacy: boolean) {
     this.flashService.create_collection(title, desc, !privacy).subscribe(res => {
       if (res.ok) {
-        console.log(res);
         this.router.navigate(['flash/item/' + res.body.cards._id]);
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {

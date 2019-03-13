@@ -33,7 +33,6 @@ export class EditCardComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private changeDet: ChangeDetectorRef,
               private matSnack: MatSnackBar) {
-    console.log(this.data.privacy);
     this.privacyText = this.data.privacy ? 'Only Me' : 'Publish';
     this.isLoading = true;
     this.form = new FormGroup({}, null);

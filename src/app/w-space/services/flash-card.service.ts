@@ -99,7 +99,7 @@ export class FlashCardService {
               numberOfCard: collection.card.length,
               updatedAt: collection.lastUpdate,
               rating: collection.rating,
-              views: 0
+              views: collection.views
             });
           });
         } else {

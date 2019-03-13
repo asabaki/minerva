@@ -38,7 +38,7 @@ export class QuizComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   number_quiz: number;
   isLoaded = false;
-
+  trending = [];
   constructor(public dialog: MatDialog,
               private router: Router,
               private qservice: QuizService,
@@ -51,6 +51,7 @@ export class QuizComponent implements OnInit {
   ngOnInit() {
     this.qservice.get_allQuizzes().subscribe(res => {
       // console.log(res);
+
       ELEMENT_DATA.length = 0;
       res.forEach(data => {
         ELEMENT_DATA.push({
@@ -63,7 +64,18 @@ export class QuizComponent implements OnInit {
           dom: data.lastUpdated,
           delete: false
         });
+        this.trending.push({
+          _id: data._id,
+          title: data.title,
+          description: data.description,
+          rating: data.rating,
+          views: data.views
+          // TODO - Add Creator Name instead of rating
+        });
       });
+      this.sortByKey(this.trending, 'views');
+      this.trending.splice(4);
+      console.log(this.trending);
       this.number_quiz = ELEMENT_DATA.length;
       this.isLoaded = true;
       this.dataSource.sort = this.sort;
@@ -72,6 +84,13 @@ export class QuizComponent implements OnInit {
     // this.qservice.get_allQuizzes().subscribe(res => {
     // });
     // this.dataSource.sort = this.sort;
+  }
+
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+      const x = a[key], y = b[key];
+      return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -93,7 +112,6 @@ export class QuizComponent implements OnInit {
   }
 
   onRowClick(r: any) {
-    console.log(r);
     this.router.navigate(['quiz/item/' + r._id]);
   }
 
