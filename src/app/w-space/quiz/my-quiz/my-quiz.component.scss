@@ -54,13 +54,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
     margin-right: 0;
     margin-bottom: 3rem;
   }
+
   &-btn_set {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
-    @media only screen and (max-width: $bp-smallest) {
-      flex-direction: column;
-    }
+
+
     &-right {
       display: flex;
       flex-direction: row;
@@ -172,16 +172,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
   background-color: transparent;
   cursor: pointer;
   transition: all 0.2s;
+
   & span {
     margin-left: 3px;
     transition: margin-left 0.2s;
   }
+
   &:hover {
     color: var(--color-grey-dark-1);
+
     & span {
       margin-left: 8px;
     }
   }
+
   &:focus {
     outline: none;
     animation: pulsate 1s infinite;
@@ -219,9 +223,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
   border-bottom: var(--line);
   display: flex;
   flex-wrap: wrap;
+
   &__item {
     margin-bottom: 0.7rem;
     flex: 0 0 50%;
+
     &::before {
       content: "";
       width: 1rem;
@@ -247,18 +253,22 @@ $bp-smallest: 31.25em; //500px  (500/16)
   color: var(--color-grey-derk-3);
   display: flex;
   align-items: center;
+
   &__count {
     margin-right: auto;
   }
+
   &__friend {
     display: flex;
   }
+
   &__photo {
     box-sizing: content-box;
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
     border: 3px solid white;
+
     &:not(:last-child) {
       margin-right: -2rem;
     }
@@ -277,39 +287,47 @@ $bp-smallest: 31.25em; //500px  (500/16)
     padding: 2rem;
     margin-bottom: 3rem;
   }
+
   &__text {
     margin-bottom: 2rem;
     z-index: 10;
     position: relative;
   }
+
   &__user {
     display: flex;
     align-items: center;
+
     &-box {
       margin-right: auto;
     }
+
     &-name {
       font-size: 1.1rem;
       font-weight: 600;
       text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
+
     &-date {
       font-size: 1rem;
       color: var(--color-grey-derk-3);
     }
   }
+
   &__photo {
     border-radius: 50%;
     height: 4.5rem;
     width: 4.5rem;
     margin-right: 1.5rem;
   }
+
   &__rating {
     color: var(--color-primary);
     font-size: 2.2rem;
     font-weight: 300;
   }
+
   &::before {
     content: "\201C";
     position: absolute;
@@ -330,6 +348,7 @@ $bp-smallest: 31.25em; //500px  (500/16)
   @media only screen and (max-width: $bp-medium) {
     padding: 2.5rem 0;
   }
+
   &__book-now {
     text-transform: uppercase;
     font-size: 2rem;
@@ -344,39 +363,47 @@ $bp-smallest: 31.25em; //500px  (500/16)
   text-transform: uppercase;
   border-radius: 100px;
   border: none;
-  background-image: linear-gradient( to right, var(--color-primary-light), var(--color-primary-dark));
+  background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
   color: white;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  &>* {
+
+  & > * {
     display: inline-block;
     transition: all 0.2s;
     height: 100%;
     width: 100%;
   }
+
   &__visible {
     padding: 2rem 7.5rem;
   }
+
   &__invisible {
     position: absolute;
     padding: 2rem 0;
     left: 0;
     top: -100%;
   }
+
   &:hover {
-    background-image: linear-gradient( to left, var(--color-primary-light), var(--color-primary-dark));
+    background-image: linear-gradient(to left, var(--color-primary-light), var(--color-primary-dark));
   }
+
   &:hover &__invisible {
     top: 0;
   }
+
   &:hover &__visible {
     transform: translateY(100%);
   }
+
   &:focus {
     outline: none;
     animation: pulsate 1s infinite;
   }
+
   &-create {
     background-image: linear-gradient(to bottom left, rgb(93, 163, 1), rgb(6, 167, 6));
     color: white;
@@ -388,15 +415,18 @@ $bp-smallest: 31.25em; //500px  (500/16)
     cursor: pointer;
     transition: all .2s;
     display: block;
+
     &:hover {
       box-shadow: 0 .5rem 1rem rgba(black, .2);
       transform: scale(1.1);
     }
+
     &:active {
       box-shadow: 0 .5rem .5rem rgba(black, .3);
       transform: scale(1);
     }
   }
+
   &-my {
     background-color: var(--color-primary);
     color: white;
@@ -408,17 +438,20 @@ $bp-smallest: 31.25em; //500px  (500/16)
     cursor: pointer;
     transition: all .2s;
     display: block;
+
     &:hover {
       box-shadow: 0 .5rem 1rem rgba(black, .2);
       transform: scale(1.1);
     }
+
     &:active {
       box-shadow: 0 .5rem .5rem rgba(black, .3);
       transform: scale(1);
     }
   }
+
   &-edit {
-    background-image: linear-gradient( to bottom left, var(--color-grey-dark-3), rgb(131, 131, 131));
+    background-image: linear-gradient(to bottom left, var(--color-grey-dark-3), rgb(131, 131, 131));
     color: white;
     padding: 1rem;
     outline: none;
@@ -427,15 +460,18 @@ $bp-smallest: 31.25em; //500px  (500/16)
     cursor: pointer;
     transition: all .2s;
     display: block;
+
     &:hover {
       box-shadow: 0 .5rem 1rem rgba(black, .2);
       transform: scale(1.1);
     }
+
     &:active {
       box-shadow: 0 .5rem .5rem rgba(black, .3);
       transform: scale(1);
     }
   }
+
   &-delete {
     border: none;
     outline: none;
@@ -443,9 +479,11 @@ $bp-smallest: 31.25em; //500px  (500/16)
     color: rgb(161, 0, 0);
     cursor: pointer;
     transition: .2s all;
+
     &:hover {
       transform: scale(1.05);
     }
+
     &:hover {
       transform: scale(1);
     }
@@ -461,10 +499,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
   align-self: flex-end;
   margin-right: 2rem;
   transition: all 0.2s;
+
   &:hover,
   &:focus {
     transform: scale(1.1);
   }
+
   &:active,
   &:visited {
     transform: scale(1);
@@ -488,9 +528,11 @@ th.mat-sort-header-sorted {
 tr.mat-row.ng-star-inserted {
   cursor: pointer;
   transition: .2s all;
+
   &:hover {
     background-color: var(--color-grey-light-2);
   }
+
   &:active {
     background-color: var(--color-grey-light-3);
   }
@@ -511,13 +553,13 @@ th.mat-header-cell {
 }
 
 
-
 td.mat-cell:not(:nth-of-type(2)),
 td.mat-footer-cell:not(:nth-of-type(2)),
 th.mat-header-cell:not(:nth-of-type(2)),
 {
   text-align: center;
 }
+
 td.mat-cell:nth-of-type(3),
 td.mat-footer-cell:nth-of-type(3),
 th.mat-header-cell:nth-of-type(3),
@@ -526,11 +568,11 @@ th.mat-header-cell:nth-of-type(3),
 }
 
 
-.bar-rating{
+.bar-rating {
   justify-content: center;
 }
 
-.mat-sort-header-button{
+.mat-sort-header-button {
   margin: auto !important;
 }
 
@@ -538,15 +580,16 @@ th.mat-header-cell:nth-of-type(3),
   flex: 0 0 30%;
   display: flex;
   align-items: center;
-  @media only screen and (max-width: $bp-largest) {
+  @media only screen and (max-width: 820px) {
     flex: 0 0 40%;
   }
-  @media only screen and (max-width: $bp-small) {
+  @media only screen and (max-width: 700px) {
     flex: 0 0 50%;
   }
-  @media only screen and (max-width: $bp-smallest) {
-    flex: 0 0 30%;
+  @media only screen and (max-width: 550px) {
+    flex: 0 0 70%;
   }
+
   &__input {
     font-family: inherit;
     font-size: inherit;
@@ -558,30 +601,37 @@ th.mat-header-cell:nth-of-type(3),
     width: 100%;
     transition: all .2s;
     margin-right: -3.25rem;
+
     &:focus {
       outline: none;
       width: 100%;
       background-color: var(--color-grey-light-3);
     }
+
     &::-webkit-input-placeholder {
       font-weight: 100;
       color: var(--color-grey-light-4);
     }
   }
-  &__input:focus+&__button {
+
+  &__input:focus + &__button {
     background-color: var(--color-grey-light-3);
   }
+
   &__button {
     border: none;
     background-color: var(--color-grey-light-2);
     cursor: pointer;
+
     &:focus {
       outline: none;
     }
+
     &:active {
       transform: translateY(2px);
     }
   }
+
   &__icon {
     cursor: pointer;
     height: 2rem;
@@ -589,6 +639,7 @@ th.mat-header-cell:nth-of-type(3),
     fill: var(--color-grey-dark-3);
   }
 }
+
 .icon-btn {
   border: none;
   outline: none;
@@ -598,11 +649,13 @@ th.mat-header-cell:nth-of-type(3),
   display: block;
   border-radius: 50%;
   transition: 0.2s ease-out;
+
   &:active,
   &:visited {
     background-color: rgba(#ffa000, 0.3);
     transform: scale(0.8);
   }
+
   &:hover {
     background-color: rgba(#ffa000, 0.2);
   }
