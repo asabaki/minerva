@@ -65,21 +65,17 @@ export class AccountSettingComponent implements OnInit {
   }
 
   onImagePick(eventTarget: EventTarget) {
-    console.log((eventTarget as HTMLInputElement).files);
     const file = (eventTarget as HTMLInputElement).files[0];
     this.form.patchValue({
       'image': file
     });
     this.form.get('image').updateValueAndValidity();
-    console.log(file);
-    console.log(this.form);
     const reader = new FileReader();
     reader.onload = () => {
       // @ts-ignore
       this.imagePreview = reader.result;
     };
     reader.readAsDataURL(file);
-    console.log(this.imagePreview);
   }
 
   onSaveImage() {

@@ -841,7 +841,7 @@ th.mat-header-cell:first-of-type {
       font-size: 1.1rem;
       color: var(--color-primary);
       transition: .2s all;
-
+      text-decoration: none;
       &:hover {
         color: var(--color-secondary);
         transform: scale(1.05);

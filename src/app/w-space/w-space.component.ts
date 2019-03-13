@@ -19,7 +19,6 @@ export class WSpaceComponent implements OnInit {
     this.router.events.subscribe((event) => {
       window.scrollTo(0, 0);
       if (event instanceof NavigationStart) {
-        console.log(`Start`);
         scrollLevels[lastId] = window.scrollY;
         lastId = event.id;
         restoredId = event.restoredState ? event.restoredState.navigationId : undefined;
@@ -27,7 +26,6 @@ export class WSpaceComponent implements OnInit {
 
       if (event instanceof NavigationEnd) {
         if (restoredId) {
-          console.log(restoredId);
           // Optional: Wrap a timeout around the next line to wait for
           // the component to finish loading
           window.scrollTo(0, 0);

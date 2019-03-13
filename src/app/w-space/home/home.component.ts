@@ -34,12 +34,10 @@ export class HomeComponent implements OnInit {
         });
       });
     });
-    console.log(this.following);
   }
 
   onFollow(id: string) {
     this.authService.followUser(id).subscribe(res => {
-      console.log(res);
       if (res !== -1 ) {
         // this.isFollowing = true;
         this.following

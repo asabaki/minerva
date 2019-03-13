@@ -101,7 +101,6 @@ export class MyQuizComponent implements OnInit {
     this.deleteClicked = true;
     const id = r._id;
     this.quizService.delete_quiz(id).subscribe((res) => {
-      console.log(res);
       if (res.ok) {
         this.quizService.get_myquizzes();
         this.changeDet.detectChanges();

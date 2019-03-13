@@ -82,9 +82,7 @@ export class MyFlashcardComponent implements OnInit {
             });
           }
         );
-        console.log(this.sort);
         this.dataSource.sort = this.sort;
-        console.log(this.dataSource);
       }
     );
 
@@ -128,7 +126,6 @@ export class MyFlashcardComponent implements OnInit {
     this.deleteClicked = true;
     const id = r._id;
     this.flash.delete_collection(id).subscribe((res) => {
-      console.log(res);
       if (res.ok) {
         this.flash.fetch_collection();
         this.changeDet.detectChanges();

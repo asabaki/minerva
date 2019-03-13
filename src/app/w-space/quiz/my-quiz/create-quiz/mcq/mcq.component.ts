@@ -66,7 +66,6 @@ export class McqComponent implements OnInit {
       });
     }
     this.data.questions.push(this.Question);
-    console.log(this.Question);
   }
 
   helper(n: any) {

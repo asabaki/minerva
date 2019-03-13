@@ -102,7 +102,6 @@ export class QuizService {
 
   taken_quiz(id: string, score: number) {
     this.http.patch(BACKEND_URL + 'taken/' + id, {score}, { observe: 'response'}).subscribe(res => {
-      console.log(res.body);
       this.quiz_taken_subject.next(res.body);
     });
     return this.quiz_taken_subject.asObservable();
@@ -136,7 +135,6 @@ export class QuizService {
         });
       }
     }, err => {
-      console.log(err);
       this.matSnack.openFromComponent(ErrorSnackComponent, {
         data: 'Something went wrong\n' + err.statusText,
         duration: 1500

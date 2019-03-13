@@ -1,20 +1,33 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from './w-space/services/auth.service';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/ga';
 
+declare const ga: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 // TODO Check matToolTip again after add table
   title = 'Minerva';
   constructor (private authService: AuthService,
-               private router: Router) {}
+               private router: Router,
+               private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
+    this.angulartics2GoogleAnalytics.startTracking();
+  }
   ngOnInit() {
+  }
+  ngAfterViewInit() {
     this.router.events.subscribe(e => {
-      this.authService.autoAuthUser();
+      if (e instanceof NavigationEnd) {
+        // window['ga']('set', 'page', e.urlAfterRedirects);
+        // window['ga']('send', 'pageview');
+        // console.log(`Page Changed`);
+
+        this.authService.autoAuthUser();
+      }
     });
   }
 }

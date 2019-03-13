@@ -83,6 +83,10 @@ import { TwitterComponent } from './w-space/shared-components/profile/twitter/tw
 import { NoteCollectionComponent } from './w-space/note/note-collection/note-collection.component';
 
 
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+
+
 
 
 @NgModule({
@@ -162,7 +166,8 @@ import { NoteCollectionComponent } from './w-space/note/note-collection/note-col
       useFactory: adapterFactory
     }),
     CountdownModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    Angulartics2Module.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

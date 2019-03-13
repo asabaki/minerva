@@ -88,7 +88,6 @@ export class CreateQuizComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.quiz.questions.push(result[0]);
-      console.log(this.quiz);
     });
   }
   sliding(f: any) {

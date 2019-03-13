@@ -46,7 +46,7 @@
 
       <div class="description sub__2">
         <h1>Quizzes on trend :</h1>
-        <div class="user-explore">
+        <div class="user-explore" *ngFor="let quiz of trending">
           <div class="user">
             <img
               class="user-img"
@@ -55,67 +55,17 @@
             />
             <div class="user-acc">
               <div>
-                <span class="user-username">quiz</span>
+                <span class="user-username">{{quiz.title}}</span>
               </div>
-              <span class="user-detail">Created by : Creator</span>
+              <span class="user-detail">Rating : {{quiz.rating}}</span>
             </div>
           </div>
-          <button class="btn-see-more side-1">
+          <a class="btn-see-more side-1" routerLink="/quiz/item/{{quiz._id}}">
             See more
             <mat-icon>arrow_right</mat-icon>
-          </button>
+          </a>
         </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/quiz.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">quiz</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/quiz.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">quiz</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/quiz.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">quiz</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
+
       </div>
     </div>
 
