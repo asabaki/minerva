@@ -1,19 +1,19 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {AuthService} from '../services/auth.service';
 import {FlashCardService} from '../services/flash-card.service';
 import {Router} from '@angular/router';
+import {NoteService} from '../services/note.service';
 
 export interface PeriodicElement {
   _id: string;
+  position: number;
   author: string;
   title: string;
   description: string;
-  numberOfCard: number;
   rating: number;
   dom: Date;
   views: number;
-  delete: boolean;
   daysUpdated: string;
 
 }
@@ -38,51 +38,71 @@ export class NoteComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   editClicked = false;
   deleteClicked = false;
-  number_collection: number;
+  number_notes: number;
 
   bootRate = 1;
   faRate = 1;
   cssRate = 1;
   faoRate = 2;
   faoRated = false;
-
-
+  trending = [];
+  isLoaded = false;
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
               private auth: AuthService,
-              private flash: FlashCardService,
+              private noteService: NoteService,
               private router: Router,
               private changeDet: ChangeDetectorRef) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
     let i = 0;
-    this.flash.fetch_collection_all().subscribe(
+    this.noteService.allNotes().subscribe(
       (res) => {
         ELEMENT_DATA.length = 0;
-        this.number_collection = res.length;
+        this.number_notes = res.length;
         res.forEach((data) => {
-            const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / ( 1000 * 60));
+            const lastUpdated = Math.floor(Math.abs(new Date(data.updatedAt).getTime() - new Date(Date.now()).getTime()) / (1000 * 60));
             ELEMENT_DATA.push({
+              position: ++i,
               _id: data._id,
               author: data.author,
               title: data.title,
               description: data.description,
-              numberOfCard: data.numberOfCard,
               rating: data.rating,
-              views: 0,
+              views: data.views,
               dom: data.updatedAt,
               daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
-              delete: false
+            });
+            this.trending.push({
+              _id: data._id,
+              creator: data.author,
+              title: data.title,
+              description: data.description,
+              rating: data.rating,
+              views: data.views
             });
           }
         );
+        this.sortByKey(this.trending, 'views');
+        this.trending.splice(4);
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.isLoaded = true;
+        console.log(this.trending);
       }
     );
+    console.log(ELEMENT_DATA);
+  }
 
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+      const x = a[key], y = b[key];
+      return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    });
   }
 
   onRowClick(r: any) {
@@ -90,7 +110,8 @@ export class NoteComponent implements OnInit {
       this.deleteClicked = false;
     } else {
       const id = r._id;
-      this.router.navigate(['flash/item/' + id]);
+      // console.log(r);
+      this.router.navigate(['note/item/' + id]);
     }
 
     // console.log(r);

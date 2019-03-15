@@ -930,3 +930,14 @@ th.mat-header-cell:first-of-type {
     margin-bottom: -12rem;
   }
 }
+
+.author-name {
+  i {
+    color: var(--color-primary);
+  }
+}
+
+.hidden {
+  display: none;
+}
+

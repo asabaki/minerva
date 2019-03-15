@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import {NoteService} from '../../../services/note.service';
+import {MatSnackBar} from '@angular/material';
+import {SuccessSnackComponent} from '../../../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-snack.component';
 
 @Component({
   selector: 'app-create-note',
@@ -10,10 +14,13 @@ import html2canvas from 'html2canvas';
 })
 export class CreateNoteComponent implements OnInit {
   privacyText = 'Only Me';
+  data = '<p>Some Initial <strong>Data</strong></p>';
   public Editor = DecoupledEditor;
+
   public captureScreen() {
     const data = document.getElementById('pdfCreate');
     html2canvas(data).then(canvas => {
+      console.log(canvas);
       const imgWidth = 208;
       const pageHeight = 295;
       const imgHeight = canvas.height * imgWidth / canvas.width;
@@ -25,19 +32,41 @@ export class CreateNoteComponent implements OnInit {
       pdf.save('MyNote.pdf');
     });
   }
-  public onReady( editor ) {
+
+  public onReady(editor) {
     editor.ui.view.editable.element.parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.view.editable.element,
     );
-    Array.from( editor.ui.componentFactory.names() );
+    Array.from(editor.ui.componentFactory.names());
   }
-  constructor() { }
+
+  constructor(private noteService: NoteService,
+              private matSnack: MatSnackBar) {
+  }
 
   ngOnInit() {
   }
+
   sliding(f: any) {
-    this.privacyText = f ? 'Only Me' : 'Publish' ;
+    this.privacyText = f ? 'Only Me' : 'Publish';
+  }
+
+  onSave(title: string, description: string, privacy: boolean) {
+    this.noteService.createNote({title, description, privacy: !privacy, data: this.data}).subscribe(res => {
+      // console.log(res);
+      if (res.ok) {
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You have successfully create new note!',
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something went Wrong!\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
   }
 
 }

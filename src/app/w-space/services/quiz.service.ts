@@ -28,12 +28,25 @@ export class QuizService {
   }
 
   get_allQuizzes() {
-    this.http.get(BACKEND_URL + 'get/all_quizzes', {
+    this.http.get<any>(BACKEND_URL + 'get/all_quizzes', {
       observe: 'response'
     }).subscribe(res => {
       // console.log(res)
+      const returnVal = [];
       if (res.ok) {
-        this.all_quizzes_subject.next(res.body);
+        res.body.quizzes.forEach((quiz, index) => {
+          returnVal.push({
+            _id: quiz._id,
+            author: res.body.creators[index],
+            title: quiz.title,
+            description: quiz.description,
+            noq: quiz.questions.length,
+            updatedAt: quiz.lastUpdated,
+            rating: quiz.rating,
+            views: quiz.views
+          });
+        });
+        this.all_quizzes_subject.next(returnVal);
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           duration: 1500,

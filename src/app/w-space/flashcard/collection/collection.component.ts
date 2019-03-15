@@ -191,6 +191,7 @@ export class CollectionComponent implements OnInit {
       if (r.ok) {
         // this.faoRated = true;
         this.flashService.getRated(this.id).subscribe(rated => this.faoRated = rated.body);
+        // console.log(r.body);
         this.faoRate = r.body.cards.rating;
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'Submitted\n Thank you for your feedback!',
