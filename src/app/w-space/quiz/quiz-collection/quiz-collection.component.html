@@ -85,7 +85,7 @@
             </div>
             <mat-radio-group class="question-choice" [name]="i.toString()" ngModel>
               <mat-radio-button *ngFor="let choice of question.choice; let j = index;" [value]="j" color="primary"
-                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}}</mat-radio-button
+                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}} <mat-icon *ngIf="isTaken && choice.answer">check</mat-icon>Correct Answer</mat-radio-button
               >
             </mat-radio-group>
             <div class="correction correction-false" *ngIf="quiz.isTaken && point[i] === 0">

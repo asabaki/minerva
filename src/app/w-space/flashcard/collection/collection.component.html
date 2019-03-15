@@ -39,7 +39,7 @@
           ></bar-rating>
           <!--<bar-rating [ngModel]="faoRate" (ngModelChange)="onFaoRate($event)" [max]="5" [theme]="'fontawesome-o'"></bar-rating>-->
           <p *ngIf="!faoRated" class="rating__text">
-            Current rating: {{ faoRate }}
+            Current rating: {{ rating }}
           </p>
           <p *ngIf="faoRated" class="rating__text">
             Your rating: {{ faoRate }}

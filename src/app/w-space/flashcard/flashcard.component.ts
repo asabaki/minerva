@@ -46,7 +46,7 @@ export class FlashcardComponent implements OnInit {
   cssRate = 1;
   faoRate = 2;
   faoRated = false;
-
+  trending = [];
 
   constructor(public dialog: MatDialog,
               private matSnack: MatSnackBar,
@@ -79,14 +79,31 @@ export class FlashcardComponent implements OnInit {
               dom: data.updatedAt,
               daysUpdated: lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
             });
+            this.trending.push({
+              _id: data._id,
+              creator: data.author,
+              title: data.title,
+              description: data.description,
+              rating: data.rating,
+              views: data.views
+            });
           }
         );
+        this.sortByKey(this.trending, 'views');
+        this.trending.splice(4);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isLoaded = true;
+        console.log(this.trending);
       }
     );
 
+  }
+  sortByKey(array, key) {
+    return array.sort(function(a, b) {
+      const x = a[key], y = b[key];
+      return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    });
   }
 
   onRowClick(r: any) {

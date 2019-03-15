@@ -40,7 +40,10 @@
       </div>
       <div class="description sub__2">
         <h1>Flashcard on trend :</h1>
-        <div class="user-explore">
+        <div *ngIf="!isLoaded" class="spinner">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+        <div class="user-explore" *ngFor="let flash of trending" [ngClass]="isLoaded ? 'description' : 'hidden'">
           <div class="user">
             <img
               class="user-img"
@@ -49,68 +52,18 @@
             />
             <div class="user-acc">
               <div>
-                <span class="user-username">Flashcard</span>
+                <span class="user-username">{{flash.title}}</span>
               </div>
 
-              <span class="user-detail">Created by : Creator</span>
+              <span class="user-detail">Created by : {{flash.creator}}</span>
             </div>
           </div>
-          <button class="btn-see-more side-1">
+          <a class="btn-see-more side-1" routerLink="/flash/item/{{flash._id}}">
             See more
             <mat-icon>arrow_right</mat-icon>
-          </button>
+          </a>
         </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/flashcard.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">Flashcard</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/flashcard.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">Flashcard</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img
-              class="user-img"
-              src="../../../assets/img/flashcard.png"
-              alt=""
-            />
-            <div class="user-acc">
-              <span class="user-username">Flashcard</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="btn-see-more side-1">
-            See more
-            <mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
+
       </div>
     </div>
 
