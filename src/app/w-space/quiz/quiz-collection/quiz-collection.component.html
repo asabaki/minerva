@@ -50,6 +50,7 @@
           <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
             <!--Edit-->
           <!--</button>-->
+          <mat-slide-toggle color="primary" class="edit-togger">Edit</mat-slide-toggle>
           <div class="btn-follow_group" *ngIf="!isCreator()">
             <button mat-button class="btn-edit" >
               Created by <br />
@@ -85,7 +86,7 @@
             </div>
             <mat-radio-group class="question-choice" [name]="i.toString()" ngModel>
               <mat-radio-button *ngFor="let choice of question.choice; let j = index;" [value]="j" color="primary"
-                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}} <mat-icon *ngIf="isTaken && choice.answer">check</mat-icon>Correct Answer</mat-radio-button
+                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}} <span class="greenanswer"> <mat-icon *ngIf="isTaken && choice.answer">check</mat-icon>Correct Answer</span></mat-radio-button
               >
             </mat-radio-group>
             <div class="correction correction-false" *ngIf="quiz.isTaken && point[i] === 0">

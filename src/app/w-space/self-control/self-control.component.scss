@@ -24,46 +24,54 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 .detail {
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    justify-content: space-evenly;
-    padding: 3rem 4.5rem;
-    background-color: var(--color-grey-light-1);
-    border-bottom: var(--line);
-    font-size: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-evenly;
+  padding: 3rem 4.5rem;
+  background-color: var(--color-grey-light-1);
+  border-bottom: var(--line);
+  font-size: 1.4rem;
 }
 
 .description {
-    background-color: white;
-    box-shadow: var(--shadow-light);
-    padding: 3rem;
-    flex: 1;
-    flex-direction: row;
-    height: 100%;
-    justify-content: center;
-    margin: 1rem 0;
+  background-color: white;
+  box-shadow: var(--shadow-light);
+  padding: 3rem;
+  flex: 1;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &-sub {
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    &-sub {
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        height: 100%;
-        margin: 1rem 0;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: 100%;
+    margin: 1rem 0;
+  }
+
+  &-box {
+    background-color: white;
+    box-shadow: var(--shadow-light);
+    padding: 3rem;
+    width: 40%;
+    text-align: center;
+    margin: 2rem 0;
+    @media only screen and (max-width: 1000px) {
+      width: 45%;
     }
-    &-box {
-        background-color: white;
-        box-shadow: var(--shadow-light);
-        padding: 3rem;
-        width: 30%;
-        text-align: center;
-        margin: 2rem 0;
+    @media only screen and (max-width: 650px) {
+      width: 90%;
     }
+  }
 }
 
 .overview {
@@ -148,73 +156,83 @@ $bp-smallest: 31.25em; //500px  (500/16)
 }
 
 .countdown-time {
-    font-size: 5rem;
-    color: black;
+  font-size: 5rem;
+  color: black;
 }
 
 .block {
-    &-icon {
-        color: red;
-        font-size: 5rem;
+  &-icon {
+    color: red;
+    font-size: 5rem;
+  }
+
+  &-url {
+    word-wrap: break-word !important;
+
+    a {
+      color: var(--color-secondary-dark);
+      font-size: 2rem;
+      text-decoration: none;
+      transition: .2s all;
+      display: block;
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
-    &-url {
-        word-wrap: break-word !important;
-        a {
-            color: var(--color-secondary-dark);
-            font-size: 2rem;
-            text-decoration: none;
-            transition: .2s all;
-            display: block;
-            &:hover {
-                transform: scale(1.05);
-            }
-        }
+  }
+
+  &-use {
+    span {
+      color: var(--color-primary);
     }
-    &-use {
-        span {
-            color: var(--color-primary);
-        }
-    }
+  }
 }
 
 .btn {
-    &-unblock {
-        color: rgb(150, 0, 0);
-        border: 1px solid rgb(150, 0, 0);
-        border-radius: 100px;
-        padding: .5rem;
-        font-size: 1rem;
-        transition: .2s all;
-        cursor: pointer;
-        margin-top: 1rem;
-        &:hover {
-            transform: scale(1.02);
-        }
-        &:active {
-            transform: scale(1);
-        }
+  &-unblock {
+    color: rgb(150, 0, 0);
+    border: 1px solid rgb(150, 0, 0);
+    border-radius: 100px;
+    padding: .5rem;
+    font-size: 1rem;
+    transition: .2s all;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      transform: scale(1.02);
     }
-    &-block {
-        color: white;
-        background-color: var(--color-primary);
-        border: none;
-        border-radius: 100px;
-        padding: .5rem 1rem 1rem 1rem;
-        transition: .2s all;
-        align-items: center;
-        vertical-align: middle;
-        cursor: pointer;
-        font-size: 1.5rem;
-        transition: .2s all;
-        &:hover {
-            transform: scale(1.02);
-        }
-        &:active {
-            transform: scale(1);
-        }
+
+    &:active {
+      transform: scale(1);
     }
-    &-group {
-        display: flex;
-        justify-content: flex-end;
+  }
+
+  &-block {
+    color: white;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 100px;
+    padding: .5rem 1rem 1rem 1rem;
+    transition: .2s all;
+    align-items: center;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: .2s all;
+
+    &:hover {
+      transform: scale(1.02);
     }
+
+    &:active {
+      transform: scale(1);
+    }
+  }
+
+  &-group {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
