@@ -18,14 +18,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.angulartics2GoogleAnalytics.startTracking();
   }
   ngOnInit() {
+    this.authService.autoAuthUser();
   }
   ngAfterViewInit() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
-        // window['ga']('set', 'page', e.urlAfterRedirects);
-        // window['ga']('send', 'pageview');
-        // console.log(`Page Changed`);
-
         this.authService.autoAuthUser();
       }
     });
