@@ -9,9 +9,17 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading">
-      <mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
-      {{title}}</h1>
+
+    <div style="display: flex; justify-content: center;">
+      <mat-slide-toggle style="margin:auto; margin-right: 1rem;" color="primary" *ngIf="editable">Only me</mat-slide-toggle>
+      <input type="text" *ngIf="isEdit" value="{{title}}" class="edit-question__title">
+      <h1 class="overview__heading" *ngIf="!isEdit" >
+        <mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
+        {{title}}</h1>
+    </div>
+
+
+
     <div class="overview__right">
       <div class="overview__count">
         <div class="overview__count-average">{{views}}</div>
@@ -42,12 +50,13 @@
             <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
           </p>
         </section>
-        <p class="description__area-p">{{description}}</p>
+        <p class="description__area-p" *ngIf="!isEdit">{{description}}</p>
+        <input class="edit-description" type="text" *ngIf="isEdit" value="{{ description }}">
         <div>
-          <button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">
-            Edit
-          </button>
-          <mat-slide-toggle color="primary" class="edit-toggle">Edit</mat-slide-toggle>
+          <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
+            <!--Edit-->
+          <!--</button>-->
+          <mat-slide-toggle color="primary" class="edit-toggle" (click)="toggleSlide()" *ngIf="isCreator()">Edit</mat-slide-toggle>
           <div class="btn-follow_group" *ngIf="!isCreator()">
             <button mat-button class="btn-edit">
               Created by <br/> {{creator}}
