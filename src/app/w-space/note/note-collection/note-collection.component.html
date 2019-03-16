@@ -1,4 +1,4 @@
-<main class="top-view" >
+<main class="top-view">
   <div class="overview">
     <button
       mat-icon-button
@@ -9,13 +9,13 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading"><mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon> {{title}}</h1>
+    <h1 class="overview__heading">
+      <mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
+      {{title}}</h1>
     <div class="overview__right">
-      <div class="follow">
-        <div class="follow__container">
-          <div class="follow__no">{{views}}</div>
-          <div class="follow__text">Views</div>
-        </div>
+      <div class="overview__count">
+        <div class="overview__count-average">{{views}}</div>
+        <div class="overview__count-count">Views</div>
       </div>
     </div>
   </div>
@@ -47,12 +47,16 @@
           <button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">
             Edit
           </button>
+          <mat-slide-toggle color="primary" class="edit-toggle">Edit</mat-slide-toggle>
           <div class="btn-follow_group" *ngIf="!isCreator()">
-            <button mat-button class="btn-edit" >
-              Created by <br /> {{creator}}
+            <button mat-button class="btn-edit">
+              Created by <br/> {{creator}}
             </button>
-            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing" (click)="onFollow(creator_id)"><span class="bold">+</span>Follow</button>
-            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing" (click)="onUnfollow(creator_id)" >
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing"
+                    (click)="onFollow(creator_id)"><span class="bold">+</span>Follow
+            </button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing"
+                    (click)="onUnfollow(creator_id)">
               <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
               <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
             </button>
