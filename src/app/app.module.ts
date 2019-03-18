@@ -31,6 +31,7 @@ import {
   MatTabsModule,
   MatStepperModule, MatProgressSpinnerModule, MAT_DIALOG_DATA, MatPaginatorModule
 } from '@angular/material';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppRoutingModule } from './app-routing.module';
@@ -129,9 +130,11 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
     FacebookComponent,
     GoogleComponent,
     TwitterComponent,
-    NoteCollectionComponent
+    NoteCollectionComponent,
+
   ],
   imports: [
+    MatCheckboxModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -193,6 +196,6 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
     TutorialVideoComponent,
     AddTaskComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
