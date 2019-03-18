@@ -12,7 +12,8 @@
     <div style="display: flex; justify-content: center;">
       <mat-slide-toggle style="margin:auto; margin-right: 1rem;" color="primary" *ngIf="editable">Only me</mat-slide-toggle>
       <input class="edit-question__title" type="text" *ngIf="editable" value="{{ quiz.title }}">
-      <h1 class="overview__heading" *ngIf="!editable">{{ quiz.title }}</h1>
+      <h1 class="overview__heading" *ngIf="!editable"><mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
+        {{ quiz.title }}</h1>
     </div>
     <div class="overview__right">
       <div class="follow">

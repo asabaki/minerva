@@ -33,6 +33,7 @@ export class NoteCollectionComponent implements OnInit {
   data: string;
   views: number
   public Editor = DecoupledEditor;
+  isEdit = false;
 
   public captureScreen() {
     const data = document.getElementById('pdfCreate');
@@ -81,6 +82,9 @@ export class NoteCollectionComponent implements OnInit {
         });
       }
     });
+  }
+  toggleSlide() {
+    this.isEdit = !this.isEdit;
   }
 
   isCreator() {
