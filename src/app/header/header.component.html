@@ -18,16 +18,16 @@
       </div>
 
       <button class="user-nav__icon-box" *ngIf="isAuth" [matMenuTriggerFor]="notification">
-        <mat-icon matBadge="2" matBadgeColor="primary" matBadgeSize="medium" style="color: var(--color-grey-dark-2);">
+        <mat-icon matBadge="3" matBadgeColor="primary" matBadgeSize="medium" style="color: var(--color-grey-dark-2);">
           notifications_active
         </mat-icon>
         <mat-menu #notification="matMenu">
           <button mat-menu-item class="notification">
             <div class="notification-btn">
               <i class="fas fa-user-plus notification-icon"></i>
-              <p style="display: flex; flex-direction: column; ">
+              <p class="notification-p">
                 <span class="notification-user">Kanpichcha Nokdam</span>
-                <span class="notification-action">just followed you</span>
+                <span class="notification-action">Started following you</span>
                 <span class="notification-time">30 mins ago</span>
               </p>
             </div>
@@ -35,16 +35,26 @@
           <button mat-menu-item class="notification">
             <div class="notification-btn">
               <i class="fas fa-upload notification-icon"></i>
-              <p style="display: flex; flex-direction: column; ">
+              <p class="notification-p">
                 <span class="notification-user">Kanpichcha Nokdam</span>
-                <span class="notification-action">just create flashcard collection</span>
+                <span class="notification-action">Created new flashcard collection</span>
                 <span class="notification-time">30 mins ago</span>
+              </p>
+            </div>
+          </button>
+          <button mat-menu-item class="notification">
+            <div class="notification-btn">
+              <i class="far fa-calendar-alt notification-icon"></i>
+              <p class="notification-p">
+                <span class="notification-user">Event Remainder</span>
+                <span class="notification-action">Math Exam</span>
+                <span class="notification-time">Today</span>
               </p>
             </div>
           </button>
 
 
-          <button mat-menu-item style="text-align: center; color: var(--color-secondary);"><span>See all</span></button>
+          <a mat-menu-item class="notification-seeall" routerLink="/home"><span>See all</span></a>
         </mat-menu>
       </button>
       <!--<div class="user-nav__icon-box" *ngIf="isAuth">
