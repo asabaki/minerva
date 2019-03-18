@@ -1,6 +1,5 @@
 
 <main class='top-view'>
-
   <div class="overview" >
     <h1 class="overview__heading">
       <mat-icon
@@ -23,57 +22,35 @@
   <div class="detail" *ngIf="isLoaded">
     <div class="description-main">
       <!--<img class="activity-non" src="../../../assets/img/no_activities.png" alt="">-->
-      <div class="activity">
-        <div class="activity-top">
-          <div class="activity-by">
-            <div class="activity-owner">
-              <div class="user">
-                <img
-                  class="user-img"
-                  src="../../../assets/img/user/a.png"
-                  alt=""
-                />
-                <div class="user-acc">
-                  <span class="user-username activity-detail__username"
-                    >Asi Baka</span
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="activity-time"><span>&bull;</span>30 mins ago</div>
-          </div>
-        </div>
+      <div class="activity" *ngIf="news_feed.length === 0">
         <div class="activity-detail">
-          Just created new Flascard collection!
+          Nothing's new!
         </div>
-        <button class="activity-see-more">
-          See more<mat-icon>arrow_right</mat-icon>
-        </button>
       </div>
-      <div class="activity">
+      <div class="activity" *ngFor="let feed of news_feed">
         <div class="activity-top">
           <div class="activity-by">
             <div class="activity-owner">
               <div class="user">
                 <img
                   class="user-img"
-                  src="../../../assets/img/user/k.png"
+                  src="../../../assets/img/user/{{feed.name.toLowerCase().charAt(0) + '.png'}}"
                   alt=""
                 />
                 <div class="user-acc">
                   <span class="user-username activity-detail__username"
-                    >Kanpichcha Nokdam</span
+                    >{{feed.name}}</span
                   >
                 </div>
               </div>
             </div>
-            <div class="activity-time"><span>&bull;</span>45 mins ago</div>
+            <div class="activity-time"><span>&bull;</span>{{feed.ago}}</div>
           </div>
         </div>
-        <div class="activity-detail">
-          Just created new Quiz collection!
+        <div class="activity-detail" [innerHTML]="feed.message">
+          <p>Just {{ feed.message }}!</p>
         </div>
-        <button class="activity-see-more">
+        <button class="activity-see-more" [routerLink]="'/' + feed.activity.collection_name + '/item/' + feed.activity.details.split('/')[1]">
           See more<mat-icon>arrow_right</mat-icon>
         </button>
       </div>
@@ -85,13 +62,13 @@
         <div class="user-explore">
           <div class="user">
             <div class="days">
-              <div class="days-num">05</div>
+              <div class="days-num">{{latest_event.days}}</div>
               days
             </div>
             <div class="user-acc">
-              <span class="user-username">Math exam</span>
-              <span class="user-detail">Starts at : 12:00</span>
-              <span class="user-detail">Ends at : 14:00</span>
+              <span class="user-username">{{latest_event.title}}</span>
+              <span class="user-detail">Starts at : {{latest_event.startTime }}</span>
+              <span class="user-detail" *ngIf="latest_event.endTime">Ends at : {{latest_event.endTime}}</span>
             </div>
           </div>
         </div>
@@ -108,7 +85,7 @@
           <div class="user">
             <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
             <div class="user-acc">
-              <span class="user-username">{{trending[1].title}}</span>
+              <span class="user-username">{{trending[1].title || 'Some title'}}</span>
               <span class="user-detail">Created by : {{trending[1].author}}</span>
             </div>
           </div>
@@ -116,7 +93,7 @@
             See more<mat-icon>arrow_right</mat-icon>
           </button>
         </div>
-        <div class="user-explore">
+        <div class="user-explore" *ngIf="isLoaded">
           <div class="user">
             <img
               class="user-img"
@@ -124,7 +101,7 @@
               alt=""
             />
             <div class="user-acc">
-              <span class="user-username">{{trending[2].title}}</span>
+              <span class="user-username">{{trending[2].title || 'Some title'}}</span>
               <span class="user-detail">Created by : {{trending[2].author}}</span>
             </div>
           </div>
@@ -132,7 +109,7 @@
             See more<mat-icon>arrow_right</mat-icon>
           </button>
         </div>
-        <div class="user-explore">
+        <div class="user-explore" *ngIf="isLoaded">
           <div class="user">
             <img class="user-img" src="../../../assets/img/note.png" alt="" />
             <div class="user-acc">
@@ -164,7 +141,7 @@
             mat-button
             matTooltip="Follow"
             class="btn-follow"
-            *ngIf="!user.followed"
+            *ngIf="!user.followed && !isYourself(user._id)"
             (click)="onFollow(user._id)"
           >
             <span class="bold">+</span>Follow
@@ -173,7 +150,7 @@
             mat-button
             matTooltip="Unfollow"
             class="btn-follow btn-follow-following"
-            *ngIf="user.followed"
+            *ngIf="user.followed && !isYourself(user._id)"
             (click)="onUnfollow(user._id)"
           >
             <span class="btn-follow-following__visible">

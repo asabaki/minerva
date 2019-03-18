@@ -80,7 +80,6 @@ export class QuizComponent implements OnInit {
       });
       this.sortByKey(this.trending, 'views');
       this.trending.splice(5);
-      console.log(ELEMENT_DATA);
       this.number_quiz = ELEMENT_DATA.length;
       this.isLoaded = true;
       this.dataSource.sort = this.sort;

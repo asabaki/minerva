@@ -35,7 +35,7 @@ export class AccountSettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getProfileUrl(localStorage.getItem('id')).subscribe(res => {
+    this.authService.getProfileUrl(localStorage.getItem('userId')).subscribe(res => {
       this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
     });
     this.form = new FormGroup({
@@ -95,6 +95,15 @@ export class AccountSettingComponent implements OnInit {
         }
       });
     }
+  }
+
+  onUpdateProfile(f: string, l: string) {
+    // console.log(f,l);
+    this.authService.updateProfile(f, l);
+  }
+
+  onChangePassword(c: string, p: string) {
+    this.authService.changePassword(c, p);
   }
 
   getUser() {

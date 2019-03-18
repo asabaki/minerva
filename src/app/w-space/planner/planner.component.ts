@@ -111,6 +111,7 @@ export class PlannerComponent implements OnInit {
   activeDayIsOpen: boolean = true;
 
   ngOnInit(): void {
+    this.service.get_latest();
     this.service.get_events().subscribe(res => {
       this.events = [];
       res.forEach(event => {

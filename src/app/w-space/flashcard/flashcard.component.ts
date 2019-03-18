@@ -94,7 +94,6 @@ export class FlashcardComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isLoaded = true;
-        console.log(this.trending);
       }
     );
 

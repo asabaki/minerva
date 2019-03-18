@@ -41,10 +41,13 @@ export class HeaderComponent implements OnInit {
         // console.log(fwn);
         this.following = fwn.body.length;
       });
+      console.log(status);
       if (status) {
-        this.id = localStorage.getItem('id');
+        this.id = localStorage.getItem('userId');
         this.authService.getProfileUrl(this.id).subscribe(res => {
-          this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
+          this.imgUrl = res.ok ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
+        }, err => {
+          this.imgUrl = 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
         });
       }
     });

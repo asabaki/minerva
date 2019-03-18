@@ -69,16 +69,13 @@
             <h3><i class="fas fa-user"></i>&nbsp;Profile</h3>
             <form class="update-form">
               <mat-form-field>
-                <input matInput placeholder="First name" required [value]="name[0]"/>
+                <input matInput placeholder="First name" required [value]="name[0]" #first/>
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="Last name" required [value]="name[1]"/>
-              </mat-form-field>
-              <mat-form-field>
-                <textarea matInput placeholder="About you"></textarea>
+                <input matInput placeholder="Last name" required [value]="name[1]" #last/>
               </mat-form-field>
               <div class="update-form__btn">
-                <button mat-button class="img-upload__btn save">Save</button>
+                <button mat-button class="img-upload__btn save" (click)="onUpdateProfile(first.value, last.value)">Save</button>
               </div>
             </form>
           </div>
@@ -95,20 +92,22 @@
                   matInput
                   placeholder="Current password"
                   type="password"
+                  #current
                 />
               </mat-form-field>
               <mat-form-field>
-                <input matInput placeholder="New password" type="password"/>
+                <input matInput placeholder="New password" type="password" #password1/>
               </mat-form-field>
               <mat-form-field>
                 <input
                   matInput
                   placeholder="Confirm new password"
                   type="password"
+                  #password2
                 />
               </mat-form-field>
               <div class="update-form__btn">
-                <button mat-button class="img-upload__btn save">Save</button>
+                <button mat-button class="img-upload__btn save" (click)="onChangePassword(current.value, password1.value)" [disabled]="password1.value !== password2.value || !current.value || !password1.value || !password2.value">Save</button>
               </div>
             </form>
           </div>

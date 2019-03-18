@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {environment} from '../../../environments/environment';
+import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
 
 const BACKEND_URL = environment.apiUrl + '/user/';
 
@@ -26,9 +28,6 @@ export class AuthService {
   onFollowing = new Subject<any>();
   onUnFollowing = new Subject<any>();
   profileUrl = new Subject<any>();
-  profileUrl2 = new Subject<any>();
-  profileUrl3 = new Subject<any>();
-  profileUrl4 = new Subject<any>();
   topUser = new Subject<any>();
 
   constructor(private http: HttpClient,
@@ -202,33 +201,6 @@ export class AuthService {
     });
     return this.profileUrl.asObservable();
   }
-  getProfileUrl2(id: string = localStorage.getItem('id')) {
-    this.http.get(BACKEND_URL + 'profile_pic', {
-      observe: 'response',
-      params: new HttpParams().set('id', id)
-    }).subscribe(res => {
-      this.profileUrl2.next(res);
-    });
-    return this.profileUrl2.asObservable();
-  }
-  getProfileUrl3(id: string = localStorage.getItem('id')) {
-    this.http.get(BACKEND_URL + 'profile_pic', {
-      observe: 'response',
-      params: new HttpParams().set('id', id)
-    }).subscribe(res => {
-      this.profileUrl3.next(res);
-    });
-    return this.profileUrl3.asObservable();
-  }
-  getProfileUrl4(id: string = localStorage.getItem('id')) {
-    this.http.get(BACKEND_URL + 'profile_pic', {
-      observe: 'response',
-      params: new HttpParams().set('id', id)
-    }).subscribe(res => {
-      this.profileUrl4.next(res);
-    });
-    return this.profileUrl4.asObservable();
-  }
 
 
   autoAuthUser() {
@@ -330,9 +302,37 @@ export class AuthService {
     return this.profileUrl.asObservable();
   }
 
-  setHttpHeader() {
-    const headers = new HttpHeaders().set('Accept', 'application/json').set('Content-Type', 'application/json');
-    // const options = { headers: headers, observe: 'response'};
-    // return options;
+  updateProfile(f: string, l: string) {
+    this.http.post<any>(BACKEND_URL + 'update', {f, l}, {observe: 'response'}).subscribe(res => {
+      if (res.ok) {
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'Update Profile Successful',
+          duration: 1500
+        });
+        localStorage.setItem('name', res.body);
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'Something Went Wrong\n' + res.statusText,
+          duration: 1500
+        });
+      }
+    });
+  }
+
+  changePassword(c: string, p: string) {
+    this.http.patch(BACKEND_URL + 'change/password', {c, p}, {observe: 'response'}).subscribe(res => {
+      console.log(res);
+      this.matSnack.openFromComponent(SuccessSnackComponent, {
+        data: 'You have successfully changed password!\n Please Login Again!',
+        duration: 1500
+      });
+      this.logout();
+    }, err => {
+      console.log(err);
+      this.matSnack.openFromComponent(ErrorSnackComponent, {
+        data: err.error.message,
+        duration: 1500
+      });
+    });
   }
 }

@@ -23,7 +23,6 @@ export class NoteService {
   allNotes() {
     this.http.get<any>(BACKEND_URL + 'all', {observe: 'response'})
       .pipe(map(res => {
-        console.log(res);
       const ret = [];
       if (res.status === 200) {
         res.body.notes.forEach((note, index) => {
