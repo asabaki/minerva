@@ -74,8 +74,8 @@ export class MyFlashcardComponent implements OnInit {
               title: data.title,
               description: data.description,
               numberOfCard: data.numberOfCard,
-              rating: i += 0.5,
-              views: 0,
+              rating: data.rating,
+              views: data.views,
               dom: data.updatedAt,
               privacy: data.privacy,
               delete: false

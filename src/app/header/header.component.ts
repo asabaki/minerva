@@ -41,9 +41,12 @@ export class HeaderComponent implements OnInit {
         // console.log(fwn);
         this.following = fwn.body.length;
       });
-      this.authService.getProfileUrl().subscribe(res => {
-        this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
-      });
+      if (status) {
+        this.id = localStorage.getItem('id');
+        this.authService.getProfileUrl(this.id).subscribe(res => {
+          this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
+        });
+      }
     });
 
   }
@@ -107,7 +110,7 @@ export class HeaderComponent implements OnInit {
   `],
 })
 export class helpSnackComponent {
-  onHelp(){
+  onHelp() {
     const myArray = [
       'Stopping the mind is the key to success 🙏🏻',
       'There is no greater happiness than a still mind 🙏🏻',

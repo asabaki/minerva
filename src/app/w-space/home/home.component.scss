@@ -367,3 +367,12 @@ $bp-smallest: 31.25em; //500px  (500/16)
     text-align: center;
   }
 }
+
+
+.hidden {
+  display: none;
+}
+.spinner {
+  display: flex;
+  justify-content: center;
+}

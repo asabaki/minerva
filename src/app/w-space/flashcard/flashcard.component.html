@@ -1,4 +1,4 @@
-<main class="top-view">
+<main class="top-view" >
   <div class="overview">
     <h1 class="overview__heading">
       <mat-icon
@@ -14,7 +14,10 @@
     </div>
   </div>
 
-  <div class="detail">
+  <div *ngIf="!isLoaded" class="spinner">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div class="detail" [ngClass]="isLoaded ? 'description' : 'hidden'">
     <div class="detail-sub">
       <div class="description sub__1">
         <div class="feature-heading">
@@ -43,7 +46,7 @@
         <div *ngIf="!isLoaded" class="spinner">
           <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
         </div>
-        <div class="user-explore" *ngFor="let flash of trending" [ngClass]="isLoaded ? 'description' : 'hidden'">
+        <div class="user-explore" *ngFor="let flash of trending" >
           <div class="user">
             <img
               class="user-img"
@@ -67,11 +70,9 @@
       </div>
     </div>
 
-    <div *ngIf="!isLoaded" class="spinner">
-      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-    </div>
 
-    <div id="flashcardTable"  [ngClass]="isLoaded ? 'description' : 'hidden'">
+
+    <div id="flashcardTable" >
       <div class="description-btn_set">
         <div class="description__flex-start">
           <form action="#" class="search">

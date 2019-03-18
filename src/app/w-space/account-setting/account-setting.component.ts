@@ -35,7 +35,7 @@ export class AccountSettingComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getProfileUrl().subscribe(res => {
+    this.authService.getProfileUrl(localStorage.getItem('id')).subscribe(res => {
       this.imgUrl = res.body ? res.body : 'assets/img/user/' + this.getUser().toLowerCase().charAt(0) + '.png';
     });
     this.form = new FormGroup({

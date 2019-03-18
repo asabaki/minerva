@@ -1,5 +1,7 @@
-<main class="top-view">
-  <div class="overview">
+
+<main class='top-view'>
+
+  <div class="overview" >
     <h1 class="overview__heading">
       <mat-icon
         color="primary"
@@ -15,7 +17,10 @@
     </div>
   </div>
 
-  <div class="detail">
+  <div *ngIf="!isLoaded" class="spinner">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div class="detail" *ngIf="isLoaded">
     <div class="description-main">
       <!--<img class="activity-non" src="../../../assets/img/no_activities.png" alt="">-->
       <div class="activity">
@@ -98,6 +103,19 @@
       <div class="description-side__sub">
         <h1>Trending :</h1>
 
+
+        <div class="user-explore" *ngIf="isLoaded">
+          <div class="user">
+            <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
+            <div class="user-acc">
+              <span class="user-username">{{trending[1].title}}</span>
+              <span class="user-detail">Created by : {{trending[1].author}}</span>
+            </div>
+          </div>
+          <button class="activity-see-more side-1" routerLink="/quiz/item/{{trending[1]._id}}">
+            See more<mat-icon>arrow_right</mat-icon>
+          </button>
+        </div>
         <div class="user-explore">
           <div class="user">
             <img
@@ -106,23 +124,11 @@
               alt=""
             />
             <div class="user-acc">
-              <span class="user-username">Flashcard</span>
-              <span class="user-detail">Created by : Creator</span>
+              <span class="user-username">{{trending[2].title}}</span>
+              <span class="user-detail">Created by : {{trending[2].author}}</span>
             </div>
           </div>
-          <button class="activity-see-more side-1">
-            See more<mat-icon>arrow_right</mat-icon>
-          </button>
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img class="user-img" src="../../../assets/img/quiz.png" alt="" />
-            <div class="user-acc">
-              <span class="user-username">Quiz</span>
-              <span class="user-detail">Created by : Creator</span>
-            </div>
-          </div>
-          <button class="activity-see-more side-1">
+          <button class="activity-see-more side-1" routerLink="/flash/item/{{trending[2]._id}}">
             See more<mat-icon>arrow_right</mat-icon>
           </button>
         </div>
@@ -130,11 +136,11 @@
           <div class="user">
             <img class="user-img" src="../../../assets/img/note.png" alt="" />
             <div class="user-acc">
-              <span class="user-username">Note</span>
-              <span class="user-detail">Created by : Creator</span>
+              <span class="user-username">{{trending[0].title}}</span>
+              <span class="user-detail">Created by : {{trending[0].author}}</span>
             </div>
           </div>
-          <button class="activity-see-more side-1">
+          <button class="activity-see-more side-1" routerLink="/note/item/{{trending[0]._id}}">
             See more<mat-icon>arrow_right</mat-icon>
           </button>
         </div>
@@ -142,13 +148,11 @@
 
       <div class="description-side__sub">
         <h1>Who to follow :</h1>
-        <div class="user-explore" *ngFor="let user of following">
+        <div class="user-explore" *ngFor="let user of top_users">
           <div class="user">
             <img
               class="user-img"
-              [src]="
-                'assets/img/user/' + user.name.toLowerCase().charAt(0) + '.png'
-              "
+              [src]="user.url"
               alt=""
             />
             <div class="user-acc">

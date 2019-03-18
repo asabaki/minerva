@@ -10,7 +10,6 @@ declare const ga: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-// TODO Check matToolTip again after add table
   title = 'Minerva';
   constructor (private authService: AuthService,
                private router: Router,
@@ -18,14 +17,11 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.angulartics2GoogleAnalytics.startTracking();
   }
   ngOnInit() {
+    this.authService.autoAuthUser();
   }
   ngAfterViewInit() {
     this.router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
-        // window['ga']('set', 'page', e.urlAfterRedirects);
-        // window['ga']('send', 'pageview');
-        // console.log(`Page Changed`);
-
         this.authService.autoAuthUser();
       }
     });
