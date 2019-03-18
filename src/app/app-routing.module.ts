@@ -21,6 +21,7 @@ import {FacebookComponent} from './w-space/shared-components/profile/facebook/fa
 import {GoogleComponent} from './w-space/shared-components/profile/google/google.component';
 import {TwitterComponent} from './w-space/shared-components/profile/twitter/twitter.component';
 import {NoteCollectionComponent} from './w-space/note/note-collection/note-collection.component';
+import {MyNoteComponent} from './w-space/note/my-note/my-note.component';
 
 const routes: Routes = [
   {path: '', component: WSpaceComponent , pathMatch: 'full'},
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'acc', component: AccountSettingComponent},
   {path: 'note', component: NoteComponent},
   {path: 'note/item/:id', component: NoteCollectionComponent},
+  {path: 'note/my', component: MyNoteComponent},
   {path: 'note/my/create', component: CreateNoteComponent, canActivate: [AuthGuard]},
   {path: 'countdown', component: CountdownComponent},
   {path: 'self-control', component: SelfControlComponent},

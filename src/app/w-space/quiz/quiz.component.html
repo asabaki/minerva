@@ -13,7 +13,10 @@
       <div class="overview__count-count">Collection</div>
     </div>
   </div>
-  <div class="detail">
+  <div *ngIf="!isLoaded" class="spinner">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div class="detail" [ngClass]="isLoaded ? 'description' : 'hidden'">
     <div class="detail-sub">
       <div class="description sub__1">
         <div class="feature-heading">
@@ -46,10 +49,7 @@
 
       <div class="description sub__2">
         <h1>Quizzes on trend :</h1>
-        <div *ngIf="!isLoaded" class="spinner">
-          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-        </div>
-        <div class="user-explore" *ngFor="let quiz of trending" [ngClass]="isLoaded ? 'description' : 'hidden'">
+        <div class="user-explore" *ngFor="let quiz of trending" >
           <div class="user">
             <img
               class="user-img"

@@ -26,6 +26,10 @@ export class AuthService {
   onFollowing = new Subject<any>();
   onUnFollowing = new Subject<any>();
   profileUrl = new Subject<any>();
+  profileUrl2 = new Subject<any>();
+  profileUrl3 = new Subject<any>();
+  profileUrl4 = new Subject<any>();
+  topUser = new Subject<any>();
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -112,6 +116,13 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
+  getTrendUsers(id: string) {
+    this.http.get(BACKEND_URL + 'trending_user', {observe: 'response', params: new HttpParams().set('id', id)}).subscribe(res => {
+      // console.log(res)
+      this.topUser.next(res.body);
+    });
+    return this.topUser.asObservable();
+  }
   getToken() {
     return this.token;
   }
@@ -182,12 +193,43 @@ export class AuthService {
     return this.toFollow.asObservable();
   }
 
-  getProfileUrl() {
-    this.http.get(BACKEND_URL + 'profile_pic', {observe: 'response'}).subscribe(res => {
+  getProfileUrl(id: string = localStorage.getItem('id')) {
+    this.http.get(BACKEND_URL + 'profile_pic', {
+      observe: 'response',
+      params: new HttpParams().set('id', id)
+    }).subscribe(res => {
       this.profileUrl.next(res);
     });
     return this.profileUrl.asObservable();
   }
+  getProfileUrl2(id: string = localStorage.getItem('id')) {
+    this.http.get(BACKEND_URL + 'profile_pic', {
+      observe: 'response',
+      params: new HttpParams().set('id', id)
+    }).subscribe(res => {
+      this.profileUrl2.next(res);
+    });
+    return this.profileUrl2.asObservable();
+  }
+  getProfileUrl3(id: string = localStorage.getItem('id')) {
+    this.http.get(BACKEND_URL + 'profile_pic', {
+      observe: 'response',
+      params: new HttpParams().set('id', id)
+    }).subscribe(res => {
+      this.profileUrl3.next(res);
+    });
+    return this.profileUrl3.asObservable();
+  }
+  getProfileUrl4(id: string = localStorage.getItem('id')) {
+    this.http.get(BACKEND_URL + 'profile_pic', {
+      observe: 'response',
+      params: new HttpParams().set('id', id)
+    }).subscribe(res => {
+      this.profileUrl4.next(res);
+    });
+    return this.profileUrl4.asObservable();
+  }
+
 
   autoAuthUser() {
     const authInfo = this.getAuthData();

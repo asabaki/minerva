@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -42,7 +43,8 @@ export class CreateNoteComponent implements OnInit {
   }
 
   constructor(private noteService: NoteService,
-              private matSnack: MatSnackBar) {
+              private matSnack: MatSnackBar,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -67,6 +69,10 @@ export class CreateNoteComponent implements OnInit {
         });
       }
     });
+  }
+
+  onClickBack() {
+    this.location.back();
   }
 
 }
