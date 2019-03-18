@@ -1,4 +1,4 @@
-<main class="top-view">
+<main class="top-view" xmlns="http://www.w3.org/1999/html">
   <div class="overview">
     <button
       mat-icon-button
@@ -9,7 +9,12 @@
     >
       <mat-icon color="primary">arrow_back</mat-icon>
     </button>
-    <h1 class="overview__heading">{{ quiz.title }}</h1>
+    <div style="display: flex; justify-content: center;">
+      <mat-slide-toggle style="margin:auto; margin-right: 1rem;" color="primary" *ngIf="editable">Only me</mat-slide-toggle>
+      <input class="edit-question__title" type="text" *ngIf="editable" value="{{ quiz.title }}">
+      <h1 class="overview__heading" *ngIf="!editable"><mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
+        {{ quiz.title }}</h1>
+    </div>
     <div class="overview__right">
       <div class="follow">
         <div class="follow__container">
@@ -45,19 +50,24 @@
             <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
           </p>
         </section>
-        <p class="description__area-p">{{ quiz.description }}</p>
-        <div style="text-align: center;">
-          <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
-            <!--Edit-->
-          <!--</button>-->
-          <mat-slide-toggle color="primary" class="edit-togger">Edit</mat-slide-toggle>
+
+        <input class="edit-description" type="text" *ngIf="editable" value="{{ quiz.description }}">
+        <p class="description__area-p" *ngIf="!editable">{{ quiz.description }}</p>
+
+        <div style="text-align: center; display: flex;">
+          <mat-slide-toggle color="primary" (change)="toggleSlide()" *ngIf="slide">Edit</mat-slide-toggle>
+          <button mat-button *ngIf="!saveBtn" class="edit-btn__save">save</button>
+
           <div class="btn-follow_group" *ngIf="!isCreator()">
-            <button mat-button class="btn-edit" >
-              Created by <br />
+            <button mat-button class="btn-edit">
+              Created by <br/>
               {{ quiz.creator_name }}
             </button>
-            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing && !isCreator()" (click)="onFollow(quiz.creator_id)"><span class="bold">+</span>Follow</button>
-            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following" *ngIf="isFollowing && !isCreator()" (click)="onUnfollow(quiz.creator_id)" >
+            <button mat-button matTooltip="Follow" class="btn-follow" *ngIf="!isFollowing && !isCreator()"
+                    (click)="onFollow(quiz.creator_id)"><span class="bold">+</span>Follow
+            </button>
+            <button mat-button matTooltip="Unfollow" class="btn-follow btn-follow-following"
+                    *ngIf="isFollowing && !isCreator()" (click)="onUnfollow(quiz.creator_id)">
               <span class="btn-follow-following__visible"> &#10004;&nbsp;Following</span>
               <span class="btn-follow-following__invisible">&#10006;&nbsp;Unfollow</span>
             </button>
@@ -76,7 +86,11 @@
           <div class="question" *ngFor="let question of quiz.questions; let i = index;">
             <div class="question-header">
               <div class="question-number">{{ i + 1 }}</div>
-              <div class="question-question">{{question.question_text}}</div>
+
+              <input class="edit-question" type="text" *ngIf="editable" value="{{question.question_text}}">
+              <button class="edit-btn__delete" *ngIf="editable"><i class="fas fa-minus-circle"></i></button>
+
+              <div class="question-question" *ngIf="!editable">{{question.question_text}}</div>
               <div class="question-correction question-correction__false" *ngIf="quiz.isTaken && point[i] === 0">
                 <mat-icon>close</mat-icon>
               </div>
@@ -84,11 +98,18 @@
                 <mat-icon>check</mat-icon>
               </div>
             </div>
-            <mat-radio-group class="question-choice" [name]="i.toString()" ngModel>
+
+            <mat-radio-group class="question-choice" [name]="i.toString()" ngModel *ngIf="!editable">
               <mat-radio-button *ngFor="let choice of question.choice; let j = index;" [value]="j" color="primary"
-                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}} <span class="greenanswer"> <mat-icon *ngIf="isTaken && choice.answer">check</mat-icon>Correct Answer</span></mat-radio-button
+                                class="radio-button" [disabled]="isTaken">{{choice.choice_text}} <span
+                class="greenanswer"> <mat-icon *ngIf="isTaken && choice.answer">check</mat-icon>Correct Answer</span>
+              </mat-radio-button
               >
             </mat-radio-group>
+            <div *ngIf="editable" class="question-choice">
+              <input class="edit-choice" *ngFor="let choice of question.choice; let j = index;"
+                     value="{{choice.choice_text}}">
+            </div>
             <div class="correction correction-false" *ngIf="quiz.isTaken && point[i] === 0">
               <mat-icon>close</mat-icon>&nbsp;Your answer is Wrong !
             </div>
@@ -97,7 +118,7 @@
             </div>
 
           </div>
-          <div class="btn-group">
+          <div class="btn-group" *ngIf="!editable">
             <button mat-button class="btn btn__save" type="submit" [disabled]="isTaken">Submit</button>
             <button mat-button class="btn btn__save btn__retest" type="button" [disabled]="!isTaken"
                     (click)="onRetest()">Retest
@@ -105,7 +126,7 @@
           </div>
         </form>
 
-        <div class="result" *ngIf="isTaken">
+        <div class="result" *ngIf="isTaken && !editable">
           <h1>Your latest result</h1>
           <div class="result-true">Correct answer : {{ mark }}</div>
           <div class="result-false">Wrong answer : {{ quiz.questions.length - mark}}</div>

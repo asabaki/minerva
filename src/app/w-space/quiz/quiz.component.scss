@@ -52,14 +52,13 @@ $bp-smallest: 31.25em; //500px  (500/16)
 .description {
   background-color: white;
   box-shadow: var(--shadow-light);
-  padding: 3rem;
+  padding: 2rem;
   flex: 1;
   @media only screen and (max-width: $bp-medium) {
     padding: 2rem;
   }
   @media only screen and (max-width: $bp-small) {
     margin-right: 0;
-    margin-bottom: 3rem;
   }
 
   &.sub {
@@ -846,7 +845,12 @@ th.mat-header-cell:first-of-type {
       font-size: 1.1rem;
       color: var(--color-primary);
       transition: .2s all;
+      width: 50%;
       text-decoration: none;
+      display: flex;
+      justify-content: flex-end;
+
+
       &:hover {
         color: var(--color-secondary);
         transform: scale(1.05);
@@ -939,3 +943,7 @@ th.mat-header-cell:first-of-type {
   display: none;
 }
 
+
+.fa-pencil-alt:before {
+  color: var(--color-primary) !important;
+}

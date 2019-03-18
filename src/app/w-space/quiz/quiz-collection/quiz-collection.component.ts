@@ -46,6 +46,9 @@ export class QuizCollectionComponent implements OnInit {
   dialogRef: MatDialogRef<ConfirmDialogComponent> = null;
   isFollowing: boolean;
   creator: string;
+  editable = false;
+  saveBtn = true;
+  slide = true;
 
   // arr: Array<number>;
 
@@ -97,6 +100,12 @@ export class QuizCollectionComponent implements OnInit {
 
       });
     });
+  }
+
+  toggleSlide() {
+    this.editable = !this.editable;
+    this.saveBtn = !this.saveBtn;
+    this.slide =!this.slide;
   }
 
   onClickBack() {

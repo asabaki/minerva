@@ -357,3 +357,37 @@ $bp-smallest: 31.25em; //500px  (500/16)
     font-size: 1.75rem;
   }
 }
+
+.notification {
+  color: var(--color-grey-dark-2);
+  height: 8rem;
+
+  &-btn {
+    word-wrap: break-word;
+    width: 25rem;
+    display: flex;
+    align-items: center;
+    margin-top: -2rem;
+  }
+
+  &-icon {
+    margin-right: 2rem;
+    color: var(--color-secondary-dark);
+  }
+
+  &-user {
+    color: var(--color-primary);
+    height: 2rem;
+  }
+
+  &-action {
+    height: 2rem;
+  }
+
+  &-time {
+    color: var(--color-grey-dark-3);
+    font-style: italic;
+    font-size: 1rem;
+    height: 2rem;
+  }
+}
