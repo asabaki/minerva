@@ -7,4 +7,6 @@ export interface FlashModel {
   user_id: string;
   updatedAt: Date;
   privacy: boolean;
+  views: number;
+  rating: number;
 }

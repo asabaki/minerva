@@ -10,7 +10,6 @@ declare const ga: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit {
-// TODO Check matToolTip again after add table
   title = 'Minerva';
   constructor (private authService: AuthService,
                private router: Router,

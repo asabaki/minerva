@@ -69,8 +69,8 @@ export class FlashCardService {
               numberOfCard: collection.card.length,
               privacy: collection.privacy,
               updatedAt: collection.updatedAt,
-              rating: 0,
-              views: 0
+              rating: collection.rating,
+              views: collection.views,
             });
           });
         } else {

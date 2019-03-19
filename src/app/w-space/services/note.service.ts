@@ -14,6 +14,7 @@ export class NoteService {
 
   note_create_subject = new Subject<any>();
   note_getAll_subject = new Subject<any>();
+  note_getMy_subject = new Subject<any>();
   note_get_subject = new Subject<any>();
 
   constructor(private http: HttpClient) {
@@ -31,7 +32,6 @@ export class NoteService {
             author: res.body.users[index],
             title: note.title,
             description: note.description,
-            numberOfNote: res.body.notes.length,
             updatedAt: note.lastUpdated,
             rating: note.rating,
             views: note.views
@@ -47,6 +47,15 @@ export class NoteService {
       console.log(err);
     });
     return this.note_getAll_subject.asObservable();
+  }
+
+  getMyNote() {
+    this.http.get(BACKEND_URL + 'get/my', {observe: 'response'}).subscribe(res => {
+      this.note_getMy_subject.next(res.body);
+    }, (err) => {
+      console.log(err);
+    });
+    return this.note_getMy_subject.asObservable();
   }
 
   getNote(id: string) {
