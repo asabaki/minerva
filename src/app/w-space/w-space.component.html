@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="isLoggedIn"></router-outlet>
+<div class="info" *ngIf="!isLoggedIn">
+  <h1 class="info-message"><i class="fas fa-lightbulb info-icon"></i> Please login to use Minerva</h1>
+</div>

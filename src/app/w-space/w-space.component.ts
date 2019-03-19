@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-w-space',
@@ -8,7 +9,9 @@ import {NavigationEnd, NavigationStart, Router} from '@angular/router';
 })
 export class WSpaceComponent implements OnInit {
 
-  constructor(private router: Router) {
+  isLoggedIn = false;
+  constructor(private router: Router,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -16,6 +19,11 @@ export class WSpaceComponent implements OnInit {
     let lastId = 0;
     let restoredId: number;
 
+    this.auth.getAuthStatus().subscribe(res => {
+      if (res) {
+        this.isLoggedIn = true;
+      }
+    })
     this.router.events.subscribe((event) => {
       window.scrollTo(0, 0);
       if (event instanceof NavigationStart) {

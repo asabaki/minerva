@@ -223,3 +223,16 @@ $bp-smallest: 31.25em; //500px  (500/16)
         }
     }
 }
+
+.mat-elevation-z8{
+  box-shadow: none !important;
+  background-color: var(--color-grey-light-1);
+}
+
+.mat-paginator-container{
+  background-color: var(--color-grey-light-1);
+}
+
+th.mat-header-cell{
+  border-bottom: none;
+}

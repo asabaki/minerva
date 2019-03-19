@@ -1,73 +1,61 @@
 <div class="user-search">
   <div class="user-search__form">
-    <form action="#" class="search">
-      <input
-        type="text"
-        class="search__input"
-        placeholder="Search for the user"
-      />
-      <button class="search__button">
-        <mat-icon class="search__icon" color="primary">search</mat-icon>
-      </button>
-    </form>
-    <div class="description-side__sub">
 
-        <div class="user-explore">
-          <div class="user">
-            <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
-            <div class="user-acc">
-              <span class="user-username">Username</span>
-              <span class="user-detail">small detail</span>
+    <div class="description-side__sub">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef>
+            <form action="#" class="search">
+              <input
+                type="text"
+                class="search__input"
+                placeholder="Search for the user"
+                matInput (keyup)="applyFilter($event.target.value)"
+              />
+              <button class="search__button">
+                <mat-icon class="search__icon" color="primary">search</mat-icon>
+              </button>
+            </form>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="user-explore">
+              <div class="user">
+                <img class="user-img" src="../../../assets/img/user/a.png" alt=""/>
+                <div class="user-acc">
+                  <span class="user-username">{{element.position}}  Username</span>
+                  <span class="user-detail">small detail</span>
+                </div>
+              </div>
+              <button
+                mat-button
+                matTooltip="Follow"
+                class="btn btn-follow"
+              >
+                <span class="bold">+</span>Follow
+              </button>
+
+              <!--<button-->
+                <!--mat-button-->
+                <!--matTooltip="Unfollow"-->
+                <!--class="btn btn-follow btn-follow-following"-->
+              <!--&gt;-->
+            <!--<span class="btn-follow-following__visible">-->
+              <!--&#10004;&nbsp;Following</span-->
+            <!--&gt;-->
+                <!--<span class="btn-follow-following__invisible"-->
+                <!--&gt;&#10006;&nbsp;Unfollow</span-->
+                <!--&gt;-->
+              <!--</button>-->
+
             </div>
-          </div>
-          <button
-            mat-button
-            matTooltip="Follow"
-            class="btn btn-follow"
-          >
-            <span class="bold">+</span>Follow
-          </button>
-          <!--<button
-            mat-button
-            matTooltip="Unfollow"
-            class="btn btn-follow btn-follow-following"
-          >
-            <span class="btn btn-follow-following__visible">
-              &#10004;&nbsp;Following</span
-            >
-            <span class="btn btn-follow-following__invisible"
-              >&#10006;&nbsp;Unfollow</span
-            >
-          </button>-->
-        </div>
-        <div class="user-explore">
-          <div class="user">
-            <img class="user-img" src="../../../assets/img/user/a.png" alt="" />
-            <div class="user-acc">
-              <span class="user-username">Username</span>
-              <span class="user-detail">small detail</span>
-            </div>
-          </div>
-          <!--<button mat-button matTooltip="Follow" class="btn btn-follow">
-            <span class="bold">+</span>follow
-          </button>-->
-          <button
-            mat-button
-            matTooltip="Unfollow"
-            class="btn btn-follow btn-follow-following"
-          >
-            <span class="btn-follow-following__visible">
-              &#10004;&nbsp;Following</span
-            >
-            <span class="btn-follow-following__invisible"
-              >&#10006;&nbsp;Unfollow</span
-            >
-          </button>
-        </div>
-        <!--<div class="user-notfound">
-          <mat-icon>sentiment_dissatisfied</mat-icon>
-          User not found
-        </div>-->
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
     </div>
   </div>
 </div>
