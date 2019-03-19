@@ -390,4 +390,14 @@ $bp-smallest: 31.25em; //500px  (500/16)
     font-size: 1rem;
     height: 2rem;
   }
+
+  &-p {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-seeall {
+    text-align: center;
+    color: var(--color-secondary);
+  }
 }
