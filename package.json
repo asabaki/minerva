@@ -80,6 +80,7 @@
     "ngx-ckeditor5": "^1.5.0-12",
     "ngx-countdown": "^3.2.0",
     "ngx-material-timepicker": "^2.13.0",
+    "ngx-socket-io": "^2.1.1",
     "nodemon": "^1.18.10",
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
@@ -90,6 +91,8 @@
     "path": "^0.12.7",
     "popper.js": "^1.14.7",
     "rxjs": "~6.4.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
@@ -104,6 +107,7 @@
     "@types/jasmine": "~3.3.9",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^11.9.5",
+    "@types/socket.io-client": "^1.4.32",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",

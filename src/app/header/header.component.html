@@ -17,28 +17,28 @@
         </div>
       </div>
 
-      <button class="user-nav__icon-box" *ngIf="isAuth" [matMenuTriggerFor]="notification">
-        <mat-icon matBadge="3" matBadgeColor="primary" matBadgeSize="medium" style="color: var(--color-grey-dark-2);">
+      <button class="user-nav__icon-box" *ngIf="isAuth" [matMenuTriggerFor]="notificationBtn" (menuClosed)="onRead()">
+        <mat-icon matBadge="{{notification.length > 0 ? notification.length : ''}}" matBadgeColor="primary" matBadgeSize="medium" style="color: var(--color-grey-dark-2);" >
           notifications_active
         </mat-icon>
-        <mat-menu #notification="matMenu">
-          <button mat-menu-item class="notification">
+        <mat-menu #notificationBtn="matMenu" >
+          <button mat-menu-item class="notification" *ngFor="let noti of notification" [routerLink]="noti.link">
             <div class="notification-btn">
-              <i class="fas fa-user-plus notification-icon"></i>
-              <p class="notification-p">
-                <span class="notification-user">Kanpichcha Nokdam</span>
-                <span class="notification-action">Started following you</span>
-                <span class="notification-time">30 mins ago</span>
+
+              <i [ngClass]="noti.to === 'you' ? 'fas fa-user-plus notification-icon' : 'fas fa-upload notification-icon'"></i>
+              <p style="display: flex; flex-direction: column; ">
+                <span class="notification-user">{{noti.user}}</span>
+                <span class="notification-action">{{noti.action + noti.to}}</span>
+                <span class="notification-time">{{noti.days}}</span>
               </p>
             </div>
           </button>
           <button mat-menu-item class="notification">
             <div class="notification-btn">
-              <i class="fas fa-upload notification-icon"></i>
-              <p class="notification-p">
-                <span class="notification-user">Kanpichcha Nokdam</span>
-                <span class="notification-action">Created new flashcard collection</span>
-                <span class="notification-time">30 mins ago</span>
+
+              <p style="display: flex; flex-direction: column; ">
+                <span class="notification-user">Nothing's new!</span>
+
               </p>
             </div>
           </button>

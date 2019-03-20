@@ -857,3 +857,10 @@ th.mat-header-cell:first-of-type {
   color: var(--color-primary) !important;
   color: var(--color-primary) !important;
 }
+.spinner {
+  display: flex;
+  justify-content: center;
+}
+.hidden {
+  display: none;
+}

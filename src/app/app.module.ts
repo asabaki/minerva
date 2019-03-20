@@ -86,8 +86,9 @@ import { NoteCollectionComponent } from './w-space/note/note-collection/note-col
 
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({
@@ -171,6 +172,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
     CountdownModule,
     MatPaginatorModule,
     Angulartics2Module.forRoot(),
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

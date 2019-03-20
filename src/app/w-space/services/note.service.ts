@@ -16,6 +16,7 @@ export class NoteService {
   note_getAll_subject = new Subject<any>();
   note_getMy_subject = new Subject<any>();
   note_get_subject = new Subject<any>();
+  note_update_subject = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }
@@ -23,25 +24,24 @@ export class NoteService {
   allNotes() {
     this.http.get<any>(BACKEND_URL + 'all', {observe: 'response'})
       .pipe(map(res => {
-        console.log(res);
-      const ret = [];
-      if (res.status === 200) {
-        res.body.notes.forEach((note, index) => {
-          ret.push({
-            _id: note._id,
-            author: res.body.users[index],
-            title: note.title,
-            description: note.description,
-            updatedAt: note.lastUpdated,
-            rating: note.rating,
-            views: note.views
+        const ret = [];
+        if (res.status === 200) {
+          res.body.notes.forEach((note, index) => {
+            ret.push({
+              _id: note._id,
+              author: res.body.users[index],
+              title: note.title,
+              description: note.description,
+              updatedAt: note.lastUpdated,
+              rating: note.rating,
+              views: note.views
+            });
           });
-        });
-      } else {
-        ret.push('err');
-      }
-      return ret;
-    })).subscribe(res => {
+        } else {
+          ret.push('err');
+        }
+        return ret;
+      })).subscribe(res => {
       this.note_getAll_subject.next(res);
     }, (err) => {
       console.log(err);
@@ -60,8 +60,9 @@ export class NoteService {
 
   getNote(id: string) {
     this.http.get(BACKEND_URL + 'get/' + id, {observe: 'response'}).subscribe(res => {
-      this.note_get_subject.next(res.body);
-      // console.log(res);
+      this.note_get_subject.next(res);
+    }, err => {
+      console.log(err);
     });
     return this.note_get_subject.asObservable();
   }
@@ -74,5 +75,15 @@ export class NoteService {
       this.note_create_subject.next(res);
     });
     return this.note_create_subject.asObservable();
+  }
+
+  updateNote(id: string, p: boolean, t: string, d: string, data: string) {
+    this.http.patch(BACKEND_URL + 'update', {id, p, t, d, data}, {observe: 'response'}).subscribe(res => {
+      this.note_get_subject.next(res);
+      this.note_update_subject.next(res.ok);
+    }, err => {
+      console.log(err);
+    });
+    return this.note_update_subject.asObservable();
   }
 }

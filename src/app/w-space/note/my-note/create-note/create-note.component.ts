@@ -7,6 +7,7 @@ import {NoteService} from '../../../services/note.service';
 import {MatSnackBar} from '@angular/material';
 import {SuccessSnackComponent} from '../../../shared-components/success-snack/success-snack.component';
 import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-snack.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-note',
@@ -15,7 +16,7 @@ import {ErrorSnackComponent} from '../../../shared-components/error-snack/error-
 })
 export class CreateNoteComponent implements OnInit {
   privacyText = 'Only Me';
-  data = '<p>Some Initial <strong>Data</strong></p>';
+  data = '';
   public Editor = DecoupledEditor;
 
   public captureScreen() {
@@ -44,7 +45,8 @@ export class CreateNoteComponent implements OnInit {
 
   constructor(private noteService: NoteService,
               private matSnack: MatSnackBar,
-              private location: Location) {
+              private location: Location,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -62,6 +64,7 @@ export class CreateNoteComponent implements OnInit {
           data: 'You have successfully create new note!',
           duration: 1500
         });
+        this.router.navigate(['note/item/' + res.body._id]);
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: 'Something went Wrong!\n' + res.statusText,

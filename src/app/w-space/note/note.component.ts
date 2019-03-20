@@ -92,7 +92,6 @@ export class NoteComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isLoaded = true;
-        console.log(this.trending);
       }
     );
     console.log(ELEMENT_DATA);

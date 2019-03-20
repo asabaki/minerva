@@ -36,7 +36,6 @@ export class McqComponent implements OnInit {
   }
 
   onAddChoice() {
-    console.log(this.thirdFormGroup.controls);
     this.i++;
     this.thirdFormGroup.addControl(this.i.toString(), new FormGroup({
       'choice': new FormControl(null, Validators.required)

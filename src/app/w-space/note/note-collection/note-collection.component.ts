@@ -8,7 +8,9 @@ import {ErrorSnackComponent} from '../../shared-components/error-snack/error-sna
 import {NoteService} from '../../services/note.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {ConfirmDialogComponent} from '../../quiz/quiz-collection/confirm-dialog/confirm-dialog.component';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-note-collection',
@@ -24,16 +26,138 @@ export class NoteCollectionComponent implements OnInit {
   creator: string;
   creator_id: string;
   privacy: boolean;
-  isLoading: boolean;
+  isLoaded = false;
   isFollowing: boolean;
   privacyText = 'Only Me';
-
-  title: string;
+  id: string;
+  title = '';
   description: string;
   data: string;
-  views: number
+  views: number;
   public Editor = DecoupledEditor;
   isEdit = false;
+
+
+  constructor(private noteService: NoteService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private location: Location,
+              private authService: AuthService,
+              private matSnack: MatSnackBar,
+              private dialog: MatDialog) {
+  }
+
+  ngOnInit() {
+    this.isLoaded = false;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      if (params.has('id')) {
+        this.noteService.getNote(params.get('id')).subscribe(res => {
+          this.id = res.body.note._id;
+          this.title = res.body.note.title;
+          this.description = res.body.note.description;
+          this.privacy = res.body.note.privacy;
+          this.creator = res.body.user.name;
+          this.faoRate = res.body.note.rating;
+          this.views = res.body.note.views;
+          this.data = res.body.decryptData;
+          this.creator_id = res.body.user._id;
+          this.isLoaded = true;
+          this.privacyText = this.privacy ? 'Only Me' : 'Published';
+        });
+      }
+    });
+  }
+
+  toggleSlide() {
+    if (this.isEdit) {
+      const retest = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to save this change ?', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      retest.afterClosed().pipe(first()).subscribe(res => {
+        if (res) {
+          this.noteService.updateNote(this.id, this.privacy, this.title, this.description, this.data).subscribe(ok => {
+            if (ok) {
+              this.matSnack.openFromComponent(SuccessSnackComponent, {
+                data: 'Update Note Successful',
+                duration: 1500
+              });
+              this.isEdit = false;
+            } else {
+              this.matSnack.openFromComponent(ErrorSnackComponent, {
+                data: 'Update Error\n' + res.statusText,
+                duration: 1500
+              });
+            }
+          });
+        } else {
+          this.isEdit = true;
+          console.log('Denied');
+        }
+
+      });
+    } else {
+      this.isEdit = !this.isEdit;
+    }
+    // console.log(e);
+  }
+
+  isCreator() {
+    return localStorage.getItem('userId') === this.creator_id;
+  }
+
+  privateSwitch() {
+    this.privacy = !this.privacy;
+    this.privacyText = this.privacy ? 'Only me' : 'Published';
+  }
+
+  openEditCardDialog() {
+
+  }
+
+  faoReset() {
+
+  }
+
+  onFaoRate(e) {
+
+  }
+
+  onFollow(id: string) {
+    this.authService.followUser(id).subscribe(res => {
+      // console.log(res)
+      if (res !== -1) {
+        this.isFollowing = true;
+        this.authService.isFollowing(localStorage.getItem('userId'), this.creator_id);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You successfully follow ' + this.creator,
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'You have already follow this user!',
+          duration: 1500
+        });
+      }
+    });
+  }
+
+  onUnfollow(id: string) {
+    this.authService.unfollowUser(id).subscribe(res => {
+      if (res !== -1) {
+        this.isFollowing = false;
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You successfully unfollow ' + this.creator,
+          duration: 1500
+        });
+      } else {
+        this.matSnack.openFromComponent(ErrorSnackComponent, {
+          data: 'You have already unfollow this user!',
+          duration: 1500
+        });
+      }
+    });
+  }
 
   public captureScreen() {
     const data = document.getElementById('pdfCreate');
@@ -56,87 +180,6 @@ export class NoteCollectionComponent implements OnInit {
       editor.ui.view.editable.element,
     );
     Array.from(editor.ui.componentFactory.names());
-  }
-
-  constructor(private noteService: NoteService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private location: Location,
-              private authService: AuthService,
-              private matSnack: MatSnackBar) {
-  }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      if (params.has('id')) {
-        this.noteService.getNote(params.get('id')).subscribe(res => {
-          console.log(res);
-          this.title = res.note.title;
-          this.description = res.note.description;
-          this.privacy = res.note.privacy;
-          this.creator = res.user.name;
-          this.faoRate = res.note.rating;
-          this.views = res.note.views;
-          this.data = res.decryptData;
-          this.creator_id = res.user._id;
-        });
-      }
-    });
-  }
-  toggleSlide() {
-    this.isEdit = !this.isEdit;
-  }
-
-  isCreator() {
-    return localStorage.getItem('userId') === this.creator_id;
-  }
-
-  openEditCardDialog() {
-
-  }
-
-  faoReset() {
-
-  }
-
-  onFaoRate(e) {
-
-  }
-
-  onFollow(id: string) {
-    this.authService.followUser(id).subscribe(res => {
-      // console.log(res)
-      if (res !== -1 ) {
-        this.isFollowing = true;
-        this.authService.isFollowing(localStorage.getItem('userId'), this.creator_id);
-        this.matSnack.openFromComponent(SuccessSnackComponent, {
-          data: 'You successfully follow ' + this.creator,
-          duration: 1500
-        });
-      } else {
-        this.matSnack.openFromComponent(ErrorSnackComponent, {
-          data: 'You have already follow this user!',
-          duration: 1500
-        });
-      }
-    });
-  }
-
-  onUnfollow(id: string) {
-    this.authService.unfollowUser(id).subscribe(res => {
-      if (res !== -1 ) {
-        this.isFollowing = false;
-        this.matSnack.openFromComponent(SuccessSnackComponent, {
-          data: 'You successfully unfollow ' + this.creator,
-          duration: 1500
-        });
-      } else {
-        this.matSnack.openFromComponent(ErrorSnackComponent, {
-          data: 'You have already unfollow this user!',
-          duration: 1500
-        });
-      }
-    });
   }
 
   onClickBack() {

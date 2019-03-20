@@ -10,152 +10,29 @@
           Countdown
         </h1>
     <div class="overview__count">
-      <div class="overview__count-average">05</div>
+      <div class="overview__count-average">{{ number_events }}</div>
       <div class="overview__count-count">Events</div>
     </div>
   </div>
   <div class="detail">
-    <div class="description">
+    <div class="description" *ngFor="let event of events">
       <div class="countdown-day">
-        02
+        {{event.days}}
         <span>Days</span>
       </div>
       <div class="countdown-event">
         <table>
           <tr>
             <td class="countdown-task">Event :</td>
-            <td>Math Exam &nbsp;</td>
+            <td>{{event.title}} &nbsp;</td>
           </tr>
           <tr>
             <td class="countdown-task">Starts at :</td>
-            <td>12/03/2019 2:45 pm</td>
+            <td>{{event.startAt | date : 'medium' }}</td>
           </tr>
-          <tr>
+          <tr *ngIf="event.endAt">
             <td class="countdown-task">Ends at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Desceiption :</td>
-            <td>
-              Exam hall at block 4 room no. 2017 *Do not forget to bring Hall
-              ticket
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="description">
-      <div class="countdown-day">
-        05
-        <span>Days</span>
-      </div>
-      <div class="countdown-event">
-        <table>
-          <tr>
-            <td class="countdown-task">Event :</td>
-            <td>Math Exam &nbsp;</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Starts at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Ends at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Desceiption :</td>
-            <td>
-              Exam hall at block 4 room no. 2017 *Do not forget to bring Hall
-              ticket
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="description">
-      <div class="countdown-day">
-        07
-        <span>Days</span>
-      </div>
-      <div class="countdown-event">
-        <table>
-          <tr>
-            <td class="countdown-task">Event :</td>
-            <td>Math Exam &nbsp;</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Starts at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Ends at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Desceiption :</td>
-            <td>
-              Exam hall at block 4 room no. 2017 *Do not forget to bring Hall
-              ticket
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="description">
-      <div class="countdown-day">
-        12
-        <span>Days</span>
-      </div>
-      <div class="countdown-event">
-        <table>
-          <tr>
-            <td class="countdown-task">Event :</td>
-            <td>Math Exam &nbsp;</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Starts at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Ends at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Desceiption :</td>
-            <td>
-              Exam hall at block 4 room no. 2017 *Do not forget to bring Hall
-              ticket
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="description">
-      <div class="countdown-day">
-        100
-        <span>Days</span>
-      </div>
-      <div class="countdown-event">
-        <table>
-          <tr>
-            <td class="countdown-task">Event :</td>
-            <td>Math Exam &nbsp;</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Starts at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Ends at :</td>
-            <td>12/03/2019 2:45 pm</td>
-          </tr>
-          <tr>
-            <td class="countdown-task">Desceiption :</td>
-            <td>
-              Exam hall at block 4 room no. 2017 *Do not forget to bring Hall
-              ticket
-            </td>
+            <td>{{event.endAt | date : 'medium'}}</td>
           </tr>
         </table>
       </div>
