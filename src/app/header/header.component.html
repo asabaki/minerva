@@ -24,6 +24,7 @@
         <mat-menu #notificationBtn="matMenu" >
           <button mat-menu-item class="notification" *ngFor="let noti of notification" [routerLink]="noti.link">
             <div class="notification-btn">
+
               <i [ngClass]="noti.to === 'you' ? 'fas fa-user-plus notification-icon' : 'fas fa-upload notification-icon'"></i>
               <p style="display: flex; flex-direction: column; ">
                 <span class="notification-user">{{noti.user}}</span>
@@ -34,14 +35,26 @@
           </button>
           <button mat-menu-item class="notification">
             <div class="notification-btn">
+
               <p style="display: flex; flex-direction: column; ">
                 <span class="notification-user">Nothing's new!</span>
+
+              </p>
+            </div>
+          </button>
+          <button mat-menu-item class="notification">
+            <div class="notification-btn">
+              <i class="far fa-calendar-alt notification-icon"></i>
+              <p class="notification-p">
+                <span class="notification-user">Event Remainder</span>
+                <span class="notification-action">Math Exam</span>
+                <span class="notification-time">Today</span>
               </p>
             </div>
           </button>
 
 
-          <button mat-menu-item style="text-align: center; color: var(--color-secondary);"><span>See all</span></button>
+          <a mat-menu-item class="notification-seeall" routerLink="/home"><span>See all</span></a>
         </mat-menu>
       </button>
       <!--<div class="user-nav__icon-box" *ngIf="isAuth">
