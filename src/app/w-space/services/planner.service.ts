@@ -12,6 +12,7 @@ export class PlannerService {
   events_subject = new Subject<any>();
   event_add_subject = new Subject<any>();
   event_latest = new Subject<any>();
+  event_countdowns = new Subject<any>();
   constructor(private http: HttpClient) {
   }
 
@@ -34,6 +35,14 @@ export class PlannerService {
       this.event_latest.next(res.body);
     });
     return this.event_latest.asObservable();
+  }
+
+  get_countdowns() {
+    this.http.get(BACKEND_URL + 'countdowns', {observe: 'response'}).subscribe(res => {
+      this.event_countdowns.next(res);
+    });
+    return this.event_countdowns.asObservable();
+
   }
 
   add_event(e: CalendarEvent[]) {

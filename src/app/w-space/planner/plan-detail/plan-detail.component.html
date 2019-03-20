@@ -1,11 +1,12 @@
 <div class="plan-detail">
   <mat-form-field class="plan-detail__input">
-    <input matInput placeholder="Title"/>
+    <input matInput placeholder="Title" [(ngModel)]="data.title" #title="ngModel"/>
   </mat-form-field>
   <div class="color-picker-group">
     <span>Prioity</span>
     <input
       type="color"
+      [(ngModel)]="data.color.primary"
       class="color-picker"
       placeholder="Primary color"
     />
@@ -17,6 +18,7 @@
       class="date_time-picker"
       type="text"
       mwlFlatpickr
+      [(ngModel)]="data.start"
       [altInput]="true"
       [convertModelValue]="true"
       [enableTime]="true"
@@ -31,6 +33,7 @@
       class="date_time-picker"
       type="text"
       mwlFlatpickr
+      [(ngModel)]="data.end"
       [altInput]="true"
       [convertModelValue]="true"
       [enableTime]="true"

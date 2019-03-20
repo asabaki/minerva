@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material';
 import {environment} from '../../../environments/environment';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
 import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
+import {Socket} from 'ngx-socket-io';
 const BACKEND_URL = environment.apiUrl + '/quiz/';
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,12 @@ export class QuizService {
   all_quizzes_subject = new Subject<any>(); // *** ALL QUIZ COLLECTIONS
   quiz_taken_subject = new Subject<any>();
   rated_subject = new Subject<any>();
-  update_subject = new Subject<any>();
+  rate_update_subject = new Subject<any>();
+  quiz_update_subject = new Subject<any>();
   constructor(private http: HttpClient,
               private authService: AuthService,
-              private matSnack: MatSnackBar) {
+              private matSnack: MatSnackBar,
+              private socket: Socket) {
   }
 
   get_allQuizzes() {
@@ -76,6 +79,7 @@ export class QuizService {
     });
     return this.quiz_subject.asObservable();
   }
+
   get_taken(id: string) {
     this.http.get(BACKEND_URL + 'get/quiz_taken', {
       params: new HttpParams().set('id', id),
@@ -105,8 +109,15 @@ export class QuizService {
 
   add_quiz(q: QuizModel) {
     // console.log(q);
-    this.http.post(BACKEND_URL + 'add', q, {observe: 'response'}).subscribe(res => {
+    this.http.post<any>(BACKEND_URL + 'add', q, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
+        if (!res.body.privacy) {
+          this.socket.emit('create', {
+            user_id: localStorage.getItem('userId'),
+            item: 'quiz',
+            item_id: res.body._id
+          });
+        }
         this.myQuiz_subject_create.next(res);
       }
     });
@@ -132,16 +143,16 @@ export class QuizService {
   rate_collection(id: string, rate: number) {
     this.http.patch(BACKEND_URL + 'rate', {rate, id}, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
-        this.update_subject.next(res);
+        this.rate_update_subject.next(res);
       }
     });
-    return this.update_subject.asObservable();
+    return this.rate_update_subject.asObservable();
   }
 
   unrate_collection(id: string) {
     this.http.patch(BACKEND_URL + 'unrate', {id}, {observe: 'response'}).subscribe(res => {
       if (res.ok) {
-        this.update_subject.next(res);
+        this.rate_update_subject.next(res);
         this.matSnack.openFromComponent(SuccessSnackComponent, {
           data: 'You Have Unrated This Quiz',
           duration: 1500
@@ -153,5 +164,20 @@ export class QuizService {
         duration: 1500
       });
     });
+  }
+
+  update_quiz(quiz: any) {
+    this.http.patch<any>(BACKEND_URL + 'update', quiz, {observe: 'response'}).subscribe(res => {
+      this.quiz_subject.next(res.body);
+      if (!res.body.privacy) {
+        this.socket.emit('update', {
+          user_id: localStorage.getItem('userId'),
+          item: 'quiz',
+          item_id: res.body._id
+        });
+      }
+      this.quiz_update_subject.next(res.ok);
+    });
+    return this.quiz_update_subject.asObservable();
   }
 }

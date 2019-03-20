@@ -1,5 +1,8 @@
 <main class="top-view">
-  <div class="overview">
+  <div class="detail" *ngIf="!isLoaded">
+    <mat-progress-spinner style="margin: 0 auto;" mode="indeterminate"></mat-progress-spinner>
+  </div>
+  <div [ngClass]="isLoaded ? 'overview': 'hidden'">
     <button
       mat-icon-button
       color="primary"
@@ -11,13 +14,13 @@
     </button>
 
     <div style="display: flex; justify-content: center;">
-      <mat-slide-toggle style="margin:auto; margin-right: 1rem;" color="primary" *ngIf="editable">Only me</mat-slide-toggle>
-      <input type="text" *ngIf="isEdit" value="{{title}}" class="edit-question__title">
-      <h1 class="overview__heading" *ngIf="!isEdit" >
+      <mat-slide-toggle style="margin:auto; margin-right: 1rem;" color="primary" (toggleChange)="privateSwitch()" *ngIf="isEdit" [(ngModel)]="!privacy" #PrivacyText="ngModel">{{privacyText}}
+      </mat-slide-toggle>
+      <h1 class="overview__heading" *ngIf="!isEdit">
         <mat-icon [ngClass]="privacy ? 'fill-red' : 'fill-green'">{{privacy ? 'lock' : 'public'}}</mat-icon>
         {{title}}</h1>
+      <input type="text" [ngClass]="isEdit ? 'edit-question__title' : 'hidden'" [(ngModel)]="title" #titleText='ngModel'>
     </div>
-
 
 
     <div class="overview__right">
@@ -27,10 +30,8 @@
       </div>
     </div>
   </div>
-  <div class="detail" *ngIf="isLoading">
-    <mat-progress-spinner style="margin: 0 auto;" mode="indeterminate"></mat-progress-spinner>
-  </div>
-  <div class="detail" *ngIf="!isLoading">
+
+  <div [ngClass]="isLoaded ? 'detail' : 'hidden'">
     <div class="description">
       <div class="description__area">
         <section class="rating">
@@ -50,13 +51,15 @@
             <i class="link fa fa-times-circle" (click)="faoReset(faoRate)"></i>
           </p>
         </section>
-        <p class="description__area-p" *ngIf="!isEdit">{{description}}</p>
-        <input class="edit-description" type="text" *ngIf="isEdit" value="{{ description }}">
+        <p class="description__area-p" *ngIf="!isEdit">{{description }}</p>
+        <input class="edit-description" type="text" *ngIf="isEdit" [(ngModel)]="description" #descriptionText="ngModel">
         <div>
           <!--<button mat-button (click)="openEditCardDialog()" class="btn-edit" *ngIf="isCreator()">-->
-            <!--Edit-->
+          <!--Edit-->
           <!--</button>-->
-          <mat-slide-toggle color="primary" class="edit-toggle" (click)="toggleSlide()" *ngIf="isCreator()">Edit</mat-slide-toggle>
+          <mat-slide-toggle color="primary" class="edit-toggle" [(ngModel)]="isEdit" (toggleChange)="toggleSlide(description)"
+                            *ngIf="isCreator()" #editTog="ngModel">Edit
+          </mat-slide-toggle>
           <div class="btn-follow_group" *ngIf="!isCreator()">
             <button mat-button class="btn-edit">
               Created by <br/> {{creator}}
@@ -77,7 +80,7 @@
         <ckeditor
           class="ckeditor"
           [(ngModel)]="data"
-          [disabled]="true"
+          [disabled]="!isEdit"
           [editor]="Editor"
           (ready)="onReady($event)"
           id="pdfCreate"

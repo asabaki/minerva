@@ -8,6 +8,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {environment} from '../../../environments/environment';
 import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+import {Socket} from 'ngx-socket-io';
 
 const BACKEND_URL = environment.apiUrl + '/user/';
 
@@ -29,11 +30,14 @@ export class AuthService {
   onUnFollowing = new Subject<any>();
   profileUrl = new Subject<any>();
   topUser = new Subject<any>();
+  topWorks = new Subject<any>();
+  notification = new Subject<any>();
 
   constructor(private http: HttpClient,
               private router: Router,
               private dialog: MatDialog,
-              private matSnack: MatSnackBar) {
+              private matSnack: MatSnackBar,
+              private socket: Socket) {
   }
 
   signUp(name: string, email: string, password: string): Observable<any> {
@@ -116,12 +120,26 @@ export class AuthService {
   }
 
   getTrendUsers(id: string) {
-    this.http.get(BACKEND_URL + 'trending_user', {observe: 'response', params: new HttpParams().set('id', id)}).subscribe(res => {
+    this.http.get(BACKEND_URL + 'trending_user', {
+      observe: 'response',
+      params: new HttpParams().set('id', id)
+    }).subscribe(res => {
       // console.log(res)
       this.topUser.next(res.body);
     });
     return this.topUser.asObservable();
   }
+
+  getTrendWorks() {
+    this.http.get(BACKEND_URL + 'trending_works', {observe: 'response'}).subscribe(res => {
+      this.topWorks.next(res.body);
+    }, (err) => {
+      console.log(err)
+      this.topWorks.next([]);
+    });
+    return this.topWorks.asObservable();
+  }
+
   getToken() {
     return this.token;
   }
@@ -256,6 +274,10 @@ export class AuthService {
         if (res.status === 202) {
           this.onFollowing.next(-1);
         } else {
+          this.socket.emit('follow', {
+            follower: localStorage.getItem('userId'),
+            following: id
+          });
           this.following.next(res);
           this.onFollowing.next(1);
         }
@@ -333,6 +355,19 @@ export class AuthService {
         data: err.error.message,
         duration: 1500
       });
+    });
+  }
+
+  getNotification() {
+    this.http.get(BACKEND_URL + 'get_noti', {observe: 'response'}).subscribe(res => {
+      this.notification.next(res.body);
+    });
+    return this.notification.asObservable();
+  }
+
+  readNotification() {
+    this.http.patch(BACKEND_URL + 'read_noti', {}, {observe: 'response'}).subscribe(res => {
+      this.notification.next(res.body);
     });
   }
 }

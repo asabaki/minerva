@@ -68,7 +68,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.form.get('cfPassword').markAsTouched();
     if (this.getErrorMsg() === '' && this.form.valid) {
       this.authService.signUp(this.form.value.firstName + ' ' + this.form.value.lastName, this.form.value.email, this.form.value.password).subscribe((res) => {
-        console.log(res);
         if (res.user) {
           this.snackBar.openFromComponent(SuccessSnackComponent, {
             data: res.emessage,

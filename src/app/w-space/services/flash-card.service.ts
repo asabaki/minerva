@@ -10,7 +10,10 @@ import {MatSnackBar} from '@angular/material';
 import {environment} from '../../../environments/environment';
 import {SuccessSnackComponent} from '../shared-components/success-snack/success-snack.component';
 import {ErrorSnackComponent} from '../shared-components/error-snack/error-snack.component';
+import {Socket} from 'ngx-socket-io';
+
 const BACKEND_URL = environment.apiUrl + '/flash/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +36,8 @@ export class FlashCardService {
   constructor(private http: HttpClient,
               private auth: AuthService,
               private route: ActivatedRoute,
-              private matSnack: MatSnackBar) {
+              private matSnack: MatSnackBar,
+              private socket: Socket) {
   }
 
   create_collection(title: string, description: string, privacy: boolean) {
@@ -43,6 +47,13 @@ export class FlashCardService {
       this.http.post<any>(BACKEND_URL + 'add', card, {observe: 'response'}).subscribe(
         (res) => {
           this.collectionId = res.body.cards._id;
+          if (!res.body.cards.privacy) {
+            this.socket.emit('create', {
+              user_id: userId,
+              item: 'flashcard',
+              item_id: res.body.cards._id
+            });
+          }
           this.cardSubject.next(res);
         },
         (err) => {
@@ -142,12 +153,19 @@ export class FlashCardService {
   }
 
   delete_card(id: string) {
-    this.http.delete(BACKEND_URL + 'delete/card',
+    this.http.delete<any>(BACKEND_URL + 'delete/card',
       {
         params: new HttpParams().set('id', id),
         observe: 'response'
       }).subscribe((response) => {
       this.cardSubject.next(response);
+      if (!response.body.cards.privacy) {
+        this.socket.emit('update', {
+          user_id: localStorage.getItem('userId'),
+          item: 'flashcard',
+          item_id: response.body.cards._id
+        });
+      }
     });
     return this.cardSubject.asObservable();
   }
@@ -182,6 +200,13 @@ export class FlashCardService {
   update_card_detail(id: string, title: string, description: string, privacy: boolean) {
     const updateBody = {id, title, description, privacy};
     this.http.patch<any>(BACKEND_URL + 'update', updateBody, {observe: 'response'}).subscribe((res) => {
+      if (!res.body.cards.privacy) {
+        this.socket.emit('update', {
+          user_id: localStorage.getItem('userId'),
+          item: 'flashcard',
+          item_id: res.body.cards._id
+        });
+      }
       this.updateSubject.next(res);
     });
     return this.updateSubject.asObservable();
@@ -189,9 +214,15 @@ export class FlashCardService {
 
   update_card(id: string, cards: Object[]) {
     // let status;
-    this.http.patch(BACKEND_URL + 'update/' + id, cards, {observe: 'response'}).subscribe((res) => {
+    this.http.patch<any>(BACKEND_URL + 'update/' + id, cards, {observe: 'response'}).subscribe((res) => {
+      if (!res.body.cards.privacy) {
+        this.socket.emit('update', {
+          user_id: localStorage.getItem('userId'),
+          item: 'flashcard',
+          item_id: res.body.cards._id
+        });
+      }
       this.updateSubject.next(res);
-      // status = res.statusText;
     });
     return this.updateSubject.asObservable();
     // console.log(status);

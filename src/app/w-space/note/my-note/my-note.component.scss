@@ -853,3 +853,24 @@ th.mat-header-cell:first-of-type {
   }
 }
 
+.icon-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin: 1rem;
+  display: block;
+  border-radius: 50%;
+  transition: 0.2s ease-out;
+
+  &:active,
+  &:visited {
+    background-color: rgba(#ffa000, 0.3);
+    transform: scale(0.8);
+  }
+
+  &:hover {
+    background-color: rgba(#ffa000, 0.2);
+  }
+}
+

@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
               private http: HttpClient) {
   }
 
-  trending = [];
+  trending: any;
   news_feed = [];
   latest_event: any;
 
@@ -45,16 +45,15 @@ export class HomeComponent implements OnInit {
       this.news_feed = [...res.body];
       this.news_feed.forEach(feed => {
         const details = feed.activity.details.split('/');
-        // console.log(details);
         feed['message'] = feed.activity.activity === 'create' ? 'Create a new' +
-          (feed.activity.collection_name === 'flash' ? ' Flashcard Collection' : feed.activity.collection_name === 'quiz' ? ' Quiz' : ' Note')
-          + '<em>' + details[0] + '</em>' : feed.activity.activity === 'update' ? 'Update a Collection ' + details[0] : 'Error';
+          (feed.activity.collection_name === 'flash' ? ' Flashcard Collection ' : feed.activity.collection_name === 'quiz' ? ' Quiz ' : ' Note ')
+          + '<em>' + details[0] + '</em>' : feed.activity.activity === 'update' ? 'Update a ' +
+          (feed.activity.collection_name === 'flash' ? ' Flashcard Collection ' : feed.activity.collection_name === 'quiz' ? ' Quiz ' : ' Note ')
+          + details[0] : 'Error';
         const lastUpdated = Math.floor(Math.abs(new Date(feed.activity.updatedTime).getTime() - new Date(Date.now()).getTime()) / (1000 * 60));
-        feed['ago'] = lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago',
-          console.log(feed['ago']);
+        feed['ago'] = lastUpdated > 60 ? (lastUpdated > 1440 ? (lastUpdated > 43800 ? (lastUpdated > 525600 ? Math.round(lastUpdated / 525600) + ' years ago' : Math.round(lastUpdated / 43800) + ' months ago') : Math.round(lastUpdated / 1440) + ' days ago') : Math.round(lastUpdated / 60) + ' hours ago') : lastUpdated + ' minutes ago';
       });
       this.sortByKeyV2(this.news_feed, 'activity', 'updatedTime');
-      console.log(this.news_feed);
     });
     this.isLoaded = false;
     this.id = localStorage.getItem('userId');
@@ -75,37 +74,25 @@ export class HomeComponent implements OnInit {
             params: new HttpParams().set('id', this.top_users[2].id)
           }).subscribe(url3 => {
             this.top_users[2].url = url3.body ? url3.body : 'assets/img/user/' + this.top_users[2].name.toLowerCase().charAt(0) + '.png';
-            this.quiz.get_allQuizzes().subscribe(quizzes => {
-              this.sortByKey(quizzes, 'views');
-              this.flash.fetch_collection_all().subscribe(collections => {
-                this.sortByKey(collections, 'views');
-                this.trending.push(collections[0]);
-                this.note.allNotes().subscribe(notes => {
-                  this.sortByKey(notes, 'views');
-                  this.trending.push(notes[0]);
-                  this.planner.get_latest().subscribe(event => {
-                    const startTime = Math.floor(Math.abs(new Date(event.start).getTime() - new Date(Date.now()).getTime()) / (1000 * 60));
-                    const days = Math.round(startTime / 1440);
-                    const time_start = new Date(event.start).toLocaleTimeString();
-                    if (event.end) {
-                      const time_end = new Date(event.end).toLocaleTimeString();
-                      event['endTime'] = time_end;
-                    }
-                    // console.log(new Date(event.start).toLocaleTimeString());
-                    event['days'] = days;
-                    event['startTime'] = time_start;
-                    console.log(event);
-                    this.latest_event = event;
-                    this.isLoaded = true;
-                  });
-
-
-                });
+            this.authService.getTrendWorks().subscribe(works => {
+              this.trending = works;
+              this.planner.get_latest().subscribe(event => {
+                if (event) {
+                  const startTime = Math.floor(Math.abs(new Date(event.start).getTime() - new Date(Date.now()).getTime()) / (1000 * 60));
+                  const days = Math.floor(startTime / 1440);
+                  const time_start = new Date(event.start).toLocaleTimeString();
+                  if (event.end) {
+                    const time_end = new Date(event.end).toLocaleTimeString();
+                    event['endTime'] = time_end;
+                  }
+                  event['days'] = days;
+                  event['startTime'] = time_start;
+                  this.latest_event = event;
+                } else {
+                }
+                this.isLoaded = true;
               });
-              this.trending.push(quizzes[0]);
             });
-
-
           });
         });
       });
@@ -127,12 +114,16 @@ export class HomeComponent implements OnInit {
   }
 
   onFollow(id: string) {
+    console.log(id);
     this.authService.followUser(id).subscribe(res => {
-      if (res !== -1) {
+      console.log(res);
+      if (res !== -1 ) {
         // this.isFollowing = true;
-        this.following
-          .filter(user => user._id === id)
-          .map(user => user.followed = true);
+        // this.authService.isFollowing(localStorage.getItem('userId'), this.creator);
+        this.matSnack.openFromComponent(SuccessSnackComponent, {
+          data: 'You successfully follow ' + id,
+          duration: 1500
+        });
       } else {
         this.matSnack.openFromComponent(ErrorSnackComponent, {
           data: 'You have already follow this user!',

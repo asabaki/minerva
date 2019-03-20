@@ -46,9 +46,11 @@ export class QuizCollectionComponent implements OnInit {
   dialogRef: MatDialogRef<ConfirmDialogComponent> = null;
   isFollowing: boolean;
   creator: string;
-  editable = false;
+  isEdit = false;
   saveBtn = true;
   slide = true;
+  privacyText = 'Only Me';
+  no_taker: number;
 
   // arr: Array<number>;
 
@@ -70,6 +72,7 @@ export class QuizCollectionComponent implements OnInit {
           this.isTaken = !!taken;
           // console.log(taken);
         });
+        this.no_taker = res.quiz.quiz_taker.length;
         this.quiz = {
           _id: res.quiz._id,
           title: res.quiz.title,
@@ -85,6 +88,7 @@ export class QuizCollectionComponent implements OnInit {
           isTaken: false
 
         };
+        this.privacyText = this.quiz.privacy ? 'Only Me' : 'Published';
         this.faoRate = this.quiz.rating;
         this.qs.getRated(this.quiz._id).subscribe(rated => {
           this.faoRated = !!rated.body;
@@ -103,9 +107,57 @@ export class QuizCollectionComponent implements OnInit {
   }
 
   toggleSlide() {
-    this.editable = !this.editable;
+    this.isEdit = !this.isEdit;
     this.saveBtn = !this.saveBtn;
-    this.slide =!this.slide;
+    this.slide = !this.slide;
+  }
+
+  onPrivacyChange() {
+    this.quiz.privacy = !this.quiz.privacy;
+    this.privacyText = this.quiz.privacy ? 'Only Me' : 'Published';
+    console.log(this.quiz.privacy);
+  }
+
+  onClickSave() {
+
+    if (this.isEdit) {
+      const retest = this.dialog.open(ConfirmDialogComponent, {
+        data: {mssg: 'Are you sure that you want to save this change ?\n Taker of this quiz will be reset!', type: 'caution'},
+        panelClass: 'myapp-no-padding-dialog'
+      });
+      retest.afterClosed().pipe(first()).subscribe(res => {
+        if (res) {
+          this.qs.update_quiz(this.quiz).subscribe(ok => {
+            if (ok) {
+              this.matSnack.openFromComponent(SuccessSnackComponent, {
+                data: 'Update Note Successful',
+                duration: 1500
+              });
+              this.isEdit = false;
+              this.saveBtn = true;
+              this.slide = false;
+            } else {
+              this.matSnack.openFromComponent(ErrorSnackComponent, {
+                data: 'Update Error\n' + res.statusText,
+                duration: 1500
+              });
+            }
+          });
+        } else {
+          this.isEdit = true;
+          console.log('Denied');
+        }
+
+      });
+    } else {
+      this.isEdit = !this.isEdit;
+    }
+  }
+
+  onDeleteQuestion(id: string) {
+    this.quiz.questions = this.quiz.questions.filter(question => question._id !== id);
+    // console.log(id);
+    console.log(this.quiz);
   }
 
   onClickBack() {
@@ -132,6 +184,7 @@ export class QuizCollectionComponent implements OnInit {
         // this.dialog.open(ResultDialogComponent);
         this.quiz.isTaken = true;
         this.qs.taken_quiz(this.quiz._id, this.mark);
+        this.qs.get_quiz(this.quiz._id);
       } else {
       }
     });

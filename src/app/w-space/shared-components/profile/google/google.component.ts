@@ -23,7 +23,6 @@ export class GoogleComponent implements OnInit {
         if (params.token) {
           this.authService.login_social(params.token, params.expiresIn, params.name, params.id).subscribe(res => {
             if (res) {
-              console.log('Success');
               this.matSnack.openFromComponent(SuccessSnackComponent, {
                 data: 'Login Success!',
                 duration: 1500,

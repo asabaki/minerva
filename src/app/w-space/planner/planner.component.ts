@@ -34,18 +34,9 @@ import {AddTaskComponent} from './add-task/add-task.component';
 
 
 const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
-  }
+  green: '#a8f9c4',
+  blue: '#1e90ff',
+  yellow: '#fff7e7'
 };
 
 
@@ -156,14 +147,10 @@ export class PlannerComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    // TODO - Set dialog according to action(Delete, Edited)
-    // TODO - Ask User Before Deleting Events
-    // TODO - Add Icon Indicator meaning of Color in Calendar(Today for eg.)
-    // TODO - Mark as complete
-    // this.modalData = { event, action };
-    // this.modal.open(this.modalContent, { size: 'lg' });
     if (action !== 'Deleted') {
-      const dialogRef = this.dialog.open(PlanDetailComponent, {panelClass: 'myapp-no-padding-dialog'});
+      const dialogRef = this.dialog.open(PlanDetailComponent, {
+        data: event,
+        panelClass: 'myapp-no-padding-dialog'});
       dialogRef.afterClosed().subscribe(result => {
       });
     }
@@ -173,7 +160,7 @@ export class PlannerComponent implements OnInit {
     this.temp_events.push({
       title: 'New event',
       start: startOfDay(new Date()),
-      color: colors.green,
+      color: colors.yellow,
       actions: this.actions,
     });
 
@@ -181,6 +168,7 @@ export class PlannerComponent implements OnInit {
   }
 
   onSave(e: any) {
+    console.log(e);
     this.service.add_event(e).subscribe(res => {
       if (res.ok) {
         this.matSnack.openFromComponent(SuccessSnackComponent, {
