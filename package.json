@@ -45,7 +45,7 @@
     "@ckeditor/ckeditor5-paragraph": "^10.0.4",
     "@ckeditor/ckeditor5-ui": "^11.2.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.4",
-    "acorn": "^6.1.0",
+    "acorn": "^6.4.1",
     "ajv": "^6.9.2",
     "angular-calendar": "^0.26.6",
     "angular-font-awesome": "^3.1.2",
